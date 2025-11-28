@@ -1,11 +1,9 @@
 <script setup>
-import NavBar from '~/components/NavBar.vue'
 import ContactSection from '~/components/ContactSection.vue'
-import FooterBar from '~/components/FooterBar.vue'
 
 definePageMeta({ ssr: false })
 
-const isLight = ref(false)
+const { isLight } = useThemeMode()
 </script>
 
 <template>
@@ -28,12 +26,8 @@ const isLight = ref(false)
       />
     </div>
 
-    <NavBar :is-light="isLight" @toggle-mode="isLight = !isLight" />
-
     <UContainer class="py-12 sm:py-16 lg:py-20">
       <ContactSection :is-light="isLight" />
     </UContainer>
-
-    <FooterBar :is-light="isLight" />
   </main>
 </template>

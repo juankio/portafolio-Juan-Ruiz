@@ -28,7 +28,6 @@ onBeforeUnmount(() => {
 <template>
   <UContainer
     as="section"
-    id="inicio"
     class="relative flex flex-col gap-10 pt-10 pb-16 sm:pt-12 sm:pb-20 lg:flex-row lg:items-center lg:pt-16 lg:pb-24"
   >
     <div class="absolute inset-0 -z-10">

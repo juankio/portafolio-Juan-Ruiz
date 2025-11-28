@@ -1,11 +1,9 @@
 <script setup>
-import NavBar from '~/components/NavBar.vue'
 import ProjectsSection from '~/components/ProjectsSection.vue'
-import FooterBar from '~/components/FooterBar.vue'
 
 definePageMeta({ ssr: false })
 
-const isLight = ref(false)
+const { isLight } = useThemeMode()
 
 const { data, pending, error, refresh } = await useAsyncData('github-repos', async () => {
   const repos = await $fetch('https://api.github.com/users/juankio/repos?sort=updated&per_page=50', {
@@ -51,8 +49,6 @@ const featuredProjects = computed(() => {
       />
     </div>
 
-    <NavBar :is-light="isLight" @toggle-mode="isLight = !isLight" />
-
     <UContainer class="py-12 sm:py-16 lg:py-20">
       <ProjectsSection
         :is-light="isLight"
@@ -62,7 +58,5 @@ const featuredProjects = computed(() => {
         :on-refresh="refresh"
       />
     </UContainer>
-
-    <FooterBar :is-light="isLight" />
   </main>
 </template>

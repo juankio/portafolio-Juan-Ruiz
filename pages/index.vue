@@ -1,17 +1,14 @@
 <script setup>
-import NavBar from '~/components/NavBar.vue'
 import HeroSection from '~/components/HeroSection.vue'
 import AboutSection from '~/components/AboutSection.vue'
 import ProjectsSection from '~/components/ProjectsSection.vue'
 import ContactSection from '~/components/ContactSection.vue'
-import FooterBar from '~/components/FooterBar.vue'
 
 definePageMeta({ ssr: false })
 
+const { isLight } = useThemeMode()
 const runtimeConfig = useRuntimeConfig()
 const siteUrl = runtimeConfig.public.siteUrl || 'https://mi-portafolio.com'
-
-const isLight = ref(false)
 
 const { data, pending, error, refresh } = await useAsyncData('github-repos', async () => {
   const repos = await $fetch('https://api.github.com/users/juankio/repos?sort=updated&per_page=50', {
@@ -49,7 +46,6 @@ useSeoMeta({
 
 <template>
   <UPage
-    id="inicio"
     :class="[
       'relative min-h-screen overflow-hidden',
       isLight ? 'bg-white text-slate-900' : 'bg-[#0c0c0d] text-slate-100'
@@ -70,9 +66,7 @@ useSeoMeta({
       />
     </div>
 
-    <UPageBody class="px-4 sm:px-6 lg:px-8 pb-14">
-      <span id="inicio" class="sr-only" aria-hidden="true"></span>
-      <NavBar :is-light="isLight" @toggle-mode="isLight = !isLight" />
+    <UPageBody class="!mt-0 !space-y-0 !pb-14 px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col gap-12 md:gap-14">
         <HeroSection :is-light="isLight" />
         <AboutSection :is-light="isLight" />
@@ -84,7 +78,6 @@ useSeoMeta({
           :on-refresh="refresh"
         />
         <ContactSection :is-light="isLight" />
-        <FooterBar :is-light="isLight" />
       </div>
     </UPageBody>
   </UPage>
