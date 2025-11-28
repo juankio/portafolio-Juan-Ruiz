@@ -9,7 +9,8 @@ const props = defineProps({
   bodyClass: { type: String, default: '' }, // clases internas del body
   glow: { type: Boolean, default: false }, // halo exterior opcional
   motion: { type: Boolean, default: true }, // animacion de entrada/hover opcional
-  float: { type: Boolean, default: false } // animacion continua sutil
+  float: { type: Boolean, default: false }, // animacion continua sutil
+  delay: { type: Number, default: 0 } // retardo para stagger
 })
 
 const darkBase =
@@ -22,29 +23,27 @@ const motionConfig = computed(() => {
 
   if (props.float) {
     return {
-      initial: { opacity: 0, y: 16, scale: 0.99 },
+      initial: { opacity: 0, y: 12, scale: 0.98 },
       visible: {
         opacity: 1,
-        y: [-2, 2, -2],
+        y: [-4, 4, -4],
         scale: 1,
-        transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+        transition: { duration: 3, repeat: Infinity, ease: 'easeInOut', delay: props.delay / 1000 }
       }
     }
   }
 
   return {
     initial: { opacity: 0, y: 12, scale: 0.98 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut' } }
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut', delay: props.delay / 1000 } }
   }
 })
+
+const hasMotion = computed(() => !!motionConfig.value)
 </script>
 
 <template>
-  <div
-    v-motion="motionConfig"
-    class="group relative transition-all duration-300"
-    :class="props.class"
-  >
+  <div v-if="hasMotion" v-motion="motionConfig" class="group relative transition-all duration-300" :class="props.class">
     <div
       v-if="props.glow"
       class="pointer-events-none absolute -inset-5 -z-10 rounded-[32px] bg-red-500/20 blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
@@ -56,6 +55,24 @@ const motionConfig = computed(() => {
         props.rounded,
         'transform-gpu',
         props.motion ? 'will-change-transform group-hover:-translate-y-1 group-hover:scale-[1.01]' : ''
+      ]"
+    >
+      <div :class="`${props.bodyPadding} ${props.bodyClass}`">
+        <slot />
+      </div>
+    </div>
+  </div>
+  <div v-else class="group relative transition-all duration-300" :class="props.class">
+    <div
+      v-if="props.glow"
+      class="pointer-events-none absolute -inset-5 -z-10 rounded-[32px] bg-red-500/20 blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
+    />
+    <div
+      :class="[
+        props.isLight ? lightBase : darkBase,
+        props.cardClass,
+        props.rounded,
+        'transform-gpu'
       ]"
     >
       <div :class="`${props.bodyPadding} ${props.bodyClass}`">

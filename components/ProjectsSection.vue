@@ -80,6 +80,7 @@ const props = defineProps({
           :is-light="isLight"
           :glow="false"
           :float="true"
+          :delay="s * 80"
           rounded="rounded-3xl"
           body-padding="p-6"
           body-class="h-40 animate-pulse"
@@ -92,6 +93,7 @@ const props = defineProps({
         :is-light="isLight"
         :glow="false"
         :float="true"
+        :delay="100"
         rounded="rounded-3xl"
         body-padding="p-6"
         body-class="text-slate-600 dark:text-slate-300"
@@ -102,13 +104,14 @@ const props = defineProps({
 
       <div v-else class="grid gap-6 md:grid-cols-2">
         <GlowCard
-          v-for="project in projects"
+          v-for="(project, idx) in projects"
           :key="project.id"
           :is-light="isLight"
           rounded="rounded-3xl"
           body-padding="p-6"
           body-class="space-y-4 relative"
           :float="true"
+          :delay="idx * 100"
           card-class="group relative overflow-hidden shadow-xl hover:-translate-y-1 hover:ring-red-500/25"
         >
           <div

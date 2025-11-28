@@ -48,6 +48,7 @@ const props = defineProps({
           body-padding="p-6 sm:p-7 lg:p-8"
           body-class="space-y-5"
           :float="true"
+          :delay="0"
           card-class="shadow-[0_25px_80px_-35px_rgba(248,113,113,0.45)]"
         >
           <div class="flex items-start justify-between">
@@ -76,7 +77,7 @@ const props = defineProps({
 
           <div class="space-y-3">
             <GlowCard
-              v-for="row in [
+              v-for="(row, idx) in [
                 { label: 'Frontend', value: 'Vue - Nuxt - Tailwind' },
                 { label: 'Backend', value: 'Node - MongoDB' },
                 { label: 'UI Motion', value: 'GSAP - Microinteracciones' }
@@ -87,6 +88,7 @@ const props = defineProps({
               body-padding="px-5 py-4"
               body-class="flex items-center justify-between"
               :float="true"
+              :delay="idx * 120"
               card-class="shadow-[0_20px_55px_-42px_rgba(248,113,113,0.8)]"
             >
               <span class="text-base font-medium" :class="isLight ? 'text-slate-800' : 'text-slate-200'">{{ row.label }}</span>
@@ -108,13 +110,14 @@ const props = defineProps({
           </p>
           <div class="grid gap-3 sm:grid-cols-2">
             <GlowCard
-              v-for="skill in [
+              v-for="(skill, idx) in [
                 { title: 'Frontend y UI', copy: 'Vue, Nuxt, Tailwind, GSAP, accesibilidad, diseno responsivo.' },
                 { title: 'Backend y datos', copy: 'Node.js, MongoDB, APIs REST, despliegues rapidos y seguros.' },
                 { title: 'Experiencia de producto', copy: 'Microinteracciones, PWAs, rendimiento, optimizacion de SEO.' },
                 { title: 'Herramientas', copy: 'Figma, GitHub, Nuxt UI, SendGrid, CI/CD ligero.' }
               ]"
               :key="skill.title"
+              :delay="idx * 120"
               :is-light="isLight"
               rounded="rounded-2xl"
               body-padding="px-4 py-4"
