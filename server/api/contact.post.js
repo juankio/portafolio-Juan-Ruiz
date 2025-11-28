@@ -1,3 +1,5 @@
+import { buildEmail } from '../utils/emailTemplate.js'
+
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const body = await readBody(event)
@@ -35,6 +37,9 @@ export default defineEventHandler(async (event) => {
 
   const tryResend = async (fromAddress) => {
     if (!resendApiKey) return { ok: false, reason: 'No Resend API key' }
+
+    const { subject, text: plainText, html } = buildEmail({ name, email, message })
+
     let response
     try {
       response = await fetch('https://api.resend.com/emails', {
@@ -46,9 +51,10 @@ export default defineEventHandler(async (event) => {
         body: JSON.stringify({
           from: fromAddress,
           to: [contactTo],
-          subject: `Nuevo mensaje de ${name}`,
+          subject,
           reply_to: email,
-          text: `Nombre: ${name}\nCorreo: ${email}\n\nMensaje:\n${message}`
+          text: plainText,
+          html
         })
       })
     } catch (err) {
