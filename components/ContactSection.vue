@@ -66,14 +66,14 @@ const handleSubmit = async () => {
           <UBadge
             size="sm"
             variant="soft"
-            :color="isLight ? 'gray' : 'primary'"
+            :color="isLight ? 'neutral' : 'primary'"
             class="uppercase tracking-[0.25em] font-semibold"
           >
             Contacto
           </UBadge>
           <div class="space-y-3">
             <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
-              Hablemos de tu proximo <span class="text-red-500">proyecto</span>
+              Hablemos de tu proximo <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">proyecto</span>
             </h2>
             <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
               Tienes una idea o producto que necesita vida? Escribeme y armemos algo brutalista, rapido y con intencion.
@@ -83,7 +83,7 @@ const handleSubmit = async () => {
             <UBadge
               variant="soft"
               size="md"
-              :color="isLight ? 'gray' : 'primary'"
+              :color="isLight ? 'neutral' : 'primary'"
               :class="isLight ? 'text-slate-700' : 'text-slate-200'"
             >
               Disponibilidad: Remoto
@@ -91,7 +91,7 @@ const handleSubmit = async () => {
             <UBadge
               variant="soft"
               size="md"
-              :color="isLight ? 'gray' : 'primary'"
+              :color="isLight ? 'neutral' : 'primary'"
               :class="isLight ? 'text-slate-700' : 'text-slate-200'"
             >
               Respuesta en 24h
@@ -118,7 +118,14 @@ const handleSubmit = async () => {
               <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
                 Uso Resend para un delivery confiable.
               </p>
-              <UButton type="submit" size="lg" :loading="sending" color="primary" variant="solid" class="bg-red-500 text-black hover:bg-red-400">
+              <UButton
+                type="submit"
+                size="lg"
+                :loading="sending"
+                color="primary"
+                variant="solid"
+                :class="isLight ? 'bg-emerald-500  hover:bg-emerald-400' : 'bg-red-500  hover:bg-red-400 '"
+              >
                 Enviar mensaje
               </UButton>
             </div>

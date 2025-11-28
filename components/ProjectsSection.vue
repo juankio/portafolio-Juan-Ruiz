@@ -35,16 +35,20 @@ const props = defineProps({
       <div>
         <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Proyectos</p>
         <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
-          Repositorios vivos desde <span class="text-red-500">GitHub</span>
+          Repositorios vivos desde <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">GitHub</span>
         </h2>
       </div>
       <div class="flex gap-3">
         <UButton
           v-if="onRefresh"
           size="sm"
-          variant="outline"
+          variant="solid"
           :loading="pending"
-          :class="isLight ? 'border-slate-200 bg-white text-slate-800 hover:border-slate-300 hover:bg-slate-50' : 'border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10'"
+          :class="
+            isLight
+              ? 'bg-[#10b981] text-black shadow-emerald-400/30 hover:bg-[#22c55e]'
+              : 'bg-red-600 text-white shadow-red-500/30 hover:bg-red-500'
+          "
           @click="onRefresh && onRefresh()"
         >
           Actualizar
@@ -53,9 +57,12 @@ const props = defineProps({
           to="https://github.com/juankio"
           target="_blank"
           size="sm"
-          color="red"
-          variant="solid"
-          class="text-black"
+          variant="outline"
+          :class="
+            isLight
+              ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
+              : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
+          "
         >
           GitHub
         </UButton>
@@ -65,7 +72,7 @@ const props = defineProps({
     <div class="mt-8">
       <UAlert
         v-if="error"
-        color="red"
+        color="error"
         variant="soft"
         class="rounded-3xl"
         :ui="{ body: { base: 'flex flex-col gap-2' } }"
@@ -112,10 +119,13 @@ const props = defineProps({
           body-class="space-y-4 relative"
           :float="true"
           :delay="idx * 100"
-          card-class="group relative overflow-hidden shadow-xl hover:-translate-y-1 hover:ring-red-500/25"
+          :card-class="isLight ? 'group relative overflow-hidden shadow-xl hover:-translate-y-1 hover:ring-emerald-400/25' : 'group relative overflow-hidden shadow-xl hover:-translate-y-1 hover:ring-red-500/25'"
         >
           <div
-            class="absolute inset-0 bg-gradient-to-br from-red-500/0 via-white/0 to-white/5 opacity-0 transition duration-500 group-hover:opacity-100"
+            :class="[
+              'absolute inset-0 bg-gradient-to-br opacity-0 transition duration-500 group-hover:opacity-100',
+              isLight ? 'from-emerald-300/0 via-white/0 to-emerald-100/25' : 'from-red-500/0 via-white/0 to-white/5'
+            ]"
           />
           <div class="relative flex items-start justify-between gap-3">
             <div>
@@ -124,7 +134,7 @@ const props = defineProps({
             </div>
             <UBadge
               variant="soft"
-              :color="isLight ? 'gray' : 'white'"
+              color="neutral"
               class="px-3 py-1 text-xs font-semibold"
               :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-white/10 text-slate-200 ring-1 ring-white/10'"
             >
@@ -139,7 +149,7 @@ const props = defineProps({
           <div class="flex flex-wrap items-center gap-3 text-xs" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
             <UBadge
               variant="solid"
-              color="gray"
+              color="neutral"
               class="inline-flex items-center gap-1 border-0"
               :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-black/30 text-slate-200'"
             >
@@ -148,7 +158,7 @@ const props = defineProps({
             </UBadge>
             <UBadge
               variant="solid"
-              color="gray"
+              color="neutral"
               class="inline-flex items-center gap-1 border-0"
               :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-black/30 text-slate-200'"
             >
@@ -162,9 +172,8 @@ const props = defineProps({
               :to="project.html_url"
               target="_blank"
               size="sm"
-              color="red"
+              :color="isLight ? 'success' : 'error'"
               variant="solid"
-              class="text-black"
             >
               Ver codigo
             </UButton>

@@ -13,7 +13,7 @@ const props = defineProps({
   <UContainer
     as="section"
     id="sobre-mi"
-    class="py-16 sm:py-20"
+    class="py-10 sm:py-14"
   >
     <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
       <div class="space-y-4">
@@ -21,7 +21,7 @@ const props = defineProps({
           Sobre mi
         </p>
         <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
-          Diseno y desarrollo <span class="text-red-500">productos</span> digitales que se sienten vivos.
+          Diseno y desarrollo <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">productos</span> digitales que se sienten vivos.
         </h2>
         <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
           Soy Juan Miguel Ruiz Supelano, desarrollador y disenador que estudia Ingenieria de Sistemas.
@@ -32,7 +32,7 @@ const props = defineProps({
             v-for="chip in ['Frontend', 'UX/UI', 'PWAs', 'Animacion']"
             :key="chip"
             variant="outline"
-            :color="isLight ? 'gray' : 'white'"
+            color="neutral"
             class="text-sm"
             :class="isLight ? 'border-slate-200 bg-white text-slate-800' : 'border-white/15 bg-white/5 text-slate-200'"
           >
@@ -49,7 +49,7 @@ const props = defineProps({
           body-class="space-y-5"
           :float="true"
           :delay="0"
-          card-class="shadow-[0_25px_80px_-35px_rgba(248,113,113,0.45)]"
+          :card-class="isLight ? 'shadow-[0_25px_80px_-35px_rgba(16,185,129,0.35)]' : 'shadow-[0_25px_80px_-35px_rgba(248,113,113,0.45)]'"
         >
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-4">
@@ -57,19 +57,20 @@ const props = defineProps({
                 size="2xl"
                 src="https://avatars.githubusercontent.com/u/11875214?v=4"
                 alt="Juan Miguel Ruiz Supelano"
-                class="border border-white/15 shadow-lg shadow-red-500/30"
+                :class="isLight ? 'border border-emerald-100 shadow-lg shadow-emerald-300/40' : 'border border-white/15 shadow-lg shadow-red-500/30'"
                 :ui="{ rounded: 'rounded-3xl' }"
               />
               <div class="space-y-1">
                 <p class="text-xl font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Juan Miguel Ruiz Supelano</p>
                 <p class="text-sm" :class="isLight ? 'text-slate-600' : 'text-slate-300'">Developer - Designer - Est. Ing. Sistemas</p>
-                <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Bogota, Colombia · Remoto</p>
+                <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Villavicencio, Colombia · Remoto</p>
               </div>
             </div>
             <UBadge
-              variant="solid"
-              color="red"
-              class="rounded-full px-4 py-2 text-sm font-semibold shadow-md shadow-red-500/40"
+              color="error"
+              variant="outline"
+              class="rounded-full px-4 py-2 text-sm font-semibold"
+              :class="isLight ? 'border-red-300 text-red-600 bg-red-50/60' : 'border-red-400 text-red-200 bg-transparent'"
             >
               Disponible
             </UBadge>
@@ -89,10 +90,10 @@ const props = defineProps({
               body-class="flex items-center justify-between"
               :float="true"
               :delay="idx * 120"
-              card-class="shadow-[0_20px_55px_-42px_rgba(248,113,113,0.8)]"
+              :card-class="isLight ? 'shadow-[0_20px_55px_-42px_rgba(16,185,129,0.55)]' : 'shadow-[0_20px_55px_-42px_rgba(248,113,113,0.8)]'"
             >
               <span class="text-base font-medium" :class="isLight ? 'text-slate-800' : 'text-slate-200'">{{ row.label }}</span>
-              <span class="text-base font-semibold text-red-500">{{ row.value }}</span>
+              <span class="text-base font-semibold" :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ row.value }}</span>
             </GlowCard>
           </div>
         </GlowCard>
@@ -103,7 +104,7 @@ const props = defineProps({
           body-padding="p-6"
           body-class="space-y-4"
           :float="true"
-          card-class="shadow-[0_25px_80px_-40px_rgba(248,113,113,0.45)]"
+          :card-class="isLight ? 'shadow-[0_25px_80px_-40px_rgba(16,185,129,0.35)]' : 'shadow-[0_25px_80px_-40px_rgba(248,113,113,0.45)]'"
         >
           <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
             Habilidades

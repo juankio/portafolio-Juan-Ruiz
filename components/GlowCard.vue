@@ -13,10 +13,13 @@ const props = defineProps({
   delay: { type: Number, default: 0 } // retardo para stagger
 })
 
+const borderClass = computed(() => (props.isLight ? 'border-green-500' : 'border-red-500'))
+const haloClass = computed(() => (props.isLight ? 'bg-green-500/20' : 'bg-red-500/20'))
+
 const darkBase =
-  'relative overflow-hidden transition-all duration-300 border-2 border-red-500 bg-transparent text-white shadow-none'
+  'relative overflow-hidden transition-all duration-300 border-2 bg-transparent text-white shadow-none'
 const lightBase =
-  'relative overflow-hidden transition-all duration-300 border-2 border-red-600 bg-transparent text-slate-900 shadow-none'
+  'relative overflow-hidden transition-all duration-300 border-2 bg-transparent text-slate-900 shadow-none'
 
 const motionConfig = computed(() => {
   if (!props.motion) return null
@@ -46,13 +49,15 @@ const hasMotion = computed(() => !!motionConfig.value)
   <div v-if="hasMotion" v-motion="motionConfig" class="group relative transition-all duration-300" :class="props.class">
     <div
       v-if="props.glow"
-      class="pointer-events-none absolute -inset-5 -z-10 rounded-[32px] bg-red-500/20 blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
+      class="pointer-events-none absolute -inset-5 -z-10 rounded-[32px] blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
+      :class="haloClass"
     />
     <div
       :class="[
         props.isLight ? lightBase : darkBase,
         props.cardClass,
         props.rounded,
+        borderClass,
         'transform-gpu',
         props.motion ? 'will-change-transform group-hover:-translate-y-1 group-hover:scale-[1.01]' : ''
       ]"
@@ -65,13 +70,15 @@ const hasMotion = computed(() => !!motionConfig.value)
   <div v-else class="group relative transition-all duration-300" :class="props.class">
     <div
       v-if="props.glow"
-      class="pointer-events-none absolute -inset-5 -z-10 rounded-[32px] bg-red-500/20 blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
+      class="pointer-events-none absolute -inset-5 -z-10 rounded-[32px] blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
+      :class="haloClass"
     />
     <div
       :class="[
         props.isLight ? lightBase : darkBase,
         props.cardClass,
         props.rounded,
+        borderClass,
         'transform-gpu'
       ]"
     >

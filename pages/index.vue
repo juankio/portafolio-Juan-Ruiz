@@ -67,7 +67,7 @@ useSeoMeta({
     </div>
 
     <UPageBody class="!mt-0 !space-y-0 !pb-14 px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-12 md:gap-14">
+      <div class="flex flex-col gap-8 md:gap-10">
         <HeroSection :is-light="isLight" />
         <AboutSection :is-light="isLight" />
         <ProjectsSection

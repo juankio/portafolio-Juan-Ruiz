@@ -22,7 +22,7 @@ const props = defineProps({
         <div class="flex flex-wrap gap-3">
           <UButton
             variant="soft"
-            color="gray"
+            color="neutral"
             to="https://github.com/juankio"
             target="_blank"
             rel="noopener noreferrer"
@@ -31,7 +31,7 @@ const props = defineProps({
           </UButton>
           <UButton
             variant="soft"
-            color="gray"
+            color="neutral"
             to="https://www.linkedin.com/in/juan-miguel-ruiz-supelano"
             target="_blank"
             rel="noopener noreferrer"

@@ -47,18 +47,18 @@ onBeforeUnmount(() => {
     <UContainer class="flex items-center gap-3 py-1 md:py-1.5">
       <UButton
         to="/"
-        color="white"
+        color="neutral"
         variant="ghost"
         class="flex shrink-0 items-center gap-2.5 px-0 text-base font-semibold tracking-tight hover:bg-transparent"
       >
         <UBadge
-          color="white"
+          color="neutral"
           variant="solid"
           :class="
             [
               'flex h-11 w-11 items-center justify-center rounded-2xl text-sm font-bold uppercase tracking-tight !text-white ring-2 leading-none shadow-lg',
               isLight
-                ? 'bg-gradient-to-br from-slate-900 via-slate-800 to-black shadow-[0_12px_30px_rgba(0,0,0,0.45)] ring-slate-700/70'
+                ? 'bg-gradient-to-br from-emerald-600 via-emerald-500 to-lime-300 shadow-[0_12px_28px_rgba(16,185,129,0.45)] ring-emerald-300/70'
                 : 'bg-gradient-to-br from-rose-500 via-red-500 to-amber-200 shadow-[0_14px_32px_rgba(248,113,113,0.45)] ring-red-300/70'
             ]
           "
@@ -77,7 +77,7 @@ onBeforeUnmount(() => {
           :key="item.href"
           :to="item.href"
           variant="ghost"
-          color="gray"
+          color="neutral"
           size="sm"
           class="font-medium px-3 py-1"
           :class="isLight ? 'text-slate-700 hover:bg-slate-100' : 'text-slate-200 hover:bg-white/10'"
@@ -89,9 +89,13 @@ onBeforeUnmount(() => {
       <div class="flex flex-1 items-center justify-end gap-2.5">
         <UButton
           to="/proyectos"
-          color="red"
           size="sm"
           variant="soft"
+          :class="
+            isLight
+              ? 'border border-emerald-300 text-emerald-700 bg-emerald-50/80 hover:bg-emerald-100/80'
+              : 'border border-red-500/60 text-red-100 bg-red-500/10 hover:bg-red-500/20'
+          "
         >
           Ver proyectos
         </UButton>
@@ -99,7 +103,11 @@ onBeforeUnmount(() => {
           size="sm"
           variant="outline"
           :icon="isLight ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-          :class="isLight ? 'border-slate-200 text-slate-800 hover:border-slate-300 hover:bg-slate-50' : 'border-white/20 text-white hover:border-white/40 hover:bg-white/10'"
+          :class="
+            isLight
+              ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
+              : 'border border-red-500/60 text-red-100 hover:border-emerald-400 hover:bg-red-500/20'
+          "
           class="rounded-full"
           aria-label="Cambiar modo"
           @click="emit('toggle-mode')"
@@ -111,7 +119,7 @@ onBeforeUnmount(() => {
           v-for="item in links"
           :key="item.href"
           :to="item.href"
-          color="gray"
+          color="neutral"
           variant="outline"
           :class="isLight ? 'border-slate-200 text-slate-700 hover:border-slate-300' : 'border-white/15 text-slate-200 hover:border-white/40'"
         >

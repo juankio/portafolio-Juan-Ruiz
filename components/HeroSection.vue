@@ -30,23 +30,23 @@ onBeforeUnmount(() => {
 <template>
   <UContainer
     as="section"
-    class="relative flex flex-col gap-10 pt-10 pb-16 sm:pt-12 sm:pb-20 lg:flex-row lg:items-center lg:pt-16 lg:pb-24"
+    class="relative flex flex-col gap-8 pt-8 pb-10 sm:pt-10 sm:pb-14 lg:pt-14 lg:pb-16"
   >
     <div class="absolute inset-0 -z-10">
-      <div class="absolute left-10 top-10 h-48 w-48 rounded-full blur-3xl" :class="isLight ? 'bg-red-500/30' : 'bg-red-500/20'" />
-      <div class="absolute right-10 top-24 h-60 w-60 rounded-full blur-3xl" :class="isLight ? 'bg-slate-200/60' : 'bg-white/10'" />
-      <div class="absolute -bottom-10 left-1/3 h-60 w-60 rounded-full blur-3xl" :class="isLight ? 'bg-red-500/15' : 'bg-red-500/10'" />
+      <div class="absolute left-10 top-10 h-48 w-48 rounded-full blur-3xl" :class="isLight ? 'bg-emerald-300/35' : 'bg-red-500/20'" />
+      <div class="absolute right-10 top-24 h-60 w-60 rounded-full blur-3xl" :class="isLight ? 'bg-emerald-200/50' : 'bg-white/10'" />
+      <div class="absolute -bottom-10 left-1/3 h-60 w-60 rounded-full blur-3xl" :class="isLight ? 'bg-emerald-300/20' : 'bg-red-500/10'" />
     </div>
 
     <div class="flex-1 space-y-6">
       <UBadge
         size="lg"
-        :color="isLight ? 'gray' : 'white'"
-        variant="soft"
-        class="gap-2  shadow-sm shadow-red-500/20"
-        :class="isLight ? ' text-slate-800 bg-white' : ' text-slate-200 bg-white/5'"
+        color="neutral"
+        variant="outline"
+        class="gap-2 shadow-sm"
+        :class="isLight ? 'text-emerald-700 border-emerald-400 bg-transparent' : 'text-red-300 border-red-500/70 bg-transparent'"
       >
-        <span class="inline-flex h-2 w-2 animate-pulse rounded-full bg-red-500" />
+        <span class="inline-flex h-2 w-2 animate-pulse rounded-full" :class="isLight ? 'bg-emerald-500' : 'bg-red-500'" />
         Disponible para nuevos retos
       </UBadge>
 
@@ -58,20 +58,26 @@ onBeforeUnmount(() => {
           class="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl"
           :class="isLight ? 'text-slate-900' : 'text-white'"
         >
-          Construyo experiencias web <span class="text-red-500">rapidas</span> y
-          <span class="text-red-500">intencionales</span>.
+          Construyo experiencias web
+          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">rapidas</span> y
+          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">intencionales</span>.
         </h1>
         <p class="max-w-2xl text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-          Desarrollador, disenador y estudiante de Ingenieria de Sistemas. Me enfoco en interfaces limpias,
-          PWAs confiables y productos digitales con intencion.
+          Diseno productos web rapidos, accesibles y listos para produccion, con foco en PWAs, rendimiento y UX.
         </p>
       </div>
 
-      <div class="flex flex-wrap items-center gap-4 text-lg font-semibold text-slate-200">
-        <span class="text-slate-400">Soy</span>
-        <span class="relative rounded-2xl bg-white/5 px-4 py-2 shadow-inner shadow-red-500/20 transition">
-          <span class="text-red-500">{{ activeWord }}</span>
-          <span class="ml-1 inline-block animate-pulse text-red-400">|</span>
+      <div
+        class="flex flex-wrap items-center gap-4 text-lg font-semibold"
+        :class="isLight ? 'text-slate-700' : 'text-slate-200'"
+      >
+        <span :class="isLight ? 'text-slate-500' : 'text-slate-400'">Soy</span>
+        <span
+          class="relative rounded-2xl px-4 py-2 transition border-2"
+          :class="isLight ? 'border-emerald-500 text-emerald-700 bg-transparent' : 'border-red-500 text-red-500 bg-transparent'"
+        >
+          <span :class="isLight ? 'text-emerald-700' : 'text-red-500'">{{ activeWord }}</span>
+          <span class="ml-1 inline-block animate-pulse" :class="isLight ? 'text-emerald-500' : 'text-red-400'">|</span>
         </span>
       </div>
 
@@ -79,7 +85,12 @@ onBeforeUnmount(() => {
         <UButton
           to="/proyectos"
           size="lg"
-          class="bg-red-500 text-black shadow-lg shadow-red-500/30 transition hover:-translate-y-0.5 hover:bg-red-400"
+          class="shadow-lg transition hover:-translate-y-0.5"
+          :class="
+            isLight
+              ? 'bg-[#10b981] text-black shadow-emerald-400/30 hover:bg-[#22c55e]'
+              : 'bg-red-600 text-white shadow-red-500/30 hover:bg-red-500'
+          "
         >
           Ver proyectos
         </UButton>
@@ -88,7 +99,7 @@ onBeforeUnmount(() => {
           size="lg"
           variant="outline"
           class="transition hover:-translate-y-0.5"
-          :class="isLight ? ' bg-white text-slate-900 hover: hover:bg-slate-50' : ' bg-white/5 text-white  hover:bg-white/10'"
+          :class="isLight ? 'border border-emerald-300 text-emerald-700 bg-white hover:bg-emerald-50' : 'border border-red-500 text-white bg-transparent hover:bg-red-500/10'"
         >
           Hablemos
         </UButton>
@@ -103,7 +114,7 @@ onBeforeUnmount(() => {
           rounded="rounded-3xl"
           body-padding="p-4"
           body-class="space-y-1"
-          card-class="border-2 border-red-500 bg-transparent text-white shadow-none"
+          card-class="border-2 bg-transparent text-inherit shadow-none"
         >
           <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Especialidad</p>
           <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Nuxt - Vue - PWA</p>
@@ -116,7 +127,7 @@ onBeforeUnmount(() => {
           rounded="rounded-3xl"
           body-padding="p-4"
           body-class="space-y-1"
-          card-class="border-2 border-red-500 bg-transparent text-white shadow-none"
+          card-class="border-2 bg-transparent text-inherit shadow-none"
         >
           <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Stack visual</p>
           <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Tailwind - Animaciones suaves</p>
@@ -129,7 +140,7 @@ onBeforeUnmount(() => {
           rounded="rounded-3xl"
           body-padding="p-4"
           body-class="space-y-1"
-          card-class="border-2 border-red-500 bg-transparent text-white shadow-none"
+          card-class="border-2 bg-transparent text-inherit shadow-none"
         >
           <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Disponible</p>
           <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Freelance y proyectos</p>
@@ -137,67 +148,5 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <div class="flex-1">
-      <GlowCard
-        :is-light="isLight"
-        :motion="true"
-        :float="true"
-        rounded="rounded-[32px]"
-        body-padding="p-8"
-        body-class="space-y-6 relative"
-        class="relative mx-auto max-w-lg overflow-hidden shadow-2xl"
-      >
-        <div class="relative space-y-6">
-          <div class="flex items-center justify-between">
-            <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-300'">
-              Perfil
-            </p>
-            <UBadge variant="soft" color="red" class="bg-red-500/20 px-3 py-1 text-xs font-semibold text-red-100">
-              Disponible
-            </UBadge>
-          </div>
-          <div class="flex items-center gap-4">
-            <UAvatar
-              size="xl"
-              src="https://avatars.githubusercontent.com/u/11875214?v=4"
-              alt="Juan Miguel Ruiz Supelano"
-              class=" shadow-lg shadow-red-500/30"
-              :ui="{ rounded: 'rounded-3xl' }"
-            />
-            <div>
-              <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">
-                Juan Miguel Ruiz Supelano
-              </p>
-              <p class="text-sm" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-                Developer - Designer - Est. Ing. Sistemas
-              </p>
-            </div>
-          </div>
-
-          <div class="space-y-3 text-sm" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
-        <GlowCard
-          v-for="item in [
-            { title: 'Frontend', value: 'Vue - Nuxt - Tailwind' },
-            { title: 'Backend', value: 'Node - MongoDB' },
-            { title: 'UI Motion', value: 'GSAP - Microinteracciones' }
-          ]"
-          :key="item.title"
-          :is-light="isLight"
-          :motion="false"
-          :delay="0"
-          rounded="rounded-2xl"
-          body-padding="px-4 py-3"
-          body-class="w-full flex items-center justify-between"
-          :glow="false"
-          :highlight="false"
-          card-class="bg-transparent border-2 border-red-500 text-white shadow-none"
-        >
-          <p>{{ item.title }}</p>
-          <span class="text-red-500">{{ item.value }}</span>
-        </GlowCard>
-          </div>
-        </div>
-      </GlowCard>
-    </div>
   </UContainer>
 </template>
