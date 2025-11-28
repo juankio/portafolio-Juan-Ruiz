@@ -123,7 +123,7 @@ const props = defineProps({
         >
           <div
             :class="[
-              'absolute inset-0 bg-gradient-to-br opacity-0 transition duration-500 group-hover:opacity-100',
+              'pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition duration-500 group-hover:opacity-100',
               isLight ? 'from-emerald-300/0 via-white/0 to-emerald-100/25' : 'from-red-500/0 via-white/0 to-white/5'
             ]"
           />
@@ -171,6 +171,7 @@ const props = defineProps({
             <UButton
               :to="project.html_url"
               target="_blank"
+              rel="noopener noreferrer"
               size="sm"
               :color="isLight ? 'success' : 'error'"
               variant="solid"
@@ -181,9 +182,14 @@ const props = defineProps({
               v-if="project.homepage"
               :to="project.homepage"
               target="_blank"
+              rel="noopener noreferrer"
               size="sm"
               variant="outline"
-              :class="isLight ? 'border-slate-200 bg-white text-slate-900 hover:border-slate-300 hover:bg-slate-50' : 'border-white/30 bg-white/5 text-white hover:border-white/60 hover:bg-white/10'"
+              :class="
+            isLight
+              ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
+              : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
+          "
             >
               Ver demo
             </UButton>
