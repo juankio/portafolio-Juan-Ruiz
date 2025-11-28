@@ -1,33 +1,65 @@
+<script setup>
+import NavBar from '~/components/NavBar.vue'
+import HeroSection from '~/components/HeroSection.vue'
+import AboutSection from '~/components/AboutSection.vue'
+import ProjectsSection from '~/components/ProjectsSection.vue'
+import ContactSection from '~/components/ContactSection.vue'
+import FooterBar from '~/components/FooterBar.vue'
+
+const runtimeConfig = useRuntimeConfig()
+const siteUrl = runtimeConfig.public.siteUrl || 'https://mi-portafolio.com'
+
+const { data, pending, error, refresh } = await useAsyncData('github-repos', async () => {
+  const repos = await $fetch('https://api.github.com/users/juankiu/repos?per_page=100', {
+    headers: {
+      Accept: 'application/vnd.github+json'
+    }
+  })
+  return repos
+})
+
+const featuredProjects = computed(() => {
+  if (!data.value) return []
+  return [...data.value]
+    .filter((repo) => !repo.fork)
+    .sort((a, b) => {
+      if (b.stargazers_count === a.stargazers_count) {
+        return new Date(b.updated_at) - new Date(a.updated_at)
+      }
+      return b.stargazers_count - a.stargazers_count
+    })
+    .slice(0, 6)
+})
+
+useSeoMeta({
+  title: 'Juan Miguel Ruiz Supelano | Desarrollador y Disenador',
+  description: 'Portafolio minimal y brutalista de Juan Miguel Ruiz Supelano: proyectos en Nuxt, Vue, Tailwind y PWAs.',
+  ogTitle: 'Portafolio de Juan Miguel Ruiz Supelano',
+  ogDescription: 'Proyectos en tiempo real desde GitHub, enfoque en PWAs, UX y rendimiento.',
+  ogUrl: siteUrl,
+  ogImage: `${siteUrl}/icons/pwa-512x512.png`,
+  twitterCard: 'summary_large_image'
+})
+</script>
+
 <template>
-  <main class="min-h-screen bg-slate-950 text-slate-50">
-    <section class="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-16 lg:py-24">
-      <p class="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-300">Index</p>
-      <h1 class="text-4xl font-semibold leading-tight lg:text-5xl">
-        Portafolio listo para construir
-      </h1>
-      <p class="text-lg text-slate-300">
-        Base limpia para tu sitio. Edita esta pagina y agrega las secciones que necesites sin el header de demo.
-      </p>
+  <main class="relative min-h-screen overflow-hidden bg-[#0c0c0d]">
+    <div class="pointer-events-none absolute inset-0 -z-10">
+      <div class="absolute left-0 top-0 h-96 w-96 rounded-full bg-red-500/15 blur-3xl" />
+      <div class="absolute right-10 top-20 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
+      <div class="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-red-500/10 blur-3xl" />
+    </div>
 
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-          <p class="text-sm font-semibold text-slate-200">Siguientes pasos</p>
-          <ul class="mt-3 space-y-1 text-sm text-slate-400">
-            <li>Agrega secciones como hero, proyectos y contacto.</li>
-            <li>Crea componentes reutilizables en <code>app/components</code>.</li>
-            <li>Ajusta estilos globales en <code>assets/css/tailwind.css</code>.</li>
-          </ul>
-        </div>
-
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-          <p class="text-sm font-semibold text-slate-200">Notas rapidas</p>
-          <ul class="mt-3 space-y-1 text-sm text-slate-400">
-            <li>Usa <code>@nuxt/ui</code> para componentes y layout.</li>
-            <li>Define metadata de la pagina con <code>definePageMeta</code> si la necesitas.</li>
-            <li>Mantener el app limpio ayuda a iterar mas rapido.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <NavBar />
+    <HeroSection />
+    <AboutSection />
+    <ProjectsSection
+      :projects="featuredProjects"
+      :pending="pending"
+      :error="error"
+      :on-refresh="refresh"
+    />
+    <ContactSection />
+    <FooterBar />
   </main>
 </template>
