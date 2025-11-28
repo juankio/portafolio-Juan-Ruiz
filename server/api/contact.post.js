@@ -4,7 +4,8 @@ export default defineEventHandler(async (event) => {
 
   const contactTo = config.contactTo || process.env.CONTACT_EMAIL || 'contacto@juanmiguel.dev'
   const resendApiKey = config.resendApiKey || process.env.RESEND_API_KEY
-  const resendFrom = config.resendFrom || process.env.RESEND_FROM || 'Portafolio <portafolio@example.com>'
+  const resendFromPrimary = config.resendFrom || process.env.RESEND_FROM || 'Portafolio <portafolio@example.com>'
+  const resendFallbackFrom = config.resendFallbackFrom || process.env.RESEND_FALLBACK_FROM || ''
 
   if (!resendApiKey) {
     throw createError({
@@ -32,7 +33,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const tryResend = async () => {
+  const tryResend = async (fromAddress) => {
     if (!resendApiKey) return { ok: false, reason: 'No Resend API key' }
     let response
     try {
@@ -43,7 +44,7 @@ export default defineEventHandler(async (event) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: resendFrom,
+          from: fromAddress,
           to: [contactTo],
           subject: `Nuevo mensaje de ${name}`,
           reply_to: email,
@@ -66,18 +67,34 @@ export default defineEventHandler(async (event) => {
       return { ok: false, status: response.status, body: bodyText.slice(0, 500) }
     }
 
-    return { ok: true }
+    return { ok: true, from: fromAddress }
   }
 
-  const resendResult = await tryResend()
-  if (resendResult.ok) return { ok: true, via: 'resend' }
+  const firstAttempt = await tryResend(resendFromPrimary)
+  if (firstAttempt.ok) return { ok: true, via: 'resend', from: resendFromPrimary }
 
-  const detail = resendResult.reason || resendResult.body
+  let secondAttempt = null
+  const bodyLower = (firstAttempt.body || '').toLowerCase()
+  if (
+    resendFallbackFrom &&
+    firstAttempt.status === 403 &&
+    bodyLower.includes('not verified') &&
+    resendFallbackFrom !== resendFromPrimary
+  ) {
+    secondAttempt = await tryResend(resendFallbackFrom)
+    if (secondAttempt.ok) return { ok: true, via: 'resend', from: resendFallbackFrom }
+  }
+
+  const detail = (secondAttempt && (secondAttempt.reason || secondAttempt.body)) || firstAttempt.reason || firstAttempt.body
   throw createError({
     statusCode: 500,
-    statusMessage: resendResult.status ? `Resend error ${resendResult.status}` : 'No se pudo enviar el correo.',
+    statusMessage: secondAttempt?.status
+      ? `Resend error ${secondAttempt.status}`
+      : firstAttempt.status
+        ? `Resend error ${firstAttempt.status}`
+        : 'No se pudo enviar el correo.',
     data: {
-      resend: resendResult,
+      resend: secondAttempt || firstAttempt,
       detail
     }
   })

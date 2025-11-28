@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     resendApiKey: process.env.RESEND_API_KEY || '',
     resendFrom: process.env.RESEND_FROM || 'Portafolio <portafolio@example.com>',
+    resendFallbackFrom: process.env.RESEND_FALLBACK_FROM || '',
     contactTo: process.env.CONTACT_EMAIL || 'contacto@juanmiguel.dev',
     public: {
       siteUrl: 'https://mi-portafolio.com'
