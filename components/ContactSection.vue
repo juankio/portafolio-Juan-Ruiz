@@ -1,4 +1,6 @@
 <script setup>
+import GlowCard from './GlowCard.vue'
+
 const props = defineProps({
   isLight: {
     type: Boolean,
@@ -97,11 +99,7 @@ const handleSubmit = async () => {
           </div>
         </div>
 
-        <UCard
-          class="shadow-xl shadow-red-500/15"
-          :class="isLight ? 'bg-white border border-slate-200' : 'bg-white/5 border-white/10 backdrop-blur'"
-          :ui="{ body: { padding: 'p-6 sm:p-7 lg:p-8' } }"
-        >
+        <GlowCard :is-light="isLight" rounded="rounded-[24px]" body-padding="p-6 sm:p-7 lg:p-8">
           <form class="space-y-5" @submit.prevent="handleSubmit">
             <div class="space-y-2">
               <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Nombre</label>
@@ -125,7 +123,7 @@ const handleSubmit = async () => {
               </UButton>
             </div>
           </form>
-        </UCard>
+        </GlowCard>
       </div>
     </UContainer>
   </section>

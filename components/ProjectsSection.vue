@@ -1,4 +1,6 @@
 <script setup>
+import GlowCard from './GlowCard.vue'
+
 const props = defineProps({
   projects: {
     type: Array,
@@ -72,31 +74,42 @@ const props = defineProps({
       </UAlert>
 
       <div v-if="pending" class="grid gap-6 md:grid-cols-2">
-        <UCard
+        <GlowCard
           v-for="s in 4"
           :key="s"
-          class="h-40 animate-pulse"
-          :ui="{ rounded: 'rounded-3xl', body: { base: 'h-full' } }"
-          :class="isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-white/5'"
+          :is-light="isLight"
+          :glow="false"
+          :float="true"
+          rounded="rounded-3xl"
+          body-padding="p-6"
+          body-class="h-40 animate-pulse"
+          card-class="shadow-none"
         />
       </div>
 
-      <UCard
+      <GlowCard
         v-else-if="projects.length === 0"
-        class="rounded-3xl"
-        :class="isLight ? 'border-slate-200 bg-white text-slate-600' : 'border-white/10 bg-white/5 text-slate-300'"
-        :ui="{ body: { base: 'p-6' } }"
+        :is-light="isLight"
+        :glow="false"
+        :float="true"
+        rounded="rounded-3xl"
+        body-padding="p-6"
+        body-class="text-slate-600 dark:text-slate-300"
+        card-class="shadow-none"
       >
         Aun no hay proyectos para mostrar. Intenta actualizar o revisa mas tarde.
-      </UCard>
+      </GlowCard>
 
       <div v-else class="grid gap-6 md:grid-cols-2">
-        <UCard
+        <GlowCard
           v-for="project in projects"
           :key="project.id"
-          class="group relative overflow-hidden shadow-xl transition duration-300 hover:-translate-y-1 hover:shadow-red-500/20"
-          :class="isLight ? 'border-slate-200 bg-white shadow-slate-200/80 hover:border-red-500/60' : 'border-white/10 bg-white/5 shadow-black/20 hover:border-red-500/40'"
-          :ui="{ rounded: 'rounded-3xl', body: { base: 'p-6 space-y-4 relative' } }"
+          :is-light="isLight"
+          rounded="rounded-3xl"
+          body-padding="p-6"
+          body-class="space-y-4 relative"
+          :float="true"
+          card-class="group relative overflow-hidden shadow-xl hover:-translate-y-1 hover:ring-red-500/25"
         >
           <div
             class="absolute inset-0 bg-gradient-to-br from-red-500/0 via-white/0 to-white/5 opacity-0 transition duration-500 group-hover:opacity-100"
@@ -110,7 +123,7 @@ const props = defineProps({
               variant="soft"
               :color="isLight ? 'gray' : 'white'"
               class="px-3 py-1 text-xs font-semibold"
-              :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-white/10 text-slate-200'"
+              :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-white/10 text-slate-200 ring-1 ring-white/10'"
             >
               {{ project.language || 'Multi' }}
             </UBadge>
@@ -163,7 +176,7 @@ const props = defineProps({
               Ver demo
             </UButton>
           </div>
-        </UCard>
+        </GlowCard>
       </div>
     </div>
   </UContainer>

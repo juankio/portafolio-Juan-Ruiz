@@ -1,4 +1,6 @@
 <script setup>
+import GlowCard from './GlowCard.vue'
+
 const props = defineProps({
   isLight: {
     type: Boolean,
@@ -41,8 +43,8 @@ onBeforeUnmount(() => {
         size="lg"
         :color="isLight ? 'gray' : 'white'"
         variant="soft"
-        class="gap-2 border shadow-sm shadow-red-500/20"
-        :class="isLight ? 'border-slate-200 text-slate-800 bg-white' : 'border-white/10 text-slate-200 bg-white/5'"
+        class="gap-2  shadow-sm shadow-red-500/20"
+        :class="isLight ? ' text-slate-800 bg-white' : ' text-slate-200 bg-white/5'"
       >
         <span class="inline-flex h-2 w-2 animate-pulse rounded-full bg-red-500" />
         Disponible para nuevos retos
@@ -86,52 +88,61 @@ onBeforeUnmount(() => {
           size="lg"
           variant="outline"
           class="transition hover:-translate-y-0.5"
-          :class="isLight ? 'border-slate-200 bg-white text-slate-900 hover:border-slate-300 hover:bg-slate-50' : 'border-white/20 bg-white/5 text-white hover:border-white/50 hover:bg-white/10'"
+          :class="isLight ? ' bg-white text-slate-900 hover: hover:bg-slate-50' : ' bg-white/5 text-white  hover:bg-white/10'"
         >
           Hablemos
         </UButton>
       </div>
 
       <div class="grid gap-4 sm:grid-cols-3">
-        <UCard
-          class="shadow-sm transition-colors"
-          :class="isLight ? 'border border-slate-200 bg-white shadow-slate-200/80' : 'border border-white/10 bg-white/5 shadow-white/10'"
-          :ui="{ rounded: 'rounded-3xl', body: { base: 'p-4 space-y-1' } }"
+        <GlowCard
+          :is-light="isLight"
+          :glow="false"
+          :highlight="false"
+          rounded="rounded-3xl"
+          body-padding="p-4"
+          body-class="space-y-1"
+          card-class="border-2 border-red-500 bg-transparent text-white shadow-none"
         >
           <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Especialidad</p>
           <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Nuxt - Vue - PWA</p>
-        </UCard>
-        <UCard
-          class="shadow-sm transition-colors"
-          :class="isLight ? 'border border-slate-200 bg-white shadow-slate-200/80' : 'border border-white/10 bg-white/5 shadow-white/10'"
-          :ui="{ rounded: 'rounded-3xl', body: { base: 'p-4 space-y-1' } }"
+        </GlowCard>
+        <GlowCard
+          :is-light="isLight"
+          :glow="false"
+          :highlight="false"
+          rounded="rounded-3xl"
+          body-padding="p-4"
+          body-class="space-y-1"
+          card-class="border-2 border-red-500 bg-transparent text-white shadow-none"
         >
           <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Stack visual</p>
           <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Tailwind - Animaciones suaves</p>
-        </UCard>
-        <UCard
-          class="shadow-sm transition-colors"
-          :class="isLight ? 'border border-slate-200 bg-white shadow-slate-200/80' : 'border border-white/10 bg-white/5 shadow-white/10'"
-          :ui="{ rounded: 'rounded-3xl', body: { base: 'p-4 space-y-1' } }"
+        </GlowCard>
+        <GlowCard
+          :is-light="isLight"
+          :glow="false"
+          :highlight="false"
+          rounded="rounded-3xl"
+          body-padding="p-4"
+          body-class="space-y-1"
+          card-class="border-2 border-red-500 bg-transparent text-white shadow-none"
         >
           <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Disponible</p>
           <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Freelance y proyectos</p>
-        </UCard>
+        </GlowCard>
       </div>
     </div>
 
     <div class="flex-1">
-      <UCard
-        class="relative mx-auto max-w-lg overflow-hidden border shadow-2xl shadow-red-500/25 transition-colors"
-        :class="
-          isLight
-            ? 'border-slate-200 bg-gradient-to-br from-white via-slate-100 to-red-50'
-            : 'border-white/10 bg-gradient-to-br from-white/10 via-black/10 to-red-500/10'
-        "
-        :ui="{ rounded: 'rounded-[32px]', body: { base: 'p-8 space-y-6 relative' } }"
+      <GlowCard
+        :is-light="isLight"
+        :motion="false"
+        rounded="rounded-[32px]"
+        body-padding="p-8"
+        body-class="space-y-6 relative"
+        class="relative mx-auto max-w-lg overflow-hidden shadow-2xl"
       >
-        <div class="absolute -left-16 -top-16 h-32 w-32 rounded-full bg-red-500/20 blur-3xl" />
-        <div class="absolute -bottom-10 -right-16 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
         <div class="relative space-y-6">
           <div class="flex items-center justify-between">
             <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-300'">
@@ -146,7 +157,7 @@ onBeforeUnmount(() => {
               size="xl"
               src="https://avatars.githubusercontent.com/u/11875214?v=4"
               alt="Juan Miguel Ruiz Supelano"
-              class="border border-white/20 shadow-lg shadow-red-500/30"
+              class=" shadow-lg shadow-red-500/30"
               :ui="{ rounded: 'rounded-3xl' }"
             />
             <div>
@@ -160,23 +171,28 @@ onBeforeUnmount(() => {
           </div>
 
           <div class="space-y-3 text-sm" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
-            <UCard
-              v-for="item in [
-                { title: 'Frontend', value: 'Vue - Nuxt - Tailwind' },
-                { title: 'Backend', value: 'Node - MongoDB' },
-                { title: 'UI Motion', value: 'GSAP - Microinteracciones' }
-              ]"
-              :key="item.title"
-              class="flex items-center justify-between transition-colors"
-              :class="isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-black/30'"
-              :ui="{ rounded: 'rounded-2xl', body: { base: 'px-4 py-3 w-full flex items-center justify-between' } }"
-            >
-              <p>{{ item.title }}</p>
-              <span class="text-red-500">{{ item.value }}</span>
-            </UCard>
+        <GlowCard
+          v-for="item in [
+            { title: 'Frontend', value: 'Vue - Nuxt - Tailwind' },
+            { title: 'Backend', value: 'Node - MongoDB' },
+            { title: 'UI Motion', value: 'GSAP - Microinteracciones' }
+          ]"
+          :key="item.title"
+          :is-light="isLight"
+          :motion="false"
+          rounded="rounded-2xl"
+          body-padding="px-4 py-3"
+          body-class="w-full flex items-center justify-between"
+          :glow="false"
+          :highlight="false"
+          card-class="bg-transparent border-2 border-red-500 text-white shadow-none"
+        >
+          <p>{{ item.title }}</p>
+          <span class="text-red-500">{{ item.value }}</span>
+        </GlowCard>
           </div>
         </div>
-      </UCard>
+      </GlowCard>
     </div>
   </UContainer>
 </template>
