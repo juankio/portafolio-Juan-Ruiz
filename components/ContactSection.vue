@@ -57,85 +57,76 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section
-    id="contacto"
-    class="mx-auto max-w-6xl px-6 py-16 sm:py-20"
-  >
-    <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-      <div class="space-y-3">
-        <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Contacto</p>
-        <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
-          Hablemos de tu proximo <span class="text-red-500">proyecto</span>
-        </h2>
-        <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-          Tienes una idea o producto que necesita vida? Escribeme y armemos algo brutalista, rapido y con intencion.
-        </p>
-        <div class="flex flex-wrap gap-3 text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-          <span
-            class="rounded-full border px-3 py-1"
-            :class="isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-white/5'"
+  <section id="contacto" class="py-16 sm:py-20">
+    <UContainer>
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div class="space-y-4">
+          <UBadge
+            size="sm"
+            variant="soft"
+            :color="isLight ? 'gray' : 'primary'"
+            class="uppercase tracking-[0.25em] font-semibold"
           >
-            Disponibilidad: Remoto
-          </span>
-          <span
-            class="rounded-full border px-3 py-1"
-            :class="isLight ? 'border-slate-200 bg-white' : 'border-white/10 bg-white/5'"
-          >
-            Respuesta en 24h
-          </span>
-        </div>
-      </div>
-
-      <div
-        class="rounded-[28px] p-6 shadow-xl shadow-red-500/15 transition-colors"
-        :class="isLight ? 'border border-slate-200 bg-white' : 'border border-white/10 bg-white/5'"
-      >
-        <form class="space-y-5" @submit.prevent="handleSubmit">
-          <div class="space-y-2">
-            <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Nombre</label>
-            <UInput
-              v-model="name"
-              placeholder="Tu nombre"
-              size="lg"
-              :class="isLight ? 'bg-white' : 'bg-black/30'"
-              required
-            />
+            Contacto
+          </UBadge>
+          <div class="space-y-3">
+            <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
+              Hablemos de tu proximo <span class="text-red-500">proyecto</span>
+            </h2>
+            <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
+              Tienes una idea o producto que necesita vida? Escribeme y armemos algo brutalista, rapido y con intencion.
+            </p>
           </div>
-          <div class="space-y-2">
-            <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Correo</label>
-            <UInput
-              v-model="email"
-              type="email"
-              placeholder="correo@ejemplo.com"
-              size="lg"
-              :class="isLight ? 'bg-white' : 'bg-black/30'"
-              required
-            />
-          </div>
-          <div class="space-y-2">
-            <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Mensaje</label>
-            <UTextarea
-              v-model="message"
-              :rows="4"
-              placeholder="Cuentame sobre tu proyecto..."
-              :class="isLight ? 'bg-white' : 'bg-black/30'"
-              required
-            />
-          </div>
-
-          <div class="flex items-center justify-between gap-3">
-            <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Uso Resend para un delivery confiable.</p>
-            <UButton
-              type="submit"
-              size="lg"
-              :loading="sending"
-              class="bg-red-500 text-black hover:bg-red-400"
+          <div class="flex flex-wrap gap-3">
+            <UBadge
+              variant="soft"
+              size="md"
+              :color="isLight ? 'gray' : 'primary'"
+              :class="isLight ? 'text-slate-700' : 'text-slate-200'"
             >
-              Enviar mensaje
-            </UButton>
+              Disponibilidad: Remoto
+            </UBadge>
+            <UBadge
+              variant="soft"
+              size="md"
+              :color="isLight ? 'gray' : 'primary'"
+              :class="isLight ? 'text-slate-700' : 'text-slate-200'"
+            >
+              Respuesta en 24h
+            </UBadge>
           </div>
-        </form>
+        </div>
+
+        <UCard
+          class="shadow-xl shadow-red-500/15"
+          :class="isLight ? 'bg-white border border-slate-200' : 'bg-white/5 border-white/10 backdrop-blur'"
+          :ui="{ body: { padding: 'p-6 sm:p-7 lg:p-8' } }"
+        >
+          <form class="space-y-5" @submit.prevent="handleSubmit">
+            <div class="space-y-2">
+              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Nombre</label>
+              <UInput v-model="name" placeholder="Tu nombre" size="lg" variant="outline" required />
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Correo</label>
+              <UInput v-model="email" type="email" placeholder="correo@ejemplo.com" size="lg" variant="outline" required />
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Mensaje</label>
+              <UTextarea v-model="message" :rows="4" placeholder="Cuentame sobre tu proyecto..." variant="outline" required />
+            </div>
+
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
+                Uso Resend para un delivery confiable.
+              </p>
+              <UButton type="submit" size="lg" :loading="sending" color="primary" variant="solid" class="bg-red-500 text-black hover:bg-red-400">
+                Enviar mensaje
+              </UButton>
+            </div>
+          </form>
+        </UCard>
       </div>
-    </div>
+    </UContainer>
   </section>
 </template>

@@ -48,9 +48,12 @@ useSeoMeta({
 </script>
 
 <template>
-  <main
-    class="relative min-h-screen overflow-hidden"
-    :class="isLight ? 'bg-white text-slate-900' : 'bg-[#0c0c0d] text-slate-100'"
+  <UPage
+    id="inicio"
+    :class="[
+      'relative min-h-screen overflow-hidden',
+      isLight ? 'bg-white text-slate-900' : 'bg-[#0c0c0d] text-slate-100'
+    ]"
   >
     <div class="pointer-events-none absolute inset-0 -z-10">
       <div
@@ -67,17 +70,22 @@ useSeoMeta({
       />
     </div>
 
-    <NavBar :is-light="isLight" @toggle-mode="isLight = !isLight" />
-    <HeroSection :is-light="isLight" />
-    <AboutSection :is-light="isLight" />
-    <ProjectsSection
-      :is-light="isLight"
-      :projects="featuredProjects"
-      :pending="pending"
-      :error="error"
-      :on-refresh="refresh"
-    />
-    <ContactSection :is-light="isLight" />
-    <FooterBar :is-light="isLight" />
-  </main>
+    <UPageBody class="px-4 sm:px-6 lg:px-8 pb-14">
+      <span id="inicio" class="sr-only" aria-hidden="true"></span>
+      <NavBar :is-light="isLight" @toggle-mode="isLight = !isLight" />
+      <div class="flex flex-col gap-12 md:gap-14">
+        <HeroSection :is-light="isLight" />
+        <AboutSection :is-light="isLight" />
+        <ProjectsSection
+          :is-light="isLight"
+          :projects="featuredProjects"
+          :pending="pending"
+          :error="error"
+          :on-refresh="refresh"
+        />
+        <ContactSection :is-light="isLight" />
+        <FooterBar :is-light="isLight" />
+      </div>
+    </UPageBody>
+  </UPage>
 </template>
