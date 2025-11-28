@@ -1,4 +1,4 @@
-import { buildEmail } from '../utils/emailTemplate.js'
+import { buildEmail } from '../utils/emailTemplate'
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
