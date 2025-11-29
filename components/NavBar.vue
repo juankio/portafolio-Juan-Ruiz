@@ -1,4 +1,7 @@
 <script setup>
+import { es, en } from '@nuxt/ui/locale'
+import { useI18n } from '~/composables/useI18n'
+
 const props = defineProps({
   isLight: {
     type: Boolean,
@@ -7,13 +10,53 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['toggle-mode'])
+const { locale, setLocale, t } = useI18n()
+const availableLocales = [es, en]
 
-const links = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Sobre mi', href: '/sobre-mi' },
-  { label: 'Proyectos', href: '/proyectos' },
-  { label: 'Contacto', href: '/contacto' }
-]
+const localeModel = computed({
+  get: () => locale.value,
+  set: (code) => {
+    const match = availableLocales.find(item => item.code === code)
+    setLocale(match ? match.code : 'en')
+  }
+})
+
+const links = computed(() => [
+  { label: t('nav.links.home'), href: '/' },
+  { label: t('nav.links.about'), href: '/sobre-mi' },
+  { label: t('nav.links.projects'), href: '/proyectos' },
+  { label: t('nav.links.contact'), href: '/contacto' }
+])
+
+const lightLocaleUi = {
+  base: 'text-slate-800',
+  trigger: {
+    base: '!bg-white !text-slate-800 !border !border-emerald-300 hover:!bg-emerald-50 hover:!border-emerald-400'
+  },
+  content: {
+    base: '!bg-white !text-slate-800 !border !border-emerald-300 shadow-lg shadow-emerald-200/50'
+  },
+  item: {
+    base: 'text-slate-800 data-[state=checked]:bg-emerald-50',
+    label: 'text-slate-800',
+    leading: 'text-lg text-slate-800'
+  }
+}
+
+const darkLocaleUi = {
+  base: '!text-white',
+  trigger: {
+    base: '!bg-black !text-white !border !border-red-500 hover:!bg-red-500/10'
+  },
+  content: {
+    base: '!bg-black !text-white !border !border-red-500 !shadow-lg !shadow-red-500/25'
+  },
+  item: {
+    base: '!text-white data-[state=checked]:bg-red-500/15',
+    label: '!text-white',
+    leading: 'text-lg !text-white'
+  }
+}
 
 const scrolled = ref(false)
 
@@ -87,6 +130,28 @@ onBeforeUnmount(() => {
       </nav>
 
       <div class="flex flex-1 items-center justify-end gap-2.5">
+        <div :class="isLight ? '' : 'dark-locale'">
+          <ULocaleSelect
+            v-model="localeModel"
+            :locales="availableLocales"
+            size="sm"
+            variant="outline"
+            value-key="code"
+          label-key="name"
+          :color="isLight ? 'success' : 'error'"
+          :ui="isLight ? lightLocaleUi : darkLocaleUi"
+            :content="!isLight ? { class: 'dark-locale-content', style: 'background:#000!important;color:#fff!important;border:1px solid #ef4444!important;' } : undefined"
+            class="w-40 sm:w-44"
+            :class="isLight ? '!border-emerald-400 !bg-white !text-slate-800' : '!border-red-500 !bg-black !text-white !opacity-100'"
+          >
+            <template #value="{ option }">
+              <span :class="isLight ? 'text-slate-800' : 'text-white !opacity-100'">{{ option?.name || localeModel }}</span>
+            </template>
+            <template #item="{ item }">
+              <span :class="isLight ? 'text-slate-800' : 'text-white !opacity-100'">{{ item.name }}</span>
+            </template>
+          </ULocaleSelect>
+        </div>
         <UButton
           to="/proyectos"
           size="sm"
@@ -97,7 +162,7 @@ onBeforeUnmount(() => {
               : 'border border-red-500/60 text-red-100 bg-red-500/10 hover:bg-red-500/20'
           "
         >
-          Ver proyectos
+          {{ t('nav.ctaProjects') }}
         </UButton>
         <UButton
           size="sm"
@@ -106,10 +171,10 @@ onBeforeUnmount(() => {
           :class="
             isLight
               ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
-              : 'border border-red-500/60 text-red-100 hover:border-emerald-400 hover:bg-red-500/20'
+              : 'border border-red-500/60 text-red-100 hover:border-red-400 hover:bg-red-500/20'
           "
           class="rounded-full"
-          aria-label="Cambiar modo"
+          :aria-label="t('nav.themeToggle')"
           @click="emit('toggle-mode')"
         />
       </div>
@@ -121,11 +186,52 @@ onBeforeUnmount(() => {
           :to="item.href"
           color="neutral"
           variant="outline"
-          :class="isLight ? 'border-slate-200 text-slate-700 hover:border-slate-300' : 'border-white/15 text-slate-200 hover:border-white/40'"
-        >
+          :class="
+            isLight
+              ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
+              : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
+          " >
           {{ item.label }}
         </UBadge>
       </nav>
     </UContainer>
   </header>
 </template>
+
+<style>
+.dark-locale-content {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #ef4444 !important;
+  box-shadow: 0 18px 38px -12px rgba(239, 68, 68, 0.35) !important;
+}
+.dark-locale-content .ui-select-menu-item,
+.dark-locale-content [data-slot='item'] {
+  color: #fff !important;
+}
+.dark-locale-content [data-slot='content'],
+.dark-locale-content [data-slot='viewport'],
+.dark-locale-content [data-slot='group'] {
+  background: #000 !important;
+  color: #fff !important;
+}
+.dark-locale [data-slot='base'] {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #ef4444 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #ef4444 !important;
+}
+.dark-locale [data-slot='content'] {
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #ef4444 !important;
+  box-shadow: 0 18px 38px -12px rgba(239, 68, 68, 0.35) !important;
+}
+.dark-locale [data-slot='item'] span {
+  color: #fff !important;
+}
+.dark-locale [data-slot='item'] {
+  color: #fff !important;
+}
+</style>

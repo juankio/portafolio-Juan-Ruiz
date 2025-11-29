@@ -8,15 +8,31 @@ const props = defineProps({
   }
 })
 
-const rotatingWords = ['Frontend Developer', 'UI Designer', 'PWA Builder', 'Creative Coder']
-const activeWord = ref(rotatingWords[0])
+const { t } = useI18n()
+
+const rotatingWords = computed(() => {
+  const words = t('hero.rotatingWords')
+  return Array.isArray(words) ? words : []
+})
+const activeWord = ref(rotatingWords.value[0] || '')
 let intervalId
+
+const heroCards = computed(() => {
+  const cards = t('hero.cards')
+  return Array.isArray(cards) ? cards : []
+})
+
+watch(rotatingWords, (words) => {
+  activeWord.value = words?.[0] || ''
+})
 
 onMounted(() => {
   let index = 0
   intervalId = window.setInterval(() => {
-    index = (index + 1) % rotatingWords.length
-    activeWord.value = rotatingWords[index]
+    const words = rotatingWords.value
+    if (!words.length) return
+    index = (index + 1) % words.length
+    activeWord.value = words[index]
   }, 2200)
 })
 
@@ -41,29 +57,33 @@ onBeforeUnmount(() => {
     <div class="flex-1 space-y-6">
       <UBadge
         size="lg"
-        color="neutral"
         variant="outline"
         class="gap-2 shadow-sm"
-        :class="isLight ? 'text-emerald-700 border-emerald-400 bg-transparent' : 'text-red-300 border-red-500/70 bg-transparent'"
+        :class="
+            isLight
+              ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
+              : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
+          "
       >
         <span class="inline-flex h-2 w-2 animate-pulse rounded-full" :class="isLight ? 'bg-emerald-500' : 'bg-red-500'" />
-        Disponible para nuevos retos
+        {{ t('hero.availability') }}
       </UBadge>
 
       <div class="space-y-3">
         <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-          Juan Miguel Ruiz Supelano
+          {{ t('hero.tagline') }}
         </p>
         <h1
           class="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl"
           :class="isLight ? 'text-slate-900' : 'text-white'"
         >
-          Construyo experiencias web
-          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">rapidas</span> y
-          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">intencionales</span>.
+          {{ t('hero.title.main') }}
+          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('hero.title.highlight1') }}</span>
+          {{ t('hero.title.connector') }}
+          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('hero.title.highlight2') }}</span>
         </h1>
         <p class="max-w-2xl text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-          Diseno productos web rapidos, accesibles y listos para produccion, con foco en PWAs, rendimiento y UX.
+          {{ t('hero.subtitle') }}
         </p>
       </div>
 
@@ -71,7 +91,7 @@ onBeforeUnmount(() => {
         class="flex flex-wrap items-center gap-4 text-lg font-semibold"
         :class="isLight ? 'text-slate-700' : 'text-slate-200'"
       >
-        <span :class="isLight ? 'text-slate-500' : 'text-slate-400'">Soy</span>
+        <span :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ t('hero.rolePrefix') }}</span>
         <span
           class="relative rounded-2xl px-4 py-2 transition border-2"
           :class="isLight ? 'border-emerald-500 text-emerald-700 bg-transparent' : 'border-red-500 text-red-500 bg-transparent'"
@@ -92,7 +112,7 @@ onBeforeUnmount(() => {
               : 'bg-red-600 text-white shadow-red-500/30 hover:bg-red-500'
           "
         >
-          Ver proyectos
+          {{ t('hero.ctas.projects') }}
         </UButton>
         <UButton
           to="/contacto"
@@ -101,49 +121,25 @@ onBeforeUnmount(() => {
           class="transition hover:-translate-y-0.5"
           :class="isLight ? 'border border-emerald-300 text-emerald-700 bg-white hover:bg-emerald-50' : 'border border-red-500 text-white bg-transparent hover:bg-red-500/10'"
         >
-          Hablemos
+          {{ t('hero.ctas.contact') }}
         </UButton>
       </div>
 
       <div class="grid gap-4 sm:grid-cols-3">
         <GlowCard
+          v-for="(card, idx) in heroCards"
+          :key="card.label"
           :is-light="isLight"
           :glow="false"
           :highlight="false"
-          :delay="0"
+          :delay="idx * 120"
           rounded="rounded-3xl"
           body-padding="p-4"
           body-class="space-y-1"
           card-class="border-2 bg-transparent text-inherit shadow-none"
         >
-          <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Especialidad</p>
-          <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Nuxt - Vue - PWA</p>
-        </GlowCard>
-        <GlowCard
-          :is-light="isLight"
-          :glow="false"
-          :highlight="false"
-          :delay="120"
-          rounded="rounded-3xl"
-          body-padding="p-4"
-          body-class="space-y-1"
-          card-class="border-2 bg-transparent text-inherit shadow-none"
-        >
-          <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Stack visual</p>
-          <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Tailwind - Animaciones suaves</p>
-        </GlowCard>
-        <GlowCard
-          :is-light="isLight"
-          :glow="false"
-          :highlight="false"
-          :delay="240"
-          rounded="rounded-3xl"
-          body-padding="p-4"
-          body-class="space-y-1"
-          card-class="border-2 bg-transparent text-inherit shadow-none"
-        >
-          <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Disponible</p>
-          <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Freelance y proyectos</p>
+          <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ card.label }}</p>
+          <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">{{ card.value }}</p>
         </GlowCard>
       </div>
     </div>

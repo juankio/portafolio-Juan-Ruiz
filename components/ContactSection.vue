@@ -9,6 +9,7 @@ const props = defineProps({
 })
 
 const toast = useToast()
+const { t } = useI18n()
 
 const name = ref('')
 const email = ref('')
@@ -17,12 +18,12 @@ const sending = ref(false)
 
 const validate = () => {
   if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
-    toast.add({ title: 'Completa todos los campos', color: 'red' })
+    toast.add({ title: t('contact.validation.required'), color: 'red' })
     return false
   }
   const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
   if (!emailRegex.test(email.value)) {
-    toast.add({ title: 'Ingresa un correo valido', color: 'red' })
+    toast.add({ title: t('contact.validation.email'), color: 'red' })
     return false
   }
   return true
@@ -40,7 +41,7 @@ const handleSubmit = async () => {
         message: message.value
       }
     })
-    toast.add({ title: 'Mensaje enviado', description: 'Te respondere pronto.', color: 'green' })
+    toast.add({ title: t('contact.validation.success'), description: t('contact.validation.successDesc'), color: 'green' })
     name.value = ''
     email.value = ''
     message.value = ''
@@ -50,8 +51,8 @@ const handleSubmit = async () => {
       error?.data?.reason ||
       error?.data?.statusMessage ||
       error?.statusMessage ||
-      'Intenta mas tarde.'
-    toast.add({ title: 'No se pudo enviar', description: reason, color: 'red' })
+      t('contact.validation.fallback')
+    toast.add({ title: t('contact.validation.error'), description: reason, color: 'red' })
   } finally {
     sending.value = false
   }
@@ -68,15 +69,16 @@ const handleSubmit = async () => {
             variant="soft"
             :color="isLight ? 'neutral' : 'primary'"
             class="uppercase tracking-[0.25em] font-semibold"
+            :class="isLight ? 'text-emerald-700  bg-transparent' : 'text-red-300  bg-transparent'"
           >
-            Contacto
+            {{ t('contact.section') }}
           </UBadge>
           <div class="space-y-3">
             <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
-              Hablemos de tu proximo <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">proyecto</span>
+              {{ t('contact.titleLead') }} <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('contact.titleAccent') }}</span>
             </h2>
             <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-              Tienes una idea o producto que necesita vida? Escribeme y armemos algo brutalista, rapido y con intencion.
+              {{ t('contact.subtitle') }}
             </p>
           </div>
           <div class="flex flex-wrap gap-3">
@@ -86,7 +88,7 @@ const handleSubmit = async () => {
               :color="isLight ? 'neutral' : 'primary'"
               :class="isLight ? 'text-slate-700' : 'text-slate-200'"
             >
-              Disponibilidad: Remoto
+              {{ t('contact.badges')[0] }}
             </UBadge>
             <UBadge
               variant="soft"
@@ -94,7 +96,7 @@ const handleSubmit = async () => {
               :color="isLight ? 'neutral' : 'primary'"
               :class="isLight ? 'text-slate-700' : 'text-slate-200'"
             >
-              Respuesta en 24h
+              {{ t('contact.badges')[1] }}
             </UBadge>
           </div>
         </div>
@@ -102,21 +104,21 @@ const handleSubmit = async () => {
         <GlowCard :is-light="isLight" rounded="rounded-[24px]" body-padding="p-6 sm:p-7 lg:p-8">
           <form class="space-y-5" @submit.prevent="handleSubmit">
             <div class="space-y-2">
-              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Nombre</label>
-              <UInput v-model="name" placeholder="Tu nombre" size="lg" variant="outline" required />
+              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">{{ t('contact.form.nameLabel') }}</label>
+              <UInput v-model="name" :placeholder="t('contact.form.namePlaceholder')" size="lg" variant="outline" required />
             </div>
             <div class="space-y-2">
-              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Correo</label>
-              <UInput v-model="email" type="email" placeholder="correo@ejemplo.com" size="lg" variant="outline" required />
+              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">{{ t('contact.form.emailLabel') }}</label>
+              <UInput v-model="email" type="email" :placeholder="t('contact.form.emailPlaceholder')" size="lg" variant="outline" required />
             </div>
             <div class="space-y-2">
-              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">Mensaje</label>
-              <UTextarea v-model="message" :rows="4" placeholder="Cuentame sobre tu proyecto..." variant="outline" required />
+              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">{{ t('contact.form.messageLabel') }}</label>
+              <UTextarea v-model="message" :rows="4" :placeholder="t('contact.form.messagePlaceholder')" variant="outline" required />
             </div>
 
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-                Uso Resend para un delivery confiable.
+                {{ t('contact.form.helper') }}
               </p>
               <UButton
                 type="submit"
@@ -126,7 +128,7 @@ const handleSubmit = async () => {
                 variant="solid"
                 :class="isLight ? 'bg-emerald-500  hover:bg-emerald-400' : 'bg-red-500  hover:bg-red-400 '"
               >
-                Enviar mensaje
+                {{ t('contact.form.submit') }}
               </UButton>
             </div>
           </form>

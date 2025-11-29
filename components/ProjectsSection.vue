@@ -23,6 +23,8 @@ const props = defineProps({
     default: false
   }
 })
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -33,9 +35,9 @@ const props = defineProps({
   >
     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Proyectos</p>
+        <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ t('projects.sectionTitle') }}</p>
         <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
-          Repositorios vivos desde <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">GitHub</span>
+          {{ t('projects.headline') }} <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('projects.headlineAccent') }}</span>
         </h2>
       </div>
       <div class="flex gap-3">
@@ -51,7 +53,7 @@ const props = defineProps({
           "
           @click="onRefresh && onRefresh()"
         >
-          Actualizar
+          {{ t('projects.refresh') }}
         </UButton>
         <UButton
           to="https://github.com/juankio"
@@ -64,7 +66,7 @@ const props = defineProps({
               : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
           "
         >
-          GitHub
+          {{ t('projects.github') }}
         </UButton>
       </div>
     </div>
@@ -77,7 +79,7 @@ const props = defineProps({
         class="rounded-3xl"
         :ui="{ body: { base: 'flex flex-col gap-2' } }"
       >
-        Hubo un problema al traer los repos. Intenta nuevamente o revisa el rate limit de GitHub.
+        {{ t('projects.error') }}
       </UAlert>
 
       <div v-if="pending" class="grid gap-6 md:grid-cols-2">
@@ -106,7 +108,7 @@ const props = defineProps({
         body-class="text-slate-600 dark:text-slate-300"
         card-class="shadow-none"
       >
-        Aun no hay proyectos para mostrar. Intenta actualizar o revisa mas tarde.
+        {{ t('projects.empty') }}
       </GlowCard>
 
       <div v-else class="grid gap-6 md:grid-cols-2">
@@ -129,7 +131,7 @@ const props = defineProps({
           />
           <div class="relative flex items-start justify-between gap-3">
             <div>
-              <p class="text-xs uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Repositorio</p>
+              <p class="text-xs uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ t('projects.repo') }}</p>
               <h3 class="text-xl font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">{{ project.name }}</h3>
             </div>
             <UBadge
@@ -143,7 +145,7 @@ const props = defineProps({
           </div>
 
           <p class="relative text-sm" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-            {{ project.description || 'Repositorio en GitHub sin descripcion anadida.' }}
+            {{ project.description || t('projects.noDescription') }}
           </p>
 
           <div class="flex flex-wrap items-center gap-3 text-xs" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
@@ -154,7 +156,7 @@ const props = defineProps({
               :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-black/30 text-slate-200'"
             >
               <UIcon name="i-heroicons-star-20-solid" class="text-amber-400" />
-              {{ project.stargazers_count ?? 0 }} stars
+              {{ project.stargazers_count ?? 0 }} {{ t('projects.stars') }}
             </UBadge>
             <UBadge
               variant="solid"
@@ -163,7 +165,7 @@ const props = defineProps({
               :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-black/30 text-slate-200'"
             >
               <UIcon name="i-heroicons-calendar-days-20-solid" class="text-slate-300" />
-              Actualizado {{ new Date(project.updated_at).toLocaleDateString() }}
+              {{ t('projects.updated') }} {{ new Date(project.updated_at).toLocaleDateString() }}
             </UBadge>
           </div>
 
@@ -176,7 +178,7 @@ const props = defineProps({
               :color="isLight ? 'success' : 'error'"
               variant="solid"
             >
-              Ver codigo
+              {{ t('projects.viewCode') }}
             </UButton>
             <UButton
               v-if="project.homepage"
@@ -191,7 +193,7 @@ const props = defineProps({
               : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
           "
             >
-              Ver demo
+              {{ t('projects.viewDemo') }}
             </UButton>
           </div>
         </GlowCard>

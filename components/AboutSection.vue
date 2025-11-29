@@ -7,6 +7,23 @@ const props = defineProps({
     default: false
   }
 })
+
+const { t } = useI18n()
+
+const aboutChips = computed(() => {
+  const chips = t('about.chips')
+  return Array.isArray(chips) ? chips : []
+})
+
+const aboutSummary = computed(() => {
+  const summary = t('about.summary')
+  return Array.isArray(summary) ? summary : []
+})
+
+const aboutSkills = computed(() => {
+  const skills = t('about.skills')
+  return Array.isArray(skills) ? skills : []
+})
 </script>
 
 <template>
@@ -18,18 +35,19 @@ const props = defineProps({
     <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
       <div class="space-y-4">
         <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-          Sobre mi
+          {{ t('about.sectionTitle') }}
         </p>
         <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
-          Diseno y desarrollo <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">productos</span> digitales que se sienten vivos.
+          {{ t('about.headline.lead') }}
+          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('about.headline.accent') }}</span>
+          {{ t('about.headline.tail') }}
         </h2>
         <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-          Soy Juan Miguel Ruiz Supelano, desarrollador y disenador que estudia Ingenieria de Sistemas.
-          Creo interfaces limpias, rapidas y con una dosis justa de brutalismo moderno.
+          {{ t('about.intro') }}
         </p>
         <div class="flex flex-wrap gap-3">
           <UBadge
-            v-for="chip in ['Frontend', 'UX/UI', 'PWAs', 'Animacion']"
+            v-for="chip in aboutChips"
             :key="chip"
             variant="outline"
             color="neutral"
@@ -67,22 +85,22 @@ const props = defineProps({
               </div>
             </div>
             <UBadge
-              color="error"
+              :color="isLight ? 'success' : 'error'"
               variant="outline"
               class="rounded-full px-4 py-2 text-sm font-semibold"
-              :class="isLight ? 'border-red-300 text-red-600 bg-red-50/60' : 'border-red-400 text-red-200 bg-transparent'"
+              :class="
+                isLight
+                  ? 'border-emerald-300 text-black hover:border-emerald-400 hover:bg-emerald-50'
+                  : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
+              "
             >
-              Disponible
+              {{ t('about.availability') }}
             </UBadge>
           </div>
 
           <div class="space-y-3">
             <GlowCard
-              v-for="(row, idx) in [
-                { label: 'Frontend', value: 'Vue - Nuxt - Tailwind' },
-                { label: 'Backend', value: 'Node - MongoDB' },
-                { label: 'UI Motion', value: 'GSAP - Microinteracciones' }
-              ]"
+              v-for="(row, idx) in aboutSummary"
               :key="row.label"
               :is-light="isLight"
               rounded="rounded-2xl"
@@ -107,16 +125,11 @@ const props = defineProps({
           :card-class="isLight ? 'shadow-[0_25px_80px_-40px_rgba(16,185,129,0.35)]' : 'shadow-[0_25px_80px_-40px_rgba(248,113,113,0.45)]'"
         >
           <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-            Habilidades
+            {{ t('about.skillsTitle') }}
           </p>
           <div class="grid gap-3 sm:grid-cols-2">
             <GlowCard
-              v-for="(skill, idx) in [
-                { title: 'Frontend y UI', copy: 'Vue, Nuxt, Tailwind, GSAP, accesibilidad, diseno responsivo.' },
-                { title: 'Backend y datos', copy: 'Node.js, MongoDB, APIs REST, despliegues rapidos y seguros.' },
-                { title: 'Experiencia de producto', copy: 'Microinteracciones, PWAs, rendimiento, optimizacion de SEO.' },
-                { title: 'Herramientas', copy: 'Figma, GitHub, Nuxt UI, SendGrid, CI/CD ligero.' }
-              ]"
+              v-for="(skill, idx) in aboutSkills"
               :key="skill.title"
               :delay="idx * 120"
               :is-light="isLight"
