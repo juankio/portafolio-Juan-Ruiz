@@ -130,19 +130,23 @@ onBeforeUnmount(() => {
       </nav>
 
       <div class="flex flex-1 items-center justify-end gap-2.5">
-        <div :class="isLight ? '' : 'dark-locale'">
+        <div :class="isLight ? 'light-locale' : 'dark-locale'">
           <ULocaleSelect
             v-model="localeModel"
             :locales="availableLocales"
             size="sm"
             variant="outline"
             value-key="code"
-          label-key="name"
-          :color="isLight ? 'success' : 'error'"
-          :ui="isLight ? lightLocaleUi : darkLocaleUi"
-            :content="!isLight ? { class: 'dark-locale-content', style: 'background:#000!important;color:#fff!important;border:1px solid #ef4444!important;' } : undefined"
+            label-key="name"
+            :color="isLight ? 'success' : 'error'"
+            :ui="isLight ? lightLocaleUi : darkLocaleUi"
+            :content="
+              isLight
+                ? { class: 'light-locale-content', style: 'background:#f9fffb!important;color:#0f172a!important;border:1px solid #10b981!important;' }
+                : { class: 'dark-locale-content', style: 'background:#000!important;color:#fff!important;border:1px solid #ef4444!important;' }
+            "
             class="w-40 sm:w-44"
-            :class="isLight ? '!border-emerald-400 !bg-white !text-slate-800' : '!border-red-500 !bg-black !text-white !opacity-100'"
+            :class="isLight ? '!border-emerald-400 !bg-[#f9fffb] !text-slate-800' : '!border-red-500 !bg-black !text-white !opacity-100'"
           >
             <template #value="{ option }">
               <span :class="isLight ? 'text-slate-800' : 'text-white !opacity-100'">{{ option?.name || localeModel }}</span>
@@ -233,5 +237,32 @@ onBeforeUnmount(() => {
 }
 .dark-locale [data-slot='item'] {
   color: #fff !important;
+}
+.light-locale [data-slot='base'] {
+  background: #f9fffb !important;
+  color: #0f172a !important;
+  border: 1px solid #10b981 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #10b981 !important;
+}
+.light-locale [data-slot='content'] {
+  background: #f9fffb !important;
+  color: #0f172a !important;
+  border: 1px solid #10b981 !important;
+  box-shadow: 0 18px 38px -12px rgba(16, 185, 129, 0.35) !important;
+}
+.light-locale [data-slot='item'],
+.light-locale [data-slot='item-label'] {
+  color: #0f172a !important;
+}
+.light-locale-content {
+  background: #f9fffb !important;
+  color: #0f172a !important;
+  border: 1px solid #10b981 !important;
+  box-shadow: 0 18px 38px -12px rgba(16, 185, 129, 0.35) !important;
+}
+.light-locale-content [data-slot='item'],
+.light-locale-content [data-slot='item-label'] {
+  color: #0f172a !important;
 }
 </style>
