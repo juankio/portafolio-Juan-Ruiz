@@ -14,32 +14,64 @@ const rotatingWords = computed(() => {
   const words = t('hero.rotatingWords')
   return Array.isArray(words) ? words : []
 })
-const activeWord = ref(rotatingWords.value[0] || '')
-let intervalId
+
+const displayWord = ref('')
+const activeIndex = ref(0)
+const isDeleting = ref(false)
+let tickTimer
 
 const heroCards = computed(() => {
   const cards = t('hero.cards')
   return Array.isArray(cards) ? cards : []
 })
 
-watch(rotatingWords, (words) => {
-  activeWord.value = words?.[0] || ''
+const clearTimers = () => {
+  if (tickTimer) {
+    clearTimeout(tickTimer)
+    tickTimer = undefined
+  }
+}
+
+const startTypingCycle = () => {
+  clearTimers()
+  const words = rotatingWords.value
+  if (!words.length) {
+    displayWord.value = ''
+    return
+  }
+
+  const currentWord = words[activeIndex.value % words.length]
+  const target = isDeleting.value ? currentWord.slice(0, displayWord.value.length - 1) : currentWord.slice(0, displayWord.value.length + 1)
+  displayWord.value = target
+
+  const finishedTyping = displayWord.value === currentWord
+  const finishedDeleting = displayWord.value === ''
+
+  let delay = isDeleting.value ? 45 : 70
+
+  if (finishedTyping) {
+    delay = 1200
+    isDeleting.value = true
+  } else if (finishedDeleting) {
+    isDeleting.value = false
+    activeIndex.value = (activeIndex.value + 1) % words.length
+    delay = 200
+  }
+
+  tickTimer = window.setTimeout(startTypingCycle, delay)
+}
+
+watch(rotatingWords, () => {
+  activeIndex.value = 0
+  startTypingCycle()
 })
 
 onMounted(() => {
-  let index = 0
-  intervalId = window.setInterval(() => {
-    const words = rotatingWords.value
-    if (!words.length) return
-    index = (index + 1) % words.length
-    activeWord.value = words[index]
-  }, 2200)
+  startTypingCycle()
 })
 
 onBeforeUnmount(() => {
-  if (intervalId) {
-    clearInterval(intervalId)
-  }
+  clearTimers()
 })
 </script>
 
@@ -96,7 +128,7 @@ onBeforeUnmount(() => {
           class="relative rounded-2xl px-4 py-2 transition border-2"
           :class="isLight ? 'border-emerald-500 text-emerald-700 bg-transparent' : 'border-red-500 text-red-500 bg-transparent'"
         >
-          <span :class="isLight ? 'text-emerald-700' : 'text-red-500'">{{ activeWord }}</span>
+          <span :class="isLight ? 'text-emerald-700' : 'text-red-500'">{{ displayWord }}</span>
           <span class="ml-1 inline-block animate-pulse" :class="isLight ? 'text-emerald-500' : 'text-red-400'">|</span>
         </span>
       </div>
