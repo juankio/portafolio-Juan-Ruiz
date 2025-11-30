@@ -10,16 +10,19 @@ const props = defineProps({
   glow: { type: Boolean, default: false }, // halo exterior opcional
   motion: { type: Boolean, default: true }, // animacion de entrada/hover opcional
   float: { type: Boolean, default: false }, // animacion continua sutil
+  overflowVisible: { type: Boolean, default: false }, // permitir que el contenido se desborde del borde
   delay: { type: Number, default: 0 } // retardo para stagger
 })
 
 const borderClass = computed(() => (props.isLight ? 'border-green-500' : 'border-red-500'))
 const haloClass = computed(() => (props.isLight ? 'bg-green-500/20' : 'bg-red-500/20'))
 
+const overflowClass = computed(() => (props.overflowVisible ? '!overflow-visible' : 'overflow-hidden'))
+
 const darkBase =
-  'relative overflow-hidden transition-all duration-300 border-2 bg-transparent text-white shadow-none'
+  'relative transition-all duration-300 border-2 bg-transparent text-white shadow-none'
 const lightBase =
-  'relative overflow-hidden transition-all duration-300 border-2 bg-transparent text-slate-900 shadow-none'
+  'relative transition-all duration-300 border-2 bg-transparent text-slate-900 shadow-none'
 
 const motionConfig = computed(() => {
   if (!props.motion) return null
@@ -55,6 +58,7 @@ const hasMotion = computed(() => !!motionConfig.value)
     <div
       :class="[
         props.isLight ? lightBase : darkBase,
+        overflowClass,
         props.cardClass,
         props.rounded,
         borderClass,
@@ -76,6 +80,7 @@ const hasMotion = computed(() => !!motionConfig.value)
     <div
       :class="[
         props.isLight ? lightBase : darkBase,
+        overflowClass,
         props.cardClass,
         props.rounded,
         borderClass,
