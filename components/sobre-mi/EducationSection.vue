@@ -8,20 +8,27 @@ const props = defineProps({
   courses: { type: Array, default: () => [] }
 })
 
+const cardWidth = 'clamp(180px, 18vw, 220px)'
+
 const buildTimeline = (items) => {
   const total = items.length || 1
-  const padding = total === 1 ? 0 : 10
-  const usableWidth = total === 1 ? 100 : 100 - padding * 2
+  const startX = total === 1 ? 50 : 2
+  const endX = total === 1 ? 50 : 98
+  const span = Math.max(0.1, endX - startX)
 
-  const amplitude = total > 10 ? 10 : total > 6 ? 12 : 14 // variacion vertical suave
-  const yBase = 52 // centro vertical para mantener la linea mas horizontal
-
-  // Patrón de alturas que arranca y termina en el mismo nivel (colgante abajo)
-  const offsets = [-0.38, 0.1, -0.26, 0.06, -0.38, 0.12, -0.3, 0.08, -0.38]
+  const amplitude = total > 10 ? 12 : total > 6 ? 14 : 16
+  const yBase = 52
+  const waves = total > 8 ? 2 : total > 5 ? 1.6 : 1.2
 
   const points = items.map((item, index) => {
-    const x = total === 1 ? 50 : padding + (usableWidth / (total - 1)) * index
-    const wave = offsets[index % offsets.length]
+    const step = total === 1 ? 0 : span / (total - 1)
+    const x = total === 1 ? 50 : startX + step * index
+    const t = total === 1 ? 0 : index / (total - 1)
+    const baseWave = Math.sin(t * Math.PI * waves) * 0.9
+    const detailWave = Math.sin(t * Math.PI * (waves + 0.6) + 0.35) * 0.18
+    const taper = Math.max(0.75, 1 - Math.abs(t - 0.5) * 0.25)
+    let wave = (baseWave + detailWave) * taper
+    if (Math.abs(wave) < 0.1) wave = index % 2 === 0 ? -0.24 : 0.24
     const y = yBase + wave * amplitude
     const align = wave >= 0 ? 'up' : 'down'
     return { ...item, x: Number(x.toFixed(2)), y: Number(y.toFixed(2)), align }
@@ -42,7 +49,53 @@ const buildTimeline = (items) => {
 }
 
 const educationTimeline = computed(() => buildTimeline(props.education))
-const coursesTimeline = computed(() => buildTimeline(props.courses))
+
+// ===== Cursos: S VERTICAL EXÓTICA, usando todo el GlowCard =====
+const buildBranchTimeline = (items) => {
+  if (!items.length) return { points: [], path: '' }
+
+  const total = items.length
+
+  // usa casi todo el alto
+  const startY = 16
+  const endY = 88
+
+  // centro + amplitud fuerte para ir casi de borde a borde
+  const xCenter = 50
+  const amplitude = 34 // 50 ± 34 -> ~16% a ~84%
+  const turns = total <= 3 ? 1.1 : total <= 5 ? 1.7 : 2.5
+
+  const points = items.map((item, index) => {
+    const t = total === 1 ? 0.5 : index / (total - 1)
+
+    const y = startY + (endY - startY) * t
+    const wave = Math.sin((t - 0.5) * Math.PI * turns)
+    const x = xCenter + wave * amplitude
+
+    const align = wave > 0 ? 'up' : 'down'
+
+    return {
+      ...item,
+      x: Number(x.toFixed(2)),
+      y: Number(y.toFixed(2)),
+      align
+    }
+  })
+
+  const path = points.reduce((acc, p, idx) => {
+    if (idx === 0) return `M ${p.x} ${p.y}`
+    const prev = points[idx - 1]
+    const deltaY = p.y - prev.y
+    const cp1y = prev.y + deltaY / 3
+    const cp2y = prev.y + (deltaY * 2) / 3
+    return `${acc} C ${prev.x} ${cp1y} ${p.x} ${cp2y} ${p.x} ${p.y}`
+  }, '')
+
+  return { points, path }
+}
+
+const coursesTimeline = computed(() => buildBranchTimeline(props.courses))
+
 const baseColor = computed(() => (props.isLight ? '#10b981' : '#ef4444'))
 const accentColor = computed(() => (props.isLight ? '#34d399' : '#f87171'))
 const dropShadow = computed(() =>
@@ -53,7 +106,8 @@ const dropShadow = computed(() =>
 <template>
   <UContainer as="section" id="educacion" class="py-12 sm:py-16">
     <div class="flex flex-col gap-16">
-      <section class="relative space-y-8 sm:space-y-10 w-full">
+      <!-- EDUCACIÓN PRINCIPAL (apagada por ahora) -->
+      <section v-if="false" class="relative space-y-8 sm:space-y-10 w-full">
         <div class="flex items-center gap-3">
           <UIcon name="i-heroicons-academic-cap-20-solid" :class="isLight ? 'text-emerald-600' : 'text-red-500'" />
           <div>
@@ -70,10 +124,10 @@ const dropShadow = computed(() =>
           :overflow-visible="true"
           class="mt-8 sm:mt-10"
           body-padding="px-0 py-0"
-          body-class="relative overflow-visible px-6 sm:px-10 pt-14 pb-14 bg-transparent"
+          body-class="relative overflow-visible px-4 sm:px-6 pt-12 pb-12 bg-transparent"
           card-class="bg-transparent"
         >
-          <div class="relative w-full h-[560px] sm:h-[620px]">
+          <div class="relative w-full h-[620px] sm:h-[700px]">
             <svg class="pointer-events-none absolute inset-0 h-full w-full z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
               <defs>
                 <linearGradient :id="`edu-gradient-${isLight ? 'light' : 'dark'}`" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -127,11 +181,12 @@ const dropShadow = computed(() =>
             <div
               v-for="(item, idx) in educationTimeline.points"
               :key="item.title"
-              class="absolute z-10 flex w-[220px] sm:w-[240px] max-w-[260px] flex-col gap-1 rounded-2xl border px-3 py-3 shadow-lg backdrop-blur-md transition-all duration-300"
+              class="absolute z-10 flex flex-col gap-1 rounded-2xl border px-3 py-3 shadow-lg backdrop-blur-md transition-all duration-300"
               :style="{
                 left: `${item.x}%`,
                 top: `${item.y}%`,
-                transform: item.align === 'up' ? 'translate(-50%, -115%)' : 'translate(-50%, 26%)'
+                width: cardWidth,
+                transform: item.align === 'up' ? 'translate(-50%, -180%)' : 'translate(-50%, 58%)'
               }"
               :class="isLight ? 'border-white/80 bg-white/95 shadow-emerald-100/60 hover:shadow-emerald-200/80' : 'border-white/10 bg-black/75 shadow-red-500/30 hover:shadow-red-400/40'"
             >
@@ -139,7 +194,7 @@ const dropShadow = computed(() =>
                 class="pointer-events-none absolute left-1/2 w-px"
                 :class="item.align === 'up' ? 'bottom-[-24px]' : 'top-[-24px]'"
                 :style="{
-                  height: item.align === 'up' ? '20px' : '16px',
+                  height: item.align === 'up' ? '30px' : '22px',
                   transform: 'translateX(-50%)',
                   background: item.align === 'up'
                     ? (isLight ? 'linear-gradient(180deg, rgba(16,185,129,0.55), transparent)' : 'linear-gradient(180deg, rgba(248,113,113,0.65), transparent)')
@@ -163,6 +218,7 @@ const dropShadow = computed(() =>
         </GlowCard>
       </section>
 
+      <!-- CURSOS Y CERTIFICACIONES -->
       <section class="relative space-y-8 sm:space-y-10 w-full">
         <div class="flex items-center gap-3">
           <UIcon name="i-heroicons-sparkles-20-solid" :class="isLight ? 'text-emerald-600' : 'text-red-500'" />
@@ -178,12 +234,11 @@ const dropShadow = computed(() =>
           :glow="false"
           rounded="rounded-[34px]"
           :overflow-visible="true"
-          class="mt-8 sm:mt-10"
           body-padding="px-0 py-0"
-          body-class="relative overflow-visible px-8 sm:px-10 pt-12 pb-12 bg-transparent"
+          body-class="relative overflow-visible bg-transparent"
           card-class="bg-transparent"
         >
-          <div class="relative w-full h-[500px] sm:h-[540px]">
+          <div class="relative w-full h-full min-h-[600px] sm:min-h-[640px] pt-10 pb-10">
             <svg class="pointer-events-none absolute inset-0 h-full w-full z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
               <defs>
                 <linearGradient :id="`course-gradient-${isLight ? 'light' : 'dark'}`" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -237,19 +292,23 @@ const dropShadow = computed(() =>
             <div
               v-for="(item, idx) in coursesTimeline.points"
               :key="item.title"
-              class="absolute z-10 flex w-[220px] sm:w-[240px] max-w-[260px] flex-col gap-1 rounded-2xl border px-3 py-3 shadow-lg backdrop-blur-md transition-all duration-300"
+              class="absolute z-10 flex max-w-[260px] flex-col gap-1 rounded-2xl border px-3 py-3 shadow-lg backdrop-blur-md transition-all duration-300"
               :style="{
                 left: `${item.x}%`,
                 top: `${item.y}%`,
-                transform: item.align === 'up' ? 'translate(-50%, -115%)' : 'translate(-50%, 24%)'
+                width: cardWidth,
+                // alejadas de la línea para que el glow se vea
+                transform: item.align === 'up'
+                  ? 'translate(-50%, -140%)'
+                  : 'translate(-50%, 90%)'
               }"
               :class="isLight ? 'border-white/80 bg-white/95 shadow-emerald-100/60 hover:shadow-emerald-200/80' : 'border-white/10 bg-black/75 shadow-red-500/30 hover:shadow-red-400/40'"
             >
               <span
                 class="pointer-events-none absolute left-1/2 w-px"
-                :class="item.align === 'up' ? 'bottom-[-24px]' : 'top-[-24px]'"
+                :class="item.align === 'up' ? 'bottom-[-32px]' : 'top-[-32px]'"
                 :style="{
-                  height: item.align === 'up' ? '16px' : '13px',
+                  height: '32px',
                   transform: 'translateX(-50%)',
                   background: item.align === 'up'
                     ? (isLight ? 'linear-gradient(180deg, rgba(16,185,129,0.55), transparent)' : 'linear-gradient(180deg, rgba(248,113,113,0.65), transparent)')
