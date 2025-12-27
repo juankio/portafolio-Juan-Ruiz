@@ -34,14 +34,42 @@ const props = defineProps({
         />
       </div>
     </UBadge>
-    <div class="leading-tight text-left">
-      <p class="text-xs uppercase tracking-[0.18em]" :class="isLight ? 'text-slate-700' : 'text-slate-300'">Juan Miguel</p>
-      <p
-        class="text-lg font-black uppercase tracking-[0.1em] drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]"
-        :class="isLight ? 'text-slate-800' : 'text-slate-200'"
-      >
-        Ruiz Supelano
-      </p>
+    <div class="leading-tight text-left flex items-start gap-2 relative">
+      <div class="mt-[2px] text-sm transition duration-300"
+        :class="isLight ? 'text-emerald-500' : 'text-red-400'">
+        <UIcon
+          name="i-heroicons-arrows-up-down-20-solid"
+          class="h-4 w-4 transition duration-300 transform group-hover:rotate-180 group-hover:-translate-y-[1px]"
+        />
+      </div>
+      <div class="relative h-4">
+        <p
+          class="text-xs uppercase tracking-[0.18em] transition duration-200"
+          :class="isLight ? 'text-slate-700 group-hover:opacity-0' : 'text-slate-300 group-hover:opacity-0'"
+        >
+          Juan Miguel
+        </p>
+        <p
+          class="text-xs uppercase tracking-[0.18em] transition duration-200 absolute inset-0 opacity-0 group-hover:opacity-100"
+          :class="isLight ? 'text-slate-700' : 'text-slate-300'"
+        >
+          Ruiz Supelano
+        </p>
+      </div>
+      <div class="relative h-6">
+        <p
+          class="text-lg font-black uppercase tracking-[0.1em] drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] transition duration-200"
+          :class="isLight ? 'text-slate-800 group-hover:opacity-0' : 'text-slate-200 group-hover:opacity-0'"
+        >
+          Ruiz Supelano
+        </p>
+        <p
+          class="text-lg font-black uppercase tracking-[0.1em] drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)] transition duration-200 absolute inset-0 opacity-0 group-hover:opacity-100"
+          :class="isLight ? 'text-slate-800' : 'text-slate-200'"
+        >
+          Juan Miguel
+        </p>
+      </div>
     </div>
   </UButton>
 </template>
