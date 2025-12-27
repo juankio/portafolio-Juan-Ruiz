@@ -37,12 +37,12 @@ const aboutSkills = computed(() => {
         <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
           {{ t('about.sectionTitle') }}
         </p>
-        <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
+        <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
           {{ t('about.headline.lead') }}
           <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('about.headline.accent') }}</span>
           {{ t('about.headline.tail') }}
         </h2>
-        <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
+        <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-400'">
           {{ t('about.intro') }}
         </p>
         <div class="flex flex-wrap gap-3">
@@ -52,7 +52,7 @@ const aboutSkills = computed(() => {
             variant="outline"
             color="neutral"
             class="text-sm"
-            :class="isLight ? 'border-slate-200 bg-white text-slate-800' : 'border-white/15 bg-white/5 text-slate-200'"
+            :class="isLight ? 'border-slate-200 bg-gray-300 text-slate-800' : 'border-white/15 bg-gray-300/5 text-slate-200'"
           >
             {{ chip }}
           </UBadge>
@@ -79,8 +79,8 @@ const aboutSkills = computed(() => {
                 :ui="{ rounded: 'rounded-3xl' }"
               />
               <div class="space-y-1">
-                <p class="text-xl font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">Juan Miguel Ruiz Supelano</p>
-                <p class="text-sm" :class="isLight ? 'text-slate-600' : 'text-slate-300'">Developer - Designer - Est. Ing. Sistemas</p>
+                <p class="text-xl font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">Juan Miguel Ruiz Supelano</p>
+                <p class="text-sm" :class="isLight ? 'text-slate-600' : 'text-slate-400'">Developer - Designer - Est. Ing. Sistemas</p>
                 <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Villavicencio, Colombia · Remoto</p>
               </div>
             </div>
@@ -90,7 +90,7 @@ const aboutSkills = computed(() => {
               class="rounded-full px-4 py-2 text-sm font-semibold"
               :class="
                 isLight
-                  ? 'border-emerald-300 text-black hover:border-emerald-400 hover:bg-emerald-50'
+                  ? 'border-emerald-300 text-slate-700 hover:border-emerald-400 hover:bg-emerald-50'
                   : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
               "
             >
@@ -139,8 +139,8 @@ const aboutSkills = computed(() => {
               :float="true"
               card-class="shadow-[0_20px_55px_-42px_rgba(248,113,113,0.8)]"
             >
-              <p class="font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">{{ skill.title }}</p>
-              <p :class="isLight ? 'text-slate-600' : 'text-slate-300'">{{ skill.copy }}</p>
+              <p class="font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">{{ skill.title }}</p>
+              <p :class="isLight ? 'text-slate-600' : 'text-slate-400'">{{ skill.copy }}</p>
             </GlowCard>
           </div>
         </GlowCard>

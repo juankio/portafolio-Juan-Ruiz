@@ -83,7 +83,7 @@ const educationTimeline = computed(() => buildTimeline(props.education))
             <p class="text-sm uppercase tracking-[0.22em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
               Educacion
             </p>
-            <h3 class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">
+            <h3 class="text-lg font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
               Formacion principal
             </h3>
           </div>
@@ -163,7 +163,7 @@ const educationTimeline = computed(() => buildTimeline(props.education))
               <p class="text-sm uppercase tracking-[0.22em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
                 Cursos y certificaciones
               </p>
-              <h3 class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">
+              <h3 class="text-lg font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
                 Actualizaciones constantes
               </h3>
             </div>

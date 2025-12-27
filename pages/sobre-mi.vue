@@ -104,7 +104,7 @@ const courses = [
   <UPage
     :class="[
       'relative min-h-screen overflow-hidden',
-      isLight ? 'bg-white text-slate-900' : 'bg-[#0c0c0d] text-slate-100'
+      isLight ? 'bg-gray-300 text-slate-800' : 'bg-gray-900 text-slate-200'
     ]"
   >
     <div class="pointer-events-none absolute inset-0 -z-10">
@@ -114,7 +114,7 @@ const courses = [
       />
       <div
         class="absolute right-10 top-20 h-80 w-80 rounded-full blur-3xl transition"
-        :class="isLight ? 'bg-slate-200/60' : 'bg-white/10'"
+        :class="isLight ? 'bg-slate-200/60' : 'bg-gray-300/10'"
       />
       <div
         class="absolute bottom-0 left-1/3 h-80 w-80 rounded-full blur-3xl transition"

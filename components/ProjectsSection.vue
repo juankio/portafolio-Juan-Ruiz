@@ -36,7 +36,7 @@ const { t } = useI18n()
     <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ t('projects.sectionTitle') }}</p>
-        <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
+        <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
           {{ t('projects.headline') }} <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('projects.headlineAccent') }}</span>
         </h2>
       </div>
@@ -48,7 +48,7 @@ const { t } = useI18n()
           :loading="pending"
           :class="
             isLight
-              ? 'bg-[#10b981] text-black shadow-emerald-400/30 hover:bg-[#22c55e]'
+              ? 'bg-[#10b981] text-slate-700 shadow-emerald-400/30 hover:bg-[#22c55e]'
               : 'bg-red-600 text-white shadow-red-500/30 hover:bg-red-500'
           "
           @click="onRefresh && onRefresh()"
@@ -126,19 +126,19 @@ const { t } = useI18n()
           <div
             :class="[
               'pointer-events-none absolute inset-0 bg-gradient-to-br opacity-0 transition duration-500 group-hover:opacity-100',
-              isLight ? 'from-emerald-300/0 via-white/0 to-emerald-100/25' : 'from-red-500/0 via-white/0 to-white/5'
+              isLight ? 'from-emerald-300/0 via-gray-300/0 to-emerald-100/25' : 'from-red-500/0 via-gray-300/0 to-gray-300/5'
             ]"
           />
           <div class="relative flex items-start justify-between gap-3">
             <div>
               <p class="text-xs uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ t('projects.repo') }}</p>
-              <h3 class="text-xl font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">{{ project.name }}</h3>
+              <h3 class="text-xl font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">{{ project.name }}</h3>
             </div>
             <UBadge
               variant="soft"
               color="neutral"
               class="px-3 py-1 text-xs font-semibold"
-              :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-white/10 text-slate-200 ring-1 ring-white/10'"
+              :class="isLight ? 'bg-slate-100 text-slate-700' : 'bg-gray-300/10 text-slate-200 ring-1 ring-gray-300/10'"
             >
               {{ project.language || 'Multi' }}
             </UBadge>

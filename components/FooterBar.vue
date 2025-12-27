@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <footer :class="isLight ? 'border-t border-slate-200 bg-white/80 backdrop-blur' : 'border-t border-white/10 bg-black/60 backdrop-blur'">
+  <footer :class="isLight ? 'border-t border-slate-200 bg-gray-300/80 backdrop-blur' : 'border-t border-white/10 bg-black/60 backdrop-blur'">
     <UContainer class="py-10">
       <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>

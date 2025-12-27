@@ -74,7 +74,7 @@ const handleSubmit = async () => {
             {{ t('contact.section') }}
           </UBadge>
           <div class="space-y-3">
-            <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-900' : 'text-white'">
+        <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
               {{ t('contact.titleLead') }} <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('contact.titleAccent') }}</span>
             </h2>
             <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">

@@ -21,7 +21,7 @@ const { t } = useI18n()
           {{ t('about.sectionTitle') }}
         </p>
 
-        <h1 class="text-4xl font-semibold leading-tight sm:text-5xl" :class="isLight ? 'text-slate-900' : 'text-white'">
+        <h1 class="text-4xl font-semibold leading-tight sm:text-5xl" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
           {{ t('about.headline.lead') }}
           <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('about.headline.accent') }}</span>
           {{ t('about.headline.tail') }}
@@ -36,7 +36,7 @@ const { t } = useI18n()
             v-for="chip in chips"
             :key="chip"
             variant="outline"
-            :class="isLight ? 'border-slate-200 bg-white text-slate-800' : 'border-white/15 bg-white/5 text-slate-200'"
+            :class="isLight ? 'border-slate-200 bg-gray-300 text-slate-800' : 'border-white/15 bg-gray-300/5 text-slate-200'"
           >
             {{ chip }}
           </UBadge>
@@ -46,7 +46,7 @@ const { t } = useI18n()
           <UButton
             to="/proyectos"
             size="lg"
-            :class="isLight ? 'bg-[#10b981] text-black hover:bg-[#22c55e]' : 'bg-red-600 text-white hover:bg-red-500'"
+            :class="isLight ? 'bg-[#10b981] text-slate-700 hover:bg-[#22c55e]' : 'bg-red-600 text-white hover:bg-red-500'"
             class="shadow-lg shadow-emerald-300/25 hover:-translate-y-0.5"
           >
             {{ t('hero.ctas.projects') }}
@@ -56,7 +56,7 @@ const { t } = useI18n()
             size="lg"
             variant="outline"
             class="hover:-translate-y-0.5"
-            :class="isLight ? 'border border-emerald-200 text-emerald-700 bg-white hover:bg-emerald-50' : 'border border-red-500 text-white bg-transparent hover:bg-red-500/10'"
+            :class="isLight ? 'border border-emerald-200 text-emerald-700 bg-gray-300 hover:bg-emerald-50' : 'border border-red-500 text-white bg-transparent hover:bg-red-500/10'"
           >
             {{ t('hero.ctas.contact') }}
           </UButton>

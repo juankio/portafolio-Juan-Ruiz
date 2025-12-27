@@ -31,10 +31,10 @@ const links = computed(() => [
 const lightLocaleUi = {
   base: 'text-slate-800',
   trigger: {
-    base: '!bg-white !text-slate-800 !border !border-emerald-300 hover:!bg-emerald-50 hover:!border-emerald-400'
+    base: '!bg-gray-300 !text-slate-800 !border !border-emerald-300 hover:!bg-emerald-50 hover:!border-emerald-400'
   },
   content: {
-    base: '!bg-white !text-slate-800 !border !border-emerald-300 shadow-lg shadow-emerald-200/50'
+    base: '!bg-gray-300 !text-slate-800 !border !border-emerald-300 shadow-lg shadow-emerald-200/50'
   },
   item: {
     base: 'text-slate-800 data-[state=checked]:bg-emerald-50',
@@ -76,23 +76,23 @@ onBeforeUnmount(() => {
 
 <template>
   <header
-    class="sticky top-0 z-50 backdrop-blur-xl transition-colors duration-300"
+    class="sticky top-0 z-50 backdrop-blur-2xl transition-all duration-300 shadow-[0_10px_36px_-18px_rgba(0,0,0,0.65)]"
     :class="
       scrolled
         ? isLight
-          ? 'bg-white/92 border-b border-slate-200'
-          : 'bg-black/80 border-b border-white/5'
+          ? 'bg-gray-200/95 border-b border-gray-300'
+          : 'bg-gray-900/92 border-b border-white/10'
         : isLight
-          ? 'bg-white/88'
-          : 'bg-gradient-to-r from-black/85 via-black/70 to-black/80'
+          ? 'bg-gray-200/95 border-b border-gray-300'
+          : 'bg-gray-900/90 border-b border-white/10'
     "
   >
-    <UContainer class="flex items-center gap-3 py-1 md:py-1.5">
+    <UContainer class="flex items-center gap-4 py-2 md:py-2.5">
       <UButton
         to="/"
         color="neutral"
         variant="ghost"
-        class="flex shrink-0 items-center gap-2.5 px-0 text-base font-semibold tracking-tight hover:bg-transparent"
+        class="nav-brand group flex shrink-0 items-center gap-3 px-0 text-base font-semibold tracking-tight hover:bg-transparent"
       >
         <UBadge
           color="neutral"
@@ -109,8 +109,18 @@ onBeforeUnmount(() => {
           JM
         </UBadge>
         <div class="leading-tight text-left">
-          <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">Juan Miguel</p>
-          <p class="text-base font-semibold" :class="isLight ? 'text-slate-900' : 'text-slate-100'">Ruiz Supelano</p>
+          <p
+            class="text-xs uppercase tracking-[0.18em]"
+            :class="isLight ? 'text-slate-700' : 'text-slate-300'"
+          >
+            Juan Miguel
+          </p>
+          <p
+            class="text-lg font-black uppercase tracking-[0.1em] drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]"
+            :class="isLight ? 'text-slate-800' : 'text-slate-200'"
+          >
+            Ruiz Supelano
+          </p>
         </div>
       </UButton>
 
@@ -122,8 +132,12 @@ onBeforeUnmount(() => {
           variant="ghost"
           color="neutral"
           size="sm"
-          class="font-medium px-3 py-1"
-          :class="isLight ? 'text-slate-700 hover:bg-slate-100' : 'text-slate-200 hover:bg-white/10'"
+          class="nav-pill"
+          :class="
+            isLight
+              ? 'text-slate-700 hover:bg-gray-300/90 hover:border-emerald-200 hover:text-emerald-700'
+              : 'text-slate-200 hover:bg-gray-300/5 hover:border-red-400/60 hover:text-slate-50'
+          "
         >
           {{ item.label }}
         </UButton>
@@ -145,42 +159,43 @@ onBeforeUnmount(() => {
                 ? { class: 'light-locale-content', style: 'background:#f9fffb!important;color:#0f172a!important;border:1px solid #10b981!important;' }
                 : { class: 'dark-locale-content', style: 'background:#000!important;color:#fff!important;border:1px solid #ef4444!important;' }
             "
-            class="w-40 sm:w-44"
-            :class="isLight ? '!border-emerald-400 !bg-[#f9fffb] !text-slate-800' : '!border-red-500 !bg-black !text-white !opacity-100'"
-          >
-            <template #value="{ option }">
-              <span :class="isLight ? 'text-slate-800' : 'text-white !opacity-100'">{{ option?.name || localeModel }}</span>
-            </template>
-            <template #item="{ item }">
-              <span :class="isLight ? 'text-slate-800' : 'text-white !opacity-100'">{{ item.name }}</span>
-            </template>
-          </ULocaleSelect>
-        </div>
-        <UButton
-          to="/proyectos"
-          size="sm"
-          variant="soft"
-          :class="
-            isLight
-              ? 'border border-emerald-300 text-emerald-700 bg-emerald-50/80 hover:bg-emerald-100/80'
-              : 'border border-red-500/60 text-red-100 bg-red-500/10 hover:bg-red-500/20'
-          "
+          class="w-40 sm:w-44"
+          :class="isLight ? '!border-emerald-400 !bg-[#f9fffb] !text-slate-800' : '!border-red-500 !bg-black !text-slate-100 !opacity-100'"
         >
-          {{ t('nav.ctaProjects') }}
-        </UButton>
-        <UButton
-          size="sm"
-          variant="outline"
-          :icon="isLight ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-          :class="
-            isLight
-              ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
-              : 'border border-red-500/60 text-red-100 hover:border-red-400 hover:bg-red-500/20'
-          "
-          class="rounded-full"
-          :aria-label="t('nav.themeToggle')"
-          @click="emit('toggle-mode')"
-        />
+          <template #value="{ option }">
+            <span :class="isLight ? 'text-slate-800' : 'text-slate-100 !opacity-100'">{{ option?.name || localeModel }}</span>
+          </template>
+          <template #item="{ item }">
+            <span :class="isLight ? 'text-slate-800' : 'text-slate-100 !opacity-100'">{{ item.name }}</span>
+          </template>
+        </ULocaleSelect>
+      </div>
+      <UButton
+        to="/proyectos"
+        size="sm"
+        variant="soft"
+        class="nav-cta"
+        :class="
+          isLight
+            ? 'border border-emerald-300/80 text-slate-700 bg-gradient-to-r from-emerald-300/90 via-emerald-400/85 to-lime-200/80 hover:brightness-110'
+            : 'border border-red-400/70 text-slate-100 bg-gradient-to-r from-red-600/90 via-red-500/85 to-amber-300/75 hover:brightness-110'
+        "
+      >
+        {{ t('nav.ctaProjects') }}
+      </UButton>
+      <UButton
+        size="sm"
+        variant="outline"
+        :icon="isLight ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+        :class="
+          isLight
+            ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
+            : 'border border-red-500/60 text-slate-100 hover:border-red-400 hover:bg-red-500/20'
+        "
+        class="rounded-full"
+        :aria-label="t('nav.themeToggle')"
+        @click="emit('toggle-mode')"
+      />
       </div>
 
       <nav class="flex flex-wrap gap-2 md:hidden">
@@ -193,7 +208,7 @@ onBeforeUnmount(() => {
           :class="
             isLight
               ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
-              : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
+              : 'border border-red-500/80 text-slate-100 hover:border-red-400 hover:bg-red-500/10'
           " >
           {{ item.label }}
         </UBadge>
@@ -264,5 +279,24 @@ onBeforeUnmount(() => {
 .light-locale-content [data-slot='item'],
 .light-locale-content [data-slot='item-label'] {
   color: #0f172a !important;
+}
+.nav-pill {
+  letter-spacing: 0.025em;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  padding-inline: 14px;
+  padding-block: 8px;
+  text-transform: uppercase;
+  transition: all 200ms ease;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+.nav-pill:hover {
+  box-shadow: 0 10px 22px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+.nav-cta {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 800;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 </style>

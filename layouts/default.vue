@@ -8,7 +8,7 @@ const { isLight, toggleMode } = useThemeMode()
 <template>
   <div
     class="min-h-screen transition-colors"
-    :class="isLight ? 'bg-white text-slate-900' : 'bg-[#0c0c0d] text-slate-100'"
+    :class="isLight ? 'bg-gray-300 text-slate-800' : 'bg-gray-900 text-slate-200'"
   >
     <NavBar :is-light="isLight" @toggle-mode="toggleMode" />
     <slot />

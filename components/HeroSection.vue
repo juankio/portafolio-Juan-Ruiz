@@ -82,7 +82,7 @@ onBeforeUnmount(() => {
   >
     <div class="absolute inset-0 -z-10">
       <div class="absolute left-10 top-10 h-48 w-48 rounded-full blur-3xl" :class="isLight ? 'bg-emerald-300/35' : 'bg-red-500/20'" />
-      <div class="absolute right-10 top-24 h-60 w-60 rounded-full blur-3xl" :class="isLight ? 'bg-emerald-200/50' : 'bg-white/10'" />
+      <div class="absolute right-10 top-24 h-60 w-60 rounded-full blur-3xl" :class="isLight ? 'bg-emerald-200/50' : 'bg-gray-300/10'" />
       <div class="absolute -bottom-10 left-1/3 h-60 w-60 rounded-full blur-3xl" :class="isLight ? 'bg-emerald-300/20' : 'bg-red-500/10'" />
     </div>
 
@@ -106,8 +106,8 @@ onBeforeUnmount(() => {
           {{ t('hero.tagline') }}
         </p>
         <h1
-          class="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl font-['Druk Wide Trial']"
-          :class="isLight ? 'text-slate-900' : 'text-white'"
+          class="text-4xl font-black leading-tight tracking-[0.08em] sm:text-5xl lg:text-6xl font-['Druk Wide Trial']"
+          :class="isLight ? 'text-slate-800' : 'text-slate-200'"
         >
           {{ t('hero.title.main') }}
           <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('hero.title.highlight1') }}</span>
@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
           class="shadow-lg transition hover:-translate-y-0.5"
           :class="
             isLight
-              ? 'bg-[#10b981] text-black shadow-emerald-400/30 hover:bg-[#22c55e]'
+              ? 'bg-[#10b981] text-slate-700 shadow-emerald-400/30 hover:bg-[#22c55e]'
               : 'bg-red-600 text-white shadow-red-500/30 hover:bg-red-500'
           "
         >
@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
           size="lg"
           variant="outline"
           class="transition hover:-translate-y-0.5"
-          :class="isLight ? 'border border-emerald-300 text-emerald-700 bg-white hover:bg-emerald-50' : 'border border-red-500 text-white bg-transparent hover:bg-red-500/10'"
+          :class="isLight ? 'border border-emerald-300 text-emerald-700 bg-gray-300 hover:bg-emerald-50' : 'border border-red-500 text-white bg-transparent hover:bg-red-500/10'"
         >
           {{ t('hero.ctas.contact') }}
         </UButton>
@@ -170,8 +170,8 @@ onBeforeUnmount(() => {
           body-class="space-y-1"
           card-class="border-2 bg-transparent text-inherit shadow-none"
         >
-          <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ card.label }}</p>
-          <p class="text-lg font-semibold" :class="isLight ? 'text-slate-900' : 'text-white'">{{ card.value }}</p>
+          <p class="text-sm" :class="isLight ? 'text-slate-700' : 'text-slate-300'">{{ card.label }}</p>
+          <p class="text-lg font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">{{ card.value }}</p>
         </GlowCard>
       </div>
     </div>

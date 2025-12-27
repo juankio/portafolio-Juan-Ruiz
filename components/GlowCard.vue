@@ -22,7 +22,7 @@ const overflowClass = computed(() => (props.overflowVisible ? '!overflow-visible
 const darkBase =
   'relative transition-all duration-300 border-2 bg-transparent text-white shadow-none'
 const lightBase =
-  'relative transition-all duration-300 border-2 bg-transparent text-slate-900 shadow-none'
+  'relative transition-all duration-300 border-2 bg-transparent text-slate-800 shadow-none'
 
 const motionConfig = computed(() => {
   if (!props.motion) return null
