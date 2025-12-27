@@ -106,7 +106,7 @@ onBeforeUnmount(() => {
           {{ t('hero.tagline') }}
         </p>
         <h1
-          class="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl"
+          class="text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl font-['Druk Wide Trial']"
           :class="isLight ? 'text-slate-900' : 'text-white'"
         >
           {{ t('hero.title.main') }}
