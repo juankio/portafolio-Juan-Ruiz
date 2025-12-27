@@ -11,7 +11,9 @@ const { isLight, toggleMode } = useThemeMode()
     :class="isLight ? 'bg-gray-300 text-slate-800' : 'bg-gray-900 text-slate-200'"
   >
     <NavBar :is-light="isLight" @toggle-mode="toggleMode" />
-    <slot />
+    <main class="relative z-10">
+      <slot />
+    </main>
     <FooterBar :is-light="isLight" />
   </div>
 </template>

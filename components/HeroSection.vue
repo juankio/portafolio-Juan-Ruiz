@@ -110,7 +110,7 @@ onBeforeUnmount(() => {
           :class="isLight ? 'text-slate-800' : 'text-slate-200'"
         >
           {{ t('hero.title.main') }}
-          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('hero.title.highlight1') }}</span>
+           <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('hero.title.highlight1') }}</span>
           {{ t('hero.title.connector') }}
           <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('hero.title.highlight2') }}</span>
         </h1>

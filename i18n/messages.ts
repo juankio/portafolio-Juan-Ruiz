@@ -28,24 +28,34 @@ export const messages = {
     about: {
       sectionTitle: 'Sobre mi',
       headline: {
-        lead: 'Diseno y desarrollo',
+        lead: 'Estrategia, diseno y codigo para',
         accent: 'productos',
-        tail: 'digitales que se sienten vivos.'
+        tail: 'digitales listos para crecer.'
       },
-      intro: 'Soy Juan Miguel Ruiz Supelano, desarrollador y disenador que estudia Ingenieria de Sistemas. Creo interfaces limpias, rapidas y con una dosis justa de brutalismo moderno.',
-      chips: ['Frontend', 'UX/UI', 'PWAs', 'Animacion'],
+      intro:
+        'Soy Juan Miguel Ruiz Supelano (Villavicencio, CO). Diseñador y dev frontend que estudia Ingenieria de Sistemas. Conecto UI limpia, animaciones medidas y performance PWA para lanzar productos que se sienten vivos y venden mejor.',
+      chips: ['Nuxt 3', 'UX/UI', 'PWAs', 'Animacion', 'Accesibilidad', 'SEO tecnico'],
       availability: 'Disponible',
       skillsTitle: 'Habilidades',
       summary: [
-        { label: 'Frontend', value: 'Vue - Nuxt - Tailwind' },
-        { label: 'Backend', value: 'Node - MongoDB' },
-        { label: 'UI Motion', value: 'GSAP - Microinteracciones' }
+        { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
+        { label: 'UX + Motion', value: 'GSAP · Microinteracciones · A11y' },
+        { label: 'Producto', value: 'Rendimiento · SEO · Flujos claros' }
       ],
       skills: [
-        { title: 'Frontend y UI', copy: 'Vue, Nuxt, Tailwind, GSAP, accesibilidad, diseno responsivo.' },
-        { title: 'Backend y datos', copy: 'Node.js, MongoDB, APIs REST, despliegues rapidos y seguros.' },
-        { title: 'Experiencia de producto', copy: 'Microinteracciones, PWAs, rendimiento, optimizacion de SEO.' },
-        { title: 'Herramientas', copy: 'Figma, GitHub, Nuxt UI, SendGrid, CI/CD ligero.' }
+        {
+          title: 'Frontend y UI',
+          copy: 'Componentes Nuxt 3 con Composition API, diseño atómico, Tailwind y estados finos (hover, focus, scroll).'
+        },
+        {
+          title: 'Experiencia y rendimiento',
+          copy: 'PWAs listas para Lighthouse 90+, animaciones GSAP que no bloquean, optimización de Core Web Vitals y SEO técnico.'
+        },
+        {
+          title: 'Backend ligero',
+          copy: 'APIs REST con Node.js/Express, MongoDB, autenticación sencilla y despliegues rápidos en Vercel/Netlify.'
+        },
+        { title: 'Tooling', copy: 'Figma, GitHub, Nuxt UI, SendGrid, CI/CD ligero y monitoreo básico.' }
       ]
     },
     projects: {
@@ -118,24 +128,34 @@ export const messages = {
     about: {
       sectionTitle: 'About me',
       headline: {
-        lead: 'I design and build',
+        lead: 'Strategy, design, and code for',
         accent: 'products',
-        tail: 'that feel alive.'
+        tail: 'built to grow.'
       },
-      intro: 'I am Juan Miguel Ruiz Supelano, a developer and designer studying Systems Engineering. I create clean, fast interfaces with a touch of modern brutalism.',
-      chips: ['Frontend', 'UX/UI', 'PWAs', 'Animation'],
+      intro:
+        'I’m Juan Miguel Ruiz Supelano (Villavicencio, CO). Frontend dev & designer studying Systems Engineering. I blend clean UI, purposeful motion, and PWA performance so products feel alive and convert better.',
+      chips: ['Nuxt 3', 'UX/UI', 'PWAs', 'Animation', 'Accessibility', 'Technical SEO'],
       availability: 'Available',
       skillsTitle: 'Skills',
       summary: [
-        { label: 'Frontend', value: 'Vue - Nuxt - Tailwind' },
-        { label: 'Backend', value: 'Node - MongoDB' },
-        { label: 'UI Motion', value: 'GSAP - Microinteractions' }
+        { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
+        { label: 'UX + Motion', value: 'GSAP · Microinteractions · A11y' },
+        { label: 'Product', value: 'Performance · SEO · Clear flows' }
       ],
       skills: [
-        { title: 'Frontend & UI', copy: 'Vue, Nuxt, Tailwind, GSAP, accessibility, responsive design.' },
-        { title: 'Backend & data', copy: 'Node.js, MongoDB, REST APIs, fast and secure deployments.' },
-        { title: 'Product experience', copy: 'Microinteractions, PWAs, performance, SEO optimization.' },
-        { title: 'Tools', copy: 'Figma, GitHub, Nuxt UI, SendGrid, lightweight CI/CD.' }
+        {
+          title: 'Frontend & UI',
+          copy: 'Nuxt 3 components with Composition API, atomic design, Tailwind, and tight state handling (hover, focus, scroll).'
+        },
+        {
+          title: 'Experience & performance',
+          copy: 'PWAs tuned for 90+ Lighthouse, GSAP motion that stays smooth, Core Web Vitals and technical SEO improvements.'
+        },
+        {
+          title: 'Lightweight backend',
+          copy: 'REST APIs with Node.js/Express, MongoDB, straightforward auth, and fast deploys on Vercel/Netlify.'
+        },
+        { title: 'Tooling', copy: 'Figma, GitHub, Nuxt UI, SendGrid, lightweight CI/CD and basic monitoring.' }
       ]
     },
     projects: {
