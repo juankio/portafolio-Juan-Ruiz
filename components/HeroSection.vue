@@ -91,10 +91,11 @@ onBeforeUnmount(() => {
         size="lg"
         variant="outline"
         class="gap-2 shadow-sm"
+        :color="isLight ? 'success' : 'error'"
         :class="
             isLight
-              ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50'
-              : 'border border-red-500/80 text-white hover:border-red-400 hover:bg-red-500/10'
+              ? ' text-slate-700 '
+              : ' text-slate-200 '
           "
       >
         <span class="inline-flex h-2 w-2 animate-pulse rounded-full" :class="isLight ? 'bg-emerald-500' : 'bg-red-500'" />

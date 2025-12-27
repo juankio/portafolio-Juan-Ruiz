@@ -94,8 +94,8 @@ const darkLocaleUi = {
       size="sm"
       variant="outline"
       :icon="isLight ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-      :class="isLight ? 'border-emerald-300 text-emerald-700 hover:border-emerald-400 hover:bg-emerald-50' : 'border border-red-500/60 text-slate-100 hover:border-red-400 hover:bg-red-500/20'"
-      class="rounded-full"
+      class="rounded-full toggle-btn"
+      :color="isLight ? 'success' : 'error'"
       :aria-label="t('nav.themeToggle')"
       @click="emit('toggle-mode')"
     />
@@ -174,5 +174,37 @@ const darkLocaleUi = {
   font-weight: 800;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   font-family: "Bangers", "Druk Text Wide Trial", "Druk Wide Trial", Inter, system-ui, sans-serif;
+}
+.toggle-btn {
+  position: relative;
+  overflow: hidden;
+}
+.toggle-btn::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 9999px;
+  border: 1px solid;
+  border-color: inherit;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.toggle-light {
+  border: 2px solid #10b981 !important;
+  color: #0f172a !important;
+  background: transparent !important;
+}
+.toggle-dark {
+  border: 2px solid #ef4444 !important;
+  color: #e2e8f0 !important;
+  background: transparent !important;
+}
+.toggle-light:hover {
+  border-color: #34d399 !important;
+  background-color: rgba(16, 185, 129, 0.08) !important;
+}
+.toggle-dark:hover {
+  border-color: #fca5a5 !important;
+  background-color: rgba(248, 113, 113, 0.15) !important;
 }
 </style>
