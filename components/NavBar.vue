@@ -2,6 +2,7 @@
 import NavBrand from '~/components/nav/NavBrand.vue'
 import NavLinks from '~/components/nav/NavLinks.vue'
 import NavActions from '~/components/nav/NavActions.vue'
+import NavMobileMenu from '~/components/nav/NavMobileMenu.vue'
 
 const props = defineProps({
   isLight: { type: Boolean, default: false }
@@ -31,8 +32,24 @@ onBeforeUnmount(() => {
   >
     <UContainer class="flex items-center gap-4 py-2 md:py-2.5">
       <NavBrand :is-light="isLight" />
+      <div class="flex flex-1 items-center justify-end lg:hidden">
+        <NavMobileMenu :is-light="isLight" @toggle-mode="emit('toggle-mode')">
+          <template #trigger>
+            <UButton
+              icon="i-heroicons-bars-3-bottom-right-20-solid"
+              size="sm"
+              variant="soft"
+              class="rounded-full"
+              :class="isLight
+                ? 'text-slate-700 bg-emerald-100/80 hover:bg-emerald-100'
+                : 'text-slate-100 bg-red-500/20 hover:bg-red-500/30'"
+              aria-label="Open menu"
+            />
+          </template>
+        </NavMobileMenu>
+      </div>
       <NavLinks :is-light="isLight" />
-      <NavActions :is-light="isLight" @toggle-mode="emit('toggle-mode')" />
+      <NavActions class="hidden lg:flex" :is-light="isLight" @toggle-mode="emit('toggle-mode')" />
     </UContainer>
     <div
       class="pointer-events-none absolute inset-x-0 bottom-0 h-[3px]"

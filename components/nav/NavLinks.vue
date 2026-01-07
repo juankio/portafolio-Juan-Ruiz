@@ -14,7 +14,7 @@ const links = computed(() => [
 </script>
 
 <template>
-  <nav class="hidden flex-1 items-center justify-center gap-2 md:flex">
+  <nav class="hidden flex-1 items-center justify-center gap-2 lg:flex">
     <UButton
       v-for="item in links"
       :key="item.href"

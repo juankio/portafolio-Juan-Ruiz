@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   srcDir: '.',
@@ -47,5 +47,10 @@ export default defineNuxtConfig({
   experimental: {
     appManifest: false
   },
+  nitro: {
+    prerender: {
+      routes: ['/', '/sobre-mi', '/proyectos', '/contacto']
+    }
+  }
 
 })

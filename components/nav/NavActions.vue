@@ -2,7 +2,8 @@
 import { es, en } from '@nuxt/ui/locale'
 
 const props = defineProps({
-  isLight: { type: Boolean, default: false }
+  isLight: { type: Boolean, default: false },
+  stacked: { type: Boolean, default: false }
 })
 
 const emit = defineEmits(['toggle-mode'])
@@ -50,7 +51,7 @@ const darkLocaleUi = {
 </script>
 
 <template>
-  <div class="flex flex-1 items-center justify-end gap-3">
+  <div :class="stacked ? 'flex w-full flex-col items-stretch gap-4' : 'flex flex-1 items-center justify-end gap-3'">
     <div :class="isLight ? 'light-locale' : 'dark-locale'">
       <ULocaleSelect
         v-model="localeModel"
@@ -66,14 +67,29 @@ const darkLocaleUi = {
             ? { class: 'light-locale-content', style: 'background:#e5e7eb!important;color:#0f172a!important;border:1px solid #10b981!important;' }
             : { class: 'dark-locale-content', style: 'background:#0f1621!important;color:#e2e8f0!important;border:1px solid #ef4444!important;' }
         "
-        class="w-48 sm:w-52 locale-trigger"
-        :class="isLight ? '!border-emerald-400 !bg-gray-200 !text-slate-800' : '!border-red-500 !bg-[#111827] !text-slate-100 !opacity-100'"
+        class="locale-trigger"
+        :class="[
+          stacked ? 'w-full' : 'w-48 sm:w-52',
+          isLight
+            ? '!border-emerald-400 !bg-gray-200 !text-slate-800'
+            : '!border-red-500 !bg-[#111827] !text-slate-100 !opacity-100'
+        ]"
       >
         <template #value="{ option }">
-          <span :class="isLight ? 'text-slate-800' : 'text-slate-100 !opacity-100'">{{ option?.name || localeModel }}</span>
+          <span
+            class="block text-[15px] font-semibold"
+            :class="isLight ? 'text-slate-800' : 'text-slate-100 !opacity-100'"
+          >
+            {{ option?.name || option?.label || option?.code || localeModel }}
+          </span>
         </template>
         <template #item="{ item }">
-          <span :class="isLight ? 'text-slate-800' : 'text-slate-100 !opacity-100'">{{ item.name }}</span>
+          <span
+            class="block text-[15px] font-semibold"
+            :class="isLight ? 'text-slate-800' : 'text-slate-100 !opacity-100'"
+          >
+            {{ item?.name || item?.label || item?.code }}
+          </span>
         </template>
       </ULocaleSelect>
     </div>
@@ -83,9 +99,12 @@ const darkLocaleUi = {
       size="sm"
       variant="soft"
       class="nav-cta"
-      :class="isLight
-        ? 'border border-emerald-300/80 text-slate-700 bg-gradient-to-r from-emerald-300/90 via-emerald-400/85 to-lime-200/80 hover:brightness-110'
-        : 'border border-red-400/70 text-slate-100 bg-gradient-to-r from-red-600/90 via-red-500/85 to-amber-300/75 hover:brightness-110'"
+      :class="[
+        isLight
+          ? 'border border-emerald-300/80 text-slate-700 bg-gradient-to-r from-emerald-300/90 via-emerald-400/85 to-lime-200/80 hover:brightness-110'
+          : 'border border-red-400/70 text-slate-100 bg-gradient-to-r from-red-600/90 via-red-500/85 to-amber-300/75 hover:brightness-110',
+        stacked ? 'w-full justify-center' : ''
+      ]"
     >
       {{ t('nav.ctaProjects') }}
     </UButton>
@@ -94,7 +113,7 @@ const darkLocaleUi = {
       size="sm"
       variant="outline"
       :icon="isLight ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-      class="rounded-full toggle-btn"
+      :class="['rounded-full toggle-btn', stacked ? 'self-start' : '']"
       :color="isLight ? 'success' : 'error'"
       :aria-label="t('nav.themeToggle')"
       @click="emit('toggle-mode')"

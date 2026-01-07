@@ -76,6 +76,6 @@ const props = defineProps({
 
 <style scoped>
 .nav-brand {
-  font-family: "Druk Wide Trial", Inter, system-ui, sans-serif;
+  font-family: "Bangers", "Druk Text Wide Trial", "Druk Wide Trial", Inter, system-ui, sans-serif;
 }
 </style>
