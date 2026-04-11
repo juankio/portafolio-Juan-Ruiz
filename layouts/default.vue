@@ -1,8 +1,11 @@
 <script setup>
-import NavBar from '~/components/NavBar.vue'
-import FooterBar from '~/components/FooterBar.vue'
+import NavBar from '~/components/nav/NavBar.vue'
+import FooterBar from '~/components/footer/FooterBar.vue'
 
 const { isLight, toggleMode } = useThemeMode()
+
+provide('isLight', isLight)
+provide('toggleMode', toggleMode)
 </script>
 
 <template>

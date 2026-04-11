@@ -1,5 +1,5 @@
 <script setup>
-import GlowCard from './GlowCard.vue'
+import GlowCard from '~/components/ui/GlowCard.vue'
 
 const props = defineProps({
   projects: {

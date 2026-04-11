@@ -1,138 +1,18 @@
-<script setup>
-import GlowCard from './GlowCard.vue'
+<script setup lang="ts">
+import ContactInfo from './ContactInfo.vue'
+import ContactForm from './ContactForm.vue'
 
-const props = defineProps({
-  isLight: {
-    type: Boolean,
-    default: false
-  }
-})
-
-const toast = useToast()
-const { t } = useI18n()
-
-const name = ref('')
-const email = ref('')
-const message = ref('')
-const sending = ref(false)
-
-const validate = () => {
-  if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
-    toast.add({ title: t('contact.validation.required'), color: 'red' })
-    return false
-  }
-  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
-  if (!emailRegex.test(email.value)) {
-    toast.add({ title: t('contact.validation.email'), color: 'red' })
-    return false
-  }
-  return true
-}
-
-const handleSubmit = async () => {
-  if (!validate()) return
-  sending.value = true
-  try {
-    await $fetch('/api/contact', {
-      method: 'POST',
-      body: {
-        name: name.value,
-        email: email.value,
-        message: message.value
-      }
-    })
-    toast.add({ title: t('contact.validation.success'), description: t('contact.validation.successDesc'), color: 'green' })
-    name.value = ''
-    email.value = ''
-    message.value = ''
-  } catch (error) {
-    const reason =
-      error?.data?.body ||
-      error?.data?.reason ||
-      error?.data?.statusMessage ||
-      error?.statusMessage ||
-      t('contact.validation.fallback')
-    toast.add({ title: t('contact.validation.error'), description: reason, color: 'red' })
-  } finally {
-    sending.value = false
-  }
-}
+defineProps<{
+  isLight: boolean
+}>()
 </script>
 
 <template>
   <section id="contacto" class="py-16 sm:py-20">
     <UContainer>
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div class="space-y-4">
-          <UBadge
-            size="sm"
-            variant="soft"
-            :color="isLight ? 'neutral' : 'primary'"
-            class="uppercase tracking-[0.25em] font-semibold"
-            :class="isLight ? 'text-emerald-700  bg-transparent' : 'text-red-300  bg-transparent'"
-          >
-            {{ t('contact.section') }}
-          </UBadge>
-          <div class="space-y-3">
-        <h2 class="text-3xl font-semibold sm:text-4xl" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
-              {{ t('contact.titleLead') }} <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('contact.titleAccent') }}</span>
-            </h2>
-            <p class="text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-              {{ t('contact.subtitle') }}
-            </p>
-          </div>
-          <div class="flex flex-wrap gap-3">
-            <UBadge
-              variant="soft"
-              size="md"
-              :color="isLight ? 'neutral' : 'primary'"
-              :class="isLight ? 'text-slate-700' : 'text-slate-200'"
-            >
-              {{ t('contact.badges')[0] }}
-            </UBadge>
-            <UBadge
-              variant="soft"
-              size="md"
-              :color="isLight ? 'neutral' : 'primary'"
-              :class="isLight ? 'text-slate-700' : 'text-slate-200'"
-            >
-              {{ t('contact.badges')[1] }}
-            </UBadge>
-          </div>
-        </div>
-
-        <GlowCard :is-light="isLight" rounded="rounded-[24px]" body-padding="p-6 sm:p-7 lg:p-8">
-          <form class="space-y-5" @submit.prevent="handleSubmit">
-            <div class="space-y-2">
-              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">{{ t('contact.form.nameLabel') }}</label>
-              <UInput v-model="name" :placeholder="t('contact.form.namePlaceholder')" size="lg" variant="outline" required />
-            </div>
-            <div class="space-y-2">
-              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">{{ t('contact.form.emailLabel') }}</label>
-              <UInput v-model="email" type="email" :placeholder="t('contact.form.emailPlaceholder')" size="lg" variant="outline" required />
-            </div>
-            <div class="space-y-2">
-              <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">{{ t('contact.form.messageLabel') }}</label>
-              <UTextarea v-model="message" :rows="4" :placeholder="t('contact.form.messagePlaceholder')" variant="outline" required />
-            </div>
-
-            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-                {{ t('contact.form.helper') }}
-              </p>
-              <UButton
-                type="submit"
-                size="lg"
-                :loading="sending"
-                color="primary"
-                variant="solid"
-                :class="isLight ? 'bg-emerald-500  hover:bg-emerald-400' : 'bg-red-500  hover:bg-red-400 '"
-              >
-                {{ t('contact.form.submit') }}
-              </UButton>
-            </div>
-          </form>
-        </GlowCard>
+      <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+        <ContactInfo :is-light="isLight" />
+        <ContactForm :is-light="isLight" />
       </div>
     </UContainer>
   </section>

@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
-import GlowCard from '~/components/GlowCard.vue'
+import GlowCard from '~/components/ui/GlowCard.vue'
+import CourseCard3D from './CourseCard3D.vue'
 
 const props = defineProps({
   isLight: { type: Boolean, default: false },
@@ -84,13 +85,13 @@ const onSelect = (item) => emit('select', item)
     :is-light="isLight"
     :motion="false"
     :glow="false"
-    rounded="rounded-[34px]"
+    rounded="rounded-3xl"
     :overflow-visible="true"
     body-padding="px-0 py-0"
     body-class="relative overflow-visible bg-transparent"
     card-class="bg-transparent"
   >
-    <div class="relative overflow-hidden rounded-[32px] border border-white/5">
+    <div class="relative overflow-hidden rounded-3xl border border-white/5">
       <div class="relative h-[70vh] min-h-[560px] max-h-[82vh] px-3 sm:px-6 pt-8 pb-12 sm:pt-10 sm:pb-14">
         <div class="relative h-full w-full origin-top transform-gpu scale-[0.78] sm:scale-[0.8] lg:scale-[0.82]">
           <svg class="pointer-events-none absolute inset-0 h-full w-full z-0" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -159,53 +160,21 @@ const onSelect = (item) => emit('select', item)
           <div
             v-for="(item, idx) in coursesTimeline.points"
             :key="item.title"
-            class="absolute z-10 flex max-w-[250px] min-h-[132px] flex-col gap-2 rounded-2xl border px-4 py-3 shadow-xl backdrop-blur-md transition-all duration-300 cursor-pointer"
+            class="absolute z-10"
             :style="{
               left: `${item.cardX}%`,
               top: `${item.cardY}%`,
               width: cardWidth,
               transform: 'translate(-50%, -50%)'
             }"
-            :class="[
-              isLight
-                ? 'border-gray-300/70 bg-gray-300/97 shadow-emerald-200/70 hover:shadow-emerald-300/80'
-                : 'border-white/12 bg-[#08090f]/92 backdrop-blur-xl shadow-[0_18px_60px_-26px_rgba(0,0,0,0.9)] hover:shadow-red-400/40',
-              selectedCourse?.title === item.title
-                ? isLight
-                  ? 'ring-2 ring-emerald-400/80 scale-[1.03]'
-                  : 'ring-2 ring-red-400/80 scale-[1.03]'
-                : 'ring-1 ring-white/5 hover:scale-[1.045]'
-           ]"
-            @click="onSelect(item)"
           >
-            <div class="flex items-center justify-between gap-3">
-              <span
-                class="text-[11px] font-semibold uppercase tracking-wide"
-                :class="isLight ? 'text-emerald-700' : 'text-red-300'"
-              >
-                {{ idx + 1 < 10 ? `0${idx + 1}` : idx + 1 }}
-              </span>
-              <span
-                class="rounded-full px-2 py-0.5 text-[11px] font-semibold"
-                :class="isLight ? 'bg-emerald-100 text-emerald-800' : 'bg-red-500/25 text-red-100'"
-              >
-                {{ item.period }}
-              </span>
-            </div>
-
-            <p
-              class="mt-0.5 text-[13px] font-semibold leading-snug line-clamp-2"
-              :class="isLight ? 'text-slate-800' : 'text-slate-200'"
-            >
-              {{ item.title }}
-            </p>
-            <p
-              v-if="item.place"
-              class="text-[11px] uppercase tracking-[0.08em] font-semibold"
-              :class="isLight ? 'text-emerald-700' : 'text-red-200'"
-            >
-              {{ item.place }}
-            </p>
+            <CourseCard3D
+              :course="item"
+              :index="idx"
+              :is-selected="selectedCourse?.title === item.title"
+              :is-light="isLight"
+              @select="onSelect(item)"
+            />
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <script setup>
-import GlowCard from './GlowCard.vue'
+import GlowCard from '~/components/ui/GlowCard.vue'
 
 const props = defineProps({
   isLight: {
@@ -62,12 +62,12 @@ const aboutSkills = computed(() => {
       <div class="space-y-6">
         <GlowCard
           :is-light="isLight"
-          rounded="rounded-[32px]"
+          rounded="rounded-3xl"
           body-padding="p-6 sm:p-7 lg:p-8"
           body-class="space-y-5"
           :float="true"
           :delay="0"
-          :card-class="isLight ? 'shadow-[0_25px_80px_-35px_rgba(16,185,129,0.35)]' : 'shadow-[0_25px_80px_-35px_rgba(248,113,113,0.45)]'"
+          card-class="shadow-(--shadow-glow)"
         >
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-4">
@@ -108,7 +108,7 @@ const aboutSkills = computed(() => {
               body-class="flex items-center justify-between"
               :float="true"
               :delay="idx * 120"
-              :card-class="isLight ? 'shadow-[0_20px_55px_-42px_rgba(16,185,129,0.55)]' : 'shadow-[0_20px_55px_-42px_rgba(248,113,113,0.8)]'"
+              card-class="shadow-(--shadow-card)"
             >
               <span class="text-base font-medium" :class="isLight ? 'text-slate-800' : 'text-slate-200'">{{ row.label }}</span>
               <span class="text-base font-semibold" :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ row.value }}</span>
@@ -118,11 +118,11 @@ const aboutSkills = computed(() => {
 
         <GlowCard
           :is-light="isLight"
-          rounded="rounded-[28px]"
+          rounded="rounded-3xl"
           body-padding="p-6"
           body-class="space-y-4"
           :float="true"
-          :card-class="isLight ? 'shadow-[0_25px_80px_-40px_rgba(16,185,129,0.35)]' : 'shadow-[0_25px_80px_-40px_rgba(248,113,113,0.45)]'"
+          card-class="shadow-(--shadow-glow)"
         >
           <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
             {{ t('about.skillsTitle') }}
@@ -137,7 +137,7 @@ const aboutSkills = computed(() => {
               body-padding="px-4 py-4"
               body-class="text-sm transition-colors"
               :float="true"
-              card-class="shadow-[0_20px_55px_-42px_rgba(248,113,113,0.8)]"
+              card-class="shadow-(--shadow-card)"
             >
               <p class="font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">{{ skill.title }}</p>
               <p :class="isLight ? 'text-slate-600' : 'text-slate-400'">{{ skill.copy }}</p>

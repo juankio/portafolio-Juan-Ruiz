@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
-import GlowCard from '~/components/GlowCard.vue'
+import GlowCard from '~/components/ui/GlowCard.vue'
 import CourseTimeline from './CourseTimeline.vue'
 import CourseSummary from './CourseSummary.vue'
 
@@ -10,6 +10,7 @@ const props = defineProps({
   courses: { type: Array, default: () => [] }
 })
 
+const { t } = useI18n()
 const displayedCourses = computed(() => props.courses || [])
 const selectedCourse = ref(null)
 
@@ -81,10 +82,10 @@ const educationTimeline = computed(() => buildTimeline(props.education))
           <UIcon name="i-heroicons-academic-cap-20-solid" :class="isLight ? 'text-emerald-600' : 'text-red-500'" />
           <div>
             <p class="text-sm uppercase tracking-[0.22em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-              Educacion
+              {{ t('education.educationTitle') }}
             </p>
             <h3 class="text-lg font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
-              Formacion principal
+              {{ t('education.educationHeadline') }}
             </h3>
           </div>
         </div>
@@ -93,7 +94,7 @@ const educationTimeline = computed(() => buildTimeline(props.education))
           :is-light="isLight"
           :motion="false"
           :glow="false"
-          rounded="rounded-[34px]"
+          rounded="rounded-3xl"
           :overflow-visible="true"
           class="mt-8 sm:mt-10"
           body-padding="px-0 py-0"
@@ -161,19 +162,19 @@ const educationTimeline = computed(() => buildTimeline(props.education))
             <UIcon name="i-heroicons-sparkles-20-solid" :class="isLight ? 'text-emerald-600' : 'text-red-500'" />
             <div>
               <p class="text-sm uppercase tracking-[0.22em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-                Cursos y certificaciones
+                {{ t('education.sectionTitle') }}
               </p>
               <h3 class="text-lg font-semibold" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
-                Actualizaciones constantes
+                {{ t('education.headline') }}
               </h3>
             </div>
           </div>
 
           <div class="flex items-center gap-2 text-[11px] uppercase tracking-[0.16em]" :class="isLight ? 'text-emerald-700' : 'text-red-200'">
             <span class="rounded-full px-3 py-1 font-semibold" :class="isLight ? 'bg-emerald-100 text-emerald-800' : 'bg-red-500/20 text-red-100'">
-              Interactua
+              {{ t('education.interact') }}
             </span>
-            <span :class="isLight ? 'text-slate-500' : 'text-slate-300'">Explora la ruta y toca para ver detalle</span>
+            <span :class="isLight ? 'text-slate-500' : 'text-slate-300'">{{ t('education.hint') }}</span>
           </div>
         </div>
 

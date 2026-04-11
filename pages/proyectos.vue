@@ -1,5 +1,5 @@
 <script setup>
-import ProjectsSection from '~/components/ProjectsSection.vue'
+import ProjectsSection from '~/components/projects/ProjectsSection.vue'
 
 definePageMeta({ ssr: false })
 

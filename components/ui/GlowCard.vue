@@ -52,7 +52,7 @@ const hasMotion = computed(() => !!motionConfig.value)
   <div v-if="hasMotion" v-motion="motionConfig" class="group relative transition-all duration-300" :class="props.class">
     <div
       v-if="props.glow"
-      class="pointer-events-none absolute -inset-5 -z-10 rounded-[32px] blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
+      class="pointer-events-none absolute -inset-5 -z-10 rounded-3xl blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
       :class="haloClass"
     />
     <div
@@ -74,7 +74,7 @@ const hasMotion = computed(() => !!motionConfig.value)
   <div v-else class="group relative transition-all duration-300" :class="props.class">
     <div
       v-if="props.glow"
-      class="pointer-events-none absolute -inset-5 -z-10 rounded-[32px] blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
+      class="pointer-events-none absolute -inset-5 -z-10 rounded-3xl blur-2xl opacity-80 group-hover:opacity-100 transition-all duration-300"
       :class="haloClass"
     />
     <div

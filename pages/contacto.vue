@@ -1,5 +1,5 @@
 <script setup>
-import ContactSection from '~/components/ContactSection.vue'
+import ContactSection from '~/components/contact/ContactSection.vue'
 
 definePageMeta({ ssr: false })
 

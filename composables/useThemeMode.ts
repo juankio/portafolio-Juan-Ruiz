@@ -2,6 +2,16 @@ export function useThemeMode() {
   const isLight = useState<boolean>('isLight', () => false)
   const storageKey = 'theme-mode'
 
+  const applyThemeClass = (light: boolean) => {
+    if (!process.client) return
+    const root = document.documentElement
+    if (light) {
+      root.classList.add('theme-light')
+    } else {
+      root.classList.remove('theme-light')
+    }
+  }
+
   const toggleMode = () => {
     isLight.value = !isLight.value
   }
@@ -14,10 +24,12 @@ export function useThemeMode() {
       } else if (saved === 'dark') {
         isLight.value = false
       }
+      applyThemeClass(isLight.value)
     })
 
     watch(isLight, (value) => {
       localStorage.setItem(storageKey, value ? 'light' : 'dark')
+      applyThemeClass(value)
     })
   }
 

@@ -5,6 +5,17 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: '.',
   modules: ['@nuxt/image', '@nuxt/ui', '@vueuse/motion/nuxt'],
+  ui: {
+    fonts: false
+  },
+  icon: {
+    provider: 'server',
+    fallbackToApi: false,
+    serverBundle: {
+      collections: ['heroicons', 'ph', 'lucide', 'circle-flags']
+    }
+  },
+  components: [{ path: '~/components', pathPrefix: false }],
   css: ['~/assets/css/tailwind.css'],
   runtimeConfig: {
     resendApiKey: process.env.RESEND_API_KEY || '',
