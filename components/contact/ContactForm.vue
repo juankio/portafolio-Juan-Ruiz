@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import GlowCard from '~/components/ui/GlowCard.vue'
-
 const props = defineProps<{
   isLight: boolean
 }>()
@@ -90,36 +88,40 @@ const resetForm = () => {
 </script>
 
 <template>
-  <GlowCard :is-light="isLight" rounded="rounded-3xl" body-padding="p-6 sm:p-7 lg:p-8">
-    <!-- Estado de exito -->
+  <div
+    class="p-6 sm:p-7 lg:p-8 border-2 bg-[var(--color-surface-card)]"
+    :class="isLight ? 'border-[var(--color-border-accent)]' : 'border-[var(--color-border-accent)]'"
+    style="border-radius: 4px 12px 6px 10px; backdrop-filter: blur(12px)"
+  >
     <Transition name="fade" mode="out-in">
       <div v-if="sent" key="success" class="flex flex-col items-center justify-center gap-4 py-8 text-center">
         <div
-          class="flex h-16 w-16 items-center justify-center rounded-full"
-          style="background: var(--color-accent-soft)"
+          class="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent-soft)]"
         >
-          <UIcon name="i-heroicons-check-20-solid" class="h-8 w-8" style="color: var(--color-accent)" />
+          <UIcon
+            name="i-heroicons-check-20-solid"
+            class="h-7 w-7 text-[var(--color-accent)]"
+          />
         </div>
-        <h3 class="text-xl font-semibold" style="color: var(--color-text-primary)">
+        <h3 class="text-xl font-bold" :class="isLight ? 'text-slate-700' : 'text-white'">
           {{ t('contact.validation.success') }}
         </h3>
-        <p class="text-sm" style="color: var(--color-text-secondary)">
+        <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
           {{ t('contact.validation.successDesc') }}
         </p>
         <UButton
           variant="outline"
           size="md"
-          style="border-color: var(--color-border-accent); color: var(--color-accent)"
+          :class="isLight ? 'border-slate-300 text-slate-600' : 'border-slate-600 text-slate-300'"
           @click="resetForm"
         >
           {{ t('contact.form.sendAnother') }}
         </UButton>
       </div>
 
-      <!-- Formulario -->
       <form v-else key="form" class="space-y-5" @submit.prevent="handleSubmit">
         <div class="space-y-1.5">
-          <label class="text-sm font-medium" style="color: var(--color-text-primary)">
+          <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
             {{ t('contact.form.nameLabel') }}
           </label>
           <UInput
@@ -134,7 +136,7 @@ const resetForm = () => {
         </div>
 
         <div class="space-y-1.5">
-          <label class="text-sm font-medium" style="color: var(--color-text-primary)">
+          <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
             {{ t('contact.form.emailLabel') }}
           </label>
           <UInput
@@ -151,10 +153,10 @@ const resetForm = () => {
 
         <div class="space-y-1.5">
           <div class="flex items-center justify-between">
-            <label class="text-sm font-medium" style="color: var(--color-text-primary)">
+            <label class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
               {{ t('contact.form.messageLabel') }}
             </label>
-            <span class="text-xs" style="color: var(--color-text-secondary)">
+            <span class="text-xs" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
               {{ message.length }}/{{ maxMessage }}
             </span>
           </div>
@@ -171,44 +173,34 @@ const resetForm = () => {
         </div>
 
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p class="text-sm" style="color: var(--color-text-secondary)">
+          <p class="text-sm" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
             {{ t('contact.form.helper') }}
           </p>
           <UButton
             type="submit"
             size="lg"
             :loading="sending"
-            variant="solid"
-            class="contact-submit"
+            class="border-sketchy !rounded-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)]"
           >
             {{ t('contact.form.submit') }}
           </UButton>
         </div>
       </form>
     </Transition>
-  </GlowCard>
+  </div>
 </template>
 
 <style scoped>
-.contact-submit {
-  background: var(--color-accent);
-  color: white;
-  transition: all var(--duration-normal) var(--ease-default);
-}
-.contact-submit:hover {
-  background: var(--color-accent-light);
-}
-
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.3s var(--ease-default);
+  transition: all 0.25s ease;
 }
 .fade-enter-from {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(6px);
 }
 .fade-leave-to {
   opacity: 0;
-  transform: translateY(-8px);
+  transform: translateY(-6px);
 }
 </style>

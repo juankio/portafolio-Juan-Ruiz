@@ -15,53 +15,51 @@ const { t } = useI18n()
 
 <template>
   <UContainer as="section" id="sobre-mi" class="py-10 sm:py-14">
-    <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-      <section class="space-y-3">
-        <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
-          {{ t('about.sectionTitle') }}
-        </p>
+    <div class="space-y-4">
+      <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
+        {{ t('about.sectionTitle') }}
+      </p>
 
-        <h1 class="text-4xl font-semibold leading-tight sm:text-5xl" :class="isLight ? 'text-slate-800' : 'text-slate-200'">
-          {{ t('about.headline.lead') }}
-          <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('about.headline.accent') }}</span>
-          {{ t('about.headline.tail') }}
-        </h1>
+      <h1 class="text-4xl font-semibold leading-tight sm:text-5xl" :class="isLight ? 'text-slate-900' : 'text-white'">
+        {{ t('about.headline.lead') }}
+        <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('about.headline.accent') }}</span>
+        {{ t('about.headline.tail') }}
+      </h1>
 
-        <p class="max-w-3xl text-lg" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-          {{ t('about.intro') }}
-        </p>
+      <p class="max-w-3xl text-lg leading-relaxed" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
+        {{ t('about.intro') }}
+      </p>
 
-        <div class="flex flex-wrap gap-3">
-          <UBadge
-            v-for="chip in chips"
-            :key="chip"
-            variant="outline"
-            :class="isLight ? 'border-slate-200 bg-gray-300 text-slate-800' : 'border-white/15 bg-gray-300/5 text-slate-200'"
-          >
-            {{ chip }}
-          </UBadge>
-        </div>
+      <div class="flex flex-wrap gap-2 pt-1">
+        <UBadge
+          v-for="chip in chips"
+          :key="chip"
+          variant="outline"
+          :class="isLight ? 'border-slate-200 text-slate-600' : 'border-slate-700 text-slate-300'"
+        >
+          {{ chip }}
+        </UBadge>
+      </div>
 
-        <div class="flex flex-wrap gap-3">
-          <UButton
-            to="/proyectos"
-            size="lg"
-            :class="isLight ? 'bg-[#10b981] text-slate-700 hover:bg-[#22c55e]' : 'bg-red-600 text-white hover:bg-red-500'"
-            class="shadow-lg shadow-emerald-300/25 hover:-translate-y-0.5"
-          >
-            {{ t('hero.ctas.projects') }}
-          </UButton>
-          <UButton
-            to="/contacto"
-            size="lg"
-            variant="outline"
-            class="hover:-translate-y-0.5"
-            :class="isLight ? 'border border-emerald-200 text-emerald-700 bg-gray-300 hover:bg-emerald-50' : 'border border-red-500 text-white bg-transparent hover:bg-red-500/10'"
-          >
-            {{ t('hero.ctas.contact') }}
-          </UButton>
-        </div>
-      </section>
+      <div class="flex flex-wrap gap-3 pt-2">
+        <UButton
+          to="/proyectos"
+          size="lg"
+          class="transition-transform hover:-translate-y-0.5"
+          :class="isLight ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-red-600 text-white hover:bg-red-500'"
+        >
+          {{ t('hero.ctas.projects') }}
+        </UButton>
+        <UButton
+          to="/contacto"
+          size="lg"
+          variant="outline"
+          class="transition-transform hover:-translate-y-0.5"
+          :class="isLight ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-slate-600 text-slate-200 hover:bg-slate-800'"
+        >
+          {{ t('hero.ctas.contact') }}
+        </UButton>
+      </div>
     </div>
   </UContainer>
 </template>

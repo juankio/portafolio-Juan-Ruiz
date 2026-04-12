@@ -11,196 +11,101 @@ const { t } = useI18n()
 
 const getCourseListClass = (item) => {
   const active = props.selectedCourse && item.title === props.selectedCourse.title
-  if (active) {
-    return 'summary-item--active'
-  }
-  return 'summary-item--default'
+  return active ? 'summary-item--active' : 'summary-item--default'
 }
 
 const onSelect = (item) => emit('select', item)
 </script>
 
 <template>
-  <div class="summary-panel" :class="isLight ? 'summary-panel--light' : ''">
+  <div
+    class="summary-panel flex h-full flex-col gap-4 rounded-2xl border p-5"
+    :class="isLight ? 'border-slate-200 bg-white' : 'border-slate-700/50 bg-slate-800/50'"
+  >
     <div class="flex items-center justify-between gap-2">
       <div>
-        <p class="summary-overline">{{ t('education.summary') }}</p>
-        <p class="summary-title">{{ t('education.nodeSelection') }}</p>
+        <p class="text-xs uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
+          {{ t('education.summary') }}
+        </p>
+        <p class="text-sm font-semibold" :class="isLight ? 'text-slate-600' : 'text-slate-200'">
+          {{ t('education.nodeSelection') }}
+        </p>
       </div>
-      <span class="summary-count">
+      <span
+        class="text-xs font-semibold uppercase tracking-[0.12em] px-3 py-1 rounded-full"
+        :class="isLight ? 'bg-[var(--color-accent-soft)] text-[var(--color-accent-dark)]' : 'bg-[var(--color-accent-soft)] text-[var(--color-accent-light)]'"
+      >
         {{ courses.length }} {{ t('education.coursesLabel') }}
       </span>
     </div>
 
-    <div class="summary-hint">
-      <span class="summary-hint__line" />
+    <div class="flex items-center gap-2 text-xs" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
+      <span class="block h-0.5 w-8 rounded-full bg-[var(--color-accent)]" />
       <span class="leading-tight">{{ t('education.hint') }}</span>
     </div>
 
-    <!-- Lista de cursos con micro-3D hover -->
-    <div class="summary-list" style="perspective: 800px">
+    <div class="flex flex-col gap-2 overflow-y-auto max-h-[360px] pr-1">
       <button
         v-for="item in courses"
         :key="'list-' + item.title"
-        class="summary-item"
-        :class="getCourseListClass(item)"
+        class="flex items-center justify-between rounded-xl px-4 py-3 text-left transition-all duration-150"
+        :class="[
+          getCourseListClass(item),
+          isLight
+            ? getCourseListClass(item) === 'summary-item--active'
+              ? 'bg-[var(--color-accent-softer)] ring-1 ring-[var(--color-accent)]/30'
+              : 'bg-slate-50 hover:bg-slate-100'
+            : getCourseListClass(item) === 'summary-item--active'
+              ? 'bg-[var(--color-accent-soft)] ring-1 ring-[var(--color-accent)]/30'
+              : 'bg-slate-900/40 hover:bg-slate-900/60'
+        ]"
         @click="onSelect(item)"
       >
-        <span class="text-sm font-semibold leading-tight line-clamp-1">{{ item.title }}</span>
-        <span class="summary-item__period">
+        <span class="text-sm font-semibold leading-tight line-clamp-1" :class="isLight ? 'text-slate-600' : 'text-slate-200'">
+          {{ item.title }}
+        </span>
+        <span
+          class="text-xs font-semibold px-2 py-0.5 rounded-full shrink-0 ml-2 bg-[var(--color-accent-soft)] text-[var(--color-accent)]"
+        >
           {{ item.period }}
         </span>
       </button>
     </div>
 
-    <!-- Detalle del curso seleccionado -->
     <Transition name="detail">
-      <div v-if="selectedCourse" :key="selectedCourse.title" class="summary-detail">
-        <div class="flex items-center gap-2 mb-2">
-          <UIcon name="i-heroicons-academic-cap-20-solid" class="text-(--color-accent) w-4 h-4" />
-          <span class="text-[11px] font-semibold uppercase tracking-wide" style="color: var(--color-accent)">
+      <div
+        v-if="selectedCourse"
+        :key="selectedCourse.title"
+        class="flex flex-col gap-2 mt-1 rounded-xl border p-4"
+        :class="isLight ? 'border-slate-200 bg-slate-50' : 'border-slate-700/50 bg-slate-900/40'"
+      >
+        <div class="flex items-center gap-2">
+          <UIcon name="i-heroicons-academic-cap-20-solid" class="w-4 h-4 text-[var(--color-accent)]" />
+          <span class="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent)]">
             {{ t('education.certificate') }}
           </span>
         </div>
         <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-wide">
-          <span style="color: var(--color-accent)">{{ selectedCourse.period }}</span>
-          <span class="text-[11px]" style="color: var(--color-text-secondary)">{{ selectedCourse.place }}</span>
+          <span class="text-[var(--color-accent)]">{{ selectedCourse.period }}</span>
+          <span class="text-xs" :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ selectedCourse.place }}</span>
         </div>
-        <p class="text-sm font-semibold leading-snug" style="color: var(--color-text-primary)">{{ selectedCourse.title }}</p>
-        <p class="text-xs leading-snug" style="color: var(--color-text-secondary)">{{ selectedCourse.detail }}</p>
+        <p class="text-sm font-semibold leading-snug" :class="isLight ? 'text-slate-600' : 'text-slate-200'">{{ selectedCourse.title }}</p>
+        <p class="text-xs leading-snug" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ selectedCourse.detail }}</p>
       </div>
     </Transition>
   </div>
 </template>
 
 <style scoped>
-.summary-panel {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  gap: 1rem;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-border);
-  padding: 1rem 1.25rem;
-  backdrop-filter: blur(16px);
-  background: rgba(0, 0, 0, 0.7);
-  box-shadow: var(--shadow-card);
-}
-
-.summary-panel--light {
-  background: rgba(209, 213, 219, 0.9);
-  border-color: rgba(209, 213, 219, 0.6);
-}
-
-.summary-overline {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  color: var(--color-text-secondary);
-}
-
-.summary-title {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-}
-
-.summary-count {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  background: var(--color-accent-soft);
-  color: var(--color-accent-light);
-}
-
-.summary-hint {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: var(--color-text-secondary);
-}
-
-.summary-hint__line {
-  display: block;
-  height: 3px;
-  width: 2.5rem;
-  border-radius: 9999px;
-  background: var(--color-accent);
-}
-
-.summary-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  overflow-y: auto;
-  padding-right: 4px;
-  max-height: 340px;
-}
-
-.summary-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: var(--radius-sm);
-  padding: 0.5rem 0.75rem;
-  text-align: left;
-  transition: all var(--duration-normal) var(--ease-default);
-}
-
-.summary-item:hover {
-  transform: translateZ(4px) scale(1.01);
-}
-
-.summary-item--default {
-  background: var(--color-accent-softer);
-  color: var(--color-text-primary);
-}
-
-.summary-item--default:hover {
-  background: var(--color-accent-soft);
-}
-
-.summary-item--active {
-  background: var(--color-accent-soft);
-  color: var(--color-text-primary);
-  box-shadow: inset 0 0 0 1px var(--color-border-accent);
-}
-
-.summary-item__period {
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  background: var(--color-accent-softer);
-  color: var(--color-accent);
-  flex-shrink: 0;
-}
-
-.summary-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 4px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  padding: 0.75rem;
-  background: var(--color-accent-softer);
-}
-
-/* Transicion de entrada del detalle */
 .detail-enter-active {
-  transition: all 0.35s var(--ease-spring);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .detail-leave-active {
-  transition: all 0.2s var(--ease-default);
+  transition: all 0.15s ease;
 }
 .detail-enter-from {
   opacity: 0;
-  transform: perspective(600px) rotateX(8deg) translateY(8px);
+  transform: translateY(6px);
 }
 .detail-leave-to {
   opacity: 0;

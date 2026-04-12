@@ -27,18 +27,18 @@ onBeforeUnmount(() => {
 
 <template>
   <header
-    class="nav-root sticky top-0 z-50 border-b transition-all duration-300"
+    class="sticky top-0 z-50 border-b transition-all duration-200"
     :class="[
       isLight
         ? scrolled
-          ? 'bg-slate-100/95 border-emerald-500/25 shadow-[0_12px_32px_-20px_rgba(15,23,42,0.35)]'
-          : 'bg-slate-100/80 border-emerald-400/20'
+          ? 'bg-white/90 backdrop-blur-md border-slate-200 shadow-sm'
+          : 'bg-white/70 backdrop-blur-sm border-slate-100'
         : scrolled
-          ? 'bg-[#0b1220]/95 border-red-500/30 shadow-[0_14px_38px_-20px_rgba(0,0,0,0.7)]'
-          : 'bg-[#0b1220]/82 border-red-400/25'
+          ? 'bg-[#0f172a]/90 backdrop-blur-md border-slate-800 shadow-sm shadow-black/10'
+          : 'bg-[#0f172a]/70 backdrop-blur-sm border-slate-800/50'
     ]"
   >
-    <UContainer class="flex h-[74px] items-center gap-3 sm:gap-4">
+    <div class="flex h-20 items-center gap-4 px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
       <NavBrand :is-light="isLight" />
       <NavLinks :is-light="isLight" />
       <NavActions class="hidden lg:flex" :is-light="isLight" @toggle-mode="emit('toggle-mode')" />
@@ -48,24 +48,15 @@ onBeforeUnmount(() => {
           <template #trigger>
             <UButton
               icon="i-heroicons-bars-3-bottom-right-20-solid"
-              size="sm"
-              variant="soft"
+              size="md"
+              variant="ghost"
+              color="neutral"
               class="rounded-xl"
-              :class="isLight
-                ? 'text-slate-800 bg-emerald-100 hover:bg-emerald-200 border border-emerald-300/70'
-                : 'text-slate-100 bg-red-500/12 hover:bg-red-500/20 border border-red-400/60'"
               aria-label="Open menu"
             />
           </template>
         </NavMobileMenu>
       </div>
-    </UContainer>
+    </div>
   </header>
 </template>
-
-<style scoped>
-.nav-root {
-  font-family: 'Segoe UI', 'Inter', 'Roboto', system-ui, sans-serif;
-  letter-spacing: normal;
-}
-</style>

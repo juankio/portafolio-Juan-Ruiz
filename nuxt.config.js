@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: '.',
   modules: ['@nuxt/image', '@nuxt/ui', '@vueuse/motion/nuxt'],
+  image: {
+    domains: ['opengraph.githubassets.com', 'avatars.githubusercontent.com']
+  },
   ui: {
     fonts: false
   },
@@ -42,7 +45,7 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.cdnfonts.com' },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700&display=swap'
+          href: 'https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700&family=Permanent+Marker&display=swap'
         },
         {
           rel: 'stylesheet',

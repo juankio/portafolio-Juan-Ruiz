@@ -15,10 +15,10 @@ const localeItems = [
 </script>
 
 <template>
-  <div :class="stacked ? 'nav-actions w-full' : 'nav-actions items-center'">
+  <div :class="stacked ? 'flex w-full flex-col gap-3' : 'flex items-center gap-3'">
     <div
-      class="lang-switch"
-      :class="isLight ? 'lang-switch--light' : 'lang-switch--dark'"
+      class="flex items-center rounded-xl border p-1"
+      :class="isLight ? 'border-slate-200 bg-slate-100' : 'border-slate-700 bg-slate-800'"
       role="group"
       aria-label="Language switch"
     >
@@ -27,15 +27,15 @@ const localeItems = [
         :key="item.code"
         size="sm"
         variant="ghost"
+        class="min-w-[44px] rounded-lg text-sm font-bold tracking-wide"
         :class="[
-          'lang-btn',
           locale === item.code
             ? isLight
-              ? 'lang-btn--active-light'
-              : 'lang-btn--active-dark'
+              ? 'bg-emerald-600 text-white'
+              : 'bg-red-600 text-white'
             : isLight
-              ? 'text-slate-700'
-              : 'text-slate-300'
+              ? 'text-slate-500 hover:text-slate-700'
+              : 'text-slate-400 hover:text-white'
         ]"
         @click="setLocale(item.code)"
       >
@@ -45,13 +45,12 @@ const localeItems = [
 
     <UButton
       to="/proyectos"
-      size="sm"
-      variant="soft"
-      class="nav-cta"
+      size="md"
+      class="text-sm font-bold uppercase tracking-[0.06em] rounded-xl"
       :class="[
         isLight
-          ? 'border border-emerald-400/70 bg-emerald-500 text-white hover:bg-emerald-600'
-          : 'border border-red-400/70 bg-red-500 text-white hover:bg-red-600',
+          ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+          : 'bg-red-600 text-white hover:bg-red-500',
         stacked ? 'w-full justify-center' : ''
       ]"
     >
@@ -59,81 +58,14 @@ const localeItems = [
     </UButton>
 
     <UButton
-      size="sm"
-      variant="outline"
+      size="md"
+      variant="ghost"
+      color="neutral"
       :icon="isLight ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
-      class="theme-btn"
-      :class="[
-        isLight
-          ? 'border-emerald-400/80 text-emerald-700 hover:bg-emerald-100'
-          : 'border-red-400/80 text-red-200 hover:bg-red-500/15',
-        stacked ? 'self-start' : ''
-      ]"
+      class="rounded-xl"
+      :class="stacked ? 'self-start' : ''"
       :aria-label="t('nav.themeToggle')"
       @click="emit('toggle-mode')"
     />
   </div>
 </template>
-
-<style scoped>
-.nav-actions {
-  display: flex;
-  gap: 0.6rem;
-  font-family: 'Segoe UI', 'Inter', 'Roboto', system-ui, sans-serif;
-}
-
-.lang-switch {
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  border: 1px solid;
-  padding: 2px;
-}
-
-.lang-switch--light {
-  border-color: rgba(16, 185, 129, 0.45);
-  background: rgba(16, 185, 129, 0.08);
-}
-
-.lang-switch--dark {
-  border-color: rgba(248, 113, 113, 0.45);
-  background: rgba(239, 68, 68, 0.1);
-}
-
-.lang-btn {
-  min-width: 42px;
-  border-radius: 8px;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-}
-
-.lang-btn--active-light {
-  background: #10b981;
-  color: #fff;
-}
-
-.lang-btn--active-dark {
-  background: #ef4444;
-  color: #fff;
-}
-
-.nav-cta {
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border-radius: 10px;
-}
-
-.theme-btn {
-  border-radius: 10px;
-}
-
-@media (max-width: 1023px) {
-  .nav-actions {
-    width: 100%;
-    flex-direction: column;
-  }
-}
-</style>

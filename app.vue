@@ -8,11 +8,9 @@ const currentLocale = computed(() => availableLocales.find(item => item.code ===
 const isBooting = ref(true)
 
 onMounted(() => {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      isBooting.value = false
-    })
-  })
+  setTimeout(() => {
+    isBooting.value = false
+  }, 800)
 })
 
 </script>
@@ -20,13 +18,15 @@ onMounted(() => {
 <template>
   <UApp :locale="currentLocale">
     <NuxtLoadingIndicator color="#ef4444" :height="3" />
-    <div class="boot-loader" :class="{ 'boot-loader--hidden': !isBooting }">
-      <div class="boot-hero" aria-hidden="true">
-        <img src="/snorlax-loader.png" alt="" />
+    <Transition name="loader">
+      <div v-if="isBooting" class="boot-loader" key="loader">
+        <div class="boot-hero" aria-hidden="true">
+          <img src="/snorlax-loader.png" alt="" />
+        </div>
+        <span class="boot-text">Cargando portafolio de Juan Miguel</span>
+        <div class="boot-spinner" aria-hidden="true" />
       </div>
-      <span class="boot-text">Cargando portafolio de Juan Miguel</span>
-      <div class="boot-spinner" aria-hidden="true" />
-    </div>
+    </Transition>
     <div v-show="!isBooting">
       <NuxtLayout>
         <NuxtPage />
@@ -44,30 +44,22 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  background: rgba(2, 6, 23, 0.85);
+  gap: 16px;
+  background: #0f172a;
   color: #e2e8f0;
   font-family: "Bangers", "Druk Text Wide Trial", "Druk Wide Trial", Inter, system-ui, sans-serif;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  transition: opacity 200ms ease, visibility 200ms ease;
-}
-.boot-loader--hidden {
-  opacity: 0;
-  visibility: hidden;
 }
 .boot-hero {
-  width: 160px;
-  filter: drop-shadow(0 16px 30px rgba(15, 23, 42, 0.35));
+  width: 140px;
+  filter: drop-shadow(0 12px 24px rgba(15, 23, 42, 0.4));
 }
 .boot-hero img {
   display: block;
   width: 100%;
   height: auto;
-  animation: boot-float 1.6s linear infinite;
-  transform-origin: center bottom;
-  will-change: transform;
-  transform: translateZ(0);
+  animation: boot-float 2s ease-in-out infinite;
 }
 .boot-text {
   font-size: 0.8rem;
@@ -75,23 +67,28 @@ onMounted(() => {
   max-width: min(320px, 80vw);
 }
 .boot-spinner {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 9999px;
-  border: 4px solid rgba(148, 163, 184, 0.35);
+  border: 3px solid rgba(148, 163, 184, 0.2);
   border-top-color: #ef4444;
-  animation: boot-spin 0.9s linear infinite;
+  animation: boot-spin 0.8s linear infinite;
 }
+
+.loader-leave-active {
+  transition: opacity 0.4s ease;
+}
+.loader-leave-to {
+  opacity: 0;
+}
+
 @keyframes boot-spin {
   to {
     transform: rotate(360deg);
   }
 }
 @keyframes boot-float {
-  0% { transform: translate3d(0, 0, 0); }
-  25% { transform: translate3d(0, -10px, 0); }
-  50% { transform: translate3d(0, -20px, 0); }
-  75% { transform: translate3d(0, -10px, 0); }
-  100% { transform: translate3d(0, 0, 0); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
 }
 </style>
