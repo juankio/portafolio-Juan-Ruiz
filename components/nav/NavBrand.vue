@@ -12,10 +12,7 @@ defineProps({
     class="group flex shrink-0 items-center gap-3 rounded-xl px-2 py-2 hover:bg-transparent"
   >
     <span
-      class="flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
-      :class="isLight
-        ? 'bg-emerald-600 text-white'
-        : 'bg-red-600 text-white'"
+      class="flex h-11 w-11 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105 bg-[var(--color-accent)] text-white"
     >
       <UIcon name="i-heroicons-user-20-solid" class="h-5 w-5" />
     </span>

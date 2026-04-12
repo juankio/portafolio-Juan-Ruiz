@@ -47,6 +47,7 @@ const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${nam
           target="_blank"
           size="sm"
           variant="outline"
+          color="neutral"
           :class="isLight ? 'border-slate-300 text-slate-600 hover:bg-slate-100' : 'border-slate-600 text-slate-300 hover:bg-slate-800'"
         >
           {{ t('projects.github') }}
@@ -156,6 +157,7 @@ const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${nam
                 rel="noopener noreferrer"
                 size="sm"
                 variant="outline"
+                color="neutral"
                 :class="isLight ? 'border-slate-300 text-slate-600' : 'border-slate-600 text-slate-300'"
               >
                 {{ t('projects.viewDemo') }}

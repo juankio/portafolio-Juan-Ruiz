@@ -56,7 +56,7 @@ const flyerRotation = (idx: number) => {
       <div v-if="education.length" class="edu-wall relative overflow-hidden">
         <div class="relative z-10 p-6 sm:p-8">
           <span
-            class="tag-sticker text-[0.6rem] uppercase tracking-widest mb-6 inline-block"
+            class="tag-sticker text-xs uppercase tracking-widest mb-6 inline-block"
             style="transform: rotate(1.5deg)"
           >
             {{ t('education.educationTitle') }}

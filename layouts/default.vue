@@ -10,8 +10,8 @@ provide('toggleMode', toggleMode)
 
 <template>
   <div
-    class="min-h-screen transition-colors duration-300"
-    :class="isLight ? 'bg-[#f8fafc] text-slate-800' : 'bg-[#0f172a] text-slate-200'"
+    class="min-h-screen bg-brick transition-colors duration-300"
+    :class="isLight ? 'text-slate-800' : 'text-slate-200'"
   >
     <NavBar :is-light="isLight" @toggle-mode="toggleMode" />
     <main class="relative z-10">

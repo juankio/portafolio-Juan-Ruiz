@@ -136,8 +136,9 @@
     display: inline-block;
     background: var(--color-accent);
     color: white;
-    padding: 4px 14px;
+    padding: 5px 16px;
     font-family: "Permanent Marker", "Bangers", cursive;
+    font-size: 0.8rem;
     letter-spacing: 0.04em;
     box-shadow: 3px 3px 0 rgba(0,0,0,0.35);
     border-radius: 2px;

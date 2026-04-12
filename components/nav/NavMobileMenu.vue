@@ -27,11 +27,11 @@ const slideoverUi = computed(() => (
   isLight.value
     ? {
         overlay: 'bg-black/20',
-        content: 'bg-white text-slate-900'
+        content: 'bg-[var(--color-wall)] text-slate-900'
       }
     : {
         overlay: 'bg-black/50',
-        content: 'bg-[#0f172a] text-slate-100'
+        content: 'bg-[var(--color-wall)] text-slate-100'
       }
 ))
 
@@ -75,9 +75,7 @@ const socialLinks = [
             class="w-full justify-start rounded-lg text-sm font-bold uppercase tracking-[0.04em]"
             :class="[
               isActive(item.href)
-                ? isLight
-                  ? 'bg-emerald-50 text-emerald-700'
-                  : 'bg-red-500/10 text-red-400'
+                ? 'bg-[var(--color-accent-soft)] text-[var(--color-accent)]'
                 : ''
             ]"
             @click="close"

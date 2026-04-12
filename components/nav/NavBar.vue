@@ -31,11 +31,11 @@ onBeforeUnmount(() => {
     :class="[
       isLight
         ? scrolled
-          ? 'bg-white/90 backdrop-blur-md border-slate-200 shadow-sm'
-          : 'bg-white/70 backdrop-blur-sm border-slate-100'
+          ? 'bg-[var(--color-wall)]/90 backdrop-blur-md border-[var(--color-border)] shadow-sm'
+          : 'bg-[var(--color-wall)]/70 backdrop-blur-sm border-[var(--color-border-subtle)]'
         : scrolled
-          ? 'bg-[#0f172a]/90 backdrop-blur-md border-slate-800 shadow-sm shadow-black/10'
-          : 'bg-[#0f172a]/70 backdrop-blur-sm border-slate-800/50'
+          ? 'bg-[var(--color-wall)]/90 backdrop-blur-md border-[var(--color-border)] shadow-sm shadow-black/10'
+          : 'bg-[var(--color-wall)]/70 backdrop-blur-sm border-[var(--color-border-subtle)]'
     ]"
   >
     <div class="flex h-20 items-center gap-4 px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">

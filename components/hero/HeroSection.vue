@@ -139,6 +139,7 @@ onBeforeUnmount(() => {
           to="/contacto"
           size="lg"
           variant="outline"
+          color="neutral"
           class="transition-transform hover:-translate-y-0.5"
           :class="isLight ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-slate-600 text-slate-200 hover:bg-slate-800'"
         >

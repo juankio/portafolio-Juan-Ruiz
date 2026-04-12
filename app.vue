@@ -5,7 +5,18 @@ import { useI18n } from '~/composables/useI18n'
 const { locale } = useI18n()
 const availableLocales = [uiLocales.es, uiLocales.en]
 const currentLocale = computed(() => availableLocales.find(item => item.code === locale.value) || uiLocales.en)
+const { isLight } = useThemeMode()
 const isBooting = ref(true)
+
+// Inyectar script blocking en <head> del HTML — corre antes del primer paint
+useHead({
+  script: [
+    {
+      key: 'theme-init',
+      innerHTML: `(function(){try{if(localStorage.getItem('theme-mode')==='light'){document.documentElement.classList.add('theme-light')}}catch(e){}})()`,
+    }
+  ]
+})
 
 onMounted(() => {
   setTimeout(() => {
@@ -17,7 +28,7 @@ onMounted(() => {
 
 <template>
   <UApp :locale="currentLocale">
-    <NuxtLoadingIndicator color="#ef4444" :height="3" />
+    <NuxtLoadingIndicator color="var(--color-accent)" :height="3" />
     <Transition name="loader">
       <div v-if="isBooting" class="boot-loader" key="loader">
         <div class="boot-hero" aria-hidden="true">
@@ -45,11 +56,12 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  background: #0f172a;
-  color: #e2e8f0;
+  background: var(--color-wall);
+  color: var(--color-text-primary);
   font-family: "Bangers", "Druk Text Wide Trial", "Druk Wide Trial", Inter, system-ui, sans-serif;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 .boot-hero {
   width: 140px;
@@ -70,8 +82,8 @@ onMounted(() => {
   width: 40px;
   height: 40px;
   border-radius: 9999px;
-  border: 3px solid rgba(148, 163, 184, 0.2);
-  border-top-color: #ef4444;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
   animation: boot-spin 0.8s linear infinite;
 }
 

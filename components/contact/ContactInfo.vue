@@ -46,12 +46,10 @@ const socialLinks = [
     <div class="flex items-center gap-3">
       <span class="relative flex h-2.5 w-2.5">
         <span
-          class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
-          class="bg-[var(--color-accent)]"
+          class="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 bg-[var(--color-accent)]"
         />
         <span
-          class="inline-flex h-2.5 w-2.5 rounded-full"
-          class="bg-[var(--color-accent)]"
+          class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]"
         />
       </span>
       <span class="text-sm font-medium" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
@@ -68,9 +66,10 @@ const socialLinks = [
         :target="social.href.startsWith('mailto') ? undefined : '_blank'"
         :rel="social.href.startsWith('mailto') ? undefined : 'noopener noreferrer'"
         variant="outline"
+        color="neutral"
         size="lg"
-        class="rounded-lg"
-        :class="isLight ? 'border-slate-200 text-slate-600 hover:bg-slate-50' : 'border-slate-700 text-slate-300 hover:bg-slate-800'"
+        class="rounded-lg hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors"
+        :class="isLight ? 'border-slate-200 text-slate-600' : 'border-slate-700 text-slate-300'"
         :aria-label="social.label"
       />
     </div>

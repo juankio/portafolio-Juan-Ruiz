@@ -51,13 +51,9 @@ const isActive = (href) => {
   transition: all 0.15s ease;
 }
 
-.nav-link--active-light {
-  background: rgba(16, 185, 129, 0.12);
-  color: #059669;
-}
-
+.nav-link--active-light,
 .nav-link--active-dark {
-  background: rgba(239, 68, 68, 0.12);
-  color: #f87171;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
 }
 </style>

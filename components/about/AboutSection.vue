@@ -93,6 +93,7 @@ const chipRotation = (idx: number) => {
             to="/contacto"
             size="lg"
             variant="outline"
+            color="neutral"
             class="border-sketchy !rounded-none hover:scale-105 transition-transform"
             :class="isLight ? 'border-slate-400 text-slate-700' : 'border-slate-500 text-slate-200'"
           >
@@ -139,7 +140,7 @@ const chipRotation = (idx: number) => {
               </div>
               <!-- Availability as neon badge -->
               <span
-                class="hidden sm:inline-flex tag-sticker text-[0.6rem] uppercase tracking-wider animate-pulse shrink-0"
+                class="hidden sm:inline-flex tag-sticker text-xs uppercase tracking-wider animate-pulse shrink-0"
                 style="transform: rotate(2deg)"
               >
                 {{ t('about.availability') }}
@@ -172,7 +173,7 @@ const chipRotation = (idx: number) => {
 
           <div class="relative z-10 p-6">
             <span
-              class="tag-sticker text-[0.6rem] uppercase tracking-widest mb-5 inline-block"
+              class="tag-sticker text-xs uppercase tracking-widest mb-5 inline-block"
               style="transform: rotate(-1deg)"
             >
               {{ t('about.skillsTitle') }}

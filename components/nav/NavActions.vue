@@ -30,9 +30,7 @@ const localeItems = [
         class="min-w-[44px] rounded-lg text-sm font-bold tracking-wide"
         :class="[
           locale === item.code
-            ? isLight
-              ? 'bg-emerald-600 text-white'
-              : 'bg-red-600 text-white'
+            ? 'bg-[var(--color-accent)] text-white'
             : isLight
               ? 'text-slate-500 hover:text-slate-700'
               : 'text-slate-400 hover:text-white'
@@ -48,9 +46,7 @@ const localeItems = [
       size="md"
       class="text-sm font-bold uppercase tracking-[0.06em] rounded-xl"
       :class="[
-        isLight
-          ? 'bg-emerald-600 text-white hover:bg-emerald-700'
-          : 'bg-red-600 text-white hover:bg-red-500',
+        'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)]',
         stacked ? 'w-full justify-center' : ''
       ]"
     >
