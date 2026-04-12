@@ -1,4 +1,6 @@
 <script setup>
+import StreetButton from '~/components/ui/StreetButton.vue'
+
 const props = defineProps({
   isLight: {
     type: Boolean,
@@ -42,23 +44,12 @@ const { t } = useI18n()
       </div>
 
       <div class="flex flex-wrap gap-3 pt-2">
-        <UButton
-          to="/proyectos"
-          size="lg"
-          class="transition-transform hover:-translate-y-0.5"
-          :class="isLight ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-red-600 text-white hover:bg-red-500'"
-        >
+        <StreetButton to="/proyectos" variant="primary">
           {{ t('hero.ctas.projects') }}
-        </UButton>
-        <UButton
-          to="/contacto"
-          size="lg"
-          variant="outline"
-          class="transition-transform hover:-translate-y-0.5"
-          :class="isLight ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-slate-600 text-slate-200 hover:bg-slate-800'"
-        >
+        </StreetButton>
+        <StreetButton to="/contacto" variant="ghost">
           {{ t('hero.ctas.contact') }}
-        </UButton>
+        </StreetButton>
       </div>
     </div>
   </UContainer>

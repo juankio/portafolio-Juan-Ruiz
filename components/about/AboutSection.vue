@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
+import StreetButton from '~/components/ui/StreetButton.vue'
 
 const props = defineProps({
   isLight: {
@@ -82,23 +83,12 @@ const chipRotation = (idx: number) => {
 
         <!-- CTAs with sketchy style -->
         <div class="flex flex-wrap gap-4 pt-3">
-          <UButton
-            to="/proyectos"
-            size="lg"
-            class="border-sketchy !rounded-none bg-[var(--color-accent)] text-white hover:scale-105 transition-transform"
-          >
+          <StreetButton to="/proyectos" variant="primary">
             {{ t('hero.ctas.projects') }}
-          </UButton>
-          <UButton
-            to="/contacto"
-            size="lg"
-            variant="outline"
-            color="neutral"
-            class="border-sketchy !rounded-none hover:scale-105 transition-transform"
-            :class="isLight ? 'border-slate-400 text-slate-700' : 'border-slate-500 text-slate-200'"
-          >
+          </StreetButton>
+          <StreetButton to="/contacto" variant="ghost">
             {{ t('hero.ctas.contact') }}
-          </UButton>
+          </StreetButton>
         </div>
       </div>
 
@@ -156,7 +146,7 @@ const chipRotation = (idx: number) => {
                 :class="isLight ? 'bg-white/60' : 'bg-slate-900/60'"
               >
                 <span class="text-sm font-medium" :class="isLight ? 'text-slate-600' : 'text-slate-300'">{{ row.label }}</span>
-                <span class="text-sm font-bold text-neon text-[var(--color-accent)]">{{ row.value }}</span>
+                <span class="text-sm font-bold text-[var(--color-accent)]">{{ row.value }}</span>
               </div>
             </div>
           </div>
@@ -202,12 +192,11 @@ const chipRotation = (idx: number) => {
 </template>
 
 <style scoped>
-/* Street poster card — translucent on the wall */
+/* Street poster card — solid on the wall */
 .about-poster {
   border: 2px solid var(--color-border-accent);
   border-radius: 4px 10px 6px 12px;
-  background: var(--color-surface-card);
-  backdrop-filter: blur(12px);
+  background: var(--color-surface);
   box-shadow: var(--shadow-glow);
   transition: box-shadow 0.3s var(--ease-spring);
 }
@@ -253,21 +242,20 @@ const chipRotation = (idx: number) => {
   box-shadow: 0 0 8px var(--color-accent-soft);
 }
 
-/* Skills wall — translucent on the wall */
+/* Skills wall — solid on the wall */
 .about-skills-wall {
   border: 2px solid var(--color-border-accent);
   border-radius: 6px 4px 10px 5px;
-  background: var(--color-surface-card);
-  backdrop-filter: blur(12px);
+  background: var(--color-surface);
   box-shadow: var(--shadow-glow);
 }
 
 /* Skill cards */
 .about-skill-card {
   padding: 0.875rem 1rem;
-  border: 1px dashed var(--color-border);
+  border: 1px dashed var(--color-border-accent);
   border-radius: 3px 8px 5px 10px;
-  background: var(--color-surface-card);
+  background: var(--color-surface);
   transform: rotate(var(--card-rotate, 0deg));
   transition: all 0.3s var(--ease-spring);
 }

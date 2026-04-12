@@ -2,6 +2,7 @@
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
+import StreetButton from '~/components/ui/StreetButton.vue'
 
 const props = defineProps({
   isLight: { type: Boolean, default: false }
@@ -128,16 +129,12 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="flex flex-wrap gap-3 pt-2 animate-fade-in-up stagger-3">
-        <UButton
-          to="/proyectos"
-          size="lg"
-          class="border-sketchy !rounded-none bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)] shadow-lg transition-transform hover:-translate-y-0.5"
-        >
+        <StreetButton to="/proyectos" variant="primary">
           {{ t('hero.ctas.projects') }}
-        </UButton>
-        <NuxtLink to="/contacto" class="hero-ghost-btn">
+        </StreetButton>
+        <StreetButton to="/contacto" variant="ghost">
           {{ t('hero.ctas.contact') }}
-        </NuxtLink>
+        </StreetButton>
       </div>
 
       <!-- Hero cards as graffiti stickers -->
@@ -162,30 +159,3 @@ onBeforeUnmount(() => {
     </div>
   </UContainer>
 </template>
-
-<style scoped>
-.hero-ghost-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-text-primary);
-  background: var(--color-surface-card);
-  border: 2px solid var(--color-border-accent);
-  border-radius: 3px 12px 5px 14px;
-  box-shadow: 2px 3px 0 var(--color-accent-dark);
-  backdrop-filter: blur(8px);
-  transition: all 0.25s var(--ease-spring);
-}
-
-.hero-ghost-btn:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-  transform: translateY(-2px) rotate(-0.5deg);
-  box-shadow: 3px 5px 0 var(--color-accent-dark), 0 0 16px var(--color-accent-soft);
-}
-</style>
