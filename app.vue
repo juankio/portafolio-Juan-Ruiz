@@ -40,7 +40,7 @@ onMounted(() => {
     </Transition>
     <div v-show="!isBooting">
       <NuxtLayout>
-        <NuxtPage />
+        <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
       </NuxtLayout>
     </div>
   </UApp>

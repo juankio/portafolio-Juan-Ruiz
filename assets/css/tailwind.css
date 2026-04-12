@@ -244,3 +244,117 @@
   0%, 100% { transform: translateY(0) rotate(var(--tag-rotate, -2deg)); }
   50% { transform: translateY(-4px) rotate(var(--tag-rotate, -2deg)); }
 }
+
+/* ─── Entrance Animations ─── */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s var(--ease-spring) both;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out both;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.5s var(--ease-spring) both;
+  }
+
+  /* Stagger delays for lists */
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.1s; }
+  .stagger-3 { animation-delay: 0.15s; }
+  .stagger-4 { animation-delay: 0.2s; }
+  .stagger-5 { animation-delay: 0.25s; }
+  .stagger-6 { animation-delay: 0.3s; }
+}
+
+/* ─── Page Transitions ─── */
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease, transform 0.4s var(--ease-spring);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-16px);
+}
+
+/* ─── Performance Optimizations ─── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hint browser about animated elements — GPU acceleration where it matters */
+.text-spray,
+.tag-sticker,
+.border-sketchy {
+  will-change: auto;
+}
+
+/* Reduce blur cost on mobile — backdrop-blur is expensive on lower-end devices */
+@media (max-width: 768px) {
+  .bg-brick {
+    background-attachment: scroll;
+  }
+
+  /* Lighter blur on mobile */
+  [class*="backdrop-blur"] {
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-scale-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

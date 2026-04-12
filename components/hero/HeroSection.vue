@@ -93,14 +93,14 @@ onBeforeUnmount(() => {
       <UBadge
         size="lg"
         variant="outline"
-        class="gap-2"
+        class="gap-2 animate-fade-in-up"
         :class="isLight ? 'border-[var(--color-accent)]/40 text-slate-600' : 'border-[var(--color-accent)]/40 text-slate-300'"
       >
         <span class="inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
         {{ t('hero.availability') }}
       </UBadge>
 
-      <div class="space-y-4">
+      <div class="space-y-4 animate-fade-in-up stagger-1">
         <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
           {{ t('hero.tagline') }}
         </p>
@@ -119,7 +119,7 @@ onBeforeUnmount(() => {
       </div>
 
       <!-- Typing effect with graffiti style -->
-      <div class="flex flex-wrap items-center gap-4 text-lg font-semibold" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
+      <div class="flex flex-wrap items-center gap-4 text-lg font-semibold animate-fade-in-up stagger-2" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
         <span :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ t('hero.rolePrefix') }}</span>
         <span class="relative border-sketchy px-4 py-2">
           <span class="font-marker text-[var(--color-accent)]" style="letter-spacing: 0.04em">{{ displayWord }}</span>
@@ -127,7 +127,7 @@ onBeforeUnmount(() => {
         </span>
       </div>
 
-      <div class="flex flex-wrap gap-3 pt-2">
+      <div class="flex flex-wrap gap-3 pt-2 animate-fade-in-up stagger-3">
         <UButton
           to="/proyectos"
           size="lg"
@@ -135,16 +135,9 @@ onBeforeUnmount(() => {
         >
           {{ t('hero.ctas.projects') }}
         </UButton>
-        <UButton
-          to="/contacto"
-          size="lg"
-          variant="outline"
-          color="neutral"
-          class="transition-transform hover:-translate-y-0.5"
-          :class="isLight ? 'border-slate-300 text-slate-700 hover:bg-slate-100' : 'border-slate-600 text-slate-200 hover:bg-slate-800'"
-        >
+        <NuxtLink to="/contacto" class="hero-ghost-btn">
           {{ t('hero.ctas.contact') }}
-        </UButton>
+        </NuxtLink>
       </div>
 
       <!-- Hero cards as graffiti stickers -->
@@ -152,10 +145,14 @@ onBeforeUnmount(() => {
         <div
           v-for="(card, idx) in heroCards"
           :key="card.label"
-          class="relative px-5 py-4 border-2 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_12px_var(--color-accent-soft)]"
+          class="relative px-5 py-4 border-2 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_12px_var(--color-accent-soft)] animate-fade-in-up"
           :class="isLight ? 'border-[var(--color-border)] bg-[var(--color-surface-card)]' : 'border-[var(--color-border)] bg-[var(--color-surface-card)]'"
-          style="border-radius: 4px 10px 5px 8px; backdrop-filter: blur(12px)"
-          :style="{ transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)` }"
+          :style="{
+            borderRadius: '4px 10px 5px 8px',
+            backdropFilter: 'blur(12px)',
+            transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)`,
+            animationDelay: `${0.2 + idx * 0.08}s`
+          }"
         >
           <PaintDrip class="absolute -top-2 right-4" :count="2" color="var(--color-accent)" />
           <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ card.label }}</p>
@@ -165,3 +162,30 @@ onBeforeUnmount(() => {
     </div>
   </UContainer>
 </template>
+
+<style scoped>
+.hero-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  background: var(--color-surface-card);
+  border: 2px solid var(--color-border-accent);
+  border-radius: 3px 12px 5px 14px;
+  box-shadow: 2px 3px 0 var(--color-accent-dark);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s var(--ease-spring);
+}
+
+.hero-ghost-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-2px) rotate(-0.5deg);
+  box-shadow: 3px 5px 0 var(--color-accent-dark), 0 0 16px var(--color-accent-soft);
+}
+</style>

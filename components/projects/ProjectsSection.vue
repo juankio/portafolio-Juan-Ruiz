@@ -2,6 +2,7 @@
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
+import SkeletonCard from '~/components/ui/SkeletonCard.vue'
 
 const props = defineProps({
   projects: { type: Array, default: () => [] },
@@ -61,12 +62,7 @@ const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${nam
       </UAlert>
 
       <div v-if="pending" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div
-          v-for="s in 6"
-          :key="s"
-          class="h-64 animate-pulse rounded-2xl"
-          :class="isLight ? 'bg-slate-200' : 'bg-slate-800'"
-        />
+        <SkeletonCard v-for="s in 6" :key="s" variant="project" :is-light="isLight" />
       </div>
 
       <div
@@ -81,9 +77,13 @@ const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${nam
         <article
           v-for="(project, idx) in projects"
           :key="project.id"
-          class="group relative flex flex-col overflow-hidden border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_16px_var(--color-accent-soft)]"
+          class="group relative flex flex-col overflow-hidden border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_16px_var(--color-accent-soft)] animate-fade-in-up"
           :class="isLight ? 'border-[var(--color-border)] bg-[var(--color-surface-card)]' : 'border-[var(--color-border)] bg-[var(--color-surface-card)]'"
-          style="border-radius: 4px 12px 6px 10px; backdrop-filter: blur(12px)"
+          :style="{
+            borderRadius: '4px 12px 6px 10px',
+            backdropFilter: 'blur(12px)',
+            animationDelay: `${idx * 0.06}s`
+          }"
         >
           <!-- Thumbnail -->
           <div class="relative overflow-hidden aspect-video">

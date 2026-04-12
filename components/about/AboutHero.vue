@@ -15,14 +15,14 @@ const { t } = useI18n()
 
 <template>
   <UContainer as="section" id="sobre-mi" class="py-10 sm:py-14">
-    <div class="space-y-4">
+    <div class="space-y-4 animate-fade-in-up">
       <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
         {{ t('about.sectionTitle') }}
       </p>
 
-      <h1 class="text-4xl font-semibold leading-tight sm:text-5xl" :class="isLight ? 'text-slate-900' : 'text-white'">
+      <h1 class="text-4xl font-bold leading-tight text-spray sm:text-5xl" :class="isLight ? 'text-slate-700' : 'text-white'">
         {{ t('about.headline.lead') }}
-        <span :class="isLight ? 'text-emerald-600' : 'text-red-500'">{{ t('about.headline.accent') }}</span>
+        <span class="text-[var(--color-accent)]">{{ t('about.headline.accent') }}</span>
         {{ t('about.headline.tail') }}
       </h1>
 

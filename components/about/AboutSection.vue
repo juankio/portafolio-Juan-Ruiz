@@ -40,7 +40,7 @@ const chipRotation = (idx: number) => {
   >
     <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
       <!-- Left column -->
-      <div class="space-y-6">
+      <div class="space-y-6 animate-fade-in-up">
         <!-- Section label as tape sticker -->
         <span
           class="tag-sticker inline-block text-xs uppercase tracking-widest"
@@ -53,7 +53,7 @@ const chipRotation = (idx: number) => {
         <div class="relative">
           <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl leading-tight" :class="isLight ? 'text-slate-700' : 'text-white'">
             {{ t('about.headline.lead') }}
-            <span class="text-neon text-[var(--color-accent)]">{{ t('about.headline.accent') }}</span>
+            <span class="text-[var(--color-accent)]">{{ t('about.headline.accent') }}</span>
             {{ t('about.headline.tail') }}
           </h2>
           <PaintDrip
@@ -103,7 +103,7 @@ const chipRotation = (idx: number) => {
       </div>
 
       <!-- Right column -->
-      <div class="space-y-6">
+      <div class="space-y-6 animate-fade-in-up stagger-2">
         <!-- Profile card as street poster -->
         <div class="about-poster relative overflow-hidden">
           <!-- Spray decorations -->

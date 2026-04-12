@@ -36,7 +36,7 @@ const flyerRotation = (idx: number) => {
   <UContainer as="section" id="educacion" class="py-14 sm:py-20">
     <div class="space-y-10">
       <!-- Header -->
-      <div class="flex flex-wrap items-end justify-between gap-4">
+      <div class="flex flex-wrap items-end justify-between gap-4 animate-fade-in-up">
         <div class="relative">
           <span
             class="tag-sticker text-xs uppercase tracking-widest mb-3 inline-block"
@@ -66,8 +66,8 @@ const flyerRotation = (idx: number) => {
             <div
               v-for="(item, idx) in education"
               :key="item.title"
-              class="edu-flyer group relative"
-              :style="{ transform: `rotate(${flyerRotation(idx)}deg)` }"
+              class="edu-flyer group relative animate-fade-in-up"
+              :style="{ transform: `rotate(${flyerRotation(idx)}deg)`, animationDelay: `${idx * 0.08}s` }"
             >
               <!-- Pin -->
               <div class="edu-flyer__pin" aria-hidden="true" />

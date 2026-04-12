@@ -13,7 +13,7 @@ const socialLinks = [
 </script>
 
 <template>
-  <div class="flex flex-col gap-6">
+  <div class="flex flex-col gap-6 animate-fade-in-up">
     <div class="space-y-3">
       <p
         class="text-sm uppercase font-semibold tracking-[0.25em] text-[var(--color-accent)]"
@@ -58,20 +58,40 @@ const socialLinks = [
     </div>
 
     <div class="flex gap-2 pt-2">
-      <UButton
+      <a
         v-for="social in socialLinks"
         :key="social.label"
-        :icon="social.icon"
-        :to="social.href"
+        :href="social.href"
         :target="social.href.startsWith('mailto') ? undefined : '_blank'"
         :rel="social.href.startsWith('mailto') ? undefined : 'noopener noreferrer'"
-        variant="outline"
-        color="neutral"
-        size="lg"
-        class="rounded-lg hover:text-[var(--color-accent)] hover:border-[var(--color-accent)] transition-colors"
-        :class="isLight ? 'border-slate-200 text-slate-600' : 'border-slate-700 text-slate-300'"
+        class="contact-social-btn"
         :aria-label="social.label"
-      />
+      >
+        <UIcon :name="social.icon" class="h-5 w-5" />
+      </a>
     </div>
   </div>
 </template>
+
+<style scoped>
+.contact-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-card);
+  border: 2px solid var(--color-border-accent);
+  border-radius: 4px 10px 5px 8px;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s var(--ease-spring);
+}
+
+.contact-social-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 12px var(--color-accent-soft);
+  transform: translateY(-2px) rotate(-1deg);
+}
+</style>
