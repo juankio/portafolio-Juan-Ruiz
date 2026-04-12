@@ -1,4 +1,5 @@
 <script setup>
+import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import NavBrand from './NavBrand.vue'
 import NavLinks from './NavLinks.vue'
 import NavActions from './NavActions.vue'
@@ -27,18 +28,16 @@ onBeforeUnmount(() => {
 
 <template>
   <header
-    class="sticky top-0 z-50 border-b transition-all duration-200"
-    :class="[
-      isLight
-        ? scrolled
-          ? 'bg-[var(--color-wall)]/90 backdrop-blur-md border-[var(--color-border)] shadow-sm'
-          : 'bg-[var(--color-wall)]/70 backdrop-blur-sm border-[var(--color-border-subtle)]'
-        : scrolled
-          ? 'bg-[var(--color-wall)]/90 backdrop-blur-md border-[var(--color-border)] shadow-sm shadow-black/10'
-          : 'bg-[var(--color-wall)]/70 backdrop-blur-sm border-[var(--color-border-subtle)]'
-    ]"
+    class="navbar-wall sticky top-0 z-50 transition-all duration-300"
+    :class="scrolled ? 'navbar-wall--scrolled' : ''"
   >
-    <div class="flex h-20 items-center gap-4 px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
+    <!-- Spray paint bottom line -->
+    <div class="absolute bottom-0 left-0 right-0 h-[2px] navbar-spray-line" aria-hidden="true" />
+
+    <!-- Subtle spray deco -->
+    <SpraySplatter class="absolute -bottom-3 right-16 pointer-events-none" size="sm" :opacity="0.04" />
+
+    <div class="relative z-10 flex h-18 items-center gap-4 px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
       <NavBrand :is-light="isLight" />
       <NavLinks :is-light="isLight" />
       <NavActions class="hidden lg:flex" :is-light="isLight" @toggle-mode="emit('toggle-mode')" />
@@ -51,7 +50,7 @@ onBeforeUnmount(() => {
               size="md"
               variant="ghost"
               color="neutral"
-              class="rounded-xl"
+              class="rounded-lg hover:text-[var(--color-accent)] transition-colors"
               aria-label="Open menu"
             />
           </template>
@@ -60,3 +59,35 @@ onBeforeUnmount(() => {
     </div>
   </header>
 </template>
+
+<style scoped>
+.navbar-wall {
+  background: var(--color-surface-card);
+  backdrop-filter: blur(16px);
+  border-bottom: 2px solid var(--color-border-accent);
+}
+
+.navbar-wall--scrolled {
+  box-shadow: var(--shadow-glow);
+}
+
+.navbar-spray-line {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-accent) 0px,
+    var(--color-accent) 12px,
+    transparent 12px,
+    transparent 18px,
+    var(--color-accent) 18px,
+    var(--color-accent) 24px,
+    transparent 24px,
+    transparent 30px
+  );
+  opacity: 0.35;
+}
+
+.navbar-wall--scrolled .navbar-spray-line {
+  opacity: 0.6;
+  filter: drop-shadow(0 0 4px var(--color-accent));
+}
+</style>
