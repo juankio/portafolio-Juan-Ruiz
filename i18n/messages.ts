@@ -6,105 +6,108 @@ export const messages = {
       themeToggle: 'Cambiar modo'
     },
     hero: {
-      availability: 'Disponible para nuevos retos',
+      availability: 'Abierto a nuevos proyectos',
       name: 'Juan Miguel Ruiz Supelano',
       tagline: 'Juan Miguel Ruiz Supelano',
       title: {
-        main: 'Construyo experiencias web',
+        main: 'Hago webs',
         highlight1: 'rapidas',
-        connector: 'y',
-        highlight2: 'intencionales.'
+        connector: 'que no se sienten',
+        highlight2: 'genericas.'
       },
-      subtitle: 'Diseno productos web rapidos, accesibles y listos para produccion, con foco en PWAs, rendimiento y UX.',
+      subtitle: 'Vue, Nuxt y mucho cafe. Me obsesiona que las cosas carguen rapido y que el usuario sepa a donde ir sin pensarlo dos veces.',
       rolePrefix: 'Soy',
-      rotatingWords: ['Frontend Developer', 'UI Designer', 'PWA Builder', 'Creative Coder'],
+      rotatingWords: ['Frontend Developer', 'Disenador de UI', 'Builder de PWAs', 'Dev que si responde'],
       ctas: { projects: 'Ver proyectos', contact: 'Hablemos' },
       cards: [
-        { label: 'Especialidad', value: 'Nuxt - Vue - PWA' },
-        { label: 'Stack visual', value: 'Tailwind - Animaciones suaves' },
-        { label: 'Disponible', value: 'Freelance y proyectos' }
+        { label: 'Stack', value: 'Vue - Nuxt - Tailwind' },
+        { label: 'Manias', value: 'Rendimiento y a11y' },
+        { label: 'Estado', value: 'Tomando proyectos' }
       ]
     },
     about: {
       sectionTitle: 'Sobre mi',
       headline: {
-        lead: 'Estrategia, diseno y codigo para',
-        accent: 'productos',
-        tail: 'digitales listos para crecer.'
+        lead: 'Diseno y codigo,',
+        accent: 'sin intermediarios',
+        tail: 'ni reuniones eternas.'
       },
       intro:
-        'Soy Juan Miguel Ruiz Supelano (Villavicencio, CO). Diseñador y dev frontend que estudia Ingenieria de Sistemas. Conecto UI limpia, animaciones medidas y performance PWA para lanzar productos que se sienten vivos y venden mejor.',
-      chips: ['Nuxt 3', 'UX/UI', 'PWAs', 'Animacion', 'Accesibilidad', 'SEO tecnico'],
-      availability: 'Disponible',
+        'Soy Juan Miguel, dev frontend desde Villavicencio (CO). Estudio Ingenieria de Sistemas de dia y rompo layouts de noche. Me obsesiona que las webs carguen rapido, que la UI no aburra y que el usuario sepa que hacer en cada pantalla sin manual.',
+      chips: ['Nuxt 3', 'UX/UI', 'PWAs', 'Animacion', 'Accesibilidad', 'Cafe negro'],
+      availability: 'Abierto',
       skillsTitle: 'Habilidades',
       summary: [
         { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
         { label: 'UX + Motion', value: 'GSAP · Microinteracciones · A11y' },
-        { label: 'Producto', value: 'Rendimiento · SEO · Flujos claros' }
+        { label: 'Obsesion', value: 'Rendimiento · Flujos claros · Cero ruido' }
       ],
       skills: [
         {
           title: 'Frontend y UI',
-          copy: 'Componentes Nuxt 3 con Composition API, diseño atómico, Tailwind y estados finos (hover, focus, scroll).'
+          copy: 'Componentes Nuxt que no se rompen cuando el proyecto crece. Tailwind limpio, estados cuidados (hover, focus, scroll raro que nadie piensa).'
         },
         {
-          title: 'Experiencia y rendimiento',
-          copy: 'PWAs listas para Lighthouse 90+, animaciones GSAP que no bloquean, optimización de Core Web Vitals y SEO técnico.'
+          title: 'Rendimiento de verdad',
+          copy: 'PWAs que pasan Lighthouse sin trampas. GSAP que no mata el FPS. SEO tecnico que si aparece en Google.'
         },
         {
-          title: 'Backend ligero',
-          copy: 'APIs REST con Node.js/Express, MongoDB, autenticación sencilla y despliegues rápidos en Vercel/Netlify.'
+          title: 'Backend cuando toca',
+          copy: 'APIs con Node y Express cuando la idea lo pide. MongoDB, auth simple y deploys en Vercel sin drama.'
         },
-        { title: 'Tooling', copy: 'Figma, GitHub, Nuxt UI, SendGrid, CI/CD ligero y monitoreo básico.' }
+        {
+          title: 'Herramientas',
+          copy: 'Figma, GitHub, Nuxt UI, Resend. Sin bloatware ni 20 SaaS que nadie usa.'
+        }
       ]
     },
     projects: {
       sectionTitle: 'Proyectos',
-      headline: 'Repositorios vivos desde',
+      headline: 'Cosas que he roto en',
       headlineAccent: 'GitHub',
       refresh: 'Actualizar',
       github: 'GitHub',
-      error: 'Hubo un problema al traer los repos. Intenta nuevamente o revisa el rate limit de GitHub.',
-      empty: 'Aun no hay proyectos para mostrar. Intenta actualizar o revisa mas tarde.',
+      error: 'Se cayo la conexion con GitHub. Dale actualizar o revisa en un rato.',
+      empty: 'Todavia nada por aqui. Vuelve en un rato.',
       repo: 'Repositorio',
       stars: 'estrellas',
       updated: 'Actualizado',
-      noDescription: 'Repositorio en GitHub sin descripcion anadida.',
+      noDescription: 'Este repo anda sin descripcion. Perdon por eso.',
       viewCode: 'Ver codigo',
-      viewDemo: 'Ver demo'
+      viewDemo: 'Probar'
     },
     contact: {
       section: 'Contacto',
-      titleLead: 'Hablemos de tu proximo',
+      titleLead: 'Cuentame de tu proximo',
       titleAccent: 'proyecto',
-      subtitle: 'Tienes una idea o producto que necesita vida? Escribeme y armemos algo brutalista, rapido y con intencion.',
-      badges: ['Disponibilidad: Remoto', 'Respuesta en 24h'],
-      availability: 'Disponible — respondo en menos de 24h',
+      subtitle: 'Tienes una idea rondando? Manda el brief sin introducciones largas. Respondo en menos de 24 horas y sin copy pegado de plantilla.',
+      badges: ['Remoto siempre', 'Respondo en 24h'],
+      availability: 'Abierto — respondo rapido',
       form: {
         nameLabel: 'Nombre',
-        namePlaceholder: 'Tu nombre',
+        namePlaceholder: 'Como te llamas',
         emailLabel: 'Correo',
-        emailPlaceholder: 'correo@ejemplo.com',
+        emailPlaceholder: 'tucorreo@dominio.com',
         messageLabel: 'Mensaje',
-        messagePlaceholder: 'Cuentame sobre tu proyecto...',
+        messagePlaceholder: 'Cuentame la idea, el plazo y el vibe que buscas...',
         submit: 'Enviar mensaje',
-        sendAnother: 'Enviar otro mensaje',
-        helper: 'Uso Resend para un delivery confiable.'
+        sendAnother: 'Enviar otro',
+        helper: 'Resend se encarga del envio. Llega siempre.'
       },
       validation: {
-        required: 'Completa todos los campos',
-        email: 'Ingresa un correo valido',
+        required: 'Faltan campos por llenar',
+        email: 'Ese correo no se ve bien',
         success: 'Mensaje enviado',
-        successDesc: 'Te respondere pronto.',
-        error: 'No se pudo enviar',
-        fallback: 'Intenta mas tarde.'
+        successDesc: 'Te escribo de vuelta pronto.',
+        error: 'Algo fallo al enviar',
+        fallback: 'Intenta de nuevo en un rato.'
       }
     },
     education: {
-      sectionTitle: 'Cursos y certificaciones',
-      headline: 'Actualizaciones constantes',
+      sectionTitle: 'Cursos y obsesiones',
+      headline: 'Nunca dejo de aprender',
       interact: 'Interactua',
-      hint: 'Explora la ruta y toca para ver detalle',
+      hint: 'Tocalo para ver el detalle',
       summary: 'Resumen',
       nodeSelection: 'Seleccion del nodo',
       coursesLabel: 'cursos',
@@ -116,19 +119,19 @@ export const messages = {
           title: 'Universidad de Programacion - Python, Java y JavaScript',
           place: 'Udemy',
           period: '2023',
-          detail: 'Fundamentos solidos en programacion multiparadigma, estructuras de datos y logica aplicada.'
+          detail: 'Bases solidas de programacion multiparadigma, estructuras de datos y logica aplicada.'
         },
         {
           title: 'Universidad HTML - Desde Cero hasta Experto',
           place: 'Udemy',
           period: '2023',
-          detail: 'Estructura web, etiquetas semanticas, accesibilidad, buenas practicas y diseno moderno.'
+          detail: 'Estructura web, etiquetas semanticas, accesibilidad y buenas practicas modernas.'
         },
         {
           title: 'Universidad CSS - Desde Cero hasta Experto',
           place: 'Udemy',
           period: '2023 - 2024',
-          detail: 'Maquetacion avanzada, flexbox, grid, animaciones y responsive design.'
+          detail: 'Maquetacion avanzada, flexbox, grid, animaciones y responsive sin dolor.'
         },
         {
           title: 'De 0 a Programador: Aprende Python desde 0',
@@ -140,19 +143,19 @@ export const messages = {
           title: 'Vue.js 3 - Composition API + Pinia + MEVN (10 Apps)',
           place: 'Udemy',
           period: '2024',
-          detail: 'Interfaces modernas, manejo de estado, APIs, composicion modular y entorno MEVN.'
+          detail: 'Interfaces modernas, manejo de estado, APIs y el entorno MEVN a fondo.'
         },
         {
           title: 'Dart + Introduccion a Flutter',
           place: 'Udemy',
           period: '2024',
-          detail: 'Fundamentos de aplicaciones moviles multiplataforma.'
+          detail: 'Fundamentos de apps moviles multiplataforma.'
         },
         {
           title: 'Proyecto Aliado Latino - Desarrollador Full-Stack',
           place: 'Proyecto Aliado Latino',
           period: '2024',
-          detail: 'Plataforma web con integracion de Google Drive API, autenticacion, manejo de archivos y dashboard empresarial.'
+          detail: 'Plataforma web con integracion a Google Drive API, autenticacion, manejo de archivos y dashboard empresarial.'
         },
         {
           title: 'Proyectos Personales Full-Stack',
@@ -166,19 +169,19 @@ export const messages = {
           title: 'Ingenieria de Sistemas (en curso)',
           place: 'UCC - Universidad Cooperativa de Colombia, Colombia',
           period: '2025 - Presente',
-          detail: 'Formacion enfocada en arquitectura de software, bases de datos, ingenieria backend, redes y desarrollo web moderno.'
+          detail: 'Arquitectura de software, bases de datos, backend, redes y desarrollo web moderno.'
         },
         {
           title: 'Intercambio Internacional - Ingeniero en Formacion',
           place: 'UDEM - Universidad de Monterrey, Mexico',
           period: '2023 (Segundo semestre)',
-          detail: 'Intercambio academico con enfasis en proyectos, competencias profesionales, pensamiento critico e innovacion tecnologica.'
+          detail: 'Semestre con enfasis en proyectos, pensamiento critico e innovacion tecnologica.'
         },
         {
           title: 'Tecnologia en Desarrollo de Software',
           place: 'UNIMINUTO - Corporacion Universitaria Minuto de Dios',
           period: '2022 - 2025',
-          detail: 'Enfoque en desarrollo web, bases de datos, programacion orientada a objetos, APIs, arquitectura y metodologias agiles.'
+          detail: 'Desarrollo web, bases de datos, OOP, APIs, arquitectura y metodologias agiles.'
         },
         {
           title: 'Fundamentos de Programacion - Modulo 1',
@@ -202,105 +205,108 @@ export const messages = {
       themeToggle: 'Toggle theme'
     },
     hero: {
-      availability: 'Available for new challenges',
+      availability: 'Open to new projects',
       name: 'Juan Miguel Ruiz Supelano',
       tagline: 'Juan Miguel Ruiz Supelano',
       title: {
-        main: 'I craft web experiences',
-        highlight1: 'fast',
+        main: 'I build web stuff',
+        highlight1: "that's fast",
         connector: 'and',
-        highlight2: 'intentional.'
+        highlight2: "doesn't feel generic."
       },
-      subtitle: 'I design web products that are fast, accessible, and production-ready, focused on PWAs, performance, and UX.',
-      rolePrefix: 'I am',
-      rotatingWords: ['Frontend Developer', 'UI Designer', 'PWA Builder', 'Creative Coder'],
+      subtitle: "Vue, Nuxt, and way too much coffee. I obsess over pages that load quick and interfaces where you never have to guess what to click.",
+      rolePrefix: "I'm a",
+      rotatingWords: ['Frontend Developer', 'UI Designer', 'PWA Builder', 'Dev who actually replies'],
       ctas: { projects: 'View projects', contact: "Let's talk" },
       cards: [
-        { label: 'Specialty', value: 'Nuxt - Vue - PWA' },
-        { label: 'Visual stack', value: 'Tailwind - Smooth animations' },
-        { label: 'Availability', value: 'Freelance and projects' }
+        { label: 'Stack', value: 'Vue - Nuxt - Tailwind' },
+        { label: 'Obsessions', value: 'Performance & a11y' },
+        { label: 'Status', value: 'Taking on projects' }
       ]
     },
     about: {
       sectionTitle: 'About me',
       headline: {
-        lead: 'Strategy, design, and code for',
-        accent: 'products',
-        tail: 'built to grow.'
+        lead: 'Design and code,',
+        accent: 'no middlemen,',
+        tail: 'no endless meetings.'
       },
       intro:
-        "I'm Juan Miguel Ruiz Supelano (Villavicencio, CO). Frontend dev & designer studying Systems Engineering. I blend clean UI, purposeful motion, and PWA performance so products feel alive and convert better.",
-      chips: ['Nuxt 3', 'UX/UI', 'PWAs', 'Animation', 'Accessibility', 'Technical SEO'],
-      availability: 'Available',
+        "I'm Juan Miguel, a frontend dev from Villavicencio (CO). Studying Systems Engineering by day, breaking layouts by night. I care about pages that load fast, UI that doesn't bore you, and users who know exactly what to do next.",
+      chips: ['Nuxt 3', 'UX/UI', 'PWAs', 'Animation', 'Accessibility', 'Black coffee'],
+      availability: 'Open',
       skillsTitle: 'Skills',
       summary: [
         { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
         { label: 'UX + Motion', value: 'GSAP · Microinteractions · A11y' },
-        { label: 'Product', value: 'Performance · SEO · Clear flows' }
+        { label: 'Obsession', value: 'Performance · Clear flows · Zero noise' }
       ],
       skills: [
         {
           title: 'Frontend & UI',
-          copy: 'Nuxt 3 components with Composition API, atomic design, Tailwind, and tight state handling (hover, focus, scroll).'
+          copy: "Nuxt components that don't break as the project grows. Clean Tailwind, well-handled states (hover, focus, that weird scroll nobody thinks about)."
         },
         {
-          title: 'Experience & performance',
-          copy: 'PWAs tuned for 90+ Lighthouse, GSAP motion that stays smooth, Core Web Vitals and technical SEO improvements.'
+          title: 'Real performance',
+          copy: 'PWAs that pass Lighthouse without cheating. GSAP motion that stays buttery. Technical SEO that actually shows up on Google.'
         },
         {
-          title: 'Lightweight backend',
-          copy: 'REST APIs with Node.js/Express, MongoDB, straightforward auth, and fast deploys on Vercel/Netlify.'
+          title: 'Backend when needed',
+          copy: 'REST APIs with Node and Express when the idea calls for it. MongoDB, simple auth, and painless Vercel deploys.'
         },
-        { title: 'Tooling', copy: 'Figma, GitHub, Nuxt UI, SendGrid, lightweight CI/CD and basic monitoring.' }
+        {
+          title: 'Tooling',
+          copy: 'Figma, GitHub, Nuxt UI, Resend. No bloatware, no 20 SaaS tools nobody uses.'
+        }
       ]
     },
     projects: {
       sectionTitle: 'Projects',
-      headline: 'Live repositories from',
+      headline: 'Stuff I broke on',
       headlineAccent: 'GitHub',
       refresh: 'Refresh',
       github: 'GitHub',
-      error: 'There was a problem fetching the repos. Try again or check the GitHub rate limit.',
-      empty: 'No projects to show yet. Try refreshing or check back later.',
+      error: 'GitHub connection dropped. Hit refresh or come back in a bit.',
+      empty: 'Nothing here yet. Check back in a moment.',
       repo: 'Repository',
       stars: 'stars',
       updated: 'Updated',
-      noDescription: 'GitHub repository without a description added.',
+      noDescription: 'This repo is missing a description. Sorry about that.',
       viewCode: 'View code',
-      viewDemo: 'View demo'
+      viewDemo: 'Try it'
     },
     contact: {
       section: 'Contact',
-      titleLead: "Let's talk about your next",
+      titleLead: "Tell me about your next",
       titleAccent: 'project',
-      subtitle: "Got an idea or product that needs life? Message me and we'll build something intentional, fast, and bold.",
-      badges: ['Availability: Remote', 'Response within 24h'],
-      availability: 'Available — I reply within 24h',
+      subtitle: "Got an idea cooking? Send over the brief without the long intro. I reply in under 24 hours, no copy-pasted templates.",
+      badges: ['Remote always', 'Reply within 24h'],
+      availability: 'Open — fast replies',
       form: {
         nameLabel: 'Name',
         namePlaceholder: 'Your name',
         emailLabel: 'Email',
-        emailPlaceholder: 'email@example.com',
+        emailPlaceholder: 'you@domain.com',
         messageLabel: 'Message',
-        messagePlaceholder: 'Tell me about your project...',
+        messagePlaceholder: 'Tell me the idea, the timeline, and the vibe you want...',
         submit: 'Send message',
-        sendAnother: 'Send another message',
-        helper: 'I use Resend for reliable delivery.'
+        sendAnother: 'Send another',
+        helper: 'Resend handles delivery. It always arrives.'
       },
       validation: {
-        required: 'Complete all fields',
-        email: 'Enter a valid email',
+        required: 'Some fields are empty',
+        email: "That email doesn't look right",
         success: 'Message sent',
-        successDesc: 'I will reply soon.',
-        error: 'Could not send',
-        fallback: 'Try again later.'
+        successDesc: "I'll get back to you soon.",
+        error: 'Something went wrong',
+        fallback: 'Try again in a moment.'
       }
     },
     education: {
-      sectionTitle: 'Courses & certifications',
-      headline: 'Continuous learning',
+      sectionTitle: 'Courses & obsessions',
+      headline: 'Always learning',
       interact: 'Interactive',
-      hint: 'Explore the path and tap to see details',
+      hint: 'Tap to see details',
       summary: 'Summary',
       nodeSelection: 'Node selection',
       coursesLabel: 'courses',
@@ -318,13 +324,13 @@ export const messages = {
           title: 'HTML University - From Zero to Expert',
           place: 'Udemy',
           period: '2023',
-          detail: 'Web structure, semantic tags, accessibility, best practices and modern design.'
+          detail: 'Web structure, semantic tags, accessibility and modern best practices.'
         },
         {
           title: 'CSS University - From Zero to Expert',
           place: 'Udemy',
           period: '2023 - 2024',
-          detail: 'Advanced layout, flexbox, grid, animations and responsive design.'
+          detail: 'Advanced layout, flexbox, grid, animations and painless responsive design.'
         },
         {
           title: 'From 0 to Programmer: Learn Python from Scratch',
@@ -336,7 +342,7 @@ export const messages = {
           title: 'Vue.js 3 - Composition API + Pinia + MEVN (10 Apps)',
           place: 'Udemy',
           period: '2024',
-          detail: 'Modern interfaces, state management, APIs, modular composition and MEVN environment.'
+          detail: 'Modern interfaces, state management, APIs and the full MEVN environment.'
         },
         {
           title: 'Dart + Introduction to Flutter',
@@ -362,19 +368,19 @@ export const messages = {
           title: 'Systems Engineering (in progress)',
           place: 'UCC - Universidad Cooperativa de Colombia, Colombia',
           period: '2025 - Present',
-          detail: 'Focused on software architecture, databases, backend engineering, networks and modern web development.'
+          detail: 'Software architecture, databases, backend engineering, networks and modern web development.'
         },
         {
           title: 'International Exchange - Engineer in Training',
           place: 'UDEM - Universidad de Monterrey, Mexico',
           period: '2023 (Second semester)',
-          detail: 'Academic exchange with emphasis on projects, professional skills, critical thinking and technological innovation.'
+          detail: 'Academic exchange with emphasis on projects, critical thinking and technological innovation.'
         },
         {
           title: 'Software Development Technology',
           place: 'UNIMINUTO - Corporacion Universitaria Minuto de Dios',
           period: '2022 - 2025',
-          detail: 'Focus on web development, databases, OOP, APIs, architecture and agile methodologies.'
+          detail: 'Web development, databases, OOP, APIs, architecture and agile methodologies.'
         },
         {
           title: 'Programming Fundamentals - Module 1',
