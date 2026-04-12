@@ -3,6 +3,7 @@ import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
 import SkeletonCard from '~/components/ui/SkeletonCard.vue'
+import StreetButton from '~/components/ui/StreetButton.vue'
 
 const props = defineProps({
   projects: { type: Array, default: () => [] },
@@ -15,6 +16,12 @@ const props = defineProps({
 const { t } = useI18n()
 
 const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${name}`
+const getPreviewImage = (project) => {
+  if (project.homepage) {
+    return `https://s.wordpress.com/mshots/v1/${encodeURIComponent(project.homepage)}?w=1200&h=675`
+  }
+  return getOgImage(project.name)
+}
 </script>
 
 <template>
@@ -34,25 +41,24 @@ const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${nam
         </h2>
       </div>
       <div class="flex gap-3">
-        <UButton
+        <StreetButton
           v-if="onRefresh"
-          size="sm"
-          :loading="pending"
-          :class="isLight ? 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)]' : 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-light)]'"
+          variant="primary"
+          class="street-btn--sm"
+          :disabled="pending"
           @click="onRefresh && onRefresh()"
         >
           {{ t('projects.refresh') }}
-        </UButton>
-        <UButton
-          to="https://github.com/juankio"
+        </StreetButton>
+        <StreetButton
+          href="https://github.com/juankio"
           target="_blank"
-          size="sm"
-          variant="outline"
-          color="neutral"
-          :class="isLight ? 'border-slate-300 text-slate-600 hover:bg-slate-100' : 'border-slate-600 text-slate-300 hover:bg-slate-800'"
+          rel="noopener noreferrer"
+          variant="ghost"
+          class="street-btn--sm"
         >
           {{ t('projects.github') }}
-        </UButton>
+        </StreetButton>
       </div>
     </div>
 
@@ -88,7 +94,7 @@ const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${nam
           <!-- Thumbnail -->
           <div class="relative overflow-hidden aspect-video">
             <NuxtImg
-              :src="getOgImage(project.name)"
+              :src="getPreviewImage(project)"
               :alt="project.name"
               class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               loading="lazy"
@@ -141,27 +147,25 @@ const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${nam
             </div>
 
             <div class="flex flex-wrap gap-2 pt-1">
-              <UButton
-                :to="project.html_url"
+              <StreetButton
+                :href="project.html_url"
                 target="_blank"
                 rel="noopener noreferrer"
-                size="sm"
-                :class="isLight ? 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-dark)]' : 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-light)]'"
+                variant="primary"
+                class="street-btn--sm"
               >
                 {{ t('projects.viewCode') }}
-              </UButton>
-              <UButton
+              </StreetButton>
+              <StreetButton
                 v-if="project.homepage"
-                :to="project.homepage"
+                :href="project.homepage"
                 target="_blank"
                 rel="noopener noreferrer"
-                size="sm"
-                variant="outline"
-                color="neutral"
-                :class="isLight ? 'border-slate-300 text-slate-600' : 'border-slate-600 text-slate-300'"
+                variant="ghost"
+                class="street-btn--sm"
               >
                 {{ t('projects.viewDemo') }}
-              </UButton>
+              </StreetButton>
             </div>
           </div>
         </article>

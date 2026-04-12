@@ -5,7 +5,11 @@ defineProps<{
   variant?: 'primary' | 'ghost'
   target?: string
   rel?: string
+  disabled?: boolean
+  type?: 'button' | 'submit'
 }>()
+
+defineEmits<{ click: [MouseEvent] }>()
 </script>
 
 <template>
@@ -18,7 +22,7 @@ defineProps<{
     <slot />
   </NuxtLink>
   <a
-    v-else
+    v-else-if="href"
     :href="href"
     :target="target"
     :rel="rel"
@@ -27,6 +31,16 @@ defineProps<{
   >
     <slot />
   </a>
+  <button
+    v-else
+    :type="type || 'button'"
+    :disabled="disabled"
+    class="street-btn"
+    :class="variant === 'ghost' ? 'street-btn--ghost' : 'street-btn--primary'"
+    @click="$emit('click', $event)"
+  >
+    <slot />
+  </button>
 </template>
 
 <style scoped>
@@ -45,6 +59,18 @@ defineProps<{
   transition: all 0.25s var(--ease-spring);
   text-decoration: none;
   cursor: pointer;
+}
+
+.street-btn.street-btn--sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.street-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .street-btn--primary {
