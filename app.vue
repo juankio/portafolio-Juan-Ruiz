@@ -8,6 +8,15 @@ const currentLocale = computed(() => availableLocales.find(item => item.code ===
 const { isLight } = useThemeMode()
 const isBooting = ref(true)
 
+const lenisOptions = {
+  duration: 1.4,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothWheel: true,
+  wheelMultiplier: 1.05,
+  touchMultiplier: 1.8,
+  lerp: 0.09,
+}
+
 // Inyectar script blocking en <head> del HTML — corre antes del primer paint
 useHead({
   script: [
@@ -38,11 +47,13 @@ onMounted(() => {
         <div class="boot-spinner" aria-hidden="true" />
       </div>
     </Transition>
-    <div v-show="!isBooting">
-      <NuxtLayout>
-        <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
-      </NuxtLayout>
-    </div>
+    <VueLenis root :options="lenisOptions">
+      <div v-show="!isBooting">
+        <NuxtLayout>
+          <NuxtPage :transition="{ name: 'page', mode: 'out-in' }" />
+        </NuxtLayout>
+      </div>
+    </VueLenis>
   </UApp>
 </template>
 

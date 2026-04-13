@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   srcDir: '.',
-  modules: ['@nuxt/image', '@nuxt/ui', '@vueuse/motion/nuxt'],
+  modules: ['@nuxt/image', '@nuxt/ui', '@vueuse/motion/nuxt', 'lenis/nuxt'],
   image: {
     domains: ['opengraph.githubassets.com', 'avatars.githubusercontent.com']
   },

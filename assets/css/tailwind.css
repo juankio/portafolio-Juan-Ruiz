@@ -315,8 +315,27 @@
 
 /* ─── Performance Optimizations ─── */
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  overflow-x: clip;
+}
+
+/* Lenis smooth scroll — evita conflicto con scroll nativo */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
 }
 
 /* Hint browser about animated elements — GPU acceleration where it matters */
