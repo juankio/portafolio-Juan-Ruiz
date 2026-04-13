@@ -2,8 +2,6 @@
 import AboutSection from '~/components/about/AboutSection.vue'
 import EducationSection from '~/components/education/EducationSection.vue'
 
-definePageMeta({ ssr: false })
-
 const { isLight } = useThemeMode()
 const { t } = useI18n()
 

@@ -1,8 +1,6 @@
 <script setup>
 import ProjectsSection from '~/components/projects/ProjectsSection.vue'
 
-definePageMeta({ ssr: false })
-
 const { isLight } = useThemeMode()
 
 const { data, pending, error, refresh } = await useAsyncData('github-repos', async () => {

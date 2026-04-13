@@ -39,21 +39,33 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      htmlAttrs: { lang: 'es' },
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'preconnect', href: 'https://fonts.cdnfonts.com' },
         {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700&family=Permanent+Marker&display=swap'
+          rel: 'preload',
+          as: 'style',
+          href: 'https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700&family=Permanent+Marker&display=swap',
+          onload: "this.onload=null;this.rel='stylesheet'"
         },
         {
-          rel: 'stylesheet',
-          href: 'https://fonts.cdnfonts.com/css/druk-wide-trial'
+          rel: 'preload',
+          as: 'style',
+          href: 'https://fonts.cdnfonts.com/css/druk-wide-trial',
+          onload: "this.onload=null;this.rel='stylesheet'"
         },
         {
-          rel: 'stylesheet',
-          href: 'https://fonts.cdnfonts.com/css/druk-text-wide-trial'
+          rel: 'preload',
+          as: 'style',
+          href: 'https://fonts.cdnfonts.com/css/druk-text-wide-trial',
+          onload: "this.onload=null;this.rel='stylesheet'"
+        }
+      ],
+      noscript: [
+        {
+          children: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700&family=Permanent+Marker&display=swap"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/druk-wide-trial"><link rel="stylesheet" href="https://fonts.cdnfonts.com/css/druk-text-wide-trial">'
         }
       ]
     }

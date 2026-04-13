@@ -4,8 +4,6 @@ import AboutSection from '~/components/about/AboutSection.vue'
 import ProjectsSection from '~/components/projects/ProjectsSection.vue'
 import ContactSection from '~/components/contact/ContactSection.vue'
 
-definePageMeta({ ssr: false })
-
 const { isLight } = useThemeMode()
 const runtimeConfig = useRuntimeConfig()
 const siteUrl = runtimeConfig.public.siteUrl || 'https://mi-portafolio.com'
