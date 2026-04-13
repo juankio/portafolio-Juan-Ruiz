@@ -100,6 +100,8 @@ const getPreviewImage = (project) => {
               loading="lazy"
               format="webp"
               quality="80"
+              width="600"
+              height="338"
             />
             <div
               class="absolute inset-0 bg-gradient-to-t opacity-60"

@@ -1,14 +1,9 @@
 <script setup>
-import HeroSection from '~/components/hero/HeroSection.vue'
-import AboutSection from '~/components/about/AboutSection.vue'
-import ProjectsSection from '~/components/projects/ProjectsSection.vue'
-import ContactSection from '~/components/contact/ContactSection.vue'
-
 const { isLight } = useThemeMode()
 const runtimeConfig = useRuntimeConfig()
 const siteUrl = runtimeConfig.public.siteUrl || 'https://mi-portafolio.com'
 
-const { data, pending, error, refresh } = await useAsyncData('github-repos', async () => {
+const { data, pending, error, refresh } = useLazyAsyncData('github-repos', async () => {
   const repos = await $fetch('https://api.github.com/users/juankio/repos?sort=updated&per_page=50', {
     headers: {
       Accept: 'application/vnd.github+json',
@@ -32,13 +27,46 @@ const featuredProjects = computed(() => {
 })
 
 useSeoMeta({
-  title: 'Juan Miguel Ruiz Supelano | Desarrollador y Disenador',
-  description: 'Portafolio minimal y brutalista de Juan Miguel Ruiz Supelano: proyectos en Nuxt, Vue, Tailwind y PWAs.',
-  ogTitle: 'Portafolio de Juan Miguel Ruiz Supelano',
-  ogDescription: 'Proyectos en tiempo real desde GitHub, enfoque en PWAs, UX y rendimiento.',
+  title: 'Juan Miguel Ruiz Supelano | Desarrollador Vue y Nuxt | Villavicencio, Colombia',
+  description: 'Portafolio de Juan Miguel Ruiz Supelano. Programador web en Villavicencio, Colombia, especializado en Vue.js, Nuxt 3, Tailwind CSS y diseño de interfaces.',
+  keywords: 'Juan Miguel, Juan Miguel Ruiz, Juan Miguel Ruiz Supelano, Supelano, juankio, programadores Villavicencio, programadores Colombia, desarrollador web Villavicencio, Vue, Vue.js, Nuxt, Nuxt 3, desarrollador frontend, diseñador UI, web developer',
+  ogTitle: 'Juan Miguel Ruiz Supelano | Frontend Developer en Colombia',
+  ogDescription: 'Desarrollador y diseñador web en Villavicencio, Colombia. Proyectos en Vue.js y Nuxt.',
   ogUrl: siteUrl,
+  ogType: 'website',
   ogImage: `${siteUrl}/icons/pwa-512x512.png`,
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Juan Miguel Ruiz Supelano | Programador Web Colombia',
+  twitterDescription: 'Portafolio de desarrollo frontend, especializado en el ecosistema Vue y Nuxt.'
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: siteUrl }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Juan Miguel Ruiz Supelano",
+        "alternateName": ["Juan Miguel", "Juan Miguel Ruiz", "juankio"],
+        "url": siteUrl,
+        "image": `${siteUrl}/icons/pwa-512x512.png`,
+        "jobTitle": "Desarrollador Frontend y Diseñador UI/UX",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Villavicencio",
+          "addressCountry": "CO"
+        },
+        "knowsAbout": ["Vue.js", "Nuxt.js", "JavaScript", "TypeScript", "Tailwind CSS", "Desarrollo Web", "Diseño UI"],
+        "sameAs": [
+          "https://github.com/juankio"
+        ]
+      })
+    }
+  ]
 })
 </script>
 
@@ -50,15 +78,15 @@ useSeoMeta({
     <div class="absolute inset-0 bg-concrete pointer-events-none" />
     <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
       <HeroSection :is-light="isLight" />
-      <AboutSection :is-light="isLight" />
-      <ProjectsSection
+      <LazyAboutSection :is-light="isLight" />
+      <LazyProjectsSection
         :is-light="isLight"
         :projects="featuredProjects"
         :pending="pending"
         :error="error"
         :on-refresh="refresh"
       />
-      <ContactSection :is-light="isLight" />
+      <LazyContactSection :is-light="isLight" />
     </UPageBody>
   </UPage>
 </template>

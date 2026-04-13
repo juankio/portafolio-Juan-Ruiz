@@ -15,7 +15,7 @@ defineProps({
     <span
       class="nav-brand__icon flex h-11 w-11 items-center justify-center text-white transition-all duration-200 group-hover:scale-110 group-hover:rotate-[-3deg]"
     >
-      <UIcon name="i-heroicons-user-20-solid" class="h-5 w-5" />
+      <UIcon name="i-heroicons-code-bracket-20-solid" class="h-6 w-6" />
     </span>
 
     <!-- Graffiti signature -->
