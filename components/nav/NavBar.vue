@@ -37,7 +37,7 @@ onBeforeUnmount(() => {
     <!-- Subtle spray deco -->
     <SpraySplatter class="absolute -bottom-3 right-16 pointer-events-none" size="sm" :opacity="0.04" />
 
-    <div class="relative z-10 flex h-18 items-center gap-4 px-6 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
+    <div class="relative z-10 flex h-18 items-center gap-3 px-4 sm:gap-4 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
       <NavBrand :is-light="isLight" />
       <NavLinks :is-light="isLight" />
       <NavActions class="hidden lg:flex" :is-light="isLight" @toggle-mode="emit('toggle-mode')" />
@@ -45,14 +45,12 @@ onBeforeUnmount(() => {
       <div class="ml-auto flex lg:hidden">
         <NavMobileMenu :is-light="isLight" @toggle-mode="emit('toggle-mode')">
           <template #trigger>
-            <UButton
-              icon="i-heroicons-bars-3-bottom-right-20-solid"
-              size="md"
-              variant="ghost"
-              color="neutral"
-              class="rounded-lg hover:text-[var(--color-accent)] transition-colors"
+            <button
+              class="flex items-center justify-center rounded-lg p-2 text-slate-400 hover:text-[var(--color-accent)] transition-colors active:bg-white/5"
               aria-label="Open menu"
-            />
+            >
+              <UIcon name="i-heroicons-bars-3-bottom-right-20-solid" class="h-6 w-6" />
+            </button>
           </template>
         </NavMobileMenu>
       </div>

@@ -5,6 +5,24 @@ import EducationSection from '~/components/education/EducationSection.vue'
 const { isLight } = useThemeMode()
 const { t } = useI18n()
 
+const siteUrl = useRuntimeConfig().public.siteUrl
+
+useSeoMeta({
+  title: 'Sobre mí — Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer',
+  description: 'Conoce a Juan Miguel Ruiz Supelano, desarrollador freelance en Villavicencio, Colombia. Experiencia en Vue.js, Nuxt 3, Tailwind y diseño UI/UX para proyectos remotos en Latinoamérica.',
+  keywords: 'sobre Juan Miguel Ruiz, biografía desarrollador freelance, experiencia Vue Nuxt Colombia, desarrollador Villavicencio, programador freelance Meta, currículum frontend developer',
+  ogTitle: 'Sobre Juan Miguel Ruiz Supelano | Freelance Developer',
+  ogDescription: 'Desarrollador freelance en Villavicencio, Colombia. Mi trayectoria, stack y forma de trabajar.',
+  ogUrl: `${siteUrl}/sobre-mi`,
+  ogType: 'profile',
+  ogImage: `${siteUrl}/icons/pwa-512x512.png`,
+  twitterCard: 'summary_large_image'
+})
+
+useHead({
+  link: [{ rel: 'canonical', href: `${siteUrl}/sobre-mi` }]
+})
+
 const education = computed(() => {
   const value = t('education.education')
   return Array.isArray(value) ? value : []

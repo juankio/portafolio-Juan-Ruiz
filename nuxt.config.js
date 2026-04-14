@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     resendFallbackFrom: process.env.RESEND_FALLBACK_FROM || '',
     contactTo: process.env.CONTACT_EMAIL || 'contacto@juanmiguel.dev',
     public: {
-      siteUrl: 'https://mi-portafolio.com',
+      siteUrl: 'https://juanmiguelruiz.lat',
       motion: {
         directives: {
           'pop-bottom': {
@@ -44,12 +44,22 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'author', content: 'Juan Miguel Ruiz Supelano' },
-        { name: 'theme-color', content: '#111827' },
+        { name: 'theme-color', content: '#ef4444' },
+        { name: 'geo.region', content: 'CO-MET' },
+        { name: 'geo.placename', content: 'Villavicencio, Meta, Colombia' },
+        { name: 'geo.position', content: '4.142;-73.626' },
+        { name: 'ICBM', content: '4.142, -73.626' },
         { name: 'google-site-verification', content: 'RLgwbyq0cBTAEwSW7SSmuT7Z81h3BgOYhW-N4C3h1pg' }
       ],
       link: [
-        { rel: 'icon', type: 'image/svg+xml', href: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💻</text></svg>' },
-        { rel: 'apple-touch-icon', href: '/icons/pwa-512x512.png' }
+        { rel: 'icon', type: 'image/svg+xml', href: '/icons/favicon.svg' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons/favicon-16x16.png' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icons/favicon-32x32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '192x192', href: '/icons/pwa-192x192.png' },
+        { rel: 'icon', type: 'image/png', sizes: '512x512', href: '/icons/pwa-512x512.png' },
+        { rel: 'shortcut icon', href: '/icons/favicon-32x32.png' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/icons/apple-touch-icon.png' },
+        { rel: 'apple-touch-icon', sizes: '512x512', href: '/icons/pwa-512x512.png' }
       ]
     }
   },

@@ -27,17 +27,20 @@ const featuredProjects = computed(() => {
 })
 
 useSeoMeta({
-  title: 'Juan Miguel Ruiz Supelano | Desarrollador Vue y Nuxt | Villavicencio, Colombia',
-  description: 'Portafolio de Juan Miguel Ruiz Supelano. Programador web en Villavicencio, Colombia, especializado en Vue.js, Nuxt 3, Tailwind CSS y diseño de interfaces.',
-  keywords: 'Juan Miguel, Juan Miguel Ruiz, Juan Miguel Ruiz Supelano, Supelano, juankio, programadores Villavicencio, programadores Colombia, desarrollador web Villavicencio, Vue, Vue.js, Nuxt, Nuxt 3, desarrollador frontend, diseñador UI, web developer',
-  ogTitle: 'Juan Miguel Ruiz Supelano | Frontend Developer en Colombia',
-  ogDescription: 'Desarrollador y diseñador web en Villavicencio, Colombia. Proyectos en Vue.js y Nuxt.',
+  title: 'Juan Miguel Ruiz Supelano | Desarrollador Freelance Vue & Nuxt | Villavicencio, Colombia',
+  description: 'Desarrollador web freelance en Villavicencio, Meta, Colombia. Especializado en Vue.js, Nuxt 3, Tailwind CSS y diseño UI/UX. Contratación remota para startups y empresas en Latinoamérica.',
+  keywords: 'desarrollador freelance, programador freelance, freelance developer Colombia, freelancer Villavicencio, programador Villavicencio, desarrollador web Villavicencio, programador Meta Colombia, contratar desarrollador Vue, contratar programador Nuxt, desarrollador remoto Colombia, freelance Vue Nuxt, Juan Miguel Ruiz, Juan Miguel Ruiz Supelano, Supelano, juankio, Vue.js, Nuxt 3, Tailwind CSS, frontend developer Colombia, diseñador UI Colombia, desarrollo web Latinoamérica, programador fullstack freelance',
+  ogTitle: 'Juan Miguel Ruiz Supelano | Desarrollador Freelance Vue & Nuxt en Colombia',
+  ogDescription: 'Freelance frontend developer en Villavicencio, Colombia. Construyo interfaces modernas con Vue.js, Nuxt 3 y Tailwind. Disponible para proyectos remotos.',
   ogUrl: siteUrl,
   ogType: 'website',
+  ogLocale: 'es_CO',
+  ogSiteName: 'Juan Miguel Ruiz Supelano',
   ogImage: `${siteUrl}/icons/pwa-512x512.png`,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Juan Miguel Ruiz Supelano | Programador Web Colombia',
-  twitterDescription: 'Portafolio de desarrollo frontend, especializado en el ecosistema Vue y Nuxt.'
+  twitterTitle: 'Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer',
+  twitterDescription: 'Desarrollador freelance en Villavicencio, Colombia. Vue.js, Nuxt 3, Tailwind CSS. Proyectos remotos en Latinoamérica.',
+  twitterImage: `${siteUrl}/icons/pwa-512x512.png`
 })
 
 useHead({
@@ -51,16 +54,48 @@ useHead({
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Juan Miguel Ruiz Supelano",
-        "alternateName": ["Juan Miguel", "Juan Miguel Ruiz", "juankio"],
+        "alternateName": ["Juan Miguel", "Juan Miguel Ruiz", "juankio", "Juanki"],
         "url": siteUrl,
         "image": `${siteUrl}/icons/pwa-512x512.png`,
-        "jobTitle": "Desarrollador Frontend y Diseñador UI/UX",
+        "jobTitle": "Desarrollador Frontend Freelance · Vue & Nuxt",
+        "description": "Desarrollador web freelance especializado en Vue.js, Nuxt 3 y diseño UI/UX. Trabaja de forma remota desde Villavicencio, Colombia para clientes en Latinoamérica y el mundo.",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Villavicencio",
+          "addressRegion": "Meta",
           "addressCountry": "CO"
         },
-        "knowsAbout": ["Vue.js", "Nuxt.js", "JavaScript", "TypeScript", "Tailwind CSS", "Desarrollo Web", "Diseño UI"],
+        "workLocation": {
+          "@type": "Place",
+          "name": "Villavicencio, Meta, Colombia",
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 4.142,
+            "longitude": -73.626
+          }
+        },
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": "Desarrollador Web Freelance",
+          "occupationLocation": {
+            "@type": "City",
+            "name": "Villavicencio, Colombia"
+          },
+          "skills": "Vue.js, Nuxt 3, TypeScript, Tailwind CSS, Node.js, Express, MongoDB, diseño UI/UX, desarrollo frontend, desarrollo fullstack"
+        },
+        "knowsAbout": [
+          "Vue.js", "Nuxt.js", "Nuxt 3", "JavaScript", "TypeScript",
+          "Tailwind CSS", "Node.js", "Express", "MongoDB",
+          "Desarrollo Web", "Diseño UI", "Diseño UX",
+          "Desarrollo Frontend", "Desarrollo Fullstack", "Freelance"
+        ],
+        "knowsLanguage": ["es", "en"],
+        "areaServed": [
+          { "@type": "Country", "name": "Colombia" },
+          { "@type": "Place", "name": "Latinoamérica" },
+          { "@type": "Place", "name": "Remoto / Global" }
+        ],
+        "availableLanguage": ["Spanish", "English"],
         "sameAs": [
           "https://github.com/juankio"
         ]

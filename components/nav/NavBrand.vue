@@ -5,34 +5,32 @@ defineProps({
 </script>
 
 <template>
-  <UButton
+  <NuxtLink
     to="/"
-    color="neutral"
-    variant="ghost"
-    class="group flex shrink-0 items-center gap-3 px-2 py-2 hover:bg-transparent"
+    class="group flex flex-1 items-center gap-3 px-2 py-2 hover:bg-transparent lg:flex-none lg:shrink-0"
   >
     <!-- Tag icon -->
     <span
-      class="nav-brand__icon flex h-11 w-11 items-center justify-center text-white transition-all duration-200 group-hover:scale-110 group-hover:rotate-[-3deg]"
+      class="nav-brand__icon flex h-11 w-11 shrink-0 items-center justify-center text-white transition-all duration-200 group-hover:scale-110 group-hover:rotate-[-3deg] sm:h-12 sm:w-12 lg:h-11 lg:w-11"
     >
-      <UIcon name="i-heroicons-code-bracket-20-solid" class="h-6 w-6" />
+      <UIcon name="i-heroicons-code-bracket-20-solid" class="h-6 w-6 sm:h-7 sm:w-7 lg:h-6 lg:w-6" />
     </span>
 
     <!-- Graffiti signature -->
-    <span class="hidden min-w-0 flex-col leading-tight sm:flex">
+    <span class="flex min-w-0 flex-1 flex-col leading-tight lg:flex-none">
       <span
-        class="text-[0.65rem] font-marker uppercase tracking-[0.18em] text-[var(--color-accent)] opacity-70"
+        class="text-[0.7rem] font-marker uppercase tracking-[0.18em] text-[var(--color-accent)] opacity-80 sm:text-xs lg:text-[0.65rem]"
       >
         Juan Miguel
       </span>
       <span
-        class="truncate text-base font-extrabold uppercase tracking-[0.06em] text-spray"
+        class="truncate text-lg font-extrabold uppercase tracking-[0.04em] text-spray sm:text-xl lg:text-base lg:tracking-[0.06em]"
         :class="isLight ? 'text-slate-700' : 'text-slate-100'"
       >
         Ruiz Supelano
       </span>
     </span>
-  </UButton>
+  </NuxtLink>
 </template>
 
 <style scoped>

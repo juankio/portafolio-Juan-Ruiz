@@ -21,14 +21,11 @@ const isActive = (href) => {
 
 <template>
   <nav class="hidden flex-1 items-center justify-center gap-1 lg:flex">
-    <UButton
+    <NuxtLink
       v-for="item in links"
       :key="item.href"
       :to="item.href"
-      variant="ghost"
-      color="neutral"
-      size="md"
-      class="nav-link px-4 py-2.5 text-sm font-bold uppercase tracking-[0.08em]"
+            class="nav-link px-4 py-2.5 text-sm font-bold uppercase tracking-[0.08em]"
       :class="[
         isLight
           ? 'text-slate-600 hover:text-[var(--color-accent-dark)] hover:bg-slate-100'
@@ -37,7 +34,7 @@ const isActive = (href) => {
       ]"
     >
       {{ item.label }}
-    </UButton>
+    </NuxtLink>
   </nav>
 </template>
 
