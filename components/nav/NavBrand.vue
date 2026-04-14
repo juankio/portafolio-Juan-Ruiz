@@ -19,12 +19,12 @@ defineProps({
     <!-- Graffiti signature -->
     <span class="flex min-w-0 flex-1 flex-col leading-tight lg:flex-none">
       <span
-        class="text-[0.7rem] font-marker uppercase tracking-[0.18em] text-[var(--color-accent)] opacity-80 sm:text-xs lg:text-[0.65rem]"
+        class="text-[0.8rem] font-marker uppercase tracking-[0.15em] text-[var(--color-accent)] opacity-90 sm:text-sm lg:text-[0.85rem]"
       >
         Juan Miguel
       </span>
       <span
-        class="truncate text-lg font-extrabold uppercase tracking-[0.04em] text-spray sm:text-xl lg:text-base lg:tracking-[0.06em]"
+        class="truncate text-xl font-extrabold uppercase tracking-[0.04em] text-spray sm:text-2xl lg:text-lg lg:tracking-[0.06em]"
         :class="isLight ? 'text-slate-700' : 'text-slate-100'"
       >
         Ruiz Supelano
