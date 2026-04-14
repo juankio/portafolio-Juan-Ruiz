@@ -7,7 +7,7 @@ const { t } = useI18n()
 
 const socialLinks = [
   { icon: 'i-ph-github-logo-fill', href: 'https://github.com/juankio', label: 'GitHub' },
-  { icon: 'i-ph-linkedin-logo-fill', href: 'https://www.linkedin.com/in/juan-miguel-ruiz-supelano', label: 'LinkedIn' },
+  { icon: 'i-ph-linkedin-logo-fill', href: 'https://www.linkedin.com/in/juan-miguel-ruiz-300037276/', label: 'LinkedIn' },
   { icon: 'i-heroicons-envelope-20-solid', href: 'mailto:contacto@juanmiguel.dev', label: 'Email' }
 ]
 </script>

@@ -28,7 +28,7 @@ const isActive = (href) => {
 
 const socialLinks = [
   { icon: 'i-ph-github-logo-fill', href: 'https://github.com/juankio', label: 'GitHub' },
-  { icon: 'i-ph-linkedin-logo-fill', href: 'https://linkedin.com/in/juankio', label: 'LinkedIn' }
+  { icon: 'i-ph-linkedin-logo-fill', href: 'https://www.linkedin.com/in/juan-miguel-ruiz-300037276/', label: 'LinkedIn' }
 ]
 
 const localeItems = [

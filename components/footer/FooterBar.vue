@@ -11,7 +11,7 @@ const props = defineProps({
 
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/juankio', icon: 'i-ph-github-logo-fill' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/juan-miguel-ruiz-supelano', icon: 'i-ph-linkedin-logo-fill' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/juan-miguel-ruiz-300037276/', icon: 'i-ph-linkedin-logo-fill' },
   { label: 'Email', href: 'mailto:contacto@juanmiguel.dev', icon: 'i-heroicons-envelope-20-solid' }
 ]
 </script>
