@@ -108,12 +108,12 @@ const chipRotation = (idx: number) => {
             <div class="flex items-start justify-between gap-4">
               <div class="flex items-center gap-4">
                 <div class="relative">
-                  <UAvatar
-                    size="2xl"
-                    src="https://avatars.githubusercontent.com/u/11875214?v=4"
+                  <NuxtImg
+                    src="https://avatars.githubusercontent.com/u/74984894?v=4"
                     alt="Juan Miguel Ruiz Supelano"
-                    class="ring-2 ring-[var(--color-accent)] shadow-[0_0_12px_var(--color-accent-soft)]"
-                    :ui="{ rounded: 'rounded-lg' }"
+                    width="64"
+                    height="64"
+                    class="rounded-lg ring-2 ring-[var(--color-accent)] shadow-[0_0_12px_var(--color-accent-soft)] object-cover w-16 h-16 sm:w-20 sm:h-20"
                   />
                   <!-- Spray dot on avatar corner -->
                   <span class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent)]" />
