@@ -107,16 +107,27 @@ const chipRotation = (idx: number) => {
           <div class="relative z-10 p-6 sm:p-7">
             <div class="flex items-start justify-between gap-4">
               <div class="flex items-center gap-4">
-                <div class="relative">
+                <!-- Street style Avatar -->
+                <div class="avatar-street group relative shrink-0">
+                  <!-- Cinta adhesiva -->
+                  <div class="absolute -top-2 -left-2 w-8 h-3 bg-[var(--color-accent)] opacity-80 rotate-[-15deg] shadow-sm z-20" aria-hidden="true" />
+                  
+                  <!-- Fondo Neon (Glow) -->
+                  <div class="absolute inset-0 bg-[var(--color-accent)] blur-md opacity-30 group-hover:opacity-100 group-hover:blur-xl transition-all duration-500 z-0" />
+                  
+                  <!-- Foto -->
                   <NuxtImg
                     src="https://avatars.githubusercontent.com/u/74984894?v=4"
                     alt="Juan Miguel Ruiz Supelano"
-                    width="64"
-                    height="64"
-                    class="rounded-lg ring-2 ring-[var(--color-accent)] shadow-[0_0_12px_var(--color-accent-soft)] object-cover w-16 h-16 sm:w-20 sm:h-20"
+                    width="80"
+                    height="80"
+                    class="avatar-img relative z-10 w-16 h-16 sm:w-20 sm:h-20 object-cover rounded shadow-lg border-2 border-[var(--color-surface)] group-hover:border-[var(--color-accent)]"
                   />
-                  <!-- Spray dot on avatar corner -->
-                  <span class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-[var(--color-accent)] shadow-[0_0_6px_var(--color-accent)]" />
+                  
+                  <!-- Firma mini -->
+                  <span class="absolute -bottom-2 -right-3 font-marker text-[0.55rem] text-[var(--color-accent)] rotate-[-10deg] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                    JMRS
+                  </span>
                 </div>
                 <div class="space-y-0.5">
                   <p class="text-lg font-bold text-spray" :class="isLight ? 'text-slate-700' : 'text-white'">{{ t('hero.name') }}</p>
@@ -274,5 +285,24 @@ const chipRotation = (idx: number) => {
 .about-chip:hover {
   transform: rotate(0deg) scale(1.1) !important;
   box-shadow: var(--shadow-neon);
+}
+
+/* Avatar Street Style */
+.avatar-street {
+  transform: rotate(3deg);
+  transition: all 0.4s var(--ease-spring);
+}
+
+.avatar-street:hover {
+  transform: rotate(-2deg) scale(1.05);
+}
+
+.avatar-img {
+  filter: grayscale(100%) contrast(120%) brightness(0.9);
+  transition: all 0.4s var(--ease-spring);
+}
+
+.avatar-street:hover .avatar-img {
+  filter: grayscale(0%) contrast(105%) brightness(1);
 }
 </style>
