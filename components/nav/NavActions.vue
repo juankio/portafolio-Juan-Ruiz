@@ -26,7 +26,10 @@ const localeItems = [
         v-for="item in localeItems"
         :key="item.code"
         class="nav-lang-btn font-marker text-sm tracking-wide"
-        :class="locale === item.code ? 'nav-lang-btn--active' : 'nav-lang-btn--inactive'"
+        :class="[
+          locale === item.code ? 'nav-lang-btn--active' : 'nav-lang-btn--inactive',
+          isLight && locale !== item.code ? 'nav-lang-btn--inactive-light' : ''
+        ]"
         @click="setLocale(item.code)"
       >
         {{ item.label }}
@@ -46,7 +49,7 @@ const localeItems = [
     <!-- Theme toggle — spray can -->
     <button
       class="nav-theme-toggle flex items-center justify-center w-10 h-10"
-      :class="stacked ? 'self-start' : ''"
+      :class="[stacked ? 'self-start' : '', isLight ? 'nav-theme-toggle--light' : '']"
       :aria-label="t('nav.themeToggle')"
       @click="emit('toggle-mode')"
     >
@@ -89,6 +92,14 @@ const localeItems = [
   color: var(--color-accent);
 }
 
+.nav-lang-btn--inactive-light {
+  color: var(--color-text-tertiary);
+}
+
+.nav-lang-btn--inactive-light:hover {
+  color: var(--color-accent-dark);
+}
+
 .nav-cta {
   background: var(--color-accent) !important;
   color: white !important;
@@ -107,7 +118,7 @@ const localeItems = [
   color: var(--color-text-secondary);
   border: 2px solid var(--color-border-accent);
   border-radius: 4px 8px 3px 6px;
-  background: transparent;
+  background: var(--color-surface-card);
   cursor: pointer;
   transition: all 0.2s var(--ease-spring);
 }
@@ -115,7 +126,19 @@ const localeItems = [
 .nav-theme-toggle:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
+  background: var(--color-surface-elevated);
   box-shadow: 0 0 8px var(--color-accent-soft);
   transform: rotate(15deg);
+}
+
+.nav-theme-toggle--light {
+  color: var(--color-text-tertiary);
+  border-color: rgba(15, 23, 42, 0.15);
+}
+
+.nav-theme-toggle--light:hover {
+  color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  box-shadow: 2px 2px 0 var(--color-accent-soft), 0 0 8px var(--color-accent-softer);
 }
 </style>

@@ -94,6 +94,7 @@ defineEmits<{ click: [MouseEvent] }>()
 
 .street-btn--ghost:hover {
   color: var(--color-accent);
+  background: var(--color-surface-elevated);
   border-color: var(--color-accent);
   transform: translateY(-2px) rotate(-0.5deg);
   box-shadow: 3px 5px 0 var(--color-accent-dark), 0 0 16px var(--color-accent-soft);

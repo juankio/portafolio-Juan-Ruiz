@@ -31,9 +31,9 @@ const isActive = (href) => {
       class="nav-link px-4 py-2.5 text-sm font-bold uppercase tracking-[0.08em]"
       :class="[
         isLight
-          ? 'text-slate-600 hover:text-[var(--color-accent)]'
-          : 'text-slate-400 hover:text-[var(--color-accent)]',
-        isActive(item.href) ? 'nav-link--active' : ''
+          ? 'text-slate-600 hover:text-[var(--color-accent-dark)] hover:bg-slate-100'
+          : 'text-slate-400 hover:text-[var(--color-accent)] hover:bg-white/5',
+        isActive(item.href) ? (isLight ? 'nav-link--active-light' : 'nav-link--active') : ''
       ]"
     >
       {{ item.label }}
@@ -69,13 +69,21 @@ const isActive = (href) => {
 
 /* Active state — tag sticker feel */
 .nav-link--active {
-  background: var(--color-accent-soft);
+  background: var(--color-accent-soft) !important;
   color: var(--color-accent) !important;
   border-radius: 3px 8px 4px 6px;
   box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
 }
 
-.nav-link--active::after {
+.nav-link--active-light {
+  background: var(--color-accent-soft) !important;
+  color: var(--color-accent-dark) !important;
+  border-radius: 3px 8px 4px 6px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.08);
+}
+
+.nav-link--active::after,
+.nav-link--active-light::after {
   transform: scaleX(1);
   opacity: 0.8;
   filter: drop-shadow(0 0 4px var(--color-accent));

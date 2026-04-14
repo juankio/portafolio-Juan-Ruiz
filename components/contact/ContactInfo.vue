@@ -65,6 +65,7 @@ const socialLinks = [
         :target="social.href.startsWith('mailto') ? undefined : '_blank'"
         :rel="social.href.startsWith('mailto') ? undefined : 'noopener noreferrer'"
         class="contact-social-btn"
+        :class="isLight ? 'contact-social-btn--light' : ''"
         :aria-label="social.label"
       >
         <UIcon :name="social.icon" class="h-5 w-5" />
@@ -93,5 +94,16 @@ const socialLinks = [
   border-color: var(--color-accent);
   box-shadow: 0 0 12px var(--color-accent-soft);
   transform: translateY(-2px) rotate(-1deg);
+}
+
+.contact-social-btn--light {
+  color: var(--color-text-tertiary);
+  border-color: rgba(15, 23, 42, 0.15);
+}
+
+.contact-social-btn--light:hover {
+  color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  box-shadow: 2px 2px 0 var(--color-accent-soft), 0 0 8px var(--color-accent-softer);
 }
 </style>

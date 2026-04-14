@@ -94,12 +94,14 @@ const socialLinks = [
   color: var(--color-text-secondary);
   border: 2px solid var(--color-border-accent);
   border-radius: 3px 8px 4px 6px;
+  background: var(--color-surface-card);
   transition: all 0.2s var(--ease-spring);
 }
 
 .footer-social:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
+  background: var(--color-surface-elevated);
   box-shadow: 0 0 10px var(--color-accent-soft);
   transform: translateY(-2px) rotate(-2deg);
 }

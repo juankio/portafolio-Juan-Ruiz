@@ -188,7 +188,7 @@ const resetForm = () => {
                 size="lg"
                 variant="none"
                 class="contact-field__input"
-                :ui="{ base: 'w-full bg-transparent border-0 focus:ring-0 outline-none' }"
+                :ui="{ base: 'w-full bg-transparent border-0 focus:ring-0 outline-none overflow-x-auto truncate' }"
                 required
                 @input="errors.email = ''"
               />
@@ -335,6 +335,7 @@ const resetForm = () => {
   font-size: 0.95rem;
   color: var(--color-text-primary);
   letter-spacing: 0.02em;
+  text-overflow: clip !important;
 }
 
 .contact-field__input :deep(input)::placeholder,
