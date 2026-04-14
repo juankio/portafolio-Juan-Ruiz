@@ -6,7 +6,14 @@ export default defineEventHandler(async (event) => {
 
   const contactTo = config.contactTo || process.env.CONTACT_EMAIL || 'contacto@juanmiguel.dev'
   const resendApiKey = config.resendApiKey || process.env.RESEND_API_KEY
-  const resendFromPrimary = config.resendFrom || process.env.RESEND_FROM || 'Portafolio <portafolio@example.com>'
+  
+  // Clean up quotes that Vercel might add
+  let rawFrom = config.resendFrom || process.env.RESEND_FROM || 'Portafolio <portafolio@example.com>'
+  if (typeof rawFrom === 'string') {
+    rawFrom = rawFrom.replace(/^["']|["']$/g, '').trim()
+  }
+  const resendFromPrimary = rawFrom
+
   const resendFallbackFrom = config.resendFallbackFrom || process.env.RESEND_FALLBACK_FROM || ''
 
   if (!resendApiKey) {
