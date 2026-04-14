@@ -17,7 +17,7 @@ export const messages = {
       },
       subtitle: 'Vue, Nuxt y mucho cafe. Me obsesiona que las cosas carguen rapido y que el usuario sepa a donde ir sin pensarlo dos veces.',
       rolePrefix: 'Soy',
-      rotatingWords: ['Frontend Developer', 'Disenador de UI', 'Builder de PWAs', 'Dev que si responde'],
+      rotatingWords: ['Frontend Developer', 'Disenador de UI', 'Dev 10x con IA', 'Builder de PWAs', 'Dev que si responde'],
       ctas: { projects: 'Ver proyectos', contact: 'Hablemos' },
       cards: [
         { label: 'Stack', value: 'Vue - Nuxt - Tailwind' },
@@ -34,7 +34,7 @@ export const messages = {
       },
       intro:
         'Soy Juan Miguel, dev frontend desde Villavicencio (CO). Estudio Ingenieria de Sistemas de dia y rompo layouts de noche. Me obsesiona que las webs carguen rapido, que la UI no aburra y que el usuario sepa que hacer en cada pantalla sin manual.',
-      chips: ['Nuxt 3', 'UX/UI', 'PWAs', 'Animacion', 'Accesibilidad', 'Cafe negro'],
+      chips: ['Nuxt 3', 'UX/UI', 'AI Agents', 'Animacion', 'PWAs', 'Cafe negro'],
       availability: 'Abierto',
       skillsTitle: 'Habilidades',
       summary: [
@@ -56,8 +56,8 @@ export const messages = {
           copy: 'APIs con Node y Express cuando la idea lo pide. MongoDB, auth simple y deploys en Vercel sin drama.'
         },
         {
-          title: 'Herramientas',
-          copy: 'Figma, GitHub, Nuxt UI, Resend. Sin bloatware ni 20 SaaS que nadie usa.'
+          title: 'IA & Herramientas',
+          copy: 'Potenciado por IA (Claude, Opencode, Open claw). Gestion con Obsidian. Desarrollo 10x mas rapido sin perder calidad ni control.'
         }
       ]
     },
@@ -216,7 +216,7 @@ export const messages = {
       },
       subtitle: "Vue, Nuxt, and way too much coffee. I obsess over pages that load quick and interfaces where you never have to guess what to click.",
       rolePrefix: "I'm a",
-      rotatingWords: ['Frontend Developer', 'UI Designer', 'PWA Builder', 'Dev who actually replies'],
+      rotatingWords: ['Frontend Developer', 'UI Designer', 'AI-Powered Dev', 'PWA Builder', 'Dev who actually replies'],
       ctas: { projects: 'View projects', contact: "Let's talk" },
       cards: [
         { label: 'Stack', value: 'Vue - Nuxt - Tailwind' },
@@ -233,7 +233,7 @@ export const messages = {
       },
       intro:
         "I'm Juan Miguel, a frontend dev from Villavicencio (CO). Studying Systems Engineering by day, breaking layouts by night. I care about pages that load fast, UI that doesn't bore you, and users who know exactly what to do next.",
-      chips: ['Nuxt 3', 'UX/UI', 'PWAs', 'Animation', 'Accessibility', 'Black coffee'],
+      chips: ['Nuxt 3', 'UX/UI', 'AI Agents', 'Animation', 'PWAs', 'Black coffee'],
       availability: 'Open',
       skillsTitle: 'Skills',
       summary: [
@@ -255,8 +255,8 @@ export const messages = {
           copy: 'REST APIs with Node and Express when the idea calls for it. MongoDB, simple auth, and painless Vercel deploys.'
         },
         {
-          title: 'Tooling',
-          copy: 'Figma, GitHub, Nuxt UI, Resend. No bloatware, no 20 SaaS tools nobody uses.'
+          title: 'AI & Tooling',
+          copy: 'AI-powered by Claude, Opencode, and Open claw. Second brain in Obsidian. 10x faster development without losing quality or control.'
         }
       ]
     },
