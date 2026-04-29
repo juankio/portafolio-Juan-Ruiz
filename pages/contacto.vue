@@ -27,7 +27,7 @@ useHead({
     :class="isLight ? 'text-slate-800' : 'text-slate-200'"
   >
     <div class="absolute inset-0 bg-concrete pointer-events-none" />
-    <UPageBody class="relative z-10 !mt-0 !space-y-0 pt-12 sm:pt-16 lg:pt-20 pb-16">
+    <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
       <ContactSection :is-light="isLight" />
     </UPageBody>
   </UPage>

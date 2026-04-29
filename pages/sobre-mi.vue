@@ -42,7 +42,7 @@ const courses = computed(() => {
     <!-- Full page concrete overlay -->
     <div class="absolute inset-0 bg-concrete pointer-events-none" />
 
-    <UPageBody class="relative z-10 !mt-0 !space-y-0 pt-12 sm:pt-16 lg:pt-20 pb-16">
+    <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
       <div class="flex flex-col gap-8 lg:gap-12">
         <AboutSection :is-light="isLight" />
         <EducationSection :is-light="isLight" :education="education" :courses="courses" />

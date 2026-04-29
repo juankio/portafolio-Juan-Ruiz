@@ -45,7 +45,7 @@ const featuredProjects = computed(() => {
     :class="isLight ? 'text-slate-800' : 'text-slate-200'"
   >
     <div class="absolute inset-0 bg-concrete pointer-events-none" />
-    <UPageBody class="relative z-10 !mt-0 !space-y-0 pt-4 sm:pt-8 lg:pt-12 pb-16">
+    <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
       <ProjectsSection
         :is-light="isLight"
         :projects="featuredProjects"
