@@ -22,13 +22,13 @@ useHead({
 </script>
 
 <template>
-  <main
+  <UPage
     class="relative min-h-screen bg-brick"
     :class="isLight ? 'text-slate-800' : 'text-slate-200'"
   >
     <div class="absolute inset-0 bg-concrete pointer-events-none" />
-    <UContainer class="relative z-10 py-12 sm:py-16 lg:py-20">
+    <UPageBody class="relative z-10 !mt-0 !space-y-0 pt-12 sm:pt-16 lg:pt-20 pb-16">
       <ContactSection :is-light="isLight" />
-    </UContainer>
-  </main>
+    </UPageBody>
+  </UPage>
 </template>
