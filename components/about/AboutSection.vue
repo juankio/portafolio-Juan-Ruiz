@@ -65,7 +65,7 @@ useTextSplit('.split-text-about', { stagger: 30 })
 
         <!-- Headline with spray effect -->
         <div class="relative animate-item opacity-0">
-          <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl leading-tight split-text-about" :class="isLight ? 'text-slate-700' : 'text-white'">
+          <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl leading-tight split-text-about text-balance" :class="isLight ? 'text-slate-700' : 'text-white'">
             {{ t('about.headline.lead') }}
             <span class="text-[var(--color-accent)]">{{ t('about.headline.accent') }}</span>
             {{ t('about.headline.tail') }}

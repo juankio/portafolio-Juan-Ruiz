@@ -25,16 +25,28 @@ export const useTextSplit = (selector, options = {}) => {
             if (!text.trim() && text.includes('\n')) return null // skip empty newlines
             
             const fragment = document.createDocumentFragment()
-            const chars = text.split('')
+            // Split by words first to keep words together (prevent mid-word line breaks)
+            const words = text.split(/(\s+)/)
             
-            chars.forEach(char => {
-              const span = document.createElement('span')
-              span.className = 'split-char'
-              span.textContent = char === ' ' ? '\u00A0' : char
-              span.style.display = 'inline-block'
-              span.style.opacity = '0'
-              span.style.transform = 'translateY(20px) rotate(5deg)'
-              fragment.appendChild(span)
+            words.forEach(word => {
+              if (!word) return
+              
+              const wordSpan = document.createElement('span')
+              wordSpan.style.display = 'inline-block'
+              wordSpan.style.whiteSpace = 'pre-wrap'
+              
+              const chars = word.split('')
+              chars.forEach(char => {
+                const span = document.createElement('span')
+                span.className = 'split-char'
+                span.textContent = char === ' ' ? '\u00A0' : char
+                span.style.display = 'inline-block'
+                span.style.opacity = '0'
+                span.style.transform = 'translateY(20px) rotate(5deg)'
+                wordSpan.appendChild(span)
+              })
+              
+              fragment.appendChild(wordSpan)
             })
             return fragment
           } else if (node.nodeType === 1) { // Element node

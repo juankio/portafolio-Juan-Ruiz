@@ -58,7 +58,7 @@ useTextSplit('.split-text-wall', { stagger: 30 })
           >
             {{ t('education.sectionTitle') }}
           </span>
-          <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl" :class="isLight ? 'text-slate-700' : 'text-white'">
+          <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl text-balance" :class="isLight ? 'text-slate-700' : 'text-white'">
             {{ t('education.headline') }}
           </h2>
           <PaintDrip class="absolute -bottom-3 left-8" :count="2" :animated="true" />

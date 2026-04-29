@@ -39,7 +39,7 @@ useScrollAnimation('.timeline-animate-trigger', {
     <div class="relative z-10 px-6 sm:px-8 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
       <div class="relative">
         <p class="text-sm uppercase tracking-[0.25em] mb-2" :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ t('education.summary') }}</p>
-        <h3 class="text-3xl font-bold text-spray sm:text-4xl split-text-wall" :class="isLight ? 'text-slate-700' : 'text-white'">
+        <h3 class="text-3xl font-bold text-spray sm:text-4xl split-text-wall text-balance" :class="isLight ? 'text-slate-700' : 'text-white'">
           Ruta de <span class="text-[var(--color-accent)]">Aprendizaje</span>
         </h3>
       </div>

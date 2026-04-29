@@ -119,7 +119,7 @@ onBeforeUnmount(() => {
           {{ t('hero.tagline') }}
         </p>
         <h1
-          class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl split-text-hero"
+          class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl split-text-hero text-balance"
           :class="isLight ? 'text-slate-700' : 'text-white'"
         >
           {{ t('hero.title.main') }}
