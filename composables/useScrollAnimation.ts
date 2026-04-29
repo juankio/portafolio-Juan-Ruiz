@@ -4,7 +4,7 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
   const {
     stagger = 100,
     threshold = 0.1,
-    repeat = true
+    repeat = false // Cambiado a false por defecto para evitar parpadeos
   } = options
 
   onMounted(() => {
@@ -25,9 +25,12 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
             // Remove previous animations to avoid jumpiness
             anime.remove(targets)
             
+            // Avoid re-animating if it's already done and repeat is false
+            if (!repeat && entry.target.classList.contains('is-animated')) return
+
             entry.target.classList.add('is-animated')
             
-            // Si scrollea hacia abajo, entra por abajo. Si scrollea hacia arriba, entra por arriba.
+            // Animación suave
             const yOffset = isScrollingDown ? 40 : -40
 
             anime({
@@ -35,14 +38,15 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
               translateY: [yOffset, 0],
               opacity: [0, 1],
               easing: 'easeOutExpo',
-              duration: 1000,
+              duration: 800, // Ligeramente más rápido
               delay: anime.stagger(stagger)
             })
             
             if (!repeat) observer.unobserve(entry.target)
           } else if (repeat) {
-            // Si sale de pantalla y queremos que repita, lo escondemos
+            // Solo lo escondemos si explícitamente se pidió repeat
             anime.set(targets, { opacity: 0 })
+            entry.target.classList.remove('is-animated')
           }
         })
       },

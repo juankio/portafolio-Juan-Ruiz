@@ -6,7 +6,7 @@ export const useTextSplit = (selector, options = {}) => {
     stagger = 30,
     duration = 800,
     easing = 'easeOutExpo',
-    repeat = true
+    repeat = false // Cambiado a false por defecto
   } = options
 
   onMounted(() => {
@@ -80,6 +80,9 @@ export const useTextSplit = (selector, options = {}) => {
             if (entry.isIntersecting) {
               anime.remove(targets)
               
+              if (!repeat && entry.target.classList.contains('text-animated')) return
+              entry.target.classList.add('text-animated')
+
               const yOffset = isScrollingDown ? 20 : -20
               const rotation = isScrollingDown ? 5 : -5
 
@@ -96,6 +99,7 @@ export const useTextSplit = (selector, options = {}) => {
               if (!repeat) observer.unobserve(entry.target)
             } else if (repeat) {
               anime.set(targets, { opacity: 0 })
+              entry.target.classList.remove('text-animated')
             }
           })
         }, { threshold: 0.1 })
