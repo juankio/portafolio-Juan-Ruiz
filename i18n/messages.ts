@@ -1,5 +1,43 @@
 export const messages = {
   es: {
+    seo: {
+      locale: 'es_CO',
+      index: {
+        title: 'Juan Miguel Ruiz Supelano | Desarrollador Freelance Vue & Nuxt | Villavicencio, Colombia',
+        description: 'Desarrollador web freelance en Villavicencio, Meta, Colombia. Especializado en Vue.js, Nuxt 3, Tailwind CSS y diseño UI/UX. Contratación remota para startups y empresas en Latinoamérica.',
+        keywords: 'desarrollador freelance, programador freelance, freelance developer Colombia, freelancer Villavicencio, programador Villavicencio, desarrollador web Villavicencio, programador Meta Colombia, contratar desarrollador Vue, contratar programador Nuxt, desarrollador remoto Colombia, freelance Vue Nuxt, Juan Miguel Ruiz, Juan Miguel Ruiz Supelano, Supelano, juankio, Vue.js, Nuxt 3, Tailwind CSS, frontend developer Colombia, diseñador UI Colombia, desarrollo web Latinoamérica, programador fullstack freelance, Angular, Flask, Anime.js, Prompt Engineering, Claude AI',
+        ogTitle: 'Juan Miguel Ruiz Supelano | Desarrollador Freelance Vue & Nuxt en Colombia',
+        ogDescription: 'Freelance frontend developer en Villavicencio, Colombia. Construyo interfaces modernas con Vue.js, Nuxt 3 y Tailwind. Disponible para proyectos remotos.',
+        twitterTitle: 'Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer',
+        twitterDescription: 'Desarrollador freelance en Villavicencio, Colombia. Vue.js, Nuxt 3, Tailwind CSS. Proyectos remotos en Latinoamérica.'
+      },
+      about: {
+        title: 'Sobre mí — Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer',
+        description: 'Conoce a Juan Miguel Ruiz Supelano, desarrollador freelance en Villavicencio, Colombia. Experiencia en Vue.js, Nuxt 3, Tailwind y diseño UI/UX para proyectos remotos en Latinoamérica.',
+        keywords: 'sobre Juan Miguel Ruiz, biografía desarrollador freelance, experiencia Vue Nuxt Colombia, desarrollador Villavicencio, programador freelance Meta, currículum frontend developer',
+        ogTitle: 'Sobre Juan Miguel Ruiz Supelano | Freelance Developer',
+        ogDescription: 'Desarrollador freelance en Villavicencio, Colombia. Mi trayectoria, stack y forma de trabajar.'
+      },
+      projects: {
+        title: 'Proyectos — Juan Miguel Ruiz Supelano | Portafolio Vue & Nuxt',
+        description: 'Proyectos de desarrollo web con Vue.js, Nuxt 3, Tailwind CSS y Node.js. Trabajos freelance y open source de Juan Miguel Ruiz Supelano desde Villavicencio, Colombia.',
+        keywords: 'proyectos Vue Nuxt, portafolio freelance Colombia, trabajos desarrollo web Villavicencio, ejemplos Nuxt 3, proyectos frontend Colombia, portfolio Juan Miguel Ruiz',
+        ogTitle: 'Proyectos | Juan Miguel Ruiz Supelano',
+        ogDescription: 'Portafolio de proyectos web construidos con Vue, Nuxt y Tailwind.'
+      },
+      contact: {
+        title: 'Contacto — Contratar desarrollador freelance Vue & Nuxt | Juan Miguel Ruiz',
+        description: '¿Buscas un desarrollador freelance Vue/Nuxt en Colombia? Contáctame para proyectos web, landings, dashboards o sitios a medida. Disponible remoto desde Villavicencio.',
+        keywords: 'contratar desarrollador freelance Colombia, contacto programador Vue Nuxt, hire freelance developer Colombia, contratar frontend Villavicencio, desarrollo web a medida Colombia, programador freelance remoto',
+        ogTitle: 'Contactar a Juan Miguel Ruiz Supelano | Freelance Developer',
+        ogDescription: 'Disponible para proyectos freelance en Vue, Nuxt y Tailwind. Trabajo remoto desde Villavicencio, Colombia.'
+      },
+      schema: {
+        jobTitle: 'Desarrollador Frontend Freelance · Vue & Nuxt',
+        description: 'Desarrollador web freelance especializado en Vue.js, Nuxt 3 y diseño UI/UX. Trabaja de forma remota desde Villavicencio, Colombia para clientes en Latinoamérica y el mundo.',
+        occupation: 'Desarrollador Web Freelance'
+      }
+    },
     nav: {
       links: { home: 'Inicio', about: 'Sobre mi', projects: 'Proyectos', contact: 'Contacto' },
       ctaProjects: 'Ver proyectos',
@@ -205,6 +243,44 @@ export const messages = {
     }
   },
   en: {
+    seo: {
+      locale: 'en_US',
+      index: {
+        title: 'Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer | Colombia',
+        description: 'Freelance web developer from Colombia. Specialized in Vue.js, Nuxt 3, Tailwind CSS and UI/UX design. Remote contractor for startups and companies worldwide.',
+        keywords: 'freelance developer, freelance programmer, freelance developer Colombia, remote developer, hire Vue developer, hire Nuxt programmer, remote developer Colombia, freelance Vue Nuxt, Juan Miguel Ruiz, Juan Miguel Ruiz Supelano, Supelano, juankio, Vue.js, Nuxt 3, Tailwind CSS, frontend developer Colombia, UI designer, web development Latin America, fullstack freelance programmer, Angular, Flask, Anime.js, Prompt Engineering, Claude AI',
+        ogTitle: 'Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer',
+        ogDescription: 'Freelance frontend developer based in Colombia. I build modern interfaces with Vue.js, Nuxt 3 and Tailwind. Available for remote projects.',
+        twitterTitle: 'Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer',
+        twitterDescription: 'Freelance developer from Colombia. Vue.js, Nuxt 3, Tailwind CSS. Remote projects worldwide.'
+      },
+      about: {
+        title: 'About me — Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer',
+        description: 'Meet Juan Miguel Ruiz Supelano, freelance developer from Colombia. Expertise in Vue.js, Nuxt 3, Tailwind and UI/UX design for remote projects worldwide.',
+        keywords: 'about Juan Miguel Ruiz, freelance developer biography, Vue Nuxt experience, Colombia developer, remote freelance programmer, frontend developer resume',
+        ogTitle: 'About Juan Miguel Ruiz Supelano | Freelance Developer',
+        ogDescription: 'Freelance developer from Colombia. My journey, tech stack, and workflow.'
+      },
+      projects: {
+        title: 'Projects — Juan Miguel Ruiz Supelano | Vue & Nuxt Portfolio',
+        description: 'Web development projects using Vue.js, Nuxt 3, Tailwind CSS and Node.js. Freelance and open source work by Juan Miguel Ruiz Supelano.',
+        keywords: 'Vue Nuxt projects, freelance portfolio Colombia, web development work, Nuxt 3 examples, frontend projects, Juan Miguel Ruiz portfolio',
+        ogTitle: 'Projects | Juan Miguel Ruiz Supelano',
+        ogDescription: 'Web projects portfolio built with Vue, Nuxt, and Tailwind.'
+      },
+      contact: {
+        title: 'Contact — Hire freelance Vue & Nuxt developer | Juan Miguel Ruiz',
+        description: 'Looking for a freelance Vue/Nuxt developer? Contact me for web projects, landings, dashboards or custom sites. Available remotely from Colombia.',
+        keywords: 'hire freelance developer Colombia, contact Vue Nuxt programmer, hire remote developer, custom web development, remote freelance programmer',
+        ogTitle: 'Contact Juan Miguel Ruiz Supelano | Freelance Developer',
+        ogDescription: 'Available for freelance projects in Vue, Nuxt and Tailwind. Working remotely from Colombia.'
+      },
+      schema: {
+        jobTitle: 'Freelance Frontend Developer · Vue & Nuxt',
+        description: 'Freelance web developer specialized in Vue.js, Nuxt 3 and UI/UX design. Works remotely from Colombia for clients worldwide.',
+        occupation: 'Freelance Web Developer'
+      }
+    },
     nav: {
       links: { home: 'Home', about: 'About', projects: 'Projects', contact: 'Contact' },
       ctaProjects: 'View projects',

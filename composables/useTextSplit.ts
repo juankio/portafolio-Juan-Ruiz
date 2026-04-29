@@ -75,6 +75,9 @@ export const useTextSplit = (selector, options = {}) => {
           const isScrollingDown = currentScrollY >= lastScrollY
           lastScrollY = currentScrollY
 
+          // Optimization: Check for prefers-reduced-motion
+          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
           entries.forEach(entry => {
             const targets = entry.target.querySelectorAll('.split-char')
             if (entry.isIntersecting) {
@@ -83,22 +86,38 @@ export const useTextSplit = (selector, options = {}) => {
               if (!repeat && entry.target.classList.contains('text-animated')) return
               entry.target.classList.add('text-animated')
 
-              const yOffset = isScrollingDown ? 20 : -20
-              const rotation = isScrollingDown ? 5 : -5
+              if (prefersReducedMotion) {
+                // If user prefers reduced motion, just fade in the container
+                anime({
+                  targets: entry.target,
+                  opacity: [0, 1],
+                  duration,
+                  easing: 'linear'
+                })
+                anime.set(targets, { opacity: 1, translateY: 0, rotate: 0 })
+              } else {
+                // Normal animated text split
+                const yOffset = isScrollingDown ? 20 : -20
+                const rotation = isScrollingDown ? 5 : -5
 
-              anime({
-                targets,
-                translateY: [yOffset, 0],
-                opacity: [0, 1],
-                rotate: [rotation, 0],
-                easing,
-                duration,
-                delay: anime.stagger(stagger, { start: delay })
-              })
+                anime({
+                  targets,
+                  translateY: [yOffset, 0],
+                  opacity: [0, 1],
+                  rotate: [rotation, 0],
+                  easing,
+                  duration,
+                  delay: anime.stagger(stagger, { start: delay })
+                })
+              }
               
               if (!repeat) observer.unobserve(entry.target)
             } else if (repeat) {
-              anime.set(targets, { opacity: 0 })
+              if (prefersReducedMotion) {
+                anime.set(entry.target, { opacity: 0 })
+              } else {
+                anime.set(targets, { opacity: 0 })
+              }
               entry.target.classList.remove('text-animated')
             }
           })

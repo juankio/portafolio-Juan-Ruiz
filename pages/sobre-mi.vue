@@ -8,11 +8,11 @@ const { t } = useI18n()
 const siteUrl = useRuntimeConfig().public.siteUrl
 
 useSeoMeta({
-  title: 'Sobre mí — Juan Miguel Ruiz Supelano | Freelance Vue & Nuxt Developer',
-  description: 'Conoce a Juan Miguel Ruiz Supelano, desarrollador freelance en Villavicencio, Colombia. Experiencia en Vue.js, Nuxt 3, Tailwind y diseño UI/UX para proyectos remotos en Latinoamérica.',
-  keywords: 'sobre Juan Miguel Ruiz, biografía desarrollador freelance, experiencia Vue Nuxt Colombia, desarrollador Villavicencio, programador freelance Meta, currículum frontend developer',
-  ogTitle: 'Sobre Juan Miguel Ruiz Supelano | Freelance Developer',
-  ogDescription: 'Desarrollador freelance en Villavicencio, Colombia. Mi trayectoria, stack y forma de trabajar.',
+  title: computed(() => t('seo.about.title')),
+  description: computed(() => t('seo.about.description')),
+  keywords: computed(() => t('seo.about.keywords')),
+  ogTitle: computed(() => t('seo.about.ogTitle')),
+  ogDescription: computed(() => t('seo.about.ogDescription')),
   ogUrl: `${siteUrl}/sobre-mi`,
   ogType: 'profile',
   ogImage: `${siteUrl}/icons/pwa-512x512.png`,
@@ -35,18 +35,8 @@ const courses = computed(() => {
 </script>
 
 <template>
-  <UPage
-    class="sobre-mi-wall relative min-h-screen bg-brick"
-    :class="isLight ? 'text-slate-800' : 'text-slate-200'"
-  >
-    <!-- Full page concrete overlay -->
-    <div class="absolute inset-0 bg-concrete pointer-events-none" />
-
-    <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
-      <div class="flex flex-col gap-8 lg:gap-12">
-        <AboutSection :is-light="isLight" />
-        <EducationSection :is-light="isLight" :education="education" :courses="courses" />
-      </div>
-    </UPageBody>
-  </UPage>
+  <div class="flex flex-col gap-8 lg:gap-12 py-4 sm:py-8 lg:py-12">
+    <AboutSection :is-light="isLight" />
+    <EducationSection :is-light="isLight" :education="education" :courses="courses" />
+  </div>
 </template>
