@@ -40,6 +40,8 @@ const localeItems = [
 <template>
   <UDrawer
     v-model:open="open"
+    title="Menú principal"
+    description="Navegación del sitio"
     :ui="{
       content: 'mobile-drawer-content',
       handle: 'mobile-drawer-handle',
@@ -49,7 +51,7 @@ const localeItems = [
     <slot name="trigger" />
 
     <template #content>
-        <div class="relative px-6 pb-8 pt-2 overflow-hidden">
+      <div class="relative px-6 pb-8 pt-2 overflow-hidden w-full h-full">
           <!-- Spray decorations -->
           <SpraySplatter class="absolute -top-4 -right-6 pointer-events-none" size="md" :opacity="0.06" />
           <SpraySplatter class="absolute bottom-6 -left-4 pointer-events-none" size="sm" :opacity="0.04" color="var(--spray-cyan)" />

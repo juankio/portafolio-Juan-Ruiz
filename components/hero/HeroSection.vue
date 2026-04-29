@@ -3,6 +3,7 @@ import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
 import StreetButton from '~/components/ui/StreetButton.vue'
+import anime from 'animejs'
 
 const props = defineProps({
   isLight: { type: Boolean, default: false }
@@ -68,7 +69,19 @@ watch(rotatingWords, () => {
 
 onMounted(() => {
   startTypingCycle()
+  
+  // Anime.js Stagger Animation for Hero Elements
+  anime({
+    targets: '.anime-element',
+    translateY: [20, 0],
+    opacity: [0, 1],
+    delay: anime.stagger(100, { start: 200 }),
+    easing: 'easeOutElastic(1, .8)',
+    duration: 1000
+  })
 })
+
+useTextSplit('.split-text-hero', { stagger: 40, duration: 1000 })
 
 onBeforeUnmount(() => {
   clearTimers()
@@ -94,19 +107,19 @@ onBeforeUnmount(() => {
       <UBadge
         size="lg"
         variant="outline"
-        class="gap-2 animate-fade-in-up"
+        class="gap-2 anime-element opacity-0"
         :class="isLight ? 'border-[var(--color-accent)]/40 text-slate-600' : 'border-[var(--color-accent)]/40 text-slate-300'"
       >
         <span class="inline-flex h-2 w-2 rounded-full bg-[var(--color-accent)]" />
         {{ t('hero.availability') }}
       </UBadge>
 
-      <div class="space-y-4 animate-fade-in-up stagger-1">
+      <div class="space-y-4 anime-element opacity-0">
         <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
           {{ t('hero.tagline') }}
         </p>
         <h1
-          class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl"
+          class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl split-text-hero"
           :class="isLight ? 'text-slate-700' : 'text-white'"
         >
           {{ t('hero.title.main') }}
@@ -120,7 +133,7 @@ onBeforeUnmount(() => {
       </div>
 
       <!-- Typing effect with graffiti style -->
-      <div class="flex flex-wrap items-center gap-4 text-lg font-semibold animate-fade-in-up stagger-2" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
+      <div class="flex flex-wrap items-center gap-4 text-lg font-semibold anime-element opacity-0" :class="isLight ? 'text-slate-700' : 'text-slate-200'">
         <span :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ t('hero.rolePrefix') }}</span>
         <span class="relative border-sketchy px-4 py-2">
           <span class="font-marker text-[var(--color-accent)]" style="letter-spacing: 0.04em">{{ displayWord }}</span>
@@ -128,7 +141,7 @@ onBeforeUnmount(() => {
         </span>
       </div>
 
-      <div class="flex flex-wrap gap-3 pt-2 animate-fade-in-up stagger-3">
+      <div class="flex flex-wrap gap-3 pt-2 anime-element opacity-0">
         <StreetButton to="/proyectos" variant="primary">
           {{ t('hero.ctas.projects') }}
         </StreetButton>
@@ -142,7 +155,7 @@ onBeforeUnmount(() => {
         <div
           v-for="(card, idx) in heroCards"
           :key="card.label"
-          class="relative px-5 py-4 border-2 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_12px_var(--color-accent-soft)] animate-fade-in-up"
+          class="relative px-5 py-4 border-2 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_12px_var(--color-accent-soft)] anime-element opacity-0"
           :class="isLight ? 'border-[var(--color-border)] bg-[var(--color-surface-card)]' : 'border-[var(--color-border)] bg-[var(--color-surface-card)]'"
           :style="{
             borderRadius: '4px 10px 5px 8px',

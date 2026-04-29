@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import GraffitiWall from './GraffitiWall.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
+import { useScrollAnimation } from '~/composables/useScrollAnimation'
+import { useTextSplit } from '~/composables/useTextSplit'
 
 const props = defineProps({
   isLight: { type: Boolean, default: false },
@@ -30,14 +32,26 @@ const flyerRotation = (idx: number) => {
   const angles = [-1.5, 1.2, -0.8, 1.8, -1]
   return angles[idx % angles.length]
 }
+
+useScrollAnimation('.edu-animate-trigger', {
+  animation: {
+    translateY: [40, 0],
+    opacity: [0, 1],
+    easing: 'easeOutExpo',
+    duration: 1200
+  },
+  stagger: 150
+})
+
+useTextSplit('.split-text-wall', { stagger: 30 })
 </script>
 
 <template>
   <UContainer as="section" id="educacion" class="py-14 sm:py-20">
     <div class="space-y-10">
       <!-- Header -->
-      <div class="flex flex-wrap items-end justify-between gap-4 animate-fade-in-up">
-        <div class="relative">
+      <div class="flex flex-wrap items-end justify-between gap-4 edu-animate-trigger animate-group">
+        <div class="relative animate-item opacity-0">
           <span
             class="tag-sticker text-xs uppercase tracking-widest mb-3 inline-block"
             style="transform: rotate(-2deg)"
@@ -49,14 +63,14 @@ const flyerRotation = (idx: number) => {
           </h2>
           <PaintDrip class="absolute -bottom-3 left-8" :count="2" :animated="true" />
         </div>
-        <GraffitiTag :text="t('education.interact')" :index="3" size="sm" />
+        <GraffitiTag class="animate-item opacity-0" :text="t('education.interact')" :index="3" size="sm" />
       </div>
 
       <!-- Formación formal — flyers pegados directo en el muro -->
-      <div v-if="education.length" class="edu-wall relative overflow-hidden">
+      <div v-if="education.length" class="edu-wall relative overflow-hidden edu-animate-trigger animate-group">
         <div class="relative z-10 p-6 sm:p-8">
           <span
-            class="tag-sticker text-xs uppercase tracking-widest mb-6 inline-block"
+            class="tag-sticker text-xs uppercase tracking-widest mb-6 inline-block animate-item opacity-0"
             style="transform: rotate(1.5deg)"
           >
             {{ t('education.educationTitle') }}
@@ -66,7 +80,7 @@ const flyerRotation = (idx: number) => {
             <div
               v-for="(item, idx) in education"
               :key="item.title"
-              class="edu-flyer group relative animate-fade-in-up"
+              class="edu-flyer group relative animate-item opacity-0"
               :style="{ transform: `rotate(${flyerRotation(idx)}deg)`, animationDelay: `${idx * 0.08}s` }"
             >
               <!-- Pin -->

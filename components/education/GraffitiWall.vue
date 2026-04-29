@@ -2,6 +2,7 @@
 import WallTag from './WallTag.vue'
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
+import { useScrollAnimation } from '~/composables/useScrollAnimation'
 
 const props = defineProps<{
   isLight: boolean
@@ -13,14 +14,44 @@ const emit = defineEmits<{
   select: [course: any]
 }>()
 
+const { t } = useI18n()
 const onSelect = (course: any) => emit('select', course)
 
 // Alternate left/right for desktop timeline
 const isLeft = (index: number) => index % 2 === 0
+
+// Animar los nodos del timeline
+useScrollAnimation('.timeline-animate-trigger', {
+  animation: {
+    translateY: [30, 0],
+    opacity: [0, 1],
+    easing: 'easeOutQuart',
+    duration: 1000
+  },
+  stagger: 150
+})
 </script>
 
 <template>
-  <div class="graffiti-wall relative overflow-hidden">
+  <div class="graffiti-wall relative overflow-hidden mt-12 pt-8 border-t-2 border-dashed border-white/10">
+
+    <!-- Header Title for Timeline -->
+    <div class="relative z-10 px-6 sm:px-8 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+      <div class="relative">
+        <p class="text-sm uppercase tracking-[0.25em] mb-2" :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ t('education.summary') }}</p>
+        <h3 class="text-3xl font-bold text-spray sm:text-4xl split-text-wall" :class="isLight ? 'text-slate-700' : 'text-white'">
+          Ruta de <span class="text-[var(--color-accent)]">Aprendizaje</span>
+        </h3>
+      </div>
+      
+      <!-- Helper text with street style -->
+      <div class="flex items-center gap-3">
+        <span class="text-sm font-marker" :class="isLight ? 'text-slate-500' : 'text-slate-400'" style="letter-spacing: 0.04em">
+          {{ t('education.hint') }}
+        </span>
+        <UIcon name="i-heroicons-hand-raised-solid" class="w-5 h-5 text-[var(--color-accent)] animate-bounce" />
+      </div>
+    </div>
 
     <!-- Spray decorations -->
     <SpraySplatter class="absolute top-6 right-6 pointer-events-none" size="lg" :opacity="0.08" />
@@ -44,12 +75,12 @@ const isLeft = (index: number) => index % 2 === 0
     <div class="timeline-line timeline-line--glow" aria-hidden="true" />
 
     <!-- Tags on the wall — timeline layout -->
-    <div role="list" aria-label="Cursos y certificaciones" class="timeline-list relative py-8 sm:py-12">
+    <div role="list" aria-label="Cursos y certificaciones" class="timeline-list relative py-8 sm:py-12 timeline-animate-trigger animate-group">
       <div
         v-for="(course, idx) in courses"
         :key="course.title"
         role="listitem"
-        class="timeline-item"
+        class="timeline-item animate-item opacity-0"
         :class="isLeft(idx) ? 'timeline-item--left' : 'timeline-item--right'"
       >
         <!-- Node on the line -->

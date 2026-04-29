@@ -20,8 +20,8 @@ useHead({
   link: [{ rel: 'canonical', href: `${siteUrl}/proyectos` }]
 })
 
-const { data, pending, error, refresh } = await useAsyncData('github-repos', async () => {
-  const repos = await $fetch('https://api.github.com/users/juankio/repos?sort=updated&per_page=50', {
+const { data, pending, error, refresh } = await useAsyncData('github-starred-repos', async () => {
+  const repos = await $fetch('https://api.github.com/users/juankio/starred?sort=created&per_page=50', {
     headers: {
       Accept: 'application/vnd.github+json',
       'User-Agent': 'nuxt-portfolio'
@@ -33,13 +33,8 @@ const { data, pending, error, refresh } = await useAsyncData('github-repos', asy
 const featuredProjects = computed(() => {
   if (!data.value) return []
   return [...data.value]
-    .filter((repo) => !repo.fork)
-    .sort((a, b) => {
-      if (b.stargazers_count === a.stargazers_count) {
-        return new Date(b.updated_at) - new Date(a.updated_at)
-      }
-      return b.stargazers_count - a.stargazers_count
-    })
+    // Solo mostrar proyectos donde juankio sea el dueño
+    .filter((repo) => repo.owner.login === 'juankio')
     .slice(0, 12)
 })
 </script>

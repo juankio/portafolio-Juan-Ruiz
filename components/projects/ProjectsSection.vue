@@ -22,6 +22,18 @@ const getPreviewImage = (project) => {
   }
   return getOgImage(project.name)
 }
+
+useScrollAnimation('.projects-animate-trigger', {
+  animation: {
+    translateY: [40, 0],
+    opacity: [0, 1],
+    easing: 'easeOutExpo',
+    duration: 1000
+  },
+  stagger: 100
+})
+
+useTextSplit('.split-text-projects', { stagger: 30 })
 </script>
 
 <template>
@@ -32,15 +44,15 @@ const getPreviewImage = (project) => {
   >
     <SpraySplatter class="absolute -top-6 -right-4" size="lg" :opacity="0.08" />
 
-    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-      <div>
-        <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ t('projects.sectionTitle') }}</p>
-        <h2 class="text-3xl font-bold text-spray sm:text-4xl" :class="isLight ? 'text-slate-700' : 'text-white'">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between projects-animate-trigger animate-group">
+      <div class="animate-item opacity-0">
+        <p class="text-sm uppercase tracking-[0.25em] mb-2" :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ t('projects.sectionTitle') }}</p>
+        <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl split-text-projects" :class="isLight ? 'text-slate-700' : 'text-white'">
           {{ t('projects.headline') }}
           <span class="text-[var(--color-accent)]">{{ t('projects.headlineAccent') }}</span>
         </h2>
       </div>
-      <div class="flex gap-3">
+      <div class="flex gap-3 animate-item opacity-0">
         <StreetButton
           v-if="onRefresh"
           variant="primary"
@@ -79,11 +91,11 @@ const getPreviewImage = (project) => {
         {{ t('projects.empty') }}
       </div>
 
-      <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 projects-animate-trigger animate-group">
         <article
           v-for="(project, idx) in projects"
           :key="project.id"
-          class="group relative flex flex-col overflow-hidden border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_16px_var(--color-accent-soft)] animate-fade-in-up"
+          class="group relative flex flex-col overflow-hidden border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_16px_var(--color-accent-soft)] animate-item opacity-0"
           :class="isLight ? 'border-[var(--color-border)] bg-[var(--color-surface-card)]' : 'border-[var(--color-border)] bg-[var(--color-surface-card)]'"
           :style="{
             borderRadius: '4px 12px 6px 10px',

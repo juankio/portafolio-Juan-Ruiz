@@ -2,6 +2,7 @@
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import StreetButton from '~/components/ui/StreetButton.vue'
+import anime from 'animejs'
 
 const props = defineProps({
   isLight: {
@@ -31,6 +32,18 @@ const chipRotation = (idx: number) => {
   const angles = [-2, 1.5, -1, 2.5, -1.5, 1.8]
   return angles[idx % angles.length]
 }
+
+useScrollAnimation('.about-animate-trigger', {
+  animation: {
+    translateY: [40, 0],
+    opacity: [0, 1],
+    easing: 'easeOutExpo',
+    duration: 1200
+  },
+  stagger: 150
+})
+
+useTextSplit('.split-text-about', { stagger: 30 })
 </script>
 
 <template>
@@ -39,20 +52,20 @@ const chipRotation = (idx: number) => {
     id="sobre-mi"
     class="py-14 sm:py-20"
   >
-    <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+    <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start about-animate-trigger animate-group">
       <!-- Left column -->
-      <div class="space-y-6 animate-fade-in-up">
+      <div class="space-y-6">
         <!-- Section label as tape sticker -->
         <span
-          class="tag-sticker inline-block text-xs uppercase tracking-widest"
+          class="tag-sticker inline-block text-xs uppercase tracking-widest animate-item opacity-0"
           style="transform: rotate(-1.5deg)"
         >
           {{ t('about.sectionTitle') }}
         </span>
 
         <!-- Headline with spray effect -->
-        <div class="relative">
-          <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl leading-tight" :class="isLight ? 'text-slate-700' : 'text-white'">
+        <div class="relative animate-item opacity-0">
+          <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl leading-tight split-text-about" :class="isLight ? 'text-slate-700' : 'text-white'">
             {{ t('about.headline.lead') }}
             <span class="text-[var(--color-accent)]">{{ t('about.headline.accent') }}</span>
             {{ t('about.headline.tail') }}
@@ -65,12 +78,12 @@ const chipRotation = (idx: number) => {
         </div>
 
         <!-- Intro text -->
-        <p class="text-base leading-relaxed max-w-xl" :class="isLight ? 'text-slate-500' : 'text-slate-400'" style="letter-spacing: 0.04em">
+        <p class="text-base leading-relaxed max-w-xl animate-item opacity-0" :class="isLight ? 'text-slate-500' : 'text-slate-400'" style="letter-spacing: 0.04em">
           {{ t('about.intro') }}
         </p>
 
         <!-- Chips as graffiti stickers -->
-        <div class="flex flex-wrap gap-3 pt-1">
+        <div class="flex flex-wrap gap-3 pt-1 animate-item opacity-0">
           <span
             v-for="(chip, idx) in aboutChips"
             :key="chip"
@@ -82,7 +95,7 @@ const chipRotation = (idx: number) => {
         </div>
 
         <!-- CTAs with sketchy style -->
-        <div class="flex flex-wrap gap-4 pt-3">
+        <div class="flex flex-wrap gap-4 pt-3 animate-item opacity-0">
           <StreetButton to="/proyectos" variant="primary">
             {{ t('hero.ctas.projects') }}
           </StreetButton>
@@ -93,9 +106,9 @@ const chipRotation = (idx: number) => {
       </div>
 
       <!-- Right column -->
-      <div class="space-y-6 animate-fade-in-up stagger-2">
+      <div class="space-y-6">
         <!-- Profile card as street poster -->
-        <div class="about-poster relative overflow-hidden">
+        <div class="about-poster relative overflow-hidden animate-item opacity-0">
           <!-- Spray decorations -->
           <SpraySplatter class="absolute -top-2 -right-2" size="sm" :opacity="0.08" />
 
@@ -169,7 +182,7 @@ const chipRotation = (idx: number) => {
         </div>
 
         <!-- Skills as tagged wall -->
-        <div class="about-skills-wall relative overflow-hidden">
+        <div class="about-skills-wall relative overflow-hidden animate-item opacity-0">
           <SpraySplatter class="absolute bottom-4 left-2" size="md" :opacity="0.05" />
 
           <div class="relative z-10 p-6">

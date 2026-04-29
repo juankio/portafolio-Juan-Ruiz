@@ -66,12 +66,14 @@ const tagAccent = computed(() => accentColors[props.index % accentColors.length]
       {{ course.place }}
     </p>
 
-    <!-- Expand detail on selected -->
-    <Transition name="detail-expand">
-      <p v-if="isSelected && course.detail" class="wall-tag__detail">
-        {{ course.detail }}
-      </p>
-    </Transition>
+    <!-- Expand detail on selected (CSS Grid approach for smooth DOM) -->
+    <div class="wall-tag__detail-wrapper" :class="{ 'is-expanded': isSelected }">
+      <div class="wall-tag__detail-inner">
+        <p v-if="course.detail" class="wall-tag__detail-text">
+          {{ course.detail }}
+        </p>
+      </div>
+    </div>
 
     <!-- Spray dots decoration -->
     <svg class="wall-tag__spray" viewBox="0 0 50 50" aria-hidden="true">
@@ -201,8 +203,25 @@ const tagAccent = computed(() => accentColors[props.index % accentColors.length]
   opacity: 0.8;
 }
 
-/* Detail */
-.wall-tag__detail {
+/* Detail Wrapper for smooth DOM expansion */
+.wall-tag__detail-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: grid-template-rows;
+}
+
+.wall-tag__detail-wrapper.is-expanded {
+  grid-template-rows: 1fr;
+}
+
+.wall-tag__detail-inner {
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* Detail Text with 3D Flip */
+.wall-tag__detail-text {
   margin-top: 8px;
   padding-top: 8px;
   border-top: 1px dashed var(--color-border);
@@ -210,6 +229,17 @@ const tagAccent = computed(() => accentColors[props.index % accentColors.length]
   letter-spacing: 0.03em;
   line-height: 1.5;
   color: var(--color-text-secondary);
+  
+  opacity: 0;
+  transform: rotateX(-90deg) translateY(-10px);
+  transform-origin: top;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.wall-tag__detail-wrapper.is-expanded .wall-tag__detail-text {
+  opacity: 1;
+  transform: rotateX(0deg) translateY(0);
+  transition-delay: 0.1s;
 }
 
 /* Spray dots */
@@ -281,24 +311,4 @@ const tagAccent = computed(() => accentColors[props.index % accentColors.length]
   opacity: 0.6;
 }
 
-/* Detail transition */
-.detail-expand-enter-active {
-  transition: all 0.35s var(--ease-spring);
-}
-.detail-expand-leave-active {
-  transition: all 0.2s ease;
-}
-.detail-expand-enter-from {
-  opacity: 0;
-  max-height: 0;
-  transform: translateY(-4px);
-}
-.detail-expand-leave-to {
-  opacity: 0;
-  max-height: 0;
-}
-.detail-expand-enter-to,
-.detail-expand-leave-from {
-  max-height: 200px;
-}
 </style>

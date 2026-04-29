@@ -49,7 +49,7 @@ El diseño está enfocado en una **excelente experiencia de usuario (UX)**, micr
 
 ## 🚀 Instalación y Uso local
 
-Sigue estos pasos para correr el portafolio en tu máquina local. Estoy usando `bun`, pero puedes usar `npm` o `yarn` o `pnpm`.
+Sigue estos pasos para correr el portafolio en tu máquina local. Este proyecto utiliza exclusivamente `bun` para la gestión de paquetes.
 
 ### 1. Clonar el repositorio
 ```bash

@@ -34,13 +34,13 @@ export const messages = {
       },
       intro:
         'Soy Juan Miguel, dev frontend desde Villavicencio (CO). Estudio Ingenieria de Sistemas de dia y rompo layouts de noche. Me obsesiona que las webs carguen rapido, que la UI no aburra y que el usuario sepa que hacer en cada pantalla sin manual.',
-      chips: ['Nuxt 3', 'UX/UI', 'AI Agents', 'Animacion', 'PWAs', 'Cafe negro'],
+      chips: ['Nuxt 3', 'UX/UI', 'AI Agents', 'Animacion', 'Angular', 'Flask', 'Anime.js', 'PWAs', 'Cafe negro'],
       availability: 'Abierto',
       skillsTitle: 'Habilidades',
       summary: [
-        { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
-        { label: 'UX + Motion', value: 'GSAP · Microinteracciones · A11y' },
-        { label: 'Obsesion', value: 'Rendimiento · Flujos claros · Cero ruido' }
+        { label: 'Stack Web', value: 'Vue 3 · Nuxt 3 · Angular' },
+        { label: 'UX + Motion', value: 'Anime.js · GSAP · A11y' },
+        { label: 'IA & Backend', value: 'Prompt Eng. · Claude · Flask' }
       ],
       skills: [
         {
@@ -63,8 +63,8 @@ export const messages = {
     },
     projects: {
       sectionTitle: 'Proyectos',
-      headline: 'Cosas que he roto en',
-      headlineAccent: 'GitHub',
+      headline: 'Mis mejores líneas de',
+      headlineAccent: 'Código',
       refresh: 'Actualizar',
       github: 'GitHub',
       error: 'Se cayo la conexion con GitHub. Dale actualizar o revisa en un rato.',
@@ -142,20 +142,26 @@ export const messages = {
         {
           title: 'Vue.js 3 - Composition API + Pinia + MEVN (10 Apps)',
           place: 'Udemy',
-          period: '2024',
+          period: '2026',
           detail: 'Interfaces modernas, manejo de estado, APIs y el entorno MEVN a fondo.'
         },
         {
           title: 'Dart + Introduccion a Flutter',
           place: 'Udemy',
-          period: '2024',
+          period: '2026',
           detail: 'Fundamentos de apps moviles multiplataforma.'
         },
         {
           title: 'Proyecto Aliado Latino - Desarrollador Full-Stack',
           place: 'Proyecto Aliado Latino',
-          period: '2024',
+          period: '2026',
           detail: 'Plataforma web con integracion a Google Drive API, autenticacion, manejo de archivos y dashboard empresarial.'
+        },
+        {
+          title: 'Anthropic AI Engineering',
+          place: 'Anthropic Courses',
+          period: '2026',
+          detail: 'Desarrollo avanzado de agentes de IA, prompt engineering y tool use con Claude.'
         },
         {
           title: 'Proyectos Personales Full-Stack',
@@ -233,13 +239,13 @@ export const messages = {
       },
       intro:
         "I'm Juan Miguel, a frontend dev from Villavicencio (CO). Studying Systems Engineering by day, breaking layouts by night. I care about pages that load fast, UI that doesn't bore you, and users who know exactly what to do next.",
-      chips: ['Nuxt 3', 'UX/UI', 'AI Agents', 'Animation', 'PWAs', 'Black coffee'],
+      chips: ['Nuxt 3', 'UX/UI', 'AI Agents', 'Animation', 'Angular', 'Flask', 'Anime.js', 'PWAs', 'Black coffee'],
       availability: 'Open',
       skillsTitle: 'Skills',
       summary: [
-        { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
-        { label: 'UX + Motion', value: 'GSAP · Microinteractions · A11y' },
-        { label: 'Obsession', value: 'Performance · Clear flows · Zero noise' }
+        { label: 'Web Stack', value: 'Vue 3 · Nuxt 3 · Angular' },
+        { label: 'UX + Motion', value: 'Anime.js · GSAP · A11y' },
+        { label: 'AI & Backend', value: 'Prompt Eng. · Claude · Flask' }
       ],
       skills: [
         {
@@ -262,8 +268,8 @@ export const messages = {
     },
     projects: {
       sectionTitle: 'Projects',
-      headline: 'Stuff I broke on',
-      headlineAccent: 'GitHub',
+      headline: 'My best lines of',
+      headlineAccent: 'Code',
       refresh: 'Refresh',
       github: 'GitHub',
       error: 'GitHub connection dropped. Hit refresh or come back in a bit.',
@@ -341,20 +347,26 @@ export const messages = {
         {
           title: 'Vue.js 3 - Composition API + Pinia + MEVN (10 Apps)',
           place: 'Udemy',
-          period: '2024',
+          period: '2026',
           detail: 'Modern interfaces, state management, APIs and the full MEVN environment.'
         },
         {
           title: 'Dart + Introduction to Flutter',
           place: 'Udemy',
-          period: '2024',
+          period: '2026',
           detail: 'Cross-platform mobile application fundamentals.'
         },
         {
           title: 'Aliado Latino Project - Full-Stack Developer',
           place: 'Proyecto Aliado Latino',
-          period: '2024',
+          period: '2026',
           detail: 'Web platform with Google Drive API integration, authentication, file management and business dashboard.'
+        },
+        {
+          title: 'Anthropic AI Engineering',
+          place: 'Anthropic Courses',
+          period: '2026',
+          detail: 'Advanced AI agent development, prompt engineering, and tool use with Claude.'
         },
         {
           title: 'Personal Full-Stack Projects',
