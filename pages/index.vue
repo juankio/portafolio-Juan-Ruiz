@@ -109,15 +109,15 @@ useHead({
     <div class="absolute inset-0 bg-concrete pointer-events-none" />
     <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
       <HeroSection :is-light="isLight" />
-      <LazyAboutSection :is-light="isLight" />
-      <LazyProjectsSection
+      <AboutSection :is-light="isLight" />
+      <ProjectsSection
         :is-light="isLight"
         :projects="featuredProjects"
         :pending="pending"
         :error="error"
         :on-refresh="refresh"
       />
-      <LazyContactSection :is-light="isLight" />
+      <ContactSection :is-light="isLight" />
     </UPageBody>
   </UPage>
 </template>
