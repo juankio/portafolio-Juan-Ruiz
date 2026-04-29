@@ -20,7 +20,7 @@ useHead({
   link: [{ rel: 'canonical', href: `${siteUrl}/proyectos` }]
 })
 
-const { data, pending, error, refresh } = await useAsyncData('github-starred-repos', async () => {
+const { data, pending, error, refresh } = useLazyAsyncData('github-starred-repos', async () => {
   const repos = await $fetch('https://api.github.com/users/juankio/starred?sort=created&per_page=50', {
     headers: {
       Accept: 'application/vnd.github+json',

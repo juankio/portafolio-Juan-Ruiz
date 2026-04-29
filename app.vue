@@ -33,6 +33,7 @@ useHead({
 
 <template>
   <UApp :locale="currentLocale">
+    <AppLoader :is-light="isLight" />
     <NuxtLoadingIndicator color="var(--color-accent)" :height="3" />
     <VueLenis root :options="lenisOptions">
       <NuxtLayout>
