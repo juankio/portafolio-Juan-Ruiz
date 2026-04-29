@@ -40,7 +40,7 @@ useTextSplit('.split-text-projects', { stagger: 30 })
   <UContainer
     as="section"
     id="proyectos"
-    class="relative py-14 sm:py-20"
+    class="relative py-8 sm:py-14 lg:py-20"
   >
     <SpraySplatter class="absolute -top-6 -right-4" size="lg" :opacity="0.08" />
 
@@ -74,7 +74,7 @@ useTextSplit('.split-text-projects', { stagger: 30 })
       </div>
     </div>
 
-    <div class="mt-10">
+    <div class="mt-8 sm:mt-10 lg:mt-14">
       <UAlert v-if="error" color="error" variant="soft" class="rounded-2xl">
         {{ t('projects.error') }}
       </UAlert>
