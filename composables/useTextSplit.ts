@@ -33,7 +33,7 @@ export const useTextSplit = (selector, options = {}) => {
               
               const wordSpan = document.createElement('span')
               wordSpan.style.display = 'inline-block'
-              wordSpan.style.whiteSpace = 'pre-wrap'
+              wordSpan.style.whiteSpace = 'nowrap' // Mantiene la palabra entera, no parte letras
               
               const chars = word.split('')
               chars.forEach(char => {

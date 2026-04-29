@@ -99,7 +99,7 @@ const tagAccent = computed(() => accentColors[props.index % accentColors.length]
 <style scoped>
 .wall-tag {
   position: relative;
-  padding: 1.25rem 1.5rem 1.25rem 3.5rem;
+  padding: 1.25rem 1rem 1.25rem 3rem; /* Padding reducido para celular */
   border-radius: 4px 12px 6px 10px;
   border: 2px solid var(--color-border);
   background: var(--color-surface-card);
@@ -108,6 +108,12 @@ const tagAccent = computed(() => accentColors[props.index % accentColors.length]
   transition: all 0.3s var(--ease-spring);
   max-width: 400px;
   width: 100%;
+}
+
+@media (min-width: 640px) {
+  .wall-tag {
+    padding: 1.25rem 1.5rem 1.25rem 3.5rem;
+  }
 }
 
 .wall-tag:hover {

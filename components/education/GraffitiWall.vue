@@ -174,6 +174,7 @@ useScrollAnimation('.timeline-animate-trigger', {
 .timeline-item {
   position: relative;
   padding-left: 3.5rem;
+  padding-right: 1.25rem; /* Evita que la tarjeta toque el borde derecho en celular */
   z-index: 2;
 }
 
@@ -184,6 +185,7 @@ useScrollAnimation('.timeline-animate-trigger', {
     align-items: center;
     gap: 2rem;
     padding-left: 0;
+    padding-right: 0;
   }
 
   .timeline-item--left .timeline-card-wrap {

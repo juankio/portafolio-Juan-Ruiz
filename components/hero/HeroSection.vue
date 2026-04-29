@@ -152,21 +152,20 @@ onBeforeUnmount(() => {
 
       <!-- Hero cards as graffiti stickers -->
       <div v-if="heroCards.length" class="grid gap-5 sm:grid-cols-3 pt-4">
-        <div
-          v-for="(card, idx) in heroCards"
-          :key="card.label"
-          class="relative px-5 py-4 border-2 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_12px_var(--color-accent-soft)] anime-element opacity-0"
-          :class="isLight ? 'border-[var(--color-border)] bg-[var(--color-surface-card)]' : 'border-[var(--color-border)] bg-[var(--color-surface-card)]'"
-          :style="{
-            borderRadius: '4px 10px 5px 8px',
-            backdropFilter: 'blur(12px)',
-            transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)`,
-            animationDelay: `${0.2 + idx * 0.08}s`
-          }"
-        >
-          <PaintDrip class="absolute -top-2 right-4" :count="2" color="var(--color-accent)" />
-          <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ card.label }}</p>
-          <p class="text-lg font-semibold" :class="isLight ? 'text-slate-600' : 'text-slate-100'">{{ card.value }}</p>
+        <div v-for="(card, idx) in heroCards" :key="card.label" class="anime-element opacity-0">
+          <div
+            class="relative px-5 py-4 border-2 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_12px_var(--color-accent-soft)] h-full"
+            :class="isLight ? 'border-[var(--color-border)] bg-[var(--color-surface-card)]' : 'border-[var(--color-border)] bg-[var(--color-surface-card)]'"
+            :style="{
+              borderRadius: '4px 10px 5px 8px',
+              backdropFilter: 'blur(12px)',
+              transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)`
+            }"
+          >
+            <PaintDrip class="absolute -top-2 right-4" :count="2" color="var(--color-accent)" />
+            <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ card.label }}</p>
+            <p class="text-lg font-semibold" :class="isLight ? 'text-slate-600' : 'text-slate-100'">{{ card.value }}</p>
+          </div>
         </div>
       </div>
     </div>

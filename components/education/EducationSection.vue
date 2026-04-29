@@ -80,39 +80,43 @@ useTextSplit('.split-text-wall', { stagger: 30 })
             <div
               v-for="(item, idx) in education"
               :key="item.title"
-              class="edu-flyer group relative animate-item opacity-0"
-              :style="{ transform: `rotate(${flyerRotation(idx)}deg)`, animationDelay: `${idx * 0.08}s` }"
+              class="animate-item opacity-0"
             >
-              <!-- Pin -->
-              <div class="edu-flyer__pin" aria-hidden="true" />
-
-              <!-- Period tape -->
-              <span class="edu-flyer__tape font-marker">
-                {{ item.period }}
-              </span>
-
-              <div class="flex items-center gap-2 mb-2">
-                <UIcon name="i-heroicons-academic-cap-20-solid" class="w-4 h-4 text-[var(--color-accent)]" />
-                <span class="text-[0.65rem] font-bold uppercase tracking-wider text-[var(--color-accent)]">
-                  {{ item.place }}
-                </span>
-              </div>
-
-              <p class="text-sm font-bold leading-snug" :class="isLight ? 'text-slate-600' : 'text-slate-200'">
-                {{ item.title }}
-              </p>
-
-              <p
-                v-if="item.detail"
-                class="text-xs mt-2 leading-relaxed border-t border-dashed pt-2"
-                :class="isLight ? 'text-slate-500 border-slate-200' : 'text-slate-400 border-slate-700'"
-                style="letter-spacing: 0.03em"
+              <div
+                class="edu-flyer group relative h-full"
+                :style="{ transform: `rotate(${flyerRotation(idx)}deg)` }"
               >
-                {{ item.detail }}
-              </p>
+                <!-- Pin -->
+                <div class="edu-flyer__pin" aria-hidden="true" />
 
-              <!-- Spray accent on hover -->
-              <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[var(--color-accent)] opacity-0 group-hover:opacity-10 blur-md transition-opacity" />
+                <!-- Period tape -->
+                <span class="edu-flyer__tape font-marker">
+                  {{ item.period }}
+                </span>
+
+                <div class="flex items-center gap-2 mb-2">
+                  <UIcon name="i-heroicons-academic-cap-20-solid" class="w-4 h-4 text-[var(--color-accent)]" />
+                  <span class="text-[0.65rem] font-bold uppercase tracking-wider text-[var(--color-accent)]">
+                    {{ item.place }}
+                  </span>
+                </div>
+
+                <p class="text-sm font-bold leading-snug" :class="isLight ? 'text-slate-600' : 'text-slate-200'">
+                  {{ item.title }}
+                </p>
+
+                <p
+                  v-if="item.detail"
+                  class="text-xs mt-2 leading-relaxed border-t border-dashed pt-2"
+                  :class="isLight ? 'text-slate-500 border-slate-200' : 'text-slate-400 border-slate-700'"
+                  style="letter-spacing: 0.03em"
+                >
+                  {{ item.detail }}
+                </p>
+
+                <!-- Spray accent on hover -->
+                <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[var(--color-accent)] opacity-0 group-hover:opacity-10 blur-md transition-opacity" />
+              </div>
             </div>
           </div>
         </div>
