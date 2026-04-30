@@ -94,12 +94,12 @@ onBeforeUnmount(() => {
             <!-- Chispa de datos (ahora dentro del SVG) -->
             <circle
               ref="followerRef"
-              cx="10"
-              cy="60"
+              cx="0"
+              cy="0"
               r="3.5"
               fill="#ffffff"
               filter="url(#glow)"
-              style="transform-origin: 0 0;"
+              style="transform-origin: 0 0; transform: translate(10px, 60px);"
             />
           </svg>
         </div>
