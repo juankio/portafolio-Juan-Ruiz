@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { animate, svg } from 'animejs'
+import anime from 'animejs'
 import PaintDrip from './graffiti/PaintDrip.vue'
 
 const props = defineProps({
@@ -17,20 +17,26 @@ let drawAnimation: any = null
 onMounted(() => {
   if (pathRef.value && followerRef.value) {
     // 1. Animación del dibujo de la línea (SVG path)
-    drawAnimation = animate(svg.createDrawable(pathRef.value), {
-      draw: '0 1',
-      ease: 'inOutSine',
+    drawAnimation = anime({
+      targets: pathRef.value,
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutSine',
       duration: 1500,
-      alternate: true,
+      direction: 'alternate',
       loop: true
     })
 
-    // 2. Animación del punto siguiendo el path (Motion Path en AnimeJS v4)
-    pathAnimation = animate(followerRef.value, {
-      ease: 'linear',
+    // 2. Animación del punto siguiendo el path (Motion Path en AnimeJS v3)
+    const path = anime.path(pathRef.value)
+    
+    pathAnimation = anime({
+      targets: followerRef.value,
+      translateX: path('x'),
+      translateY: path('y'),
+      rotate: path('angle'),
+      easing: 'linear',
       duration: 3000,
-      loop: true,
-      ...svg.createMotionPath(pathRef.value)
+      loop: true
     })
   }
 
