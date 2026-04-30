@@ -2,7 +2,6 @@
 import AboutSection from '~/components/about/AboutSection.vue'
 import EducationSection from '~/components/education/EducationSection.vue'
 
-const { isLight } = useThemeMode()
 const { t } = useI18n()
 
 const siteUrl = useRuntimeConfig().public.siteUrl
@@ -36,7 +35,7 @@ const courses = computed(() => {
 
 <template>
   <div class="flex flex-col gap-8 lg:gap-12 py-4 sm:py-8 lg:py-12">
-    <AboutSection :is-light="isLight" />
-    <EducationSection :is-light="isLight" :education="education" :courses="courses" />
+    <AboutSection  />
+    <EducationSection  :education="education" :courses="courses" />
   </div>
 </template>

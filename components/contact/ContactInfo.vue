@@ -1,7 +1,7 @@
 <script setup lang="ts">
-defineProps<{
-  isLight: boolean
-}>()
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
+
 
 const { t, locale } = useI18n()
 

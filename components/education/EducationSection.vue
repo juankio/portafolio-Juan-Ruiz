@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+const isLight = inject('isLight', ref(false))
+import { inject,  ref, watch, computed  } from 'vue'
 import GraffitiWall from './GraffitiWall.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
@@ -7,7 +8,7 @@ import { useScrollAnimation } from '~/composables/useScrollAnimation'
 import { useTextSplit } from '~/composables/useTextSplit'
 
 const props = defineProps({
-  isLight: { type: Boolean, default: false },
+  
   education: { type: Array, default: () => [] },
   courses: { type: Array, default: () => [] }
 })

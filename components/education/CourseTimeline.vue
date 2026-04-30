@@ -1,10 +1,12 @@
 <script setup>
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 import { computed } from 'vue'
 import GlowCard from '~/components/ui/GlowCard.vue'
 import CourseCard3D from './CourseCard3D.vue'
 
 const props = defineProps({
-  isLight: { type: Boolean, default: false },
+  
   courses: { type: Array, default: () => [] },
   selectedCourse: { type: Object, default: null },
   cardWidth: { type: String, default: 'clamp(180px, 16vw, 220px)' }

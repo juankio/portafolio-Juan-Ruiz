@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 import WallTag from './WallTag.vue'
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
@@ -12,7 +14,7 @@ interface CourseItem {
 }
 
 const props = defineProps<{
-  isLight: boolean
+  
   courses: CourseItem[]
   selectedCourse: { title: string } | null
 }>()

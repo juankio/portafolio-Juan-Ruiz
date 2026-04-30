@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 defineProps<{
   overline?: string
   lead?: string
   accent?: string
   tail?: string
-  isLight?: boolean
+  
 }>()
 </script>
 

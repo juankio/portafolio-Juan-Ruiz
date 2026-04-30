@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+const isLight = inject('isLight', ref(false))
+import { inject,  ref, onMounted, onBeforeUnmount  } from 'vue'
 import { animate, svg } from 'animejs'
 import PaintDrip from './graffiti/PaintDrip.vue'
 
-const props = defineProps({
-  isLight: { type: Boolean, default: false }
-})
+
 
 const isLoaded = ref(false)
 const pathRef = ref(null)

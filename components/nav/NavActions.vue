@@ -1,6 +1,8 @@
 <script setup>
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 defineProps({
-  isLight: { type: Boolean, default: false },
+  
   stacked: { type: Boolean, default: false }
 })
 

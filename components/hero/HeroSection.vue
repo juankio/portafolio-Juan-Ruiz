@@ -1,13 +1,13 @@
 <script setup>
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
 import StreetButton from '~/components/ui/StreetButton.vue'
 import { animate, stagger } from 'animejs'
 
-const props = defineProps({
-  isLight: { type: Boolean, default: false }
-})
+
 
 const { t, locale } = useI18n()
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 import ContactInfo from './ContactInfo.vue'
 import ContactForm from './ContactForm.vue'
 
-defineProps<{
-  isLight: boolean
-}>()
+
 
 useScrollAnimation('.contact-animate-trigger', {
   animation: {

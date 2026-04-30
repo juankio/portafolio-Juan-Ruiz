@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 const props = defineProps<{
   course: {
     title: string
@@ -8,7 +10,7 @@ const props = defineProps<{
   }
   index: number
   isSelected: boolean
-  isLight: boolean
+  
 }>()
 
 const emit = defineEmits<{

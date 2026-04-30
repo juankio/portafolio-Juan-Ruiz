@@ -1,6 +1,8 @@
 <script setup>
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 const props = defineProps({
-  isLight: { type: Boolean, default: false },
+  
   rounded: { type: String, default: 'rounded-2xl' },
   bodyPadding: { type: String, default: 'p-5 sm:p-6' },
   class: { type: String, default: '' },

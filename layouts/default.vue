@@ -16,7 +16,7 @@ provide('toggleMode', toggleMode)
   >
     <SkipToContent />
     
-    <NavBar :is-light="isLight" @toggle-mode="toggleMode" />
+    <NavBar  @toggle-mode="toggleMode" />
     
     <UPage id="main-content" class="relative min-h-screen z-10" tabindex="-1">
       <div class="absolute inset-0 bg-concrete pointer-events-none" />
@@ -25,6 +25,6 @@ provide('toggleMode', toggleMode)
       </UPageBody>
     </UPage>
 
-    <FooterBar :is-light="isLight" />
+    <FooterBar  />
   </div>
 </template>

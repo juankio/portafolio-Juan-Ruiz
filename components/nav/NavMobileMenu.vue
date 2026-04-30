@@ -1,11 +1,10 @@
 <script setup>
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 
-const props = defineProps({
-  isLight: { type: Boolean, default: false }
-})
-const isLight = computed(() => props.isLight)
+
 
 const emit = defineEmits(['toggle-mode'])
 

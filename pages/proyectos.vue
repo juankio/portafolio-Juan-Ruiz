@@ -1,7 +1,6 @@
 <script setup>
 import ProjectsSection from '~/components/projects/ProjectsSection.vue'
 
-const { isLight } = useThemeMode()
 const siteUrl = useRuntimeConfig().public.siteUrl
 
 const { data, pending, error, refresh } = useLazyFetch('/api/github')
@@ -33,7 +32,7 @@ useHead({
 <template>
   <div class="space-y-0 py-4 sm:py-8 lg:py-12">
     <ProjectsSection
-      :is-light="isLight"
+      
       :projects="featuredProjects"
       :pending="pending"
       :error="error"

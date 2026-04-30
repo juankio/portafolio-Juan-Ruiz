@@ -1,5 +1,4 @@
 <script setup>
-const { isLight } = useThemeMode()
 const runtimeConfig = useRuntimeConfig()
 const siteUrl = runtimeConfig.public.siteUrl || 'https://mi-portafolio.com'
 
@@ -100,15 +99,15 @@ useHead({
 
 <template>
   <div class="space-y-0">
-    <HeroSection :is-light="isLight" />
-    <AboutSection :is-light="isLight" />
+    <HeroSection  />
+    <AboutSection  />
     <ProjectsSection
-      :is-light="isLight"
+      
       :projects="featuredProjects"
       :pending="pending"
       :error="error"
       :on-refresh="refresh"
     />
-    <ContactSection :is-light="isLight" />
+    <ContactSection  />
   </div>
 </template>

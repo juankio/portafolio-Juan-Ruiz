@@ -1,7 +1,6 @@
 <script setup>
 import ContactSection from '~/components/contact/ContactSection.vue'
 
-const { isLight } = useThemeMode()
 const siteUrl = useRuntimeConfig().public.siteUrl
 
 const { t } = useI18n()
@@ -25,6 +24,6 @@ useHead({
 
 <template>
   <div class="space-y-0 py-4 sm:py-8 lg:py-12">
-    <ContactSection :is-light="isLight" />
+    <ContactSection  />
   </div>
 </template>

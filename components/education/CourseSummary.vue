@@ -1,6 +1,8 @@
 <script setup>
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 const props = defineProps({
-  isLight: { type: Boolean, default: false },
+  
   courses: { type: Array, default: () => [] },
   selectedCourse: { type: Object, default: null }
 })

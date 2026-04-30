@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 defineProps<{
-  isLight?: boolean
+  
   variant?: 'project' | 'flyer'
 }>()
 </script>

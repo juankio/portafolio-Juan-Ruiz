@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 
-const props = defineProps<{
-  isLight: boolean
-}>()
 
 const toast = useToast()
 const { t } = useI18n()
@@ -143,6 +142,7 @@ const resetForm = () => {
             {{ t('contact.validation.successDesc') }}
           </p>
           <button
+            type="button"
             class="border-sketchy px-5 py-2 text-sm font-bold transition-all hover:scale-105"
             :class="isLight ? 'text-slate-600' : 'text-slate-300'"
             @click="resetForm"
@@ -155,75 +155,78 @@ const resetForm = () => {
         <form v-else key="form" class="space-y-5" @submit.prevent="handleSubmit">
           <!-- Name -->
           <div class="contact-field">
-            <label class="contact-field__label font-marker" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-              <span class="contact-field__number">01</span>
+            <label for="contact-name" class="contact-field__label font-marker" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
+              <span class="contact-field__number" aria-hidden="true">01</span>
               {{ t('contact.form.nameLabel') }}
             </label>
             <div class="contact-field__input-wrap">
               <UInput
+                id="contact-name"
                 v-model="name"
                 :placeholder="t('contact.form.namePlaceholder')"
                 size="lg"
                 variant="none"
                 class="contact-field__input"
-                :ui="{ base: 'w-full bg-transparent border-0 focus:ring-0 outline-none' }"
+                :ui="{ base: 'w-full bg-transparent border-0 focus-visible:ring-2 focus-visible:ring-var(--color-accent) outline-none rounded-md transition-all' }"
                 required
                 @input="errors.name = ''"
               />
               <div class="contact-field__line" />
             </div>
-            <p v-if="errors.name" class="contact-field__error font-marker">{{ errors.name }}</p>
+            <p v-if="errors.name" class="contact-field__error font-marker" role="alert">{{ errors.name }}</p>
           </div>
 
           <!-- Email -->
           <div class="contact-field">
-            <label class="contact-field__label font-marker" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-              <span class="contact-field__number">02</span>
+            <label for="contact-email" class="contact-field__label font-marker" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
+              <span class="contact-field__number" aria-hidden="true">02</span>
               {{ t('contact.form.emailLabel') }}
             </label>
             <div class="contact-field__input-wrap">
               <UInput
+                id="contact-email"
                 v-model="email"
                 type="email"
                 :placeholder="t('contact.form.emailPlaceholder')"
                 size="lg"
                 variant="none"
                 class="contact-field__input"
-                :ui="{ base: 'w-full bg-transparent border-0 focus:ring-0 outline-none overflow-x-auto truncate' }"
+                :ui="{ base: 'w-full bg-transparent border-0 focus-visible:ring-2 focus-visible:ring-var(--color-accent) outline-none overflow-x-auto truncate rounded-md transition-all' }"
                 required
                 @input="errors.email = ''"
               />
               <div class="contact-field__line" />
             </div>
-            <p v-if="errors.email" class="contact-field__error font-marker">{{ errors.email }}</p>
+            <p v-if="errors.email" class="contact-field__error font-marker" role="alert">{{ errors.email }}</p>
           </div>
 
           <!-- Message -->
           <div class="contact-field">
             <div class="flex items-center justify-between">
-              <label class="contact-field__label font-marker" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
-                <span class="contact-field__number">03</span>
+              <label for="contact-message" class="contact-field__label font-marker" :class="isLight ? 'text-slate-600' : 'text-slate-300'">
+                <span class="contact-field__number" aria-hidden="true">03</span>
                 {{ t('contact.form.messageLabel') }}
               </label>
-              <span class="text-[0.6rem] font-marker text-[var(--color-accent)] opacity-60">
+              <span class="text-[0.6rem] font-marker text-[var(--color-accent)] opacity-60" aria-live="polite">
                 {{ message.length }}/{{ maxMessage }}
               </span>
             </div>
             <div class="contact-field__input-wrap">
               <UTextarea
+                id="contact-message"
                 v-model="message"
                 :rows="4"
                 :maxlength="maxMessage"
                 :placeholder="t('contact.form.messagePlaceholder')"
                 variant="none"
                 class="contact-field__input"
-                :ui="{ base: 'w-full bg-transparent border-0 focus:ring-0 outline-none resize-none' }"
+                :ui="{ base: 'w-full bg-transparent border-0 focus-visible:ring-2 focus-visible:ring-var(--color-accent) outline-none resize-none rounded-md transition-all' }"
                 required
                 @input="errors.message = ''"
               />
               <div class="contact-field__line" />
             </div>
-            <p v-if="errors.message" class="contact-field__error font-marker">{{ errors.message }}</p>
+            <p v-if="errors.message" class="contact-field__error font-marker" role="alert">{{ errors.message }}</p>
           </div>
 
           <!-- Footer -->
@@ -237,7 +240,7 @@ const resetForm = () => {
               :disabled="sending"
             >
               <span v-if="sending" class="inline-flex items-center gap-2">
-                <span class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
                 ...
               </span>
               <span v-else>{{ t('contact.form.submit') }}</span>
@@ -375,7 +378,7 @@ const resetForm = () => {
   font-size: 0.65rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #ef4444;
+  color: var(--color-error, #ef4444);
   margin-top: 0.35rem;
   opacity: 0.9;
 }

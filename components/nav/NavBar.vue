@@ -1,4 +1,6 @@
 <script setup>
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import NavBrand from './NavBrand.vue'
 import NavLinks from './NavLinks.vue'
@@ -6,7 +8,7 @@ import NavActions from './NavActions.vue'
 import NavMobileMenu from './NavMobileMenu.vue'
 
 defineProps({
-  isLight: { type: Boolean, default: false }
+  
 })
 
 const emit = defineEmits(['toggle-mode'])
