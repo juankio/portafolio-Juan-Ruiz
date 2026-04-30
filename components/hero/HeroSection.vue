@@ -137,11 +137,15 @@ onBeforeUnmount(() => {
         </p>
         <h1
           class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl text-balance" 
+          :key="locale"
           :class="isLight ? 'text-slate-700' : 'text-white'"
         >
           <span class="split-text-hero">{{ t('hero.title.main') }}</span>
+          {{ ' ' }}
           <span class="text-[var(--color-accent)] split-text-hero">{{ t('hero.title.highlight1') }}</span>
+          {{ ' ' }}
           <span class="split-text-hero">{{ t('hero.title.connector') }}</span>
+          {{ ' ' }}
           <span class="text-[var(--color-accent)] split-text-hero">{{ t('hero.title.highlight2') }}</span>
         </h1>
         <p class="max-w-2xl text-lg leading-relaxed font-body" style="letter-spacing: 0.02em" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
@@ -168,7 +172,7 @@ onBeforeUnmount(() => {
       </div>
 
       <!-- Hero cards as graffiti stickers -->
-      <div v-if="heroCards.length" class="grid gap-5 sm:grid-cols-3 pt-4">
+      <div v-if="heroCards.length" class="grid gap-5 sm:grid-cols-3 pt-4" :key="`cards-${locale}`">
         <div v-for="(card, idx) in heroCards" :key="idx" class="anime-element opacity-0">
           <div
             class="relative px-5 py-4 border-2 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_12px_var(--color-accent-soft)] h-full"

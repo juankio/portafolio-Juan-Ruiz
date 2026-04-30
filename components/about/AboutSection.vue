@@ -162,7 +162,7 @@ useTextSplit('.split-text-about', { stagger: 30 })
             </div>
 
             <!-- Summary rows with spray accent -->
-            <div class="mt-5 space-y-2">
+            <div class="mt-5 space-y-2" :key="`summary-${locale}`">
               <div
                 v-for="(row, idx) in aboutSummary"
                 :key="row.label"
@@ -193,7 +193,7 @@ useTextSplit('.split-text-about', { stagger: 30 })
               {{ t('about.skillsTitle') }}
             </span>
 
-            <div class="grid gap-3 sm:grid-cols-2 mt-4">
+            <div class="grid gap-3 sm:grid-cols-2 mt-4" :key="`skills-${locale}`">
               <div
                 v-for="(skill, idx) in aboutSkills"
                 :key="skill.title"
