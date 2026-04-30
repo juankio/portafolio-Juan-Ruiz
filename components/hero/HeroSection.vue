@@ -3,7 +3,7 @@ import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
 import StreetButton from '~/components/ui/StreetButton.vue'
-import { animate, stagger, svg, utils } from 'animejs'
+import anime from 'animejs'
 
 const props = defineProps({
   isLight: { type: Boolean, default: false }
@@ -74,17 +74,19 @@ onMounted(() => {
 
   const animateHero = () => {
     if (prefersReducedMotion) {
-      animate('.anime-element', {
+      anime({
+        targets: '.anime-element',
         opacity: [0, 1],
         duration: 800,
-        ease: 'linear'
+        easing: 'linear'
       })
     } else {
-      animate('.anime-element', {
-        y: [20, 0],
+      anime({
+        targets: '.anime-element',
+        translateY: [20, 0],
         opacity: [0, 1],
-        delay: stagger(100),
-        ease: 'outElastic(1, .8)',
+        delay: anime.stagger(100),
+        easing: 'easeOutElastic(1, .8)',
         duration: 1000
       })
     }
@@ -100,17 +102,19 @@ onMounted(() => {
     // requestAnimationFrame espera al ciclo de pintado real del navegador para evitar parpadeos
     requestAnimationFrame(() => {
       if (prefersReducedMotion) {
-        animate('.anime-element', {
+        anime({
+          targets: '.anime-element',
           opacity: [0, 1],
           duration: 800,
-          ease: 'linear'
+          easing: 'linear'
         })
       } else {
-        animate('.anime-element', {
-          y: [20, 0],
+        anime({
+          targets: '.anime-element',
+          translateY: [20, 0],
           opacity: [0, 1],
-          delay: stagger(100),
-          ease: 'outElastic(1, .8)',
+          delay: anime.stagger(100),
+          easing: 'easeOutElastic(1, .8)',
           duration: 1000
         })
       }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { animate, svg } from 'animejs'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import anime from 'animejs'
 import PaintDrip from './graffiti/PaintDrip.vue'
 
 const props = defineProps({
@@ -8,29 +8,47 @@ const props = defineProps({
 })
 
 const isLoaded = ref(false)
+const pathRef = ref(null)
+const followerRef = ref(null)
+
+let pathAnimation: any = null
+let drawAnimation: any = null
 
 onMounted(() => {
-  // 1. Animación del punto de luz siguiendo el path (Motion Path AnimeJS v4)
-  animate('.loader-spark', {
-    ease: 'linear',
-    duration: 3500,
-    loop: true,
-    ...svg.createMotionPath('.loader-circuit-path')
-  })
+  if (pathRef.value && followerRef.value) {
+    // 1. Animación del dibujo de la línea (SVG path)
+    drawAnimation = anime({
+      targets: pathRef.value,
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutSine',
+      duration: 1500,
+      direction: 'alternate',
+      loop: true
+    })
 
-  // 2. Animación del trazado de la línea
-  animate(svg.createDrawable('.loader-circuit-path'), {
-    draw: '0 1',
-    ease: 'inOutExpo',
-    duration: 3500,
-    alternate: true,
-    loop: true
-  })
+    // 2. Animación del punto siguiendo el path (Motion Path en AnimeJS v3)
+    const path = anime.path(pathRef.value)
+    
+    pathAnimation = anime({
+      targets: followerRef.value,
+      translateX: path('x'),
+      translateY: path('y'),
+      rotate: path('angle'),
+      easing: 'linear',
+      duration: 3000,
+      loop: true
+    })
+  }
 
   // Ocultar el loader después de un retraso inicial
   setTimeout(() => {
     isLoaded.value = true
-  }, 1500)
+  }, 1200)
+})
+
+onBeforeUnmount(() => {
+  if (pathAnimation) pathAnimation.pause()
+  if (drawAnimation) drawAnimation.pause()
 })
 </script>
 
