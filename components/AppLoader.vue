@@ -85,6 +85,8 @@ onBeforeUnmount(() => {
               stroke-width="3" 
               stroke-linecap="round" 
               stroke-linejoin="round" 
+              stroke-dasharray="1000"
+              stroke-dashoffset="1000"
               opacity="0.8"
             />
             
@@ -96,8 +98,8 @@ onBeforeUnmount(() => {
             <!-- Chispa de datos (ahora dentro del SVG) -->
             <circle
               ref="followerRef"
-              cx="0"
-              cy="0"
+              cx="10"
+              cy="60"
               r="3.5"
               fill="#ffffff"
               filter="url(#glow)"
