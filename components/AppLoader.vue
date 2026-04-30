@@ -18,8 +18,8 @@ onMounted(() => {
     // 1. Animación del dibujo de la línea (SVG path)
     drawAnimation = animate(svg.createDrawable(pathRef.value), {
       draw: '0 1',
-      ease: 'inOutSine',
-      duration: 1500,
+      ease: 'inOutCubic',
+      duration: 2000,
       direction: 'alternate',
       loop: true
     })
@@ -31,8 +31,9 @@ onMounted(() => {
       translateX,
       translateY,
       rotate,
-      ease: 'linear',
-      duration: 3000,
+      ease: 'inOutCubic',
+      duration: 4000,
+      direction: 'alternate',
       loop: true
     })
   }
@@ -60,37 +61,31 @@ onBeforeUnmount(() => {
       <div class="relative z-10 flex flex-col items-center w-full max-w-md px-6">
         
         <!-- Contenedor del trazado SVG animado -->
-        <div class="relative w-full h-40 mb-2">
-          <!-- Símbolo "Hacker" de terminal / código con circuito -->
-          <svg class="w-full h-full absolute inset-0 overflow-visible" viewBox="0 0 300 120" fill="none" stroke-width="2">
-            <!-- Puntos decorativos del circuito -->
-            <circle cx="10" cy="60" r="3" fill="var(--color-surface)" stroke="var(--color-border-accent)" />
-            <circle cx="150" cy="10" r="3" fill="var(--color-surface)" stroke="var(--color-border-accent)" />
-            <circle cx="290" cy="60" r="3" fill="var(--color-surface)" stroke="var(--color-border-accent)" />
-            <circle cx="150" cy="110" r="3" fill="var(--color-surface)" stroke="var(--color-border-accent)" />
-
-            <!-- Etiquetas decorativas < > -->
-            <text x="30" y="65" font-family="'Inter', monospace" font-size="18" font-weight="bold" fill="var(--color-border-accent)" opacity="0.5">&lt;</text>
-            <text x="255" y="65" font-family="'Inter', monospace" font-size="18" font-weight="bold" fill="var(--color-border-accent)" opacity="0.5">/&gt;</text>
-
-            <!-- Path de circuito complejo que recorre el diseño -->
+        <div class="relative w-full h-32 mb-2 flex justify-center items-center">
+          <svg class="w-24 h-24 sm:w-32 sm:h-32 overflow-visible" viewBox="0 0 100 70" fill="none" stroke-width="2">
+            <!-- Corona de Graffiti Path -->
             <path 
               ref="pathRef"
               class="loader-circuit-path"
-              d="M 10 60 L 40 60 L 60 20 L 120 20 L 150 10 L 180 20 L 240 20 L 260 60 L 290 60 L 260 60 L 240 100 L 180 100 L 150 110 L 120 100 L 60 100 L 40 60 Z" 
+              d="M10 60 L10 25 L30 40 L50 10 L70 40 L90 25 L90 60 Z" 
               stroke="var(--color-accent)" 
-              stroke-width="2" 
+              stroke-width="3" 
               stroke-linecap="round" 
               stroke-linejoin="round" 
               opacity="0.8"
             />
+            
+            <!-- Gotas decorativas -->
+            <circle cx="10" cy="20" r="4" fill="var(--color-accent)" opacity="0.6" />
+            <circle cx="50" cy="5" r="4" fill="var(--color-accent)" opacity="0.6" />
+            <circle cx="90" cy="20" r="4" fill="var(--color-accent)" opacity="0.6" />
           </svg>
 
           <!-- El elemento que sigue el Path (Chispa de datos) -->
           <div 
             ref="followerRef"
-            class="loader-spark absolute top-0 left-0 w-3 h-3 bg-white rounded-full shadow-[0_0_12px_var(--color-accent),0_0_24px_var(--color-accent)] pointer-events-none"
-            style="transform-origin: center center; margin-top: -6px; margin-left: -6px;"
+            class="loader-spark absolute top-0 left-0 w-4 h-4 bg-white rounded-full shadow-[0_0_12px_var(--color-accent),0_0_24px_var(--color-accent)] pointer-events-none"
+            style="transform-origin: center center; margin-top: -8px; margin-left: -8px;"
           />
         </div>
         

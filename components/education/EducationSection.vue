@@ -13,7 +13,7 @@ const props = defineProps({
   courses: { type: Array, default: () => [] }
 })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const displayedCourses = computed(() => props.courses || [])
 const selectedCourse = ref(null)
 
