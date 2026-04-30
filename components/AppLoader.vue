@@ -17,24 +17,22 @@ let drawAnimation: any = null
 onMounted(() => {
   if (pathRef.value && followerRef.value) {
     // 1. Animación del dibujo de la línea (SVG path)
-    drawAnimation = anime({
-      targets: pathRef.value,
-      strokeDashoffset: [anime.setDashoffset, 0],
-      easing: 'easeInOutSine',
+    drawAnimation = animate(svg.createDrawable(pathRef.value), {
+      draw: '0 1',
+      ease: 'inOutSine',
       duration: 1500,
       direction: 'alternate',
       loop: true
     })
 
-    // 2. Animación del punto siguiendo el path (Motion Path en AnimeJS v3)
-    const path = anime.path(pathRef.value)
+    // 2. Animación del punto siguiendo el path (Motion Path en AnimeJS v4)
+    const { translateX, translateY, rotate } = svg.createMotionPath(pathRef.value)
     
-    pathAnimation = anime({
-      targets: followerRef.value,
-      translateX: path('x'),
-      translateY: path('y'),
-      rotate: path('angle'),
-      easing: 'linear',
+    pathAnimation = animate(followerRef.value, {
+      translateX,
+      translateY,
+      rotate,
+      ease: 'linear',
       duration: 3000,
       loop: true
     })
@@ -78,6 +76,7 @@ onBeforeUnmount(() => {
 
             <!-- Path de circuito complejo que recorre el diseño -->
             <path 
+              ref="pathRef"
               class="loader-circuit-path"
               d="M 10 60 L 40 60 L 60 20 L 120 20 L 150 10 L 180 20 L 240 20 L 260 60 L 290 60 L 260 60 L 240 100 L 180 100 L 150 110 L 120 100 L 60 100 L 40 60 Z" 
               stroke="var(--color-accent)" 
@@ -90,6 +89,7 @@ onBeforeUnmount(() => {
 
           <!-- El elemento que sigue el Path (Chispa de datos) -->
           <div 
+            ref="followerRef"
             class="loader-spark absolute top-0 left-0 w-3 h-3 bg-white rounded-full shadow-[0_0_12px_var(--color-accent),0_0_24px_var(--color-accent)] pointer-events-none"
             style="transform-origin: center center; margin-top: -6px; margin-left: -6px;"
           />
