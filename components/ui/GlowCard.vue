@@ -15,32 +15,14 @@ const props = defineProps({
 })
 
 const overflowClass = computed(() => (props.overflowVisible ? '!overflow-visible' : 'overflow-hidden'))
-
-const motionConfig = computed(() => {
-  if (!props.motion) return null
-
-  if (props.float) {
-    return {
-      initial: { opacity: 0, y: 8 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.5, ease: 'easeOut', delay: props.delay / 1000 }
-      }
-    }
-  }
-
-  return {
-    initial: { opacity: 0, y: 8 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut', delay: props.delay / 1000 } }
-  }
-})
-
-const hasMotion = computed(() => !!motionConfig.value)
 </script>
 
 <template>
-  <div v-if="hasMotion" v-motion="motionConfig" class="group relative" :class="props.class">
+  <div 
+    class="group relative" 
+    :class="[props.class, props.float ? 'animate-float' : '']"
+    :style="props.delay ? `animation-delay: ${props.delay}ms` : ''"
+  >
     <div
       :class="[
         'glow-card relative transition-all duration-200',
@@ -55,20 +37,6 @@ const hasMotion = computed(() => !!motionConfig.value)
       </div>
     </div>
   </div>
-  <div v-else class="group relative" :class="props.class">
-    <div
-      :class="[
-        'glow-card relative transition-all duration-200',
-        overflowClass,
-        props.cardClass,
-        props.rounded
-      ]"
-    >
-      <div :class="`${props.bodyPadding} ${props.bodyClass}`">
-        <slot />
-      </div>
-    </div>
-  </div>
 </template>
 
 <style scoped>
@@ -76,5 +44,15 @@ const hasMotion = computed(() => !!motionConfig.value)
   border: 1px solid var(--color-border);
   background: var(--color-surface-card);
   box-shadow: var(--shadow-card);
+}
+
+.animate-float {
+  animation: float-animation 6s ease-in-out infinite;
+}
+
+@keyframes float-animation {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }
 </style>

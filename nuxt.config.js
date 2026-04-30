@@ -4,7 +4,51 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   srcDir: '.',
-  modules: ['@nuxt/image', '@nuxt/ui', '@vueuse/motion/nuxt', 'lenis/nuxt', '@nuxt/fonts'],
+  modules: [
+    '@nuxt/image', 
+    '@nuxt/ui', 
+    'lenis/nuxt', 
+    '@nuxt/fonts',
+    '@vite-pwa/nuxt',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots'
+  ],
+  site: {
+    url: 'https://juanmiguelruiz.lat',
+    name: 'Juan Miguel Ruiz | Desarrollador Web'
+  },
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'Juan Miguel Ruiz | Portafolio',
+      short_name: 'Juan Miguel',
+      theme_color: '#ef4444',
+      background_color: '#0f172a',
+      icons: [
+        {
+          src: '/icons/pwa-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: '/icons/pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any maskable'
+        }
+      ]
+    },
+    workbox: {
+      navigateFallback: '/',
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
+    },
+    client: {
+      installPrompt: true
+    },
+    devOptions: {
+      enabled: false
+    }
+  },
   image: {
     domains: ['opengraph.githubassets.com', 'avatars.githubusercontent.com', 's.wordpress.com']
   },
@@ -26,15 +70,7 @@ export default defineNuxtConfig({
     resendFallbackFrom: process.env.RESEND_FALLBACK_FROM || '',
     contactTo: process.env.CONTACT_EMAIL || 'contacto@juanmiguel.dev',
     public: {
-      siteUrl: 'https://juanmiguelruiz.lat',
-      motion: {
-        directives: {
-          'pop-bottom': {
-            initial: { scale: 0, opacity: 0, y: 100 },
-            visible: { scale: 1, opacity: 1, y: 0 }
-          }
-        }
-      }
+      siteUrl: 'https://juanmiguelruiz.lat'
     }
   },
   app: {
@@ -73,5 +109,4 @@ export default defineNuxtConfig({
     },
     compressPublicAssets: true
   }
-
 })

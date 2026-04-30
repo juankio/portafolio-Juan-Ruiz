@@ -41,7 +41,8 @@ export const messages = {
     nav: {
       links: { home: 'Inicio', about: 'Sobre mi', projects: 'Proyectos', contact: 'Contacto' },
       ctaProjects: 'Ver proyectos',
-      themeToggle: 'Cambiar modo'
+      themeToggle: 'Cambiar modo',
+      skipToContent: 'Saltar al contenido principal'
     },
     hero: {
       availability: 'Abierto a nuevos proyectos',
@@ -284,7 +285,8 @@ export const messages = {
     nav: {
       links: { home: 'Home', about: 'About', projects: 'Projects', contact: 'Contact' },
       ctaProjects: 'View projects',
-      themeToggle: 'Toggle theme'
+      themeToggle: 'Toggle theme',
+      skipToContent: 'Skip to main content'
     },
     hero: {
       availability: 'Open to new projects',
