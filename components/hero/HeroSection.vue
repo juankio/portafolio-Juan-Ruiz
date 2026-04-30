@@ -3,7 +3,7 @@ import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import GraffitiTag from '~/components/graffiti/GraffitiTag.vue'
 import StreetButton from '~/components/ui/StreetButton.vue'
-import anime from 'animejs'
+import { animate, stagger, svg, utils } from 'animejs'
 
 const props = defineProps({
   isLight: { type: Boolean, default: false }

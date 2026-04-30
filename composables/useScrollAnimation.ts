@@ -1,11 +1,11 @@
-import { animate, stagger, utils } from 'animejs'
+import { animate, stagger, svg, utils } from 'animejs'
 
 // Registro global para prevenir leaks
 const scrollObserversMap = new Map()
 
 export const useScrollAnimation = (targetSelector, options = {}) => {
   const {
-    stagger: staggerMs = 100,
+    stagger = 100,
     threshold = 0.1,
     repeat = false 
   } = options
@@ -30,7 +30,7 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
             : entry.target
 
           if (entry.isIntersecting) {
-            utils.remove(targets)
+            anime.remove(targets)
             
             if (!repeat && entry.target.classList.contains('is-animated') && !entry.target.hasAttribute('data-force-reanimate')) return
 
@@ -40,19 +40,21 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
             if (prefersReducedMotion) {
-               animate(targets, {
+               anime({
+                targets,
                 opacity: [0, 1],
                 duration: 800,
-                ease: 'linear'
+                easing: 'linear'
               })
             } else {
               const yOffset = isScrollingDown ? 40 : -40
-              animate(targets, {
-                y: [yOffset, 0],
+              anime({
+                targets,
+                translateY: [yOffset, 0],
                 opacity: [0, 1],
-                ease: 'outExpo',
+                easing: 'easeOutExpo',
                 duration: 800,
-                delay: stagger(staggerMs)
+                delay: anime.stagger(stagger)
               })
             }
             
@@ -61,7 +63,7 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
               scrollObserversMap.get(instanceId)?.delete(entry.target)
             }
           } else if (repeat) {
-            utils.set(targets, { opacity: 0 })
+            anime.set(targets, { opacity: 0 })
             entry.target.classList.remove('is-animated')
           }
         })
@@ -88,16 +90,17 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
             
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-            utils.remove(targets)
+            anime.remove(targets)
             if (prefersReducedMotion) {
-              animate(targets, { opacity: [0, 1], duration: 800, ease: 'linear' })
+              anime({ targets, opacity: [0, 1], duration: 800, easing: 'linear' })
             } else {
-              animate(targets, {
-                y: [20, 0],
+              anime({
+                targets,
+                translateY: [20, 0],
                 opacity: [0, 1],
-                ease: 'outExpo',
+                easing: 'easeOutExpo',
                 duration: 800,
-                delay: stagger(staggerMs)
+                delay: anime.stagger(stagger)
               })
             }
           }

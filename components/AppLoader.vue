@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import anime from 'animejs'
+import { animate, svg } from 'animejs'
 import PaintDrip from './graffiti/PaintDrip.vue'
 
 const props = defineProps({
