@@ -1,39 +1,42 @@
 <script setup>
-import { inject, ref } from 'vue'
-const isLight = inject('isLight', ref(false))
+import { inject, ref, watch, nextTick } from 'vue'
+import { animate, stagger } from 'animejs'
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
+import NavMobileMenuLinks from './NavMobileMenuLinks.vue'
+import NavMobileMenuSocial from './NavMobileMenuSocial.vue'
 
-
-
+const isLight = inject('isLight', ref(false))
 const emit = defineEmits(['toggle-mode'])
 
 const { t, locale, setLocale } = useI18n()
-const route = useRoute()
-
 const open = ref(false)
-
-const links = computed(() => [
-  { label: t('nav.links.home'), href: '/', num: '01' },
-  { label: t('nav.links.about'), href: '/sobre-mi', num: '02' },
-  { label: t('nav.links.projects'), href: '/proyectos', num: '03' },
-  { label: t('nav.links.contact'), href: '/contacto', num: '04' }
-])
-
-const isActive = (href) => {
-  if (href === '/') return route.path === '/'
-  return route.path.startsWith(href)
-}
-
-const socialLinks = [
-  { icon: 'i-ph-github-logo-fill', href: 'https://github.com/juankio', label: 'GitHub' },
-  { icon: 'i-ph-linkedin-logo-fill', href: 'https://www.linkedin.com/in/juan-miguel-ruiz-300037276/', label: 'LinkedIn' }
-]
 
 const localeItems = [
   { code: 'es', label: 'ES' },
   { code: 'en', label: 'EN' }
 ]
+
+// Santoryu: Gestor de transición con animejs
+watch(open, async (isOpen) => {
+  if (isOpen) {
+    await nextTick()
+    
+    // Mover foco al primer enlace para evitar warning de aria-hidden en el header
+    const firstLink = document.querySelector('.mobile-drawer-content .mobile-link')
+    if (firstLink) {
+      firstLink.focus()
+    }
+
+    animate('.mobile-stagger-item', {
+      translateX: [-30, 0],
+      opacity: [0, 1],
+      delay: stagger(80, { start: 100 }),
+      duration: 800,
+      easing: 'easeOutElastic(1, .8)'
+    })
+  }
+})
 </script>
 
 <template>
@@ -57,7 +60,7 @@ const localeItems = [
           <PaintDrip class="absolute top-0 right-16 pointer-events-none" :count="2" :animated="true" />
 
           <!-- Header -->
-          <div class="relative z-10 flex items-center justify-between mb-6">
+          <div class="relative z-10 flex items-center justify-between mb-6 mobile-stagger-item opacity-0">
             <span class="tag-sticker text-xs uppercase tracking-widest">
               Menu
             </span>
@@ -69,29 +72,17 @@ const localeItems = [
             </svg>
           </div>
 
-          <!-- Links — numbered graffiti style -->
-          <div class="relative z-10 flex flex-col gap-2 mb-6">
-            <NuxtLink
-              v-for="item in links"
-              :key="item.href"
-              :to="item.href"
-              class="mobile-link group flex items-center gap-3 px-4 py-3.5"
-              :class="isActive(item.href) ? 'mobile-link--active' : ''"
-              @click="open = false"
-            >
-              <span class="mobile-link__num font-marker">{{ item.num }}</span>
-              <span class="text-sm font-bold uppercase tracking-[0.08em]">{{ item.label }}</span>
-            </NuxtLink>
-          </div>
+          <!-- Links -->
+          <NavMobileMenuLinks @close="open = false" />
 
           <!-- Spray divider -->
-          <div class="mobile-divider mb-5" aria-hidden="true" />
+          <div class="mobile-divider mb-5 mobile-stagger-item opacity-0" aria-hidden="true" />
 
           <!-- Unified Footer: Settings & Socials -->
           <div class="relative z-10 flex items-center justify-between">
             
             <!-- Left: Settings -->
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 mobile-stagger-item opacity-0">
               <!-- Theme toggle -->
               <button
                 class="mobile-control-btn flex items-center justify-center w-10 h-10"
@@ -128,25 +119,12 @@ const localeItems = [
             </div>
 
             <!-- Right: Socials -->
-            <div class="flex items-center gap-2">
-              <a
-                v-for="social in socialLinks"
-                :key="social.label"
-                :href="social.href"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="mobile-control-btn flex items-center justify-center w-10 h-10"
-                :class="isLight ? 'mobile-control-btn--light' : ''"
-                :aria-label="social.label"
-              >
-                <UIcon :name="social.icon" class="h-5 w-5" />
-              </a>
-            </div>
+            <NavMobileMenuSocial />
 
           </div>
 
           <!-- Bottom mark -->
-          <div class="absolute bottom-2 right-4 font-marker text-[0.45rem] tracking-widest opacity-10 text-[var(--color-accent)]" aria-hidden="true">
+          <div class="absolute bottom-2 right-4 font-marker text-[0.45rem] tracking-widest opacity-10 text-[var(--color-accent)] mobile-stagger-item opacity-0" aria-hidden="true">
             NAVIGATE ★
           </div>
         </div>
@@ -166,38 +144,6 @@ const localeItems = [
   opacity: 0.5;
 }
 
-.mobile-link {
-  border-radius: 3px 8px 4px 6px;
-  color: var(--color-text-secondary);
-  transition: all 0.2s var(--ease-spring);
-  border: 1px solid transparent;
-}
-
-.mobile-link:hover {
-  color: var(--color-accent);
-  background: var(--color-accent-softer);
-  border-color: rgba(var(--color-accent-rgb), 0.2);
-}
-
-.mobile-link--active {
-  background: var(--color-accent-softer);
-  color: var(--color-accent);
-  border-color: rgba(var(--color-accent-rgb), 0.3);
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.06);
-}
-
-.mobile-link__num {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--color-accent);
-  opacity: 0.4;
-  min-width: 1.5rem;
-}
-
-.mobile-link--active .mobile-link__num {
-  opacity: 0.8;
-}
-
 .mobile-divider {
   height: 2px;
   background: repeating-linear-gradient(
@@ -211,7 +157,7 @@ const localeItems = [
   border-radius: 1px;
 }
 
-/* Unified footer controls (Theme, Social) */
+/* Theme toggle relies on this class */
 .mobile-control-btn {
   color: var(--color-text-secondary);
   border: 2px solid var(--color-border-accent);
