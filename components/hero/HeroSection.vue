@@ -70,15 +70,26 @@ watch(rotatingWords, () => {
 onMounted(() => {
   startTypingCycle()
   
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
   const animateHero = () => {
-    anime({
-      targets: '.anime-element',
-      translateY: [20, 0],
-      opacity: [0, 1],
-      delay: anime.stagger(100, { start: 200 }),
-      easing: 'easeOutElastic(1, .8)',
-      duration: 1000
-    })
+    if (prefersReducedMotion) {
+      anime({
+        targets: '.anime-element',
+        opacity: [0, 1],
+        duration: 800,
+        easing: 'linear'
+      })
+    } else {
+      anime({
+        targets: '.anime-element',
+        translateY: [20, 0],
+        opacity: [0, 1],
+        delay: anime.stagger(100, { start: 200 }),
+        easing: 'easeOutElastic(1, .8)',
+        duration: 1000
+      })
+    }
   }
   
   animateHero()
@@ -87,13 +98,22 @@ onMounted(() => {
   watch(locale, () => {
     // Aumentamos el timeout para asegurar que Vue actualice el DOM de los v-for primero
     setTimeout(() => {
-      anime({
-        targets: '.anime-element',
-        translateY: [20, 0],
-        opacity: [0, 1],
-        easing: 'easeOutElastic(1, .8)',
-        duration: 1000
-      })
+      if (prefersReducedMotion) {
+        anime({
+          targets: '.anime-element',
+          opacity: [0, 1],
+          duration: 800,
+          easing: 'linear'
+        })
+      } else {
+        anime({
+          targets: '.anime-element',
+          translateY: [20, 0],
+          opacity: [0, 1],
+          easing: 'easeOutElastic(1, .8)',
+          duration: 1000
+        })
+      }
     }, 250)
   })
 })

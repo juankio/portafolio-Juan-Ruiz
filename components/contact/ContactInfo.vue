@@ -13,7 +13,7 @@ const socialLinks = [
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 animate-fade-in-up">
+  <div class="flex flex-col gap-6 ">
     <div class="space-y-3">
       <p
         class="text-sm uppercase font-semibold tracking-[0.25em] text-[var(--color-accent)]"

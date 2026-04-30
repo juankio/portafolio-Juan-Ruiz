@@ -17,7 +17,7 @@ const { t } = useI18n()
 
 <template>
   <UContainer as="section" id="sobre-mi" class="py-10 sm:py-14">
-    <div class="space-y-4 animate-fade-in-up">
+    <div class="space-y-4 ">
       <p class="text-sm uppercase tracking-[0.25em]" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
         {{ t('about.sectionTitle') }}
       </p>

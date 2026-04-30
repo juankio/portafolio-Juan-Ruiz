@@ -1,14 +1,22 @@
 import anime from 'animejs'
 
+// Registro global para prevenir leaks
+const scrollObserversMap = new Map()
+
 export const useScrollAnimation = (targetSelector, options = {}) => {
   const {
     stagger = 100,
     threshold = 0.1,
-    repeat = false // Cambiado a false por defecto para evitar parpadeos
+    repeat = false 
   } = options
+
+  const instanceId = Symbol()
 
   onMounted(() => {
     let lastScrollY = window.scrollY
+    
+    // Guardamos las referencias de este componente particular
+    scrollObserversMap.set(instanceId, new Set())
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -22,30 +30,39 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
             : entry.target
 
           if (entry.isIntersecting) {
-            // Remove previous animations to avoid jumpiness
             anime.remove(targets)
             
-            // Avoid re-animating if it's already done and repeat is false
             if (!repeat && entry.target.classList.contains('is-animated') && !entry.target.hasAttribute('data-force-reanimate')) return
 
             entry.target.classList.add('is-animated')
             entry.target.removeAttribute('data-force-reanimate')
             
-            // Animación suave
-            const yOffset = isScrollingDown ? 40 : -40
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-            anime({
-              targets,
-              translateY: [yOffset, 0],
-              opacity: [0, 1],
-              easing: 'easeOutExpo',
-              duration: 800, // Ligeramente más rápido
-              delay: anime.stagger(stagger)
-            })
+            if (prefersReducedMotion) {
+               anime({
+                targets,
+                opacity: [0, 1],
+                duration: 800,
+                easing: 'linear'
+              })
+            } else {
+              const yOffset = isScrollingDown ? 40 : -40
+              anime({
+                targets,
+                translateY: [yOffset, 0],
+                opacity: [0, 1],
+                easing: 'easeOutExpo',
+                duration: 800,
+                delay: anime.stagger(stagger)
+              })
+            }
             
-            if (!repeat) observer.unobserve(entry.target)
+            if (!repeat) {
+              observer.unobserve(entry.target)
+              scrollObserversMap.get(instanceId)?.delete(entry.target)
+            }
           } else if (repeat) {
-            // Solo lo escondemos si explícitamente se pidió repeat
             anime.set(targets, { opacity: 0 })
             entry.target.classList.remove('is-animated')
           }
@@ -56,31 +73,49 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
 
     setTimeout(() => {
       const elements = document.querySelectorAll(targetSelector)
-      elements.forEach((el) => observer.observe(el))
+      elements.forEach((el) => {
+        observer.observe(el)
+        scrollObserversMap.get(instanceId)?.add(el)
+      })
     }, 150)
 
-    // Re-animar al cambiar idioma porque algunos elementos (como listas o tarjetas) se reconstruyen en Vue
     const { locale } = useI18n()
     watch(locale, () => {
       setTimeout(() => {
         const elements = document.querySelectorAll(targetSelector)
         elements.forEach((el) => {
-          // Si estaba animado, lo forzamos a reanimar porque su contenido pudo haber sido destruido y vuelto a montar con opacity-0
           if (el.classList.contains('is-animated')) {
             el.setAttribute('data-force-reanimate', 'true')
             const targets = el.classList.contains('animate-group') ? el.querySelectorAll('.animate-item') : el
             
-            anime({
-              targets,
-              translateY: [20, 0],
-              opacity: [0, 1],
-              easing: 'easeOutExpo',
-              duration: 800,
-              delay: anime.stagger(stagger)
-            })
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+            anime.remove(targets)
+            if (prefersReducedMotion) {
+              anime({ targets, opacity: [0, 1], duration: 800, easing: 'linear' })
+            } else {
+              anime({
+                targets,
+                translateY: [20, 0],
+                opacity: [0, 1],
+                easing: 'easeOutExpo',
+                duration: 800,
+                delay: anime.stagger(stagger)
+              })
+            }
           }
         })
-      }, 250) // Damos tiempo a Vue de reconstruir el DOM con el nuevo idioma
+      }, 250) 
+    })
+
+    // Limpieza
+    onBeforeUnmount(() => {
+      const elements = scrollObserversMap.get(instanceId)
+      if (elements) {
+        elements.forEach(el => observer.unobserve(el))
+        scrollObserversMap.delete(instanceId)
+      }
+      observer.disconnect()
     })
   })
 }

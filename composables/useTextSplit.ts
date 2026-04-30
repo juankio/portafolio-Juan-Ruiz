@@ -2,6 +2,8 @@ import anime from 'animejs'
 
 // Mantenemos una referencia global de los observers para poder destruirlos al cambiar de idioma
 const observersMap = new Map()
+// Registrar los elementos atados a cada componente para no tener memory leaks
+const componentElementsMap = new Map()
 
 export const useTextSplit = (selector, options = {}) => {
   const {
@@ -12,11 +14,15 @@ export const useTextSplit = (selector, options = {}) => {
     repeat = false 
   } = options
 
+  // Generamos un ID unico para este montaje del composable
+  const instanceId = Symbol()
+
   onMounted(() => {
     // Escuchar cambios para poder recrear el split si el texto base cambia (ej: cambio de idioma)
     const initSplit = () => {
       setTimeout(() => {
         const elements = document.querySelectorAll(selector)
+        componentElementsMap.set(instanceId, elements)
         let lastScrollY = window.scrollY
         
         elements.forEach(el => {
@@ -26,29 +32,27 @@ export const useTextSplit = (selector, options = {}) => {
             observersMap.delete(el)
           }
 
-          // Si Vue destruye el contenido, perderemos la clase is-split. 
-          // Si no la hemos perdido, evitamos volver a particionar a menos que haya cambiado el idioma.
           if (el.classList.contains('is-split') && !el.hasAttribute('data-lang-changed')) return
           
           el.classList.add('is-split')
           el.removeAttribute('data-lang-changed')
+
+          // Extraer y guardar el texto completo original para Accesibilidad (A11y)
+          const originalText = el.textContent || ''
           
-          // Recursive function to split text nodes while preserving elements
           const wrapChars = (node) => {
             if (node.nodeType === 3) { // Text node
               const text = node.nodeValue
-              if (!text.trim() && text.includes('\n')) return null // skip empty newlines
+              if (!text.trim() && text.includes('\n')) return null 
               
               const fragment = document.createDocumentFragment()
-              // Split by words first to keep words together (prevent mid-word line breaks)
               const words = text.split(/(\s+)/)
               
               words.forEach(word => {
                 if (!word) return
-                
                 const wordSpan = document.createElement('span')
                 wordSpan.style.display = 'inline-block'
-                wordSpan.style.whiteSpace = 'nowrap' // Mantiene la palabra entera
+                wordSpan.style.whiteSpace = 'nowrap'
                 
                 const chars = word.split('')
                 chars.forEach(char => {
@@ -60,18 +64,14 @@ export const useTextSplit = (selector, options = {}) => {
                   span.style.transform = 'translateY(20px) rotate(5deg)'
                   wordSpan.appendChild(span)
                 })
-                
                 fragment.appendChild(wordSpan)
               })
               return fragment
-            } else if (node.nodeType === 1) { // Element node
-              // Copy the element
+            } else if (node.nodeType === 1) { 
               const clone = node.cloneNode(false)
               Array.from(node.childNodes).forEach(child => {
                 const result = wrapChars(child)
-                if (result) {
-                  clone.appendChild(result)
-                }
+                if (result) clone.appendChild(result)
               })
               return clone
             }
@@ -80,9 +80,20 @@ export const useTextSplit = (selector, options = {}) => {
           const newContent = wrapChars(el)
           if (newContent) {
             el.innerHTML = ''
+            
+            // Inyectar el texto real oculto para Screen Readers
+            const srSpan = document.createElement('span')
+            srSpan.className = 'sr-only'
+            srSpan.textContent = originalText
+            el.appendChild(srSpan)
+
+            // Inyectar el contenido visual cortado y esconderlo de los Screen Readers
+            const visualWrapper = document.createElement('span')
+            visualWrapper.setAttribute('aria-hidden', 'true')
             Array.from(newContent.childNodes).forEach(child => {
-               el.appendChild(child)
+               visualWrapper.appendChild(child)
             })
+            el.appendChild(visualWrapper)
           }
 
           const observer = new IntersectionObserver((entries) => {
@@ -125,7 +136,10 @@ export const useTextSplit = (selector, options = {}) => {
                   })
                 }
                 
-                if (!repeat) observer.unobserve(entry.target)
+                if (!repeat) {
+                  observer.unobserve(entry.target)
+                  observersMap.delete(entry.target)
+                }
               } else if (repeat) {
                 if (prefersReducedMotion) {
                   anime.set(entry.target, { opacity: 0 })
@@ -147,9 +161,6 @@ export const useTextSplit = (selector, options = {}) => {
 
     const { locale } = useI18n()
     watch(locale, () => {
-      // Como Vue destruye y recrea el HTML, no le ponemos classList.remove a los viejos
-      // Sino que esperamos a que Vue termine, y luego volvemos a correr initSplit
-      // initSplit se encarga de limpiar los observers viejos y volver a animar.
       setTimeout(() => {
         const elements = document.querySelectorAll(selector)
         elements.forEach(el => {
@@ -159,5 +170,19 @@ export const useTextSplit = (selector, options = {}) => {
         initSplit()
       }, 200) 
     })
+  })
+
+  // Destruir instancias al cambiar de ruta para evitar Memory Leaks
+  onBeforeUnmount(() => {
+    const elements = componentElementsMap.get(instanceId)
+    if (elements) {
+      elements.forEach(el => {
+        if (observersMap.has(el)) {
+          observersMap.get(el).disconnect()
+          observersMap.delete(el)
+        }
+      })
+      componentElementsMap.delete(instanceId)
+    }
   })
 }

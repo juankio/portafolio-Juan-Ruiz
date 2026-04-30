@@ -92,7 +92,7 @@ const resetForm = () => {
 </script>
 
 <template>
-  <div class="contact-form relative overflow-hidden animate-fade-in-up">
+  <div class="contact-form relative overflow-hidden ">
     <!-- Spray deco -->
     <SpraySplatter class="absolute -top-4 -right-4" size="sm" :opacity="0.06" />
     <SpraySplatter class="absolute -bottom-6 -left-6" size="md" :opacity="0.04" color="var(--spray-cyan)" />
