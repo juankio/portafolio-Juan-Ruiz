@@ -4,40 +4,57 @@ import { inject,  ref, onMounted, onBeforeUnmount  } from 'vue'
 import { animate, svg, remove } from 'animejs'
 import PaintDrip from './graffiti/PaintDrip.vue'
 
-
-
 const isLoaded = ref(false)
 const pathRef = ref(null)
 const followerRef = ref(null)
 
 let pathAnimation: any = null
 let drawAnimation: any = null
+let fallbackTimer: number | null = null
 
 onMounted(() => {
   if (pathRef.value && followerRef.value) {
-    // 1. Animación del dibujo de la línea (SVG path)
+    // 1. Animación del dibujo de la línea (SVG path) - Loop infinito
     drawAnimation = animate(svg.createDrawable(pathRef.value), {
       draw: '0 1',
-      ease: 'outQuart',
-      duration: 800,
+      ease: 'inOutSine',
+      duration: 1200,
       direction: 'normal',
-      loop: false
+      loop: true
     })
 
-    // 2. Animación del punto siguiendo el path (Motion Path en AnimeJS v4)
+    // 2. Animación del punto siguiendo el path - Loop infinito
     pathAnimation = animate(followerRef.value, {
       ...svg.createMotionPath(pathRef.value),
-      ease: 'outQuart',
-      duration: 800,
+      ease: 'inOutSine',
+      duration: 1200,
       direction: 'normal',
-      loop: false
+      loop: true
     })
   }
 
-  // Ocultar el loader después de un retraso inicial para no demorar la carga artificialmente
-  setTimeout(() => {
+  // --- LÓGICA DE CARGA REAL ---
+  const finishLoading = () => {
+    if (isLoaded.value) return // Evitar doble ejecución
     isLoaded.value = true
-  }, 800)
+    if (fallbackTimer) clearTimeout(fallbackTimer)
+  }
+
+  // 1. Escuchar cuando todo el contenido de la ventana ha cargado (Imágenes, CSS, etc)
+  if (document.readyState === 'complete') {
+    // Si por casualidad ya había cargado todo súper rápido antes de montar
+    finishLoading()
+  } else {
+    window.addEventListener('load', finishLoading)
+  }
+
+  // 2. Fallback de seguridad: Si algo se queda atascado cargando infinito, forzar ocultamiento a los 8 segundos
+  fallbackTimer = window.setTimeout(finishLoading, 8000)
+  
+  // Limpieza del event listener
+  onBeforeUnmount(() => {
+    window.removeEventListener('load', finishLoading)
+  })
 })
 
 onBeforeUnmount(() => {
@@ -45,6 +62,7 @@ onBeforeUnmount(() => {
   if (drawAnimation) drawAnimation.pause()
   if (pathRef.value) remove(pathRef.value)
   if (followerRef.value) remove(followerRef.value)
+  if (fallbackTimer) clearTimeout(fallbackTimer)
 })
 </script>
 
