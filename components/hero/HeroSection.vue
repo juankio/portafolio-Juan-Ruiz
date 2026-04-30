@@ -95,8 +95,11 @@ onMounted(() => {
   animateHero()
 
   // Re-animar cuando cambie el idioma para que los nuevos elementos del DOM no queden en opacity-0
-  watch(locale, () => {
-    // Aumentamos el timeout para asegurar que Vue actualice el DOM de los v-for primero
+  watch(locale, async () => {
+    // Usar nextTick para esperar que Vue reconstruya el DOM
+    await nextTick()
+    
+    // Un pequeño respiro extra para que el render engine pinte los elementos
     setTimeout(() => {
       if (prefersReducedMotion) {
         anime({
@@ -110,11 +113,12 @@ onMounted(() => {
           targets: '.anime-element',
           translateY: [20, 0],
           opacity: [0, 1],
+          delay: anime.stagger(100),
           easing: 'easeOutElastic(1, .8)',
           duration: 1000
         })
       }
-    }, 250)
+    }, 50)
   })
 })
 
@@ -156,17 +160,17 @@ onBeforeUnmount(() => {
           {{ t('hero.tagline') }}
         </p>
         <h1
-          class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl text-balance" 
+          class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl text-balance split-text-hero" 
           :key="locale"
           :class="isLight ? 'text-slate-700' : 'text-white'"
         >
-          <span class="split-text-hero">{{ t('hero.title.main') }}</span>
+          <span>{{ t('hero.title.main') }}</span>
           {{ ' ' }}
-          <span class="text-[var(--color-accent)] split-text-hero">{{ t('hero.title.highlight1') }}</span>
+          <span class="text-[var(--color-accent)]">{{ t('hero.title.highlight1') }}</span>
           {{ ' ' }}
-          <span class="split-text-hero">{{ t('hero.title.connector') }}</span>
+          <span>{{ t('hero.title.connector') }}</span>
           {{ ' ' }}
-          <span class="text-[var(--color-accent)] split-text-hero">{{ t('hero.title.highlight2') }}</span>
+          <span class="text-[var(--color-accent)]">{{ t('hero.title.highlight2') }}</span>
         </h1>
         <p class="max-w-2xl text-lg leading-relaxed font-body" style="letter-spacing: 0.02em" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
           {{ t('hero.subtitle') }}

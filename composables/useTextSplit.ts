@@ -160,7 +160,10 @@ export const useTextSplit = (selector, options = {}) => {
     initSplit()
 
     const { locale } = useI18n()
-    watch(locale, () => {
+    watch(locale, async () => {
+      // nextTick asegura que Vue ya renderizó el HTML limpio antes de volver a dividirlo
+      await nextTick()
+      
       setTimeout(() => {
         const elements = document.querySelectorAll(selector)
         elements.forEach(el => {
@@ -168,7 +171,7 @@ export const useTextSplit = (selector, options = {}) => {
           el.setAttribute('data-force-reanimate', 'true')
         })
         initSplit()
-      }, 200) 
+      }, 50) 
     })
   })
 
