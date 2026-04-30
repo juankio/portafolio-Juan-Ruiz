@@ -18,19 +18,19 @@ onMounted(() => {
     // 1. Animación del dibujo de la línea (SVG path)
     drawAnimation = animate(svg.createDrawable(pathRef.value), {
       draw: '0 1',
-      ease: 'inOutSine',
-      duration: 1500,
-      direction: 'alternate',
-      loop: true
+      ease: 'outQuart',
+      duration: 800,
+      direction: 'normal',
+      loop: false
     })
 
     // 2. Animación del punto siguiendo el path (Motion Path en AnimeJS v4)
     pathAnimation = animate(followerRef.value, {
       ...svg.createMotionPath(pathRef.value),
-      ease: 'inOutSine',
-      duration: 1500,
-      direction: 'alternate',
-      loop: true
+      ease: 'outQuart',
+      duration: 800,
+      direction: 'normal',
+      loop: false
     })
   }
 
@@ -72,7 +72,17 @@ onBeforeUnmount(() => {
               </filter>
             </defs>
 
-            <!-- Corona de Graffiti Path -->
+            <!-- Corona Base Visible Siempre -->
+            <path 
+              d="M10 60 L10 25 L30 40 L50 10 L70 40 L90 25 L90 60 Z" 
+              stroke="var(--color-accent)" 
+              stroke-width="3" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              opacity="0.15"
+            />
+
+            <!-- Corona Animada por Anime.js -->
             <path 
               ref="pathRef"
               class="loader-circuit-path"
@@ -83,7 +93,7 @@ onBeforeUnmount(() => {
               stroke-linejoin="round" 
               stroke-dasharray="1000"
               stroke-dashoffset="1000"
-              opacity="0.8"
+              opacity="1"
             />
             
             <!-- Gotas decorativas -->
