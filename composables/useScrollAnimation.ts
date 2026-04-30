@@ -1,4 +1,4 @@
-import anime from 'animejs'
+import { animate, stagger, utils } from 'animejs'
 
 // Registro global para prevenir leaks
 const scrollObserversMap = new Map()

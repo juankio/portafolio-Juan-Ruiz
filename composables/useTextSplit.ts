@@ -1,4 +1,4 @@
-import anime from 'animejs'
+import { animate, stagger, utils } from 'animejs'
 
 // Mantenemos una referencia global de los observers para poder destruirlos al cambiar de idioma
 const observersMap = new Map()
