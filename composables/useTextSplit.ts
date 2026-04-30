@@ -157,13 +157,15 @@ export const useTextSplit = (selector, options = {}) => {
 
     initSplit()
 
+    let localeTimer: number | null = null
     const { locale } = useI18n()
     watch(locale, async () => {
       // nextTick asegura que Vue ya renderizó el HTML limpio antes de volver a dividirlo
       await nextTick()
       
+      if (localeTimer) cancelAnimationFrame(localeTimer)
       // requestAnimationFrame asegura que el navegador completó la fase de pintado (Paint)
-      requestAnimationFrame(() => {
+      localeTimer = requestAnimationFrame(() => {
         const elements = document.querySelectorAll(selector)
         elements.forEach(el => {
           el.classList.remove('is-split')

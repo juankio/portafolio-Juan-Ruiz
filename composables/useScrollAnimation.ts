@@ -77,9 +77,11 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
       })
     }, 150)
 
+    let localeTimer: number | null = null
     const { locale } = useI18n()
     watch(locale, () => {
-      setTimeout(() => {
+      if (localeTimer) clearTimeout(localeTimer)
+      localeTimer = window.setTimeout(() => {
         const elements = document.querySelectorAll(targetSelector)
         elements.forEach((el) => {
           if (el.classList.contains('is-animated')) {

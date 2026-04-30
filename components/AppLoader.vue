@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const isLight = inject('isLight', ref(false))
 import { inject,  ref, onMounted, onBeforeUnmount  } from 'vue'
-import { animate, svg } from 'animejs'
+import { animate, svg, remove } from 'animejs'
 import PaintDrip from './graffiti/PaintDrip.vue'
 
 
@@ -47,6 +47,8 @@ onMounted(() => {
 onBeforeUnmount(() => {
   if (pathAnimation) pathAnimation.pause()
   if (drawAnimation) drawAnimation.pause()
+  if (pathRef.value) remove(pathRef.value)
+  if (followerRef.value) remove(followerRef.value)
 })
 </script>
 
@@ -63,6 +65,17 @@ onBeforeUnmount(() => {
         <!-- Contenedor del trazado SVG animado -->
         <div class="relative w-full h-32 mb-2 flex justify-center items-center">
           <svg class="w-24 h-24 sm:w-32 sm:h-32 overflow-visible" viewBox="0 0 100 70" fill="none" stroke-width="2">
+            <!-- Definir filtro de brillo para la chispa -->
+            <defs>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
             <!-- Corona de Graffiti Path -->
             <path 
               ref="pathRef"
@@ -79,14 +92,18 @@ onBeforeUnmount(() => {
             <circle cx="10" cy="20" r="4" fill="var(--color-accent)" opacity="0.6" />
             <circle cx="50" cy="5" r="4" fill="var(--color-accent)" opacity="0.6" />
             <circle cx="90" cy="20" r="4" fill="var(--color-accent)" opacity="0.6" />
-          </svg>
 
-          <!-- El elemento que sigue el Path (Chispa de datos) -->
-          <div 
-            ref="followerRef"
-            class="loader-spark absolute top-0 left-0 w-4 h-4 bg-white rounded-full shadow-[0_0_12px_var(--color-accent),0_0_24px_var(--color-accent)] pointer-events-none"
-            style="transform-origin: center center; margin-top: -8px; margin-left: -8px;"
-          />
+            <!-- Chispa de datos (ahora dentro del SVG) -->
+            <circle
+              ref="followerRef"
+              cx="0"
+              cy="0"
+              r="3.5"
+              fill="#ffffff"
+              filter="url(#glow)"
+              style="transform-origin: 0 0;"
+            />
+          </svg>
         </div>
         
         <div class="relative mb-2 mt-4">
