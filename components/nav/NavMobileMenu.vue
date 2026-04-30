@@ -28,12 +28,19 @@ watch(open, async (isOpen) => {
       firstLink.focus()
     }
 
+    // Animación fluida sin setTimeout para que no se vea la pantalla en blanco
     animate('.mobile-stagger-item', {
-      translateX: [-30, 0],
+      translateX: [-20, 0], // Distancia más corta
       opacity: [0, 1],
-      delay: stagger(80, { start: 100 }),
-      duration: 800,
-      easing: 'easeOutElastic(1, .8)'
+      delay: stagger(40, { start: 50 }), // Inicia casi de inmediato, stagger más rápido
+      duration: 500, // Un poco más rápido para emparejar con el Drawer
+      easing: 'easeOutQuart' // Easing más ligero que Elastic para evitar lag en móviles
+    })
+  } else {
+    // Resetear al cerrar
+    document.querySelectorAll('.mobile-stagger-item').forEach(el => {
+      el.style.opacity = '0'
+      el.style.transform = 'translateX(-20px)'
     })
   }
 })
@@ -79,7 +86,7 @@ watch(open, async (isOpen) => {
           <div class="mobile-divider mb-5 mobile-stagger-item opacity-0" aria-hidden="true" />
 
           <!-- Unified Footer: Settings & Socials -->
-          <div class="relative z-10 flex items-center justify-between">
+          <div class="relative z-10 flex flex-wrap items-center justify-between gap-4">
             
             <!-- Left: Settings -->
             <div class="flex items-center gap-3 mobile-stagger-item opacity-0">

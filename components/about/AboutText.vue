@@ -1,13 +1,9 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import StreetButton from '~/components/ui/StreetButton.vue'
 
-defineProps({
-  isLight: {
-    type: Boolean,
-    default: false
-  }
-})
+const isLight = inject('isLight', ref(false))
 
 const { t } = useI18n()
 

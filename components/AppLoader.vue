@@ -38,6 +38,10 @@ onMounted(() => {
     if (isLoaded.value) return // Evitar doble ejecución
     isLoaded.value = true
     if (fallbackTimer) clearTimeout(fallbackTimer)
+    
+    // Mata las animaciones de anime.js para evitar memory leaks
+    if (pathRef.value) remove(pathRef.value)
+    if (followerRef.value) remove(followerRef.value)
   }
 
   // 1. Escuchar cuando todo el contenido de la ventana ha cargado (Imágenes, CSS, etc)

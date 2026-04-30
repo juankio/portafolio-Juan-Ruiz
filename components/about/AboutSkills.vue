@@ -1,12 +1,8 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
 import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 
-defineProps({
-  isLight: {
-    type: Boolean,
-    default: false
-  }
-})
+const isLight = inject('isLight', ref(false))
 
 const { t, locale } = useI18n()
 

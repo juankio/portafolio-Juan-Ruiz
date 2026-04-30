@@ -11,16 +11,16 @@ provide('toggleMode', toggleMode)
 
 <template>
   <div
-    class="min-h-screen bg-brick transition-colors duration-300"
+    class="min-h-screen bg-brick transition-colors duration-300 overflow-x-hidden relative"
     :class="isLight ? 'text-slate-800' : 'text-slate-200'"
   >
     <SkipToContent />
     
     <NavBar  @toggle-mode="toggleMode" />
     
-    <UPage id="main-content" class="relative min-h-screen z-10" tabindex="-1">
+    <UPage id="main-content" class="relative min-h-screen z-10 w-full overflow-x-hidden" tabindex="-1">
       <div class="absolute inset-0 bg-concrete pointer-events-none" />
-      <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
+      <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0 w-full">
         <slot />
       </UPageBody>
     </UPage>

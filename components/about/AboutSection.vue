@@ -1,14 +1,10 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
 import AboutText from './AboutText.vue'
 import AboutProfile from './AboutProfile.vue'
 import AboutSkills from './AboutSkills.vue'
 
-const props = defineProps({
-  isLight: {
-    type: Boolean,
-    default: false
-  }
-})
+const isLight = inject('isLight', ref(false))
 
 useScrollAnimation('.about-animate-trigger', {
   animation: {
