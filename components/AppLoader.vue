@@ -18,21 +18,17 @@ onMounted(() => {
     // 1. Animación del dibujo de la línea (SVG path)
     drawAnimation = animate(svg.createDrawable(pathRef.value), {
       draw: '0 1',
-      ease: 'inOutCubic',
-      duration: 2000,
+      ease: 'inOutSine',
+      duration: 1500,
       direction: 'alternate',
       loop: true
     })
 
     // 2. Animación del punto siguiendo el path (Motion Path en AnimeJS v4)
-    const { translateX, translateY, rotate } = svg.createMotionPath(pathRef.value)
-    
     pathAnimation = animate(followerRef.value, {
-      translateX,
-      translateY,
-      rotate,
-      ease: 'inOutCubic',
-      duration: 4000,
+      ...svg.createMotionPath(pathRef.value),
+      ease: 'inOutSine',
+      duration: 1500,
       direction: 'alternate',
       loop: true
     })
