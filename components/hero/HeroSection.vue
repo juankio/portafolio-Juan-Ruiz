@@ -74,19 +74,17 @@ onMounted(() => {
 
   const animateHero = () => {
     if (prefersReducedMotion) {
-      anime({
-        targets: '.anime-element',
+      animate('.anime-element', {
         opacity: [0, 1],
         duration: 800,
-        easing: 'linear'
+        ease: 'linear'
       })
     } else {
-      anime({
-        targets: '.anime-element',
-        translateY: [20, 0],
+      animate('.anime-element', {
+        y: [20, 0],
         opacity: [0, 1],
-        delay: anime.stagger(100),
-        easing: 'easeOutElastic(1, .8)',
+        delay: stagger(100),
+        ease: 'outElastic(1, .8)',
         duration: 1000
       })
     }
@@ -102,19 +100,17 @@ onMounted(() => {
     // requestAnimationFrame espera al ciclo de pintado real del navegador para evitar parpadeos
     requestAnimationFrame(() => {
       if (prefersReducedMotion) {
-        anime({
-          targets: '.anime-element',
+        animate('.anime-element', {
           opacity: [0, 1],
           duration: 800,
-          easing: 'linear'
+          ease: 'linear'
         })
       } else {
-        anime({
-          targets: '.anime-element',
-          translateY: [20, 0],
+        animate('.anime-element', {
+          y: [20, 0],
           opacity: [0, 1],
-          delay: anime.stagger(100),
-          easing: 'easeOutElastic(1, .8)',
+          delay: stagger(100),
+          ease: 'outElastic(1, .8)',
           duration: 1000
         })
       }
