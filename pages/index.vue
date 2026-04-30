@@ -67,11 +67,14 @@ useHead({
             "@type": "City",
             "name": "Villavicencio, Colombia"
           },
-          "skills": "Vue.js, Nuxt 3, TypeScript, Tailwind CSS, Node.js, Express, MongoDB, Angular, Flask, Anime.js, Prompt Engineering, UI/UX"
+          "skills": "Vue.js, Nuxt 3, React, Svelte, Angular, TypeScript, JavaScript, Tailwind CSS, Node.js, Express, GraphQL, SQL, PostgreSQL, MongoDB, Flask, Python, Docker, AWS, Three.js, WebGL, Anime.js, GSAP, Prompt Engineering, Claude AI, Gemini, OpenAI GPT-4, UI/UX"
         },
         "knowsAbout": [
-          "Vue.js", "Nuxt.js", "Nuxt 3", "JavaScript", "TypeScript", "Angular",
-          "Tailwind CSS", "Node.js", "Express", "MongoDB", "Flask", "Anime.js", "Prompt Engineering"
+          "Vue.js", "Nuxt.js", "Nuxt 3", "React", "Svelte", "Angular", "JavaScript", "TypeScript",
+          "Tailwind CSS", "Node.js", "Express", "GraphQL", "SQL", "PostgreSQL", "MongoDB", "Flask", "Python",
+          "Docker", "AWS", "Three.js", "WebGL", "Anime.js", "GSAP", "Web Performance", "PWA",
+          "Prompt Engineering", "Claude AI", "Gemini", "OpenAI GPT-4", "AI Agents",
+          "Desarrollo Web", "Diseño UI", "Diseño UX", "Desarrollo Frontend", "Fullstack", "Freelance"
         ],
         "knowsLanguage": ["es", "en"],
         "areaServed": [

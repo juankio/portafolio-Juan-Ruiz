@@ -72,30 +72,30 @@ export const messages = {
       },
       intro:
         'Soy Juan Miguel, dev frontend desde Villavicencio (CO). Estudio Ingenieria de Sistemas de dia y rompo layouts de noche. Me obsesiona que las webs carguen rapido, que la UI no aburra y que el usuario sepa que hacer en cada pantalla sin manual.',
-      chips: ['Nuxt 3', 'UX/UI', 'AI Agents', 'Animacion', 'Angular', 'Flask', 'Anime.js', 'PWAs', 'Cafe negro'],
+      chips: ['Vue & Nuxt', 'React & Svelte', 'Angular', 'GraphQL', 'SQL & Postgres', 'Claude & Gemini AI', 'Three.js / WebGL', 'Docker & AWS', 'Tailwind', 'Cafe negro'],
       availability: 'Abierto',
       skillsTitle: 'Habilidades',
       summary: [
-        { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
-        { label: 'UX + Motion', value: 'GSAP · Microinteracciones · A11y' },
-        { label: 'Obsesión', value: 'Rendimiento · Flujos claros · Cero ruido' }
+        { label: 'Frontend', value: 'Vue · Nuxt · React · Svelte · Angular' },
+        { label: 'Backend & BD', value: 'Node · GraphQL · SQL · Postgres · Docker' },
+        { label: 'IA & Motion', value: 'Claude · Gemini · Three.js · GSAP' }
       ],
       skills: [
         {
-          title: 'Frontend y UI',
-          copy: 'Componentes Nuxt que no se rompen cuando el proyecto crece. Tailwind limpio, estados cuidados (hover, focus, scroll raro que nadie piensa).'
+          title: 'Frontend Omnipotente',
+          copy: 'Domino Vue, Nuxt, React, Svelte y Angular. Interfaces construidas con Tailwind que no se rompen. Estados perfectos y 3D en la web con Three.js y WebGL.'
         },
         {
-          title: 'Rendimiento de verdad',
-          copy: 'PWAs que pasan Lighthouse sin trampas. GSAP que no mata el FPS. SEO tecnico que si aparece en Google.'
+          title: 'Rendimiento y Motion',
+          copy: 'Animaciones mantequilla con GSAP y Anime.js sin matar el FPS. PWAs ultrarrápidas y un SEO técnico que le gana a la competencia.'
         },
         {
-          title: 'Backend cuando toca',
-          copy: 'APIs con Node y Express cuando la idea lo pide. MongoDB, auth simple y deploys en Vercel sin drama.'
+          title: 'Backend y Bases de Datos',
+          copy: 'Arquitecturas robustas con Node, Express, Python y Flask. Consumo de APIs con GraphQL y modelado de datos en SQL, Postgres y MongoDB.'
         },
         {
-          title: 'IA & Herramientas',
-          copy: 'Potenciado por IA (Claude, Opencode, Open claw). Gestion con Obsidian. Desarrollo 10x mas rapido sin perder calidad ni control.'
+          title: 'Inteligencia Artificial 10x',
+          copy: 'Desarrollo potenciado por Claude 3.5, Gemini y OpenAI GPT-4. Creación de Agentes de IA, Prompt Engineering avanzado y automatizaciones brutales.'
         }
       ]
     },
@@ -315,30 +315,30 @@ export const messages = {
       },
       intro:
         "I'm Juan Miguel, a frontend dev from Villavicencio (CO). Studying Systems Engineering by day, breaking layouts by night. I care about pages that load fast, UI that doesn't bore you, and users who know exactly what to do next.",
-      chips: ['Nuxt 3', 'UX/UI', 'AI Agents', 'Animation', 'Angular', 'Flask', 'Anime.js', 'PWAs', 'Black coffee'],
+      chips: ['Vue & Nuxt', 'React & Svelte', 'Angular', 'GraphQL', 'SQL & Postgres', 'Claude & Gemini AI', 'Three.js / WebGL', 'Docker & AWS', 'Tailwind', 'Black coffee'],
       availability: 'Open',
       skillsTitle: 'Skills',
       summary: [
-        { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
-        { label: 'UX + Motion', value: 'GSAP · Microinteractions · A11y' },
-        { label: 'Obsession', value: 'Performance · Clear flows · Zero noise' }
+        { label: 'Frontend', value: 'Vue · Nuxt · React · Svelte · Angular' },
+        { label: 'Backend & DB', value: 'Node · GraphQL · SQL · Postgres · Docker' },
+        { label: 'AI & Motion', value: 'Claude · Gemini · Three.js · GSAP' }
       ],
       skills: [
         {
-          title: 'Frontend & UI',
-          copy: "Nuxt components that don't break as the project grows. Clean Tailwind, well-handled states (hover, focus, that weird scroll nobody thinks about)."
+          title: 'Omnipotent Frontend',
+          copy: 'Mastering Vue, Nuxt, React, Svelte, and Angular. Unbreakable Tailwind UI components. Buttery smooth WebGL and Three.js 3D experiences.'
         },
         {
-          title: 'Real performance',
-          copy: 'PWAs that pass Lighthouse without cheating. GSAP motion that stays buttery. Technical SEO that actually shows up on Google.'
+          title: 'Performance & Motion',
+          copy: 'Silky animations with GSAP and Anime.js without dropping frames. Lightning-fast PWAs and technical SEO that crushes competitors on Google.'
         },
         {
-          title: 'Backend when needed',
-          copy: 'REST APIs with Node and Express when the idea calls for it. MongoDB, simple auth, and painless Vercel deploys.'
+          title: 'Backend & Databases',
+          copy: 'Robust architectures with Node, Express, Python, and Flask. GraphQL API integrations and data modeling across SQL, Postgres, and MongoDB.'
         },
         {
-          title: 'AI & Tooling',
-          copy: 'AI-powered by Claude, Opencode, and Open claw. Second brain in Obsidian. 10x faster development without losing quality or control.'
+          title: '10x AI Engineering',
+          copy: 'Development supercharged by Claude 3.5, Gemini, and OpenAI GPT-4. Building custom AI Agents, advanced Prompt Engineering, and brutal automations.'
         }
       ]
     },
