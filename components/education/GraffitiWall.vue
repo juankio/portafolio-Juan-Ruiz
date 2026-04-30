@@ -21,7 +21,7 @@ const emit = defineEmits<{
   select: [course: CourseItem]
 }>()
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const onSelect = (course: CourseItem) => emit('select', course)
 
 // Alternate left/right for desktop timeline
