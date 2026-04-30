@@ -1,50 +1,55 @@
+import { z } from 'zod'
 import { buildEmail } from '../utils/emailTemplate'
 
-export default defineEventHandler(async (event) => {
+// Interfaz estándar de respuesta de API
+interface ApiResponse {
+  success: boolean
+  data?: any
+  message?: string
+  error?: any
+}
+
+// Zod Schema para validación estricta
+const contactSchema = z.object({
+  name: z.string().min(2, 'El nombre es muy corto').max(100, 'El nombre es muy largo'),
+  email: z.string().email('El correo no es válido'),
+  message: z.string().min(10, 'El mensaje es muy corto').max(2000, 'El mensaje es muy largo')
+})
+
+export default defineEventHandler(async (event): Promise<ApiResponse> => {
   const config = useRuntimeConfig()
   const body = await readBody(event)
+
+  // Validación estricta con Zod
+  const parsed = contactSchema.safeParse(body)
+  if (!parsed.success) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Error de validación',
+      data: parsed.error.format()
+    })
+  }
+
+  const { name, email, message } = parsed.data
 
   const contactTo = config.contactTo || process.env.CONTACT_EMAIL || 'contacto@juanmiguel.dev'
   const resendApiKey = config.resendApiKey || process.env.RESEND_API_KEY
   
-  // Clean up quotes that Vercel might add
   let rawFrom = config.resendFrom || process.env.RESEND_FROM || 'Portafolio <portafolio@example.com>'
   if (typeof rawFrom === 'string') {
     rawFrom = rawFrom.replace(/^["']|["']$/g, '').trim()
   }
   const resendFromPrimary = rawFrom
-
   const resendFallbackFrom = config.resendFallbackFrom || process.env.RESEND_FALLBACK_FROM || ''
 
   if (!resendApiKey) {
     throw createError({
       statusCode: 500,
-      statusMessage: 'Falta RESEND_API_KEY'
+      statusMessage: 'Error de configuración del servidor'
     })
   }
 
-  const name = body?.name?.trim()
-  const email = body?.email?.trim()
-  const message = body?.message?.trim()
-
-  if (!name || !email || !message) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Todos los campos son obligatorios.'
-    })
-  }
-
-  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
-  if (!emailRegex.test(email)) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'Correo no valido.'
-    })
-  }
-
-  const tryResend = async (fromAddress) => {
-    if (!resendApiKey) return { ok: false, reason: 'No Resend API key' }
-
+  const tryResend = async (fromAddress: string) => {
     const { subject, text: plainText, html } = buildEmail({ name, email, message })
 
     let response
@@ -66,7 +71,7 @@ export default defineEventHandler(async (event) => {
       })
     } catch (err) {
       console.error('Resend network error', err)
-      return { ok: false, reason: 'Network error hacia Resend' }
+      return { success: false, reason: 'Network error hacia Resend' }
     }
 
     if (!response.ok) {
@@ -77,17 +82,20 @@ export default defineEventHandler(async (event) => {
         bodyText = 'No response body'
       }
       console.error('Resend API error', response.status, bodyText)
-      return { ok: false, status: response.status, body: bodyText.slice(0, 500) }
+      return { success: false, status: response.status, body: bodyText.slice(0, 500) }
     }
 
-    return { ok: true, from: fromAddress }
+    return { success: true, from: fromAddress }
   }
 
   const firstAttempt = await tryResend(resendFromPrimary)
-  if (firstAttempt.ok) return { ok: true, via: 'resend', from: resendFromPrimary }
+  if (firstAttempt.success) {
+    return { success: true, message: 'Correo enviado con éxito' }
+  }
 
-  let secondAttempt = null
+  let secondAttempt: any = null
   const bodyLower = (firstAttempt.body || '').toLowerCase()
+  
   if (
     resendFallbackFrom &&
     firstAttempt.status === 403 &&
@@ -95,20 +103,16 @@ export default defineEventHandler(async (event) => {
     resendFallbackFrom !== resendFromPrimary
   ) {
     secondAttempt = await tryResend(resendFallbackFrom)
-    if (secondAttempt.ok) return { ok: true, via: 'resend', from: resendFallbackFrom }
+    if (secondAttempt.success) {
+      return { success: true, message: 'Correo enviado con éxito (fallback)' }
+    }
   }
 
   const detail = (secondAttempt && (secondAttempt.reason || secondAttempt.body)) || firstAttempt.reason || firstAttempt.body
+  
   throw createError({
     statusCode: 500,
-    statusMessage: secondAttempt?.status
-      ? `Resend error ${secondAttempt.status}`
-      : firstAttempt.status
-        ? `Resend error ${firstAttempt.status}`
-        : 'No se pudo enviar el correo.',
-    data: {
-      resend: secondAttempt || firstAttempt,
-      detail
-    }
+    statusMessage: 'No se pudo enviar el correo',
+    data: detail
   })
 })

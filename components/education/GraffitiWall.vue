@@ -4,18 +4,25 @@ import SpraySplatter from '~/components/graffiti/SpraySplatter.vue'
 import PaintDrip from '~/components/graffiti/PaintDrip.vue'
 import { useScrollAnimation } from '~/composables/useScrollAnimation'
 
+interface CourseItem {
+  title: string
+  period: string
+  place?: string
+  detail?: string
+}
+
 const props = defineProps<{
   isLight: boolean
-  courses: Array<{ title: string; period: string; place?: string; detail?: string }>
+  courses: CourseItem[]
   selectedCourse: { title: string } | null
 }>()
 
 const emit = defineEmits<{
-  select: [course: any]
+  select: [course: CourseItem]
 }>()
 
-const { t, locale } = useI18n()
-const onSelect = (course: any) => emit('select', course)
+const { t } = useI18n()
+const onSelect = (course: CourseItem) => emit('select', course)
 
 // Alternate left/right for desktop timeline
 const isLeft = (index: number) => index % 2 === 0

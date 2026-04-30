@@ -1,20 +1,41 @@
-export function buildEmail({ name, email, message }) {
-  const safeMessage = message || ''
-  const subject = `Nuevo mensaje de ${name}`
-  const text = `Nombre: ${name}\nCorreo: ${email}\n\nMensaje:\n${safeMessage}`
+interface EmailData {
+  name: string
+  email: string
+  message: string
+}
+
+// Función súper estricta de sanitización HTML para prevenir XSS
+const sanitizeHtml = (str: string) => {
+  if (!str) return ''
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
+export function buildEmail(data: EmailData) {
+  const safeName = sanitizeHtml(data.name)
+  const safeEmail = sanitizeHtml(data.email)
+  const safeMessage = sanitizeHtml(data.message)
+  
+  const subject = `Nuevo mensaje de ${safeName}`
+  const text = `Nombre: ${safeName}\nCorreo: ${safeEmail}\n\nMensaje:\n${safeMessage}`
+  
   const html = `
   <table style="width:100%;background:#0b0b0d;padding:32px;font-family:'Inter',Segoe UI,Arial,sans-serif;color:#e5e7eb;">
     <tr>
       <td style="max-width:640px;margin:0 auto;background:#111217;border:1px solid #1f2028;border-radius:16px;padding:24px;">
         <p style="letter-spacing:0.2em;text-transform:uppercase;font-size:12px;color:#9ca3af;margin:0 0 12px;">Portafolio</p>
-        <h1 style="color:#f3f4f6;font-size:22px;margin:0 0 18px;">Nuevo mensaje de ${name}</h1>
+        <h1 style="color:#f3f4f6;font-size:22px;margin:0 0 18px;">Nuevo mensaje de ${safeName}</h1>
         <div style="background:#15161d;border:1px solid #222433;border-radius:14px;padding:16px;margin-bottom:16px;">
           <p style="margin:0 0 6px;color:#9ca3af;font-size:13px;">Nombre</p>
-          <p style="margin:0;color:#f3f4f6;font-size:15px;font-weight:600;">${name}</p>
+          <p style="margin:0;color:#f3f4f6;font-size:15px;font-weight:600;">${safeName}</p>
         </div>
         <div style="background:#15161d;border:1px solid #222433;border-radius:14px;padding:16px;margin-bottom:16px;">
           <p style="margin:0 0 6px;color:#9ca3af;font-size:13px;">Correo</p>
-          <p style="margin:0;color:#f3f4f6;font-size:15px;font-weight:600;">${email}</p>
+          <p style="margin:0;color:#f3f4f6;font-size:15px;font-weight:600;">${safeEmail}</p>
         </div>
         <div style="background:#15161d;border:1px solid #222433;border-radius:14px;padding:16px;margin-bottom:20px;">
           <p style="margin:0 0 6px;color:#9ca3af;font-size:13px;">Mensaje</p>
