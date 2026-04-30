@@ -1,4 +1,4 @@
-import anime from 'animejs'
+import { animate, stagger, utils } from 'animejs'
 
 // Mantenemos una referencia global de los observers para poder destruirlos al cambiar de idioma
 const observersMap = new Map()
@@ -8,9 +8,9 @@ const componentElementsMap = new Map()
 export const useTextSplit = (selector, options = {}) => {
   const {
     delay = 0,
-    stagger = 30,
+    stagger: staggerMs = 30,
     duration = 800,
-    easing = 'easeOutExpo',
+    easing = 'outExpo',
     repeat = false 
   } = options
 
@@ -106,7 +106,7 @@ export const useTextSplit = (selector, options = {}) => {
             entries.forEach(entry => {
               const targets = entry.target.querySelectorAll('.split-char')
               if (entry.isIntersecting) {
-                anime.remove(targets)
+                utils.remove(targets)
                 
                 if (!repeat && entry.target.classList.contains('text-animated') && !entry.target.hasAttribute('data-force-reanimate')) return
                 
@@ -114,25 +114,23 @@ export const useTextSplit = (selector, options = {}) => {
                 entry.target.removeAttribute('data-force-reanimate')
 
                 if (prefersReducedMotion) {
-                  anime({
-                    targets: entry.target,
+                  animate(entry.target, {
                     opacity: [0, 1],
                     duration,
-                    easing: 'linear'
+                    ease: 'linear'
                   })
-                  anime.set(targets, { opacity: 1, translateY: 0, rotate: 0 })
+                  utils.set(targets, { opacity: 1, translateY: 0, rotate: 0 })
                 } else {
                   const yOffset = isScrollingDown ? 20 : -20
                   const rotation = isScrollingDown ? 5 : -5
 
-                  anime({
-                    targets,
-                    translateY: [yOffset, 0],
+                  animate(targets, {
+                    y: [yOffset, 0],
                     opacity: [0, 1],
                     rotate: [rotation, 0],
-                    easing,
+                    ease: easing,
                     duration,
-                    delay: anime.stagger(stagger, { start: delay })
+                    delay: stagger(staggerMs, { start: delay })
                   })
                 }
                 
@@ -142,9 +140,9 @@ export const useTextSplit = (selector, options = {}) => {
                 }
               } else if (repeat) {
                 if (prefersReducedMotion) {
-                  anime.set(entry.target, { opacity: 0 })
+                  utils.set(entry.target, { opacity: 0 })
                 } else {
-                  anime.set(targets, { opacity: 0 })
+                  utils.set(targets, { opacity: 0 })
                 }
                 entry.target.classList.remove('text-animated')
               }
