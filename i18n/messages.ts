@@ -3,39 +3,39 @@ export const messages = {
     seo: {
       locale: 'es_CO',
       index: {
-        title: 'Juan Miguel Ruiz | Desarrollador de Páginas Web y Software a Medida | Colombia',
-        description: 'Creador de páginas web, tiendas online y sistemas para negocios. Programador freelance en Colombia experto en desarrollo a medida, diseño UI/UX y sitios rápidos que venden más.',
-        keywords: 'crear pagina web, hacer tienda online, diseño web Colombia, desarrollador web freelance, programador a medida, creador de sitios web, hacer aplicacion web, arreglar pagina web, cotizar pagina web, experto en paginas web, agencia de desarrollo web, programador en Villavicencio Meta, contratar programador remoto, desarrollo de software a medida, creador de paginas web, Juan Miguel Ruiz Supelano, juankio, experto Vue.js Nuxt 3, desarrollador frontend, diseñador UI UX, integracion de Inteligencia Artificial',
-        ogTitle: 'Juan Miguel Ruiz | Desarrollador y Creador de Páginas Web',
-        ogDescription: 'Ayudo a negocios a crear sitios web rápidos, modernos y aplicaciones a medida. Desarrollo freelance desde Colombia para el mundo.',
-        twitterTitle: 'Juan Miguel Ruiz | Desarrollador Web a Medida',
-        twitterDescription: 'Creador de páginas web y software a medida en Colombia. Diseño moderno, sitios rápidos y listos para vender.'
+        title: 'Juan Miguel Ruiz | Creación de Páginas Web Rápidas y Software | Colombia',
+        description: '¿Necesitas una página web rápida o una tienda online? Soy programador freelance experto en Angular y Vue. Creo páginas web modernas, baratas y buenas que cargan al instante.',
+        keywords: 'crear pagina web, paginas web rapidas, hacer pagina web, necesito una pagina web, quien me hace una pagina web, alguien que haga paginas web, crear mi pagina en internet, programador angular, programador vue, diseño web rapido, paginas web para vender, tiendas virtuales, mejorar mi pagina web, creador de sitios web, arreglar pagina web, cotizar pagina web, paginas web baratas y buenas, experto en paginas web, Juan Miguel Ruiz, juankio',
+        ogTitle: 'Juan Miguel Ruiz | Creador de Páginas Web Rápidas',
+        ogDescription: '¿Necesitas una web que cargue al instante y venda? Ayudo a negocios a crear sitios web y tiendas online modernas y rápidas.',
+        twitterTitle: 'Juan Miguel Ruiz | Creador de Webs Rápidas',
+        twitterDescription: 'Creación de páginas web, tiendas online y software. Diseños rápidos, modernos y hechos a medida.'
       },
       about: {
-        title: 'Sobre mí — Juan Miguel Ruiz | Experto en Creación de Páginas Web',
-        description: 'Conoce a Juan Miguel Ruiz, programador y creador de páginas web en Colombia. Ayudo a negocios a escalar con sitios web rápidos y desarrollo de software a medida.',
-        keywords: 'sobre Juan Miguel Ruiz, quien es Juan Miguel Ruiz, programador freelance biografia, creador de paginas web Colombia, experto desarrollo web, desarrollador de software Villavicencio, perfil profesional programador',
-        ogTitle: 'Sobre Juan Miguel Ruiz | Creador de Sitios Web',
-        ogDescription: 'Conoce mi trayectoria ayudando a negocios a crear páginas web y aplicaciones modernas desde Colombia.'
+        title: 'Sobre mí — Juan Miguel | El Programador que hace tu Web',
+        description: 'Conoce a Juan Miguel Ruiz. Si buscas alguien que te haga una página web o tienda virtual que cargue rápido, soy tu programador freelance de confianza en Angular y Vue.',
+        keywords: 'quien es juan miguel ruiz, programador colombiano, creador de paginas web, experto en angular, experto en vue, experto web, alguien que sepa crear webs, desarrollador freelance, perfil profesional programador',
+        ogTitle: 'Sobre Juan Miguel | Creador de Sitios Web',
+        ogDescription: 'Conoce mi trayectoria ayudando a negocios a tener páginas web rápidas y aplicaciones modernas.'
       },
       projects: {
-        title: 'Proyectos y Portafolio — Juan Miguel Ruiz | Desarrollo Web a Medida',
-        description: 'Mira mis últimos proyectos: páginas web corporativas, tiendas online y aplicaciones a medida creadas para negocios y startups. Diseños limpios y sitios rápidos.',
-        keywords: 'ejemplos de paginas web, portafolio de paginas web, trabajos desarrollo web, proyectos de software a medida, diseño web portafolio, tiendas online creadas, aplicaciones web ejemplos, Juan Miguel Ruiz proyectos',
-        ogTitle: 'Portafolio de Proyectos Web | Juan Miguel Ruiz',
-        ogDescription: 'Explora las páginas web, tiendas y aplicaciones a medida que he construido.'
+        title: 'Proyectos — Ejemplos de Páginas Web y Tiendas Online',
+        description: 'Mira mis últimos proyectos: páginas web que cargan rápido, tiendas online y aplicaciones creadas para negocios. Si necesitas una web, mira mis trabajos.',
+        keywords: 'ejemplos de paginas web, portafolio de paginas web, ver paginas web creadas, tiendas online ejemplos, como queda una pagina web, proyectos de software a medida, aplicaciones web ejemplos, Juan Miguel Ruiz proyectos',
+        ogTitle: 'Portafolio de Páginas Web | Juan Miguel Ruiz',
+        ogDescription: 'Explora las páginas web, tiendas y sistemas rápidos que he construido para distintos clientes.'
       },
       contact: {
-        title: 'Contacto — Cotizar Página Web o Desarrollo de Software | Juan Miguel Ruiz',
-        description: '¿Necesitas crear una página web, una tienda online o software para tu negocio? Escríbeme para cotizar tu proyecto. Trabajo remoto desde Colombia para todo el mundo.',
-        keywords: 'cotizar pagina web, cuanto cuesta una pagina web, contratar creador de paginas web, buscar programador para mi negocio, hacer una aplicacion web costo, contacto desarrollador freelance, diseño web precios, programador web remoto',
+        title: 'Contacto — Cuánto cuesta hacer una página web | Cotizar',
+        description: '¿Quieres saber cuánto cuesta hacer una página web o tienda online? Escríbeme y cotizamos tu idea rápido. Trabajo con negocios de todo el mundo.',
+        keywords: 'cotizar pagina web, cuanto cuesta hacer una pagina web, precio pagina web, contratar creador de paginas web, buscar programador para mi negocio, hacer tienda online costo, necesito un desarrollador, contacto desarrollador freelance',
         ogTitle: 'Cotiza tu Página Web | Juan Miguel Ruiz',
-        ogDescription: 'Escríbeme para crear tu sitio web, tienda online o aplicación a medida. Cotizaciones rápidas y sin compromiso.'
+        ogDescription: 'Escríbeme para crear tu sitio web o tienda online. Cotizaciones rápidas y directas al grano.'
       },
       schema: {
-        jobTitle: 'Desarrollador Web Freelance y Creador de Sitios Web',
-        description: 'Especialista en la creación de páginas web, desarrollo de tiendas online y software a medida para potenciar negocios. Trabajo remoto globalmente.',
-        occupation: 'Desarrollador y Diseñador Web'
+        jobTitle: 'Programador de Angular, Vue y Creador de Páginas Web',
+        description: 'Me dedico a crear páginas web rápidas, tiendas virtuales y sistemas para negocios. Programador experto en Angular y Vue.js.',
+        occupation: 'Desarrollador y Creador de Páginas Web'
       }
     },
     nav: {
@@ -76,9 +76,9 @@ export const messages = {
       availability: 'Abierto',
       skillsTitle: 'Habilidades',
       summary: [
-        { label: 'Stack Web', value: 'Vue 3 · Nuxt 3 · Angular' },
-        { label: 'UX + Motion', value: 'Anime.js · GSAP · A11y' },
-        { label: 'IA & Backend', value: 'Prompt Eng. · Claude · Flask' }
+        { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
+        { label: 'UX + Motion', value: 'GSAP · Microinteracciones · A11y' },
+        { label: 'Obsesión', value: 'Rendimiento · Flujos claros · Cero ruido' }
       ],
       skills: [
         {
@@ -105,8 +105,8 @@ export const messages = {
       headlineAccent: 'Código',
       refresh: 'Actualizar',
       github: 'GitHub',
-      error: 'Se cayo la conexion con GitHub. Dale actualizar o revisa en un rato.',
-      empty: 'Todavia nada por aqui. Vuelve en un rato.',
+      error: 'GitHub se fue a tomar un café. Dale actualizar o revisa en un rato.',
+      empty: 'Los aliens abdujeron mis repositorios... Vuelve en un rato.',
       repo: 'Repositorio',
       stars: 'estrellas',
       updated: 'Actualizado',
@@ -246,39 +246,39 @@ export const messages = {
     seo: {
       locale: 'en_US',
       index: {
-        title: 'Juan Miguel Ruiz | Custom Web Development & Website Creator | Colombia',
-        description: 'Website creator, online stores, and custom software developer. Freelance programmer in Colombia specializing in tailored web solutions, UI/UX design, and fast sites that convert.',
-        keywords: 'build my website, create website for my business, custom web development services, make online store, hire a programmer for startup, website creator Colombia, ecommerce developer, affordable web developer latin america, hire frontend developer remote, web designer colombia, website expert, fix my website, custom software solutions, Juan Miguel Ruiz, juankio, freelance web developer, Vue.js Nuxt 3 expert, UI UX designer, AI integration web',
-        ogTitle: 'Juan Miguel Ruiz | Custom Web Developer & Creator',
-        ogDescription: 'I help businesses build fast, modern websites and custom web apps. Freelance remote development from Colombia.',
-        twitterTitle: 'Juan Miguel Ruiz | Custom Web Developer',
-        twitterDescription: 'Website creator and custom software developer in Colombia. Modern design, fast sites, ready for business.'
+        title: 'Juan Miguel Ruiz | Fast Website Creator & Angular Programmer | Colombia',
+        description: 'Need a fast website or an online store? I am a freelance programmer expert in Angular and Vue. I build modern, affordable, and blazing fast websites.',
+        keywords: 'create fast website, make my website, need a website, who can build a website, angular programmer, vue developer, websites for selling, online stores, fast loading websites, improve my website, hire website creator, affordable web design, Juan Miguel Ruiz, web creator',
+        ogTitle: 'Juan Miguel Ruiz | Fast Website Creator',
+        ogDescription: 'Need a website that loads instantly and sells? I help businesses build modern, lightning-fast sites and online stores.',
+        twitterTitle: 'Juan Miguel Ruiz | Fast Website Creator',
+        twitterDescription: 'Website and online store creator. Modern designs, fast sites, built to sell.'
       },
       about: {
-        title: 'About me — Juan Miguel Ruiz | Website Creation Expert',
-        description: 'Meet Juan Miguel Ruiz, a programmer and website creator from Colombia. I help businesses scale with fast websites and custom software development.',
-        keywords: 'about Juan Miguel Ruiz, who is Juan Miguel Ruiz, freelance developer biography, website creator Colombia, web development expert, software developer Latin America, remote programmer profile',
-        ogTitle: 'About Juan Miguel Ruiz | Website Creator',
-        ogDescription: 'Learn about my journey helping businesses build modern websites and web applications from Colombia.'
+        title: 'About me — Juan Miguel | The Programmer who builds your Web',
+        description: 'Meet Juan Miguel Ruiz. If you are looking for someone to build a fast-loading website or online store, I am your trusted Angular and Vue freelance programmer.',
+        keywords: 'who is Juan Miguel Ruiz, freelance developer biography, Colombia programmer, website creator, angular expert, vue expert, someone who knows how to make websites, professional programmer profile',
+        ogTitle: 'About Juan Miguel | Website Creator',
+        ogDescription: 'Learn about my journey helping businesses get fast websites and modern web applications.'
       },
       projects: {
-        title: 'Projects & Portfolio — Juan Miguel Ruiz | Custom Web Development',
-        description: 'View my latest projects: corporate websites, online stores, and custom web apps built for businesses and startups. Clean designs and lightning-fast sites.',
-        keywords: 'website examples, web design portfolio, web development work, custom software projects, online stores built, web app examples, Juan Miguel Ruiz projects',
-        ogTitle: 'Web Projects Portfolio | Juan Miguel Ruiz',
-        ogDescription: 'Explore the custom websites, stores, and web apps I have built.'
+        title: 'Projects — Website and Online Store Examples',
+        description: 'Check out my latest projects: fast loading websites, online stores, and web apps built for businesses. If you need a website, see my work here.',
+        keywords: 'website examples, web design portfolio, see created websites, online store examples, how a website looks like, custom software projects, web app examples, Juan Miguel Ruiz projects',
+        ogTitle: 'Website Portfolio | Juan Miguel Ruiz',
+        ogDescription: 'Explore the fast websites, stores, and systems I have built for different clients.'
       },
       contact: {
-        title: 'Contact — Quote a Website or Software Project | Juan Miguel Ruiz',
-        description: 'Need to build a website, an online store, or custom software for your business? Contact me for a quote. Remote worker from Colombia for clients worldwide.',
-        keywords: 'quote website, how much does a website cost, hire website creator, find programmer for my business, cost to build web app, contact freelance developer, web design pricing, remote web programmer',
+        title: 'Contact — How much does a website cost | Get a Quote',
+        description: 'Want to know how much a website or online store costs? Send me a message and we will quote your idea fast. Working with businesses worldwide.',
+        keywords: 'quote website, how much does a website cost, website price, hire website creator, find programmer for my business, online store cost, need a developer, contact freelance developer',
         ogTitle: 'Get a Quote for Your Website | Juan Miguel Ruiz',
-        ogDescription: 'Message me to create your website, online store, or custom app. Fast, no-obligation quotes.'
+        ogDescription: 'Message me to create your website or online store. Fast, direct-to-the-point quotes.'
       },
       schema: {
-        jobTitle: 'Freelance Web Developer & Website Creator',
-        description: 'Specialist in building websites, developing online stores, and crafting custom software to scale businesses. Working remotely worldwide.',
-        occupation: 'Web Developer & Designer'
+        jobTitle: 'Angular & Vue Programmer, Fast Website Creator',
+        description: 'I build fast websites, online stores, and business systems. Expert Angular and Vue.js programmer.',
+        occupation: 'Web Developer & Website Creator'
       }
     },
     nav: {
@@ -319,9 +319,9 @@ export const messages = {
       availability: 'Open',
       skillsTitle: 'Skills',
       summary: [
-        { label: 'Web Stack', value: 'Vue 3 · Nuxt 3 · Angular' },
-        { label: 'UX + Motion', value: 'Anime.js · GSAP · A11y' },
-        { label: 'AI & Backend', value: 'Prompt Eng. · Claude · Flask' }
+        { label: 'Frontend', value: 'Vue 3 · Nuxt 3 · Tailwind' },
+        { label: 'UX + Motion', value: 'GSAP · Microinteractions · A11y' },
+        { label: 'Obsession', value: 'Performance · Clear flows · Zero noise' }
       ],
       skills: [
         {
@@ -348,8 +348,8 @@ export const messages = {
       headlineAccent: 'Code',
       refresh: 'Refresh',
       github: 'GitHub',
-      error: 'GitHub connection dropped. Hit refresh or come back in a bit.',
-      empty: 'Nothing here yet. Check back in a moment.',
+      error: 'GitHub went out for coffee. Hit refresh or come back in a bit.',
+      empty: 'Aliens abducted my repositories... Check back in a moment.',
       repo: 'Repository',
       stars: 'stars',
       updated: 'Updated',
