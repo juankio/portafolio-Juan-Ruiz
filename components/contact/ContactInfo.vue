@@ -21,7 +21,7 @@ const socialLinks = [
         {{ t('contact.section') }}
       </p>
       <h2
-        class="text-3xl font-bold text-spray sm:text-4xl split-text-contact text-balance" :key="locale"
+        class="text-3xl font-bold text-spray sm:text-4xl split-text-contact text-balance"
         :class="isLight ? 'text-slate-700' : 'text-white'"
       >
         {{ t('contact.titleLead') }}

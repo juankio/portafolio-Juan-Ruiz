@@ -1,12 +1,15 @@
 import anime from 'animejs'
 
+// Mantenemos una referencia global de los observers para poder destruirlos al cambiar de idioma
+const observersMap = new Map()
+
 export const useTextSplit = (selector, options = {}) => {
   const {
     delay = 0,
     stagger = 30,
     duration = 800,
     easing = 'easeOutExpo',
-    repeat = false // Cambiado a false por defecto
+    repeat = false 
   } = options
 
   onMounted(() => {
@@ -17,10 +20,14 @@ export const useTextSplit = (selector, options = {}) => {
         let lastScrollY = window.scrollY
         
         elements.forEach(el => {
-          // If already split, do not block, but we need to know if the text changed
-          // Since Vue re-renders the text node on lang change, the original text nodes might be replaced
-          // Actually, if Vue replaces innerHTML, the 'is-split' class might be lost. 
-          // If it isn't, we should clear it if we detect a change.
+          // Destruir observers viejos de este elemento si existen
+          if (observersMap.has(el)) {
+            observersMap.get(el).disconnect()
+            observersMap.delete(el)
+          }
+
+          // Si Vue destruye el contenido, perderemos la clase is-split. 
+          // Si no la hemos perdido, evitamos volver a particionar a menos que haya cambiado el idioma.
           if (el.classList.contains('is-split') && !el.hasAttribute('data-lang-changed')) return
           
           el.classList.add('is-split')
@@ -41,7 +48,7 @@ export const useTextSplit = (selector, options = {}) => {
                 
                 const wordSpan = document.createElement('span')
                 wordSpan.style.display = 'inline-block'
-                wordSpan.style.whiteSpace = 'nowrap' // Mantiene la palabra entera, no parte letras
+                wordSpan.style.whiteSpace = 'nowrap' // Mantiene la palabra entera
                 
                 const chars = word.split('')
                 chars.forEach(char => {
@@ -83,7 +90,6 @@ export const useTextSplit = (selector, options = {}) => {
             const isScrollingDown = currentScrollY >= lastScrollY
             lastScrollY = currentScrollY
 
-            // Optimization: Check for prefers-reduced-motion
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
             entries.forEach(entry => {
@@ -91,11 +97,12 @@ export const useTextSplit = (selector, options = {}) => {
               if (entry.isIntersecting) {
                 anime.remove(targets)
                 
-                if (!repeat && entry.target.classList.contains('text-animated')) return
+                if (!repeat && entry.target.classList.contains('text-animated') && !entry.target.hasAttribute('data-force-reanimate')) return
+                
                 entry.target.classList.add('text-animated')
+                entry.target.removeAttribute('data-force-reanimate')
 
                 if (prefersReducedMotion) {
-                  // If user prefers reduced motion, just fade in the container
                   anime({
                     targets: entry.target,
                     opacity: [0, 1],
@@ -104,7 +111,6 @@ export const useTextSplit = (selector, options = {}) => {
                   })
                   anime.set(targets, { opacity: 1, translateY: 0, rotate: 0 })
                 } else {
-                  // Normal animated text split
                   const yOffset = isScrollingDown ? 20 : -20
                   const rotation = isScrollingDown ? 5 : -5
 
@@ -132,29 +138,26 @@ export const useTextSplit = (selector, options = {}) => {
           }, { threshold: 0.1 })
           
           observer.observe(el)
+          observersMap.set(el, observer)
         })
       }, 150)
     }
 
     initSplit()
 
-    // Observar cambios de idioma para re-splitear el texto
     const { locale } = useI18n()
     watch(locale, () => {
-      const elements = document.querySelectorAll(selector)
-      elements.forEach(el => {
-        el.classList.remove('is-split')
-        el.classList.remove('text-animated')
-        el.setAttribute('data-lang-changed', 'true')
-        
-        // Remove existing spans and restore raw text to let Vue update it properly
-        const spans = el.querySelectorAll('.split-char, [style*="display: inline-block"]')
-        if (spans.length) {
-          // Si el texto base cambia, Vue necesita inyectar el nuevo HTML sin nuestra basura del DOM
-          // Retrasamos el split hasta el proximo tick del event loop
-        }
-      })
-      setTimeout(initSplit, 250) // Le damos más tiempo a Vue para aplicar las traducciones
+      // Como Vue destruye y recrea el HTML, no le ponemos classList.remove a los viejos
+      // Sino que esperamos a que Vue termine, y luego volvemos a correr initSplit
+      // initSplit se encarga de limpiar los observers viejos y volver a animar.
+      setTimeout(() => {
+        const elements = document.querySelectorAll(selector)
+        elements.forEach(el => {
+          el.classList.remove('is-split')
+          el.setAttribute('data-force-reanimate', 'true')
+        })
+        initSplit()
+      }, 200) 
     })
   })
 }
