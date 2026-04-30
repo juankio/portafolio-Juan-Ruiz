@@ -43,7 +43,7 @@ useScrollAnimation('.edu-animate-trigger', {
   stagger: 150
 })
 
-useTextSplit('.split-text-wall', { stagger: 30 })
+useTextSplit('.split-text-wall', { stagger: 15, duration: 700 })
 </script>
 
 <template>
@@ -76,10 +76,10 @@ useTextSplit('.split-text-wall', { stagger: 30 })
             {{ t('education.educationTitle') }}
           </span>
 
-          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-4">
+          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-4" :key="`edu-${locale}`">
             <div
               v-for="(item, idx) in education"
-              :key="item.title"
+              :key="idx"
               class="animate-item opacity-0"
             >
               <div

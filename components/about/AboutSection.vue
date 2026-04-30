@@ -43,7 +43,7 @@ useScrollAnimation('.about-animate-trigger', {
   stagger: 150
 })
 
-useTextSplit('.split-text-about', { stagger: 30 })
+useTextSplit('.split-text-about', { stagger: 15, duration: 700 })
 </script>
 
 <template>

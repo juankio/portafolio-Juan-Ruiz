@@ -82,10 +82,10 @@ useScrollAnimation('.timeline-animate-trigger', {
     <div class="timeline-line timeline-line--glow" aria-hidden="true" />
 
     <!-- Tags on the wall — timeline layout -->
-    <div role="list" aria-label="Cursos y certificaciones" class="timeline-list relative py-8 sm:py-12 timeline-animate-trigger animate-group">
+    <div role="list" aria-label="Cursos y certificaciones" class="timeline-list relative py-8 sm:py-12 timeline-animate-trigger animate-group" :key="`timeline-${locale}`">
       <div
         v-for="(course, idx) in courses"
-        :key="course.title"
+        :key="idx"
         role="listitem"
         class="timeline-item animate-item opacity-0"
         :class="isLeft(idx) ? 'timeline-item--left' : 'timeline-item--right'"

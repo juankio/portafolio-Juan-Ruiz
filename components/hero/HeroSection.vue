@@ -96,11 +96,11 @@ onMounted(() => {
 
   // Re-animar cuando cambie el idioma para que los nuevos elementos del DOM no queden en opacity-0
   watch(locale, async () => {
-    // Usar nextTick para esperar que Vue reconstruya el DOM
+    // Usar nextTick para esperar que Vue reconstruya el Virtual DOM
     await nextTick()
     
-    // Un pequeño respiro extra para que el render engine pinte los elementos
-    setTimeout(() => {
+    // requestAnimationFrame espera al ciclo de pintado real del navegador para evitar parpadeos
+    requestAnimationFrame(() => {
       if (prefersReducedMotion) {
         anime({
           targets: '.anime-element',
@@ -118,11 +118,11 @@ onMounted(() => {
           duration: 1000
         })
       }
-    }, 50)
+    })
   })
 })
 
-useTextSplit('.split-text-hero', { stagger: 40, duration: 1000 })
+useTextSplit('.split-text-hero', { stagger: 20, duration: 800 })
 
 onBeforeUnmount(() => {
   clearTimers()

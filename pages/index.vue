@@ -10,7 +10,7 @@ const featuredProjects = computed(() => {
   return data.value.slice(0, 6)
 })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 useSeoMeta({
   title: computed(() => t('seo.index.title')),
@@ -33,6 +33,12 @@ useHead({
   link: [
     { rel: 'canonical', href: siteUrl }
   ],
+  meta: computed(() => locale.value === 'es' ? [
+    { name: 'geo.region', content: 'CO-MET' },
+    { name: 'geo.placename', content: 'Villavicencio, Meta, Colombia' },
+    { name: 'geo.position', content: '4.142;-73.626' },
+    { name: 'ICBM', content: '4.142, -73.626' }
+  ] : []),
   script: [
     {
       type: 'application/ld+json',

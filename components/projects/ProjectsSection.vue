@@ -33,7 +33,7 @@ useScrollAnimation('.projects-animate-trigger', {
   stagger: 100
 })
 
-useTextSplit('.split-text-projects', { stagger: 30 })
+useTextSplit('.split-text-projects', { stagger: 15, duration: 700 })
 </script>
 
 <template>
@@ -91,7 +91,7 @@ useTextSplit('.split-text-projects', { stagger: 30 })
         {{ t('projects.empty') }}
       </div>
 
-      <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 projects-animate-trigger animate-group">
+      <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 projects-animate-trigger animate-group" :key="`projects-${locale}`">
         <article
           v-for="(project, idx) in projects"
           :key="project.id"

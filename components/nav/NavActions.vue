@@ -30,6 +30,7 @@ const localeItems = [
           locale === item.code ? 'nav-lang-btn--active' : 'nav-lang-btn--inactive',
           isLight && locale !== item.code ? 'nav-lang-btn--inactive-light' : ''
         ]"
+        :aria-pressed="locale === item.code"
         @click="setLocale(item.code)"
       >
         {{ item.label }}

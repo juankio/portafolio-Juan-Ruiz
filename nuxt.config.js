@@ -82,12 +82,8 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'author', content: 'Juan Miguel Ruiz Supelano' },
+        { name: 'author', content: 'Juan Miguel Ruiz' },
         { name: 'theme-color', content: '#ef4444' },
-        { name: 'geo.region', content: 'CO-MET' },
-        { name: 'geo.placename', content: 'Villavicencio, Meta, Colombia' },
-        { name: 'geo.position', content: '4.142;-73.626' },
-        { name: 'ICBM', content: '4.142, -73.626' },
         { name: 'google-site-verification', content: 'RLgwbyq0cBTAEwSW7SSmuT7Z81h3BgOYhW-N4C3h1pg' }
       ],
       link: [

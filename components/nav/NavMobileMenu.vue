@@ -120,6 +120,7 @@ const localeItems = [
                     locale === item.code ? 'mobile-lang-btn--active' : 'mobile-lang-btn--inactive',
                     isLight && locale !== item.code ? 'mobile-lang-btn--inactive-light' : ''
                   ]"
+                  :aria-pressed="locale === item.code"
                   @click="setLocale(item.code)"
                 >
                   {{ item.label }}

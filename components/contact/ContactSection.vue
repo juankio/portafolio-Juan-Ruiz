@@ -16,7 +16,7 @@ useScrollAnimation('.contact-animate-trigger', {
   stagger: 200
 })
 
-useTextSplit('.split-text-contact', { stagger: 30 })
+useTextSplit('.split-text-contact', { stagger: 15, duration: 700 })
 </script>
 
 <template>
