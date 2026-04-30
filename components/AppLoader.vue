@@ -34,10 +34,10 @@ onMounted(() => {
     })
   }
 
-  // Ocultar el loader después de un retraso inicial
+  // Ocultar el loader después de un retraso inicial para no demorar la carga artificialmente
   setTimeout(() => {
     isLoaded.value = true
-  }, 1200)
+  }, 800)
 })
 
 onBeforeUnmount(() => {
@@ -99,6 +99,7 @@ onBeforeUnmount(() => {
               r="3.5"
               fill="#ffffff"
               filter="url(#glow)"
+              class="animate-pulse"
               style="transform-origin: 0 0; transform: translate(10px, 60px);"
             />
           </svg>
