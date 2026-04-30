@@ -3,7 +3,7 @@ defineProps<{
   isLight: boolean
 }>()
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const socialLinks = [
   { icon: 'i-ph-github-logo-fill', href: 'https://github.com/juankio', label: 'GitHub' },
@@ -21,7 +21,7 @@ const socialLinks = [
         {{ t('contact.section') }}
       </p>
       <h2
-        class="text-3xl font-bold text-spray sm:text-4xl split-text-contact text-balance"
+        class="text-3xl font-bold text-spray sm:text-4xl split-text-contact text-balance" :key="locale"
         :class="isLight ? 'text-slate-700' : 'text-white'"
       >
         {{ t('contact.titleLead') }}

@@ -22,8 +22,12 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Juan Miguel Ruiz | Portafolio',
       short_name: 'Juan Miguel',
+      description: 'Portafolio de Juan Miguel Ruiz, Desarrollador Web y Creador de Páginas Rápidas en Colombia.',
       theme_color: '#ef4444',
       background_color: '#0f172a',
+      display: 'standalone',
+      start_url: '/',
+      lang: 'es',
       icons: [
         {
           src: '/icons/pwa-192x192.png',

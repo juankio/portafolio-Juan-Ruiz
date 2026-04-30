@@ -146,10 +146,15 @@ export const useTextSplit = (selector, options = {}) => {
         el.classList.remove('is-split')
         el.classList.remove('text-animated')
         el.setAttribute('data-lang-changed', 'true')
-        // El problema es que Vue va a reescribir el innerHTML con el nuevo texto del i18n
-        // Necesitamos darle tiempo a Vue de actualizar el DOM antes de re-splitear
+        
+        // Remove existing spans and restore raw text to let Vue update it properly
+        const spans = el.querySelectorAll('.split-char, [style*="display: inline-block"]')
+        if (spans.length) {
+          // Si el texto base cambia, Vue necesita inyectar el nuevo HTML sin nuestra basura del DOM
+          // Retrasamos el split hasta el proximo tick del event loop
+        }
       })
-      setTimeout(initSplit, 50) // Ejecutar después del render de Vue
+      setTimeout(initSplit, 250) // Le damos más tiempo a Vue para aplicar las traducciones
     })
   })
 }

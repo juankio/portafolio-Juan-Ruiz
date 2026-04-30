@@ -18,14 +18,12 @@ provide('toggleMode', toggleMode)
     
     <NavBar :is-light="isLight" @toggle-mode="toggleMode" />
     
-    <main id="main-content" class="relative z-10" tabindex="-1">
-      <UPage class="relative min-h-screen">
-        <div class="absolute inset-0 bg-concrete pointer-events-none" />
-        <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
-          <slot />
-        </UPageBody>
-      </UPage>
-    </main>
+    <UPage id="main-content" class="relative min-h-screen z-10" tabindex="-1">
+      <div class="absolute inset-0 bg-concrete pointer-events-none" />
+      <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0">
+        <slot />
+      </UPageBody>
+    </UPage>
 
     <FooterBar :is-light="isLight" />
   </div>

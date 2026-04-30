@@ -153,6 +153,8 @@ export const messages = {
       certificate: 'Certificado',
       educationTitle: 'Educacion',
       educationHeadline: 'Formacion principal',
+      learningPath: 'Ruta de',
+      learningPathAccent: 'Aprendizaje',
       courses: [
         {
           title: 'Universidad de Programacion - Python, Java y JavaScript',
@@ -397,6 +399,8 @@ export const messages = {
       certificate: 'Certificate',
       educationTitle: 'Education',
       educationHeadline: 'Main education',
+      learningPath: 'Learning',
+      learningPathAccent: 'Path',
       courses: [
         {
           title: 'Programming University - Python, Java & JavaScript',

@@ -9,7 +9,7 @@ const props = defineProps({
   isLight: { type: Boolean, default: false }
 })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const rotatingWords = computed(() => {
   const words = t('hero.rotatingWords')
@@ -119,13 +119,14 @@ onBeforeUnmount(() => {
           {{ t('hero.tagline') }}
         </p>
         <h1
-          class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl split-text-hero text-balance"
+          class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl text-balance" 
+          :key="locale"
           :class="isLight ? 'text-slate-700' : 'text-white'"
         >
-          {{ t('hero.title.main') }}
-          <span class="text-[var(--color-accent)]">{{ t('hero.title.highlight1') }}</span>
-          {{ t('hero.title.connector') }}
-          <span class="text-[var(--color-accent)]">{{ t('hero.title.highlight2') }}</span>
+          <span class="split-text-hero">{{ t('hero.title.main') }}</span>
+          <span class="text-[var(--color-accent)] split-text-hero">{{ t('hero.title.highlight1') }}</span>
+          <span class="split-text-hero">{{ t('hero.title.connector') }}</span>
+          <span class="text-[var(--color-accent)] split-text-hero">{{ t('hero.title.highlight2') }}</span>
         </h1>
         <p class="max-w-2xl text-lg leading-relaxed font-body" style="letter-spacing: 0.02em" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
           {{ t('hero.subtitle') }}
