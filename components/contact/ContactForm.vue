@@ -71,6 +71,7 @@ const handleSubmit = async () => {
     name.value = ''
     email.value = ''
     message.value = ''
+    toast.add({ title: t('contact.validation.success'), description: t('contact.validation.successDesc'), color: 'emerald' })
   } catch (error) {
     const reason =
       error?.data?.body ||

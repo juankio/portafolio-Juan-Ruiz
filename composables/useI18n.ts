@@ -10,6 +10,9 @@ export const useI18n = () => {
     locale.value = availableLocales.includes(code) ? code : 'en'
   }
 
+  // Hacer que t sea reactivo: si se usa en un template, Vue debe rastrear la dependencia de currentMessages.
+  // En Vue, si pasas una función pura al template (ej: t('llave')), y la función lee una ref (currentMessages.value), 
+  // la vista se re-renderizará cuando la ref cambie.
   const t = (path: string): any => {
     return path.split('.').reduce((acc: any, key) => (acc ? acc[key as keyof typeof acc] : undefined), currentMessages.value) ?? path
   }

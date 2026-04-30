@@ -224,6 +224,7 @@ const tagAccent = computed(() => accentColors[props.index % accentColors.length]
 .wall-tag__detail-inner {
   overflow: hidden;
   perspective: 1000px;
+  min-height: 0;
 }
 
 /* Detail Text with 3D Flip */

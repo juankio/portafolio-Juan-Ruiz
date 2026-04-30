@@ -16,7 +16,10 @@ export default defineCachedEventHandler(async (event) => {
     return myProjects.slice(0, 12)
   } catch (error) {
     console.error('Error fetching github repos:', error)
-    return []
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Error fetching GitHub repositories'
+    })
   }
 }, {
   maxAge: 60 * 60 * 2, // Caché por 2 horas (7200 segundos)
