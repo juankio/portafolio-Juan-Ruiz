@@ -68,37 +68,27 @@ const socialLinks = [
 .footer-wall {
   background: var(--color-surface-card);
   backdrop-filter: blur(12px);
-  border-top: 2px solid var(--color-border-accent);
+  border-top: 1px solid var(--color-border-accent);
 }
 
 .footer-spray-line {
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-accent) 0px,
-    var(--color-accent) 12px,
-    transparent 12px,
-    transparent 18px,
-    var(--color-accent) 18px,
-    var(--color-accent) 24px,
-    transparent 24px,
-    transparent 30px
-  );
-  opacity: 0.35;
+  background: var(--color-border-accent);
+  opacity: 0.5;
 }
 
 .footer-social {
   color: var(--color-text-secondary);
-  border: 2px solid var(--color-border-accent);
-  border-radius: 3px 8px 4px 6px;
+  border: 1px solid var(--color-border-accent);
+  border-radius: 12px;
   background: var(--color-surface-card);
-  transition: all 0.2s var(--ease-spring);
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .footer-social:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
-  background: var(--color-surface-elevated);
-  box-shadow: 0 0 10px var(--color-accent-soft);
-  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
 }
 </style>

@@ -35,9 +35,9 @@ const isActive = (href) => {
 
 <style scoped>
 .mobile-link {
-  border-radius: 3px 8px 4px 6px;
+  border-radius: 12px;
   color: var(--color-text-secondary);
-  transition: all 0.2s var(--ease-spring);
+  transition: all 0.3s ease;
   border: 1px solid transparent;
 }
 
@@ -45,13 +45,14 @@ const isActive = (href) => {
   color: var(--color-accent);
   background: var(--color-accent-softer);
   border-color: rgba(var(--color-accent-rgb), 0.2);
+  transform: translateX(4px);
 }
 
 .mobile-link--active {
   background: var(--color-accent-softer);
   color: var(--color-accent);
   border-color: rgba(var(--color-accent-rgb), 0.3);
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.06);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .mobile-link__num {

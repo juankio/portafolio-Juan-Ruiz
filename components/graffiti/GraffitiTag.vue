@@ -6,26 +6,19 @@ const props = defineProps<{
   color?: string
 }>()
 
-const rotation = computed(() => {
-  const idx = props.index ?? 0
-  const angles = [-3, 2, -1.5, 2.5, -2, 1, -2.5, 3]
-  return angles[idx % angles.length]
-})
-
 const sizeClasses = computed(() => {
   const s = props.size || 'md'
-  if (s === 'sm') return 'px-3 py-1 text-xs'
-  if (s === 'lg') return 'px-6 py-2.5 text-base'
-  return 'px-4 py-1.5 text-sm'
+  if (s === 'sm') return 'px-2.5 py-0.5 text-[0.7rem]'
+  if (s === 'lg') return 'px-4 py-2 text-sm'
+  return 'px-3 py-1 text-xs'
 })
 </script>
 
 <template>
   <span
-    class="tag-sticker inline-block font-marker"
+    class="inline-flex items-center font-semibold rounded-full shadow-sm text-white"
     :class="sizeClasses"
     :style="{
-      transform: `rotate(${rotation}deg)`,
       background: color || 'var(--color-accent)',
     }"
   >

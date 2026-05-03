@@ -29,17 +29,18 @@ const socialLinks = [
 <style scoped>
 .mobile-control-btn {
   color: var(--color-text-secondary);
-  border: 2px solid var(--color-border-accent);
-  border-radius: 4px 8px 3px 6px;
+  border: 1px solid var(--color-border-accent);
+  border-radius: 12px;
   background: var(--color-surface-card);
-  transition: all 0.2s var(--ease-spring);
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .mobile-control-btn:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
-  box-shadow: 0 0 8px var(--color-accent-soft);
-  transform: rotate(3deg) scale(1.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
 }
 
 .mobile-control-btn--light {

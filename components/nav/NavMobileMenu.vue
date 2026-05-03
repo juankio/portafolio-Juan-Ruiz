@@ -11,25 +11,30 @@ const emit = defineEmits(['toggle-mode'])
 
 const { t, locale, setLocale } = useI18n()
 const open = ref(false)
+const menuContainer = ref(null)
 
 const localeItems = [
   { code: 'es', label: 'ES' },
   { code: 'en', label: 'EN' }
 ]
 
-// Santoryu: Gestor de transición con animejs
+// Santoryu: Gestor de transición con template refs y animejs
 watch(open, async (isOpen) => {
   if (isOpen) {
     await nextTick()
     
-    // Mover foco al primer enlace para evitar warning de aria-hidden en el header
-    const firstLink = document.querySelector('.mobile-drawer-content .mobile-link')
+    if (!menuContainer.value) return
+
+    // Mover foco al primer enlace de forma segura usando ref
+    const firstLink = menuContainer.value.querySelector('.mobile-link')
     if (firstLink) {
       firstLink.focus()
     }
 
-    // Animación fluida sin setTimeout para que no se vea la pantalla en blanco
-    animate('.mobile-stagger-item', {
+    const targets = menuContainer.value.querySelectorAll('.mobile-stagger-item')
+
+    // Animación fluida
+    animate(targets, {
       translateX: [-20, 0], // Distancia más corta
       opacity: [0, 1],
       delay: stagger(40, { start: 50 }), // Inicia casi de inmediato, stagger más rápido
@@ -37,11 +42,11 @@ watch(open, async (isOpen) => {
       easing: 'easeOutQuart' // Easing más ligero que Elastic para evitar lag en móviles
     })
   } else {
-    // Resetear al cerrar
-    document.querySelectorAll('.mobile-stagger-item').forEach(el => {
-      el.style.opacity = '0'
-      el.style.transform = 'translateX(-20px)'
-    })
+    // Limpieza de estado sin mutación nativa iterativa
+    if (menuContainer.value) {
+      const targets = menuContainer.value.querySelectorAll('.mobile-stagger-item')
+      animate(targets, { opacity: 0, translateX: -20, duration: 0 })
+    }
   }
 })
 </script>
@@ -60,7 +65,7 @@ watch(open, async (isOpen) => {
     <slot name="trigger" />
 
     <template #content>
-      <div class="relative px-6 pb-8 pt-2 overflow-hidden w-full h-full">
+      <div ref="menuContainer" class="relative px-6 pb-8 pt-2 overflow-hidden w-full h-full">
           <!-- Spray decorations -->
           <SpraySplatter class="absolute -top-4 -right-6 pointer-events-none" size="md" :opacity="0.06" />
           <SpraySplatter class="absolute bottom-6 -left-4 pointer-events-none" size="sm" :opacity="0.04" color="var(--spray-cyan)" />
@@ -142,42 +147,38 @@ watch(open, async (isOpen) => {
 <style scoped>
 :deep(.mobile-drawer-content) {
   background: var(--color-wall) !important;
-  border-top: 2px solid var(--color-border-accent) !important;
-  border-radius: 12px 12px 0 0 !important;
+  border-top: 1px solid var(--color-border-accent) !important;
+  border-radius: 20px 20px 0 0 !important;
 }
 
 :deep(.mobile-drawer-handle) {
   background: var(--color-accent) !important;
   opacity: 0.5;
+  border-radius: 9999px !important;
 }
 
 .mobile-divider {
-  height: 2px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-accent) 0px,
-    var(--color-accent) 8px,
-    transparent 8px,
-    transparent 14px
-  );
-  opacity: 0.25;
+  height: 1px;
+  background: var(--color-border-accent);
+  opacity: 0.5;
   border-radius: 1px;
 }
 
 /* Theme toggle relies on this class */
 .mobile-control-btn {
   color: var(--color-text-secondary);
-  border: 2px solid var(--color-border-accent);
-  border-radius: 4px 8px 3px 6px;
+  border: 1px solid var(--color-border-accent);
+  border-radius: 12px;
   background: var(--color-surface-card);
-  transition: all 0.2s var(--ease-spring);
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .mobile-control-btn:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
-  box-shadow: 0 0 8px var(--color-accent-soft);
-  transform: rotate(3deg) scale(1.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
 }
 
 .mobile-control-btn--light {
@@ -192,9 +193,10 @@ watch(open, async (isOpen) => {
 
 /* Language Switch */
 .mobile-lang-switch {
-  border: 2px solid var(--color-border-accent);
-  border-radius: 3px 8px 4px 6px;
+  border: 1px solid var(--color-border-accent);
+  border-radius: 12px;
   background: var(--color-surface-card);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .mobile-lang-btn {
@@ -202,14 +204,15 @@ watch(open, async (isOpen) => {
   padding: 4px 10px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s var(--ease-spring);
-  border-radius: 2px 6px 3px 4px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  font-weight: 600;
 }
 
 .mobile-lang-btn--active {
   background: var(--color-accent);
   color: white;
-  box-shadow: 1px 1px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .mobile-lang-btn--inactive {
@@ -219,6 +222,7 @@ watch(open, async (isOpen) => {
 
 .mobile-lang-btn--inactive:hover {
   color: var(--color-accent);
+  background: var(--color-surface-elevated);
 }
 
 .mobile-lang-btn--inactive-light {

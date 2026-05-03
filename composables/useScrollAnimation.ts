@@ -13,18 +13,18 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
   const instanceId = Symbol()
 
   onMounted(() => {
-    let lastScrollY = window.scrollY
+    let lastY = 0
     
     // Guardamos las referencias de este componente particular
     scrollObserversMap.set(instanceId, new Set())
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const currentScrollY = window.scrollY
-        const isScrollingDown = currentScrollY >= lastScrollY
-        lastScrollY = currentScrollY
-
         entries.forEach((entry) => {
+          const currentY = entry.boundingClientRect.top
+          const isScrollingDown = currentY < lastY
+          lastY = currentY
+
           const targets = entry.target.classList.contains('animate-group') 
             ? entry.target.querySelectorAll('.animate-item') 
             : entry.target
@@ -69,42 +69,12 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
       { threshold }
     )
 
-    setTimeout(() => {
+    nextTick(() => {
       const elements = document.querySelectorAll(targetSelector)
       elements.forEach((el) => {
         observer.observe(el)
         scrollObserversMap.get(instanceId)?.add(el)
       })
-    }, 150)
-
-    let localeTimer: number | null = null
-    const { locale } = useI18n()
-    watch(locale, () => {
-      if (localeTimer) clearTimeout(localeTimer)
-      localeTimer = window.setTimeout(() => {
-        const elements = document.querySelectorAll(targetSelector)
-        elements.forEach((el) => {
-          if (el.classList.contains('is-animated')) {
-            el.setAttribute('data-force-reanimate', 'true')
-            const targets = el.classList.contains('animate-group') ? el.querySelectorAll('.animate-item') : el
-            
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-            remove(targets)
-            if (prefersReducedMotion) {
-              animate(targets, { opacity: [0, 1], duration: 800, ease: 'linear' })
-            } else {
-              animate(targets, {
-                translateY: [20, 0],
-                opacity: [0, 1],
-                ease: 'outExpo',
-                duration: 800,
-                delay: animeStagger(stagger)
-              })
-            }
-          }
-        })
-      }, 250) 
     })
 
     // Limpieza

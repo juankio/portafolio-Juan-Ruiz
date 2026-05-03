@@ -49,22 +49,23 @@ defineEmits<{ click: [MouseEvent] }>()
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  border: 2px solid var(--color-border-accent);
-  border-radius: 3px 12px 5px 14px;
+  border-radius: 12px;
   backdrop-filter: blur(8px);
-  transition: all 0.25s var(--ease-spring);
+  transition: all 0.3s ease;
   text-decoration: none;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
 .street-btn.street-btn--sm {
   padding: 0.5rem 1rem;
   font-size: 0.75rem;
   letter-spacing: 0.04em;
+  border-radius: 8px;
 }
 
 .street-btn:disabled {
@@ -76,27 +77,27 @@ defineEmits<{ click: [MouseEvent] }>()
 .street-btn--primary {
   color: white;
   background: var(--color-accent);
-  border-color: var(--color-accent-dark);
-  box-shadow: 2px 3px 0 var(--color-accent-dark);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .street-btn--primary:hover {
-  background: var(--color-accent-dark);
-  transform: translateY(-2px) rotate(-0.5deg);
-  box-shadow: 3px 5px 0 var(--color-accent-dark), 0 0 16px var(--color-accent-soft);
+  background: var(--color-accent-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 12px var(--color-accent-soft);
 }
 
 .street-btn--ghost {
   color: var(--color-text-primary);
   background: var(--color-surface-card);
-  box-shadow: 2px 3px 0 var(--color-accent-dark);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .street-btn--ghost:hover {
-  color: var(--color-accent);
+  color: var(--color-text-primary);
   background: var(--color-surface-elevated);
-  border-color: var(--color-accent);
-  transform: translateY(-2px) rotate(-0.5deg);
-  box-shadow: 3px 5px 0 var(--color-accent-dark), 0 0 16px var(--color-accent-soft);
+  border-color: var(--color-border-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 </style>

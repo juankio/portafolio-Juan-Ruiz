@@ -31,7 +31,7 @@ const { t, locale } = useI18n()
       {{ t('projects.empty') }}
     </div>
 
-    <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 projects-animate-trigger animate-group" :key="`projects-${locale}`">
+    <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 projects-animate-trigger animate-group">
       <ProjectCard 
         v-for="(project, idx) in projects" 
         :key="project.id" 

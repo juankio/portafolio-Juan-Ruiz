@@ -99,15 +99,15 @@ useHead({
 
 <template>
   <div class="space-y-0">
-    <HeroSection  />
-    <AboutSection  />
-    <ProjectsSection
+    <LazyHeroSection  />
+    <LazyAboutSection  />
+    <LazyProjectsSection
       
       :projects="featuredProjects"
       :pending="pending"
       :error="error"
       :on-refresh="refresh"
     />
-    <ContactSection  />
+    <LazyContactSection  />
   </div>
 </template>

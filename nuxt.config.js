@@ -87,6 +87,7 @@ export default defineNuxtConfig({
         { name: 'google-site-verification', content: 'RLgwbyq0cBTAEwSW7SSmuT7Z81h3BgOYhW-N4C3h1pg' }
       ],
       link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'icon', type: 'image/svg+xml', href: '/icons/favicon.svg' },
         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons/favicon-16x16.png' },
         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icons/favicon-32x32.png' },

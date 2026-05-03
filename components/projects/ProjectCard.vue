@@ -12,34 +12,28 @@ const props = defineProps({
 const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
-const getOgImage = (name) => `https://opengraph.githubassets.com/1/juankio/${name}`
 const getPreviewImage = (project) => {
-  if (project.homepage) {
-    return `https://s.wordpress.com/mshots/v1/${encodeURIComponent(project.homepage)}?w=1200&h=675`
-  }
-  return getOgImage(project.name)
+  // Intentar mostrar la web real si existe, sino el repo
+  const targetUrl = project.homepage || project.html_url
+  // Usar Thum.io que es gratuito y no bloquea CORS como mshots
+  return `https://image.thum.io/get/width/600/crop/800/${targetUrl}`
 }
 </script>
 
 <template>
   <article
-    class="group relative flex flex-col overflow-hidden border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_16px_var(--color-accent-soft)] animate-item opacity-0"
-    :class="isLight ? 'border-[var(--color-border)] bg-[var(--color-surface-card)]' : 'border-[var(--color-border)] bg-[var(--color-surface-card)]'"
+    class="group relative flex flex-col overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-card)] transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 hover:border-[var(--color-accent)]/50 animate-item opacity-0"
     :style="{
-      borderRadius: '4px 12px 6px 10px',
-      backdropFilter: 'blur(12px)',
       animationDelay: `${idx * 0.06}s`
     }"
   >
     <!-- Thumbnail -->
     <div class="relative overflow-hidden aspect-video">
-      <NuxtImg
+      <img
         :src="getPreviewImage(project)"
         :alt="project.name"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         loading="lazy"
-        format="webp"
-        quality="80"
         width="600"
         height="338"
       />

@@ -20,6 +20,7 @@ const displayWord = ref('')
 const activeIndex = ref(0)
 const isDeleting = ref(false)
 let tickTimer
+let heroObserver
 
 const heroCards = computed(() => {
   const cards = t('hero.cards')
@@ -68,7 +69,20 @@ watch(rotatingWords, () => {
 })
 
 onMounted(() => {
-  startTypingCycle()
+  heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startTypingCycle()
+      } else {
+        clearTimers()
+      }
+    })
+  })
+
+  nextTick(() => {
+    const el = document.querySelector('.hero-section-container')
+    if (el) heroObserver.observe(el)
+  })
   
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -91,44 +105,20 @@ onMounted(() => {
   }
   
   animateHero()
-
-  // Re-animar cuando cambie el idioma para que los nuevos elementos del DOM no queden en opacity-0
-  watch(locale, async () => {
-    // Usar nextTick para esperar que Vue reconstruya el Virtual DOM
-    await nextTick()
-    
-    // requestAnimationFrame espera al ciclo de pintado real del navegador para evitar parpadeos
-    requestAnimationFrame(() => {
-      if (prefersReducedMotion) {
-        animate('.anime-element', {
-          opacity: [0, 1],
-          duration: 800,
-          ease: 'linear'
-        })
-      } else {
-        animate('.anime-element', {
-          translateY: [20, 0],
-          opacity: [0, 1],
-          delay: stagger(100),
-          ease: 'outElastic(1, .8)',
-          duration: 1000
-        })
-      }
-    })
-  })
 })
 
 useTextSplit('.split-text-hero', { stagger: 20, duration: 800 })
 
-onBeforeUnmount(() => {
+onUnmounted(() => {
   clearTimers()
+  if (heroObserver) heroObserver.disconnect()
 })
 </script>
 
 <template>
   <UContainer
     as="section"
-    class="relative flex flex-col gap-10 pt-12 pb-14 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24"
+    class="hero-section-container relative flex flex-col gap-10 pt-12 pb-14 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24"
   >
     <!-- Spray decorations -->
     <SpraySplatter class="absolute top-4 right-10" size="lg" :opacity="0.06" />
@@ -157,7 +147,6 @@ onBeforeUnmount(() => {
         </p>
         <h1
           class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl text-balance split-text-hero" 
-          :key="locale"
           :class="isLight ? 'text-slate-700' : 'text-white'"
         >
           <span>{{ t('hero.title.main') }}</span>
@@ -192,16 +181,11 @@ onBeforeUnmount(() => {
       </div>
 
       <!-- Hero cards as graffiti stickers -->
-      <div v-if="heroCards.length" class="grid gap-5 sm:grid-cols-3 pt-4" :key="`cards-${locale}`">
+      <div v-if="heroCards.length" class="grid gap-5 sm:grid-cols-3 pt-4">
         <div v-for="(card, idx) in heroCards" :key="idx" class="anime-element opacity-0">
           <div
             class="relative px-5 py-4 border-2 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_12px_var(--color-accent-soft)] h-full"
             :class="isLight ? 'border-[var(--color-border)] bg-[var(--color-surface-card)]' : 'border-[var(--color-border)] bg-[var(--color-surface-card)]'"
-            :style="{
-              borderRadius: '4px 10px 5px 8px',
-              backdropFilter: 'blur(12px)',
-              transform: `rotate(${idx % 2 === 0 ? -1 : 1}deg)`
-            }"
           >
             <PaintDrip class="absolute -top-2 right-4" :count="2" color="var(--color-accent)" />
             <p class="text-sm" :class="isLight ? 'text-slate-500' : 'text-slate-400'">{{ card.label }}</p>

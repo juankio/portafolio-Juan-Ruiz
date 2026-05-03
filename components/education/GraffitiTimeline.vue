@@ -30,7 +30,7 @@ const isLeft = (index: number) => index % 2 === 0
   <div class="timeline-line timeline-line--glow" aria-hidden="true" />
 
   <!-- Tags on the wall — timeline layout -->
-  <div role="list" aria-label="Cursos y certificaciones" class="timeline-list relative py-8 sm:py-12 timeline-animate-trigger animate-group" :key="`timeline-${locale}`">
+  <div role="list" aria-label="Cursos y certificaciones" class="timeline-list relative py-8 sm:py-12 timeline-animate-trigger animate-group">
     <div
       v-for="(course, idx) in courses"
       :key="idx"

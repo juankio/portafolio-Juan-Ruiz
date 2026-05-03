@@ -34,5 +34,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "playwright": "^1.59.1"
+  }
 }

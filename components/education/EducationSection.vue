@@ -77,7 +77,7 @@ useTextSplit('.split-text-wall', { stagger: 15, duration: 700 })
             {{ t('education.educationTitle') }}
           </span>
 
-          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-4" :key="`edu-${locale}`">
+          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mt-4">
             <div
               v-for="(item, idx) in education"
               :key="idx"
