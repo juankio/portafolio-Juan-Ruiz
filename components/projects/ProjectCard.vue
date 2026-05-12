@@ -13,11 +13,9 @@ const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
 const getPreviewImage = (project) => {
-  if (project.homepage) {
-    // Thum.io funciona bien para webs reales, pero fallaba al intentar tomar capturas de GitHub
-    return `https://image.thum.io/get/width/600/crop/800/${project.homepage}`
-  }
-  // Para repositorios sin demo, la imagen nativa de GitHub es instantánea y no bloquea la carga
+  // Las aplicaciones SPA (Vue/Nuxt) a menudo devuelven pantallas en blanco a los bots como Thum.io 
+  // porque el JS no ha terminado de hidratar. Para evitar esto y garantizar que siempre se vea bien
+  // y cargue al instante, usamos la imagen nativa de OpenGraph de GitHub para todos los proyectos.
   return `https://opengraph.githubassets.com/1/${project.full_name}`
 }
 </script>
@@ -38,7 +36,6 @@ const getPreviewImage = (project) => {
         loading="lazy"
         width="600"
         height="338"
-        @error="(e) => e.target.src = `https://opengraph.githubassets.com/1/${project.full_name}`"
       />
       <div
         class="absolute inset-0 bg-gradient-to-t opacity-60"
