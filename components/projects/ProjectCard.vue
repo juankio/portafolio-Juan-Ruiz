@@ -13,9 +13,10 @@ const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
 const getPreviewImage = (project) => {
-  // Las aplicaciones SPA (Vue/Nuxt) a menudo devuelven pantallas en blanco a los bots como Thum.io 
-  // porque el JS no ha terminado de hidratar. Para evitar esto y garantizar que siempre se vea bien
-  // y cargue al instante, usamos la imagen nativa de OpenGraph de GitHub para todos los proyectos.
+  if (project.homepage) {
+    const hp = project.homepage.startsWith('http') ? project.homepage : `https://${project.homepage}`
+    return `https://v1.screenshot.11ty.dev/${encodeURIComponent(hp)}/opengraph/`
+  }
   return `https://opengraph.githubassets.com/1/${project.full_name}`
 }
 </script>
@@ -33,7 +34,6 @@ const getPreviewImage = (project) => {
         :src="getPreviewImage(project)"
         :alt="project.name"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        loading="lazy"
         width="600"
         height="338"
       />
