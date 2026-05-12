@@ -13,10 +13,12 @@ const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
 const getPreviewImage = (project) => {
-  // Intentar mostrar la web real si existe, sino el repo
-  const targetUrl = project.homepage || project.html_url
-  // Usar Thum.io que es gratuito y no bloquea CORS como mshots
-  return `https://image.thum.io/get/width/600/crop/800/${targetUrl}`
+  if (project.homepage) {
+    // Thum.io funciona bien para webs reales, pero fallaba al intentar tomar capturas de GitHub
+    return `https://image.thum.io/get/width/600/crop/800/${project.homepage}`
+  }
+  // Para repositorios sin demo, la imagen nativa de GitHub es instantánea y no bloquea la carga
+  return `https://opengraph.githubassets.com/1/${project.full_name}`
 }
 </script>
 
@@ -36,6 +38,7 @@ const getPreviewImage = (project) => {
         loading="lazy"
         width="600"
         height="338"
+        @error="(e) => e.target.src = `https://opengraph.githubassets.com/1/${project.full_name}`"
       />
       <div
         class="absolute inset-0 bg-gradient-to-t opacity-60"
