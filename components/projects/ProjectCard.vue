@@ -14,10 +14,9 @@ const { t } = useI18n()
 
 const getPreviewImage = (project) => {
   if (project.homepage) {
-    // Thum.io funciona bien para webs reales, pero fallaba al intentar tomar capturas de GitHub
-    return `https://image.thum.io/get/width/600/crop/800/${project.homepage}`
+    const hp = project.homepage.startsWith('http') ? project.homepage : `https://${project.homepage}`
+    return `https://v1.screenshot.11ty.dev/${encodeURIComponent(hp)}/opengraph/`
   }
-  // Para repositorios sin demo, la imagen nativa de GitHub es instantánea y no bloquea la carga
   return `https://opengraph.githubassets.com/1/${project.full_name}`
 }
 </script>
@@ -35,10 +34,8 @@ const getPreviewImage = (project) => {
         :src="getPreviewImage(project)"
         :alt="project.name"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        loading="lazy"
         width="600"
         height="338"
-        @error="(e) => e.target.src = `https://opengraph.githubassets.com/1/${project.full_name}`"
       />
       <div
         class="absolute inset-0 bg-gradient-to-t opacity-60"
