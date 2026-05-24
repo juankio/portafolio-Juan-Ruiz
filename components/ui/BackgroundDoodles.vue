@@ -1,6 +1,18 @@
+<script setup>
+import { inject, ref } from 'vue'
+const isLight = inject('isLight', ref(false))
+</script>
+
 <template>
-  <div class="absolute inset-0 pointer-events-none z-[1] overflow-hidden opacity-[0.14] dark:opacity-[0.08] transition-opacity duration-300">
-    <svg class="absolute w-full h-full text-slate-900 dark:text-white" xmlns="http://www.w3.org/2000/svg">
+  <div 
+    class="absolute inset-0 pointer-events-none z-[1] overflow-hidden transition-opacity duration-300"
+    :class="isLight ? 'opacity-[0.25]' : 'opacity-[0.08]'"
+  >
+    <svg 
+      class="absolute w-full h-full" 
+      :class="isLight ? 'text-slate-800' : 'text-white'" 
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <defs>
         <pattern id="doodle-pattern" x="0" y="0" width="750" height="750" patternUnits="userSpaceOnUse" patternTransform="rotate(-4)">
           <g stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round" transform="scale(2.5)">
