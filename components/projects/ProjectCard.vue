@@ -12,7 +12,7 @@ const props = defineProps({
 const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
-const imageError = ref(false)
+const imageError = ref(props.project.name === 'cine-al-parque-')
 
 const getPreviewImage = (project) => {
   if (project.homepage) {
@@ -102,7 +102,9 @@ const getPreviewImage = (project) => {
         </span>
         <span class="inline-flex items-center gap-1">
           <UIcon name="i-heroicons-calendar-days-20-solid" />
-          {{ new Date(project.updated_at).toLocaleDateString() }}
+          <ClientOnly fallback="...">
+            {{ new Date(project.updated_at).toLocaleDateString() }}
+          </ClientOnly>
         </span>
       </div>
 
