@@ -88,9 +88,14 @@ const isLight = inject('isLight', ref(false))
               <rect x="14" y="6" width="2" height="2" />
             </g>
 
-            <!-- Pterodactyl Outline -->
+            <!-- Gamepad / Controller Outline -->
             <g transform="translate(190, 20) scale(0.9)">
-              <path d="M12 12 Q 4 8 2 2 Q 8 6 12 10 Q 16 6 22 2 Q 20 8 12 12 Z M12 10 L 12 4 L 8 6 L 12 8 Z" />
+              <rect x="2" y="6" width="20" height="12" rx="6" />
+              <!-- D-Pad -->
+              <path d="M6 12h4M8 10v4" />
+              <!-- Buttons -->
+              <circle cx="15" cy="13" r="1" />
+              <circle cx="18" cy="11" r="1" />
             </g>
 
             <!-- Stegosaurus Outline -->
