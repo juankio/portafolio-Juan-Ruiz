@@ -146,6 +146,7 @@ onUnmounted(() => {
           {{ t('hero.tagline') }}
         </p>
         <h1
+          :key="locale"
           class="text-4xl font-black leading-tight tracking-[0.06em] text-spray sm:text-5xl lg:text-6xl text-balance split-text-hero" 
           :class="isLight ? 'text-slate-700' : 'text-white'"
         >

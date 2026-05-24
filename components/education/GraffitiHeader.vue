@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineProps<{ isLight: boolean }>()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 </script>
 
 <template>
   <div class="relative z-10 px-6 sm:px-8 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
     <div class="relative">
       <p class="text-sm uppercase tracking-[0.25em] mb-2" :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ t('education.summary') }}</p>
-      <h3 class="text-3xl font-bold text-spray sm:text-4xl split-text-wall text-balance" :class="isLight ? 'text-slate-700' : 'text-white'">
+      <h3 :key="locale" class="text-3xl font-bold text-spray sm:text-4xl split-text-wall text-balance" :class="isLight ? 'text-slate-700' : 'text-white'">
         {{ t('education.learningPath') }} <span class="text-[var(--color-accent)]">{{ t('education.learningPathAccent') }}</span>
       </h3>
     </div>

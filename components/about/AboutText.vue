@@ -3,7 +3,7 @@ import { inject, ref, computed } from 'vue'
 
 const isLight = inject('isLight', ref(false))
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const aboutChips = computed(() => {
   const chips = t('about.chips')
@@ -22,7 +22,7 @@ const aboutChips = computed(() => {
 
     <!-- Headline -->
     <div class="relative animate-item opacity-0">
-      <h2 class="text-3xl font-bold sm:text-4xl lg:text-5xl leading-tight split-text-about text-balance text-spray" :class="isLight ? 'text-slate-700' : 'text-white'">
+      <h2 :key="locale" class="text-3xl font-bold sm:text-4xl lg:text-5xl leading-tight split-text-about text-balance text-spray" :class="isLight ? 'text-slate-700' : 'text-white'">
         {{ t('about.headline.lead') }}
         <span class="text-[var(--color-accent)]">{{ t('about.headline.accent') }}</span>
         {{ t('about.headline.tail') }}

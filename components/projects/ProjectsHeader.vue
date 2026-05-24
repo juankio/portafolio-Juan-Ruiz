@@ -8,7 +8,7 @@ const props = defineProps({
 })
 
 const isLight = inject('isLight', ref(false))
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 // Splitting text specifically for this component's headline
 useTextSplit('.split-text-projects', { stagger: 15, duration: 700 })
@@ -19,7 +19,7 @@ useTextSplit('.split-text-projects', { stagger: 15, duration: 700 })
   <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between projects-animate-trigger animate-group relative">
     <div class="animate-item opacity-0 relative z-10">
       <p class="text-sm uppercase tracking-[0.25em] mb-2" :class="isLight ? 'text-slate-400' : 'text-slate-500'">{{ t('projects.sectionTitle') }}</p>
-      <h2 class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl split-text-projects text-balance" :class="isLight ? 'text-slate-700' : 'text-white'">
+      <h2 :key="locale" class="text-3xl font-bold text-spray sm:text-4xl lg:text-5xl split-text-projects text-balance" :class="isLight ? 'text-slate-700' : 'text-white'">
         {{ t('projects.headline') }}
         <span class="text-[var(--color-accent)]">{{ t('projects.headlineAccent') }}</span>
       </h2>
