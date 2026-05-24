@@ -2,6 +2,7 @@ import { animate, stagger as animeStagger, set, remove } from 'animejs'
 
 // Registro global para prevenir leaks
 const scrollObserversMap = new Map()
+const observerInstances = new Map()
 
 export const useScrollAnimation = (targetSelector, options = {}) => {
   const {
@@ -68,6 +69,8 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
       },
       { threshold }
     )
+    
+    observerInstances.set(instanceId, observer)
 
     nextTick(() => {
       const elements = document.querySelectorAll(targetSelector)
@@ -76,15 +79,21 @@ export const useScrollAnimation = (targetSelector, options = {}) => {
         scrollObserversMap.get(instanceId)?.add(el)
       })
     })
+  })
 
-    // Limpieza
-    onBeforeUnmount(() => {
-      const elements = scrollObserversMap.get(instanceId)
-      if (elements) {
-        elements.forEach(el => observer.unobserve(el))
-        scrollObserversMap.delete(instanceId)
-      }
+  // Limpieza fuera de onMounted para que Vue no tire warnings
+  onBeforeUnmount(() => {
+    const elements = scrollObserversMap.get(instanceId)
+    const observer = observerInstances.get(instanceId)
+    
+    if (elements && observer) {
+      elements.forEach(el => observer.unobserve(el))
+      scrollObserversMap.delete(instanceId)
+    }
+    
+    if (observer) {
       observer.disconnect()
-    })
+      observerInstances.delete(instanceId)
+    }
   })
 }
