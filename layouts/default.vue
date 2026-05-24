@@ -2,6 +2,7 @@
 import NavBar from '~/components/nav/NavBar.vue'
 import FooterBar from '~/components/footer/FooterBar.vue'
 import SkipToContent from '~/components/ui/SkipToContent.vue'
+import BackgroundDoodles from '~/components/ui/BackgroundDoodles.vue'
 
 const { isLight, toggleMode } = useThemeMode()
 
@@ -20,6 +21,7 @@ provide('toggleMode', toggleMode)
     
     <UPage id="main-content" class="relative min-h-screen z-10 w-full overflow-x-hidden" tabindex="-1">
       <div class="absolute inset-0 bg-concrete pointer-events-none" />
+      <BackgroundDoodles />
       <UPageBody class="relative z-10 !mt-0 !space-y-0 !pb-0 w-full">
         <slot />
       </UPageBody>
