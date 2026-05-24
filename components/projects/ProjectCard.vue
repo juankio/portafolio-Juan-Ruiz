@@ -12,6 +12,8 @@ const props = defineProps({
 const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
+const imageError = ref(false)
+
 const getPreviewImage = (project) => {
   if (project.homepage) {
     const hp = project.homepage.startsWith('http') ? project.homepage : `https://${project.homepage}`
@@ -29,14 +31,36 @@ const getPreviewImage = (project) => {
     }"
   >
     <!-- Thumbnail -->
-    <div class="relative overflow-hidden aspect-video">
+    <div class="relative overflow-hidden aspect-video bg-[var(--color-surface)]">
+      <!-- Imagen normal (se oculta si hay error) -->
       <img
+        v-show="!imageError"
         :src="getPreviewImage(project)"
         :alt="project.name"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         width="600"
         height="338"
+        @error="imageError = true"
       />
+
+      <!-- Fallback Graffiti cuando la imagen no carga -->
+      <div 
+        v-show="imageError" 
+        class="absolute inset-0 flex flex-col items-center justify-center bg-[#0f1115] border-b border-[var(--color-border)]"
+      >
+        <!-- Patrón de fondo estilo "pared" -->
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--color-accent)] opacity-80 mb-2 drop-shadow-md">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          <circle cx="12" cy="12" r="4"/>
+        </svg>
+        <span class="text-xs font-black uppercase tracking-widest text-[var(--color-accent)] opacity-70">
+          No Signal
+        </span>
+      </div>
+
+      <!-- Gradiente superpuesto -->
       <div
         class="absolute inset-0 bg-gradient-to-t opacity-60"
         :class="isLight ? 'from-white via-transparent' : 'from-slate-900 via-transparent'"

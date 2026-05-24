@@ -14,24 +14,24 @@ const { t, locale } = useI18n()
 </script>
 
 <template>
-  <div class="mt-8 sm:mt-10 lg:mt-14">
-    <UAlert v-if="error" color="error" variant="soft" class="rounded-2xl">
+  <div class="mt-8 sm:mt-10 lg:mt-14 projects-animate-trigger animate-group">
+    <UAlert v-if="error" color="error" variant="soft" class="rounded-2xl animate-item">
       {{ t('projects.error') }}
     </UAlert>
 
     <div v-if="pending" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <SkeletonCard v-for="s in 6" :key="s" variant="project" :is-light="isLight" />
+      <SkeletonCard v-for="s in 6" :key="s" variant="project" :is-light="isLight" class="animate-item" />
     </div>
 
     <div
       v-else-if="projects.length === 0"
-      class="rounded-2xl border-sketchy px-6 py-10 text-center"
+      class="rounded-2xl border-sketchy px-6 py-10 text-center animate-item"
       :class="isLight ? 'text-slate-500' : 'text-slate-400'"
     >
       {{ t('projects.empty') }}
     </div>
 
-    <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 projects-animate-trigger animate-group">
+    <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <ProjectCard 
         v-for="(project, idx) in projects" 
         :key="project.id" 
