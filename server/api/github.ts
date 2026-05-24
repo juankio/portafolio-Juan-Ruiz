@@ -30,7 +30,7 @@ export default defineCachedEventHandler(async (event) => {
     })
   }
 }, {
-  maxAge: 60 * 60 * 2, // Caché por 2 horas (7200 segundos)
+  maxAge: 60 * 5, // Caché reducida a 5 minutos (antes 2 horas) para ver actualizaciones más rápido
   name: 'github-starred-repos',
   getKey: () => 'juankio-repos'
 })
