@@ -1,27 +1,23 @@
 import { messages, defaultLocale } from '~/i18n/messages'
-import { computed } from 'vue'
-
-// Estado global reactivo para que todos los componentes se actualicen al instante
-const globalLocale = ref(defaultLocale)
 
 export const useI18n = () => {
-  const localeCookie = useCookie('ui-locale', { default: () => defaultLocale, watch: true })
+  // Use useState to ensure cross-component reactivity that works properly with SSR
+  const locale = useState('ui-locale-state', () => defaultLocale)
+  const localeCookie = useCookie('ui-locale', { default: () => defaultLocale })
   
-  // Sincronizar cookie con estado global al montar en cliente
-  if (process.client) {
-    globalLocale.value = localeCookie.value
-  } else {
-    // SSR
-    globalLocale.value = localeCookie.value || defaultLocale
+  if (process.server && localeCookie.value) {
+    locale.value = localeCookie.value
+  } else if (process.client && localeCookie.value && locale.value !== localeCookie.value) {
+    locale.value = localeCookie.value
   }
 
   const availableLocales = Object.keys(messages)
 
-  const currentMessages = computed(() => messages[globalLocale.value as keyof typeof messages] || messages.en)
+  const currentMessages = computed(() => messages[locale.value as keyof typeof messages] || messages.en)
 
   const setLocale = (code: string) => {
     if (availableLocales.includes(code)) {
-      globalLocale.value = code
+      locale.value = code
       localeCookie.value = code
     }
   }
@@ -31,7 +27,7 @@ export const useI18n = () => {
   }
 
   return {
-    locale: globalLocale,
+    locale,
     setLocale,
     t,
     messages: currentMessages,
