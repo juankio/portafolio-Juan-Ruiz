@@ -1,6 +1,7 @@
 <script setup>
 import { inject, ref } from 'vue'
 import StreetButton from '~/components/ui/StreetButton.vue'
+import { animate, stagger } from 'animejs'
 
 const props = defineProps({
   pending: { type: Boolean, default: false },
@@ -12,6 +13,39 @@ const { t } = useI18n()
 
 // Splitting text specifically for this component's headline
 useTextSplit('.split-text-projects', { stagger: 15, duration: 700 })
+
+const handleRefresh = async () => {
+  if (props.pending || !props.onRefresh) return
+  
+  // Ocultar tarjetas actuales
+  const cards = document.querySelectorAll('.animate-item:not(.skel-card)')
+  if (cards.length) {
+    animate({
+      targets: cards,
+      opacity: [1, 0],
+      translateY: [0, 20],
+      duration: 300,
+      easing: 'easeInQuad',
+      delay: stagger(50)
+    })
+    
+    // Esperar a que termine la animación antes de hacer fetch
+    await new Promise(r => setTimeout(r, 300 + (cards.length * 50)))
+  }
+  
+  // Ejecutar fetch
+  await props.onRefresh()
+  
+  // Cuando termine el fetch, useScrollAnimation y ProjectsGrid se encargarán de mostrarlas
+  // Necesitamos forzar la reanimación quitando la clase is-animated
+  setTimeout(() => {
+    const trigger = document.querySelector('#proyectos .projects-animate-trigger:last-of-type')
+    if (trigger) {
+      trigger.classList.remove('is-animated')
+      trigger.setAttribute('data-force-reanimate', 'true')
+    }
+  }, 100)
+}
 </script>
 
 <template>
@@ -29,8 +63,9 @@ useTextSplit('.split-text-projects', { stagger: 15, duration: 700 })
         variant="primary"
         class="street-btn--sm"
         :disabled="pending"
-        @click="onRefresh && onRefresh()"
+        @click="handleRefresh"
       >
+        <UIcon v-if="pending" name="i-heroicons-arrow-path-20-solid" class="animate-spin mr-1" />
         {{ t('projects.refresh') }}
       </StreetButton>
       <StreetButton
