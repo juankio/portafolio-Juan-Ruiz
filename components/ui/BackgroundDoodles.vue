@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed inset-0 pointer-events-none z-[1] overflow-hidden opacity-[0.025] dark:opacity-[0.035] transition-opacity duration-300">
+  <div class="fixed inset-0 pointer-events-none z-[1] overflow-hidden opacity-[0.06] dark:opacity-[0.08] transition-opacity duration-300">
     <svg class="absolute w-full h-full text-slate-900 dark:text-white" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="doodle-pattern" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse" patternTransform="rotate(-4)">
