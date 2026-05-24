@@ -17,6 +17,9 @@ export const useTextSplit = (selector, options = {}) => {
   // Generamos un ID unico para este montaje del composable
   const instanceId = Symbol()
 
+  // Track the original HTML before splitting so we can restore it on translation changes
+  const originalHtmlMap = new Map()
+
   const initSplit = () => {
     nextTick(() => {
       const newElements = document.querySelectorAll(selector)
@@ -42,7 +45,19 @@ export const useTextSplit = (selector, options = {}) => {
           observersMap.delete(el)
         }
 
-        if (el.classList.contains('is-split') && !el.hasAttribute('data-lang-changed')) return
+        // Si ya está split, limpiarlo primero para que no rompa el nuevo texto del i18n
+        if (el.classList.contains('is-split')) {
+          if (originalHtmlMap.has(el)) {
+            // No restauramos el innerHTML aquí porque vue i18n ya reemplazó los nodos de texto.
+            // Solo removemos las clases para rehacer el proceso.
+            el.classList.remove('is-split', 'text-animated')
+            // Ojo: si hay spans creados por el anterior wrapChars, los dejamos, 
+            // pero lo ideal es que Vue controle el virtual DOM. 
+            // Al hacer el wrapChars de nuevo, lo volveremos a dividir.
+          }
+        } else {
+           originalHtmlMap.set(el, el.innerHTML)
+        }
         
         el.classList.add('is-split')
         el.removeAttribute('data-lang-changed')
@@ -79,6 +94,20 @@ export const useTextSplit = (selector, options = {}) => {
             })
             return fragment
           } else if (node.nodeType === 1) { 
+            // Avoid re-wrapping already split chars or sr-only
+            if (node.classList && (node.classList.contains('split-char') || node.classList.contains('sr-only'))) {
+              return node.cloneNode(true)
+            }
+            // Skip visual wrapper
+            if (node.getAttribute && node.getAttribute('aria-hidden') === 'true') {
+               const clone = node.cloneNode(false)
+               Array.from(node.childNodes).forEach(child => {
+                 const result = wrapChars(child)
+                 if (result) clone.appendChild(result)
+               })
+               return clone
+            }
+
             const clone = node.cloneNode(false)
             Array.from(node.childNodes).forEach(child => {
               const result = wrapChars(child)
@@ -169,12 +198,29 @@ export const useTextSplit = (selector, options = {}) => {
     })
   }
 
+  // Hook into locale changes using Nuxt's useState
+  const locale = useState('ui-locale-state')
+  
+  watch(locale, () => {
+    // Force re-initialization when language changes
+    setTimeout(() => {
+      initSplit()
+      // Disparar animación de nuevo
+      const els = document.querySelectorAll(selector)
+      els.forEach(el => el.setAttribute('data-force-reanimate', 'true'))
+    }, 50)
+  })
+
   onMounted(() => {
     initSplit()
   })
 
   onUpdated(() => {
-    initSplit()
+    // Only re-init if the content has changed and we lost the splits
+    const elements = document.querySelectorAll(selector)
+    if (elements.length > 0 && !elements[0].querySelector('.split-char')) {
+      initSplit()
+    }
   })
 
   // Destruir instancias al cambiar de ruta para evitar Memory Leaks
