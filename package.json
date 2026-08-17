@@ -36,6 +36,7 @@
   },
   "type": "module",
   "devDependencies": {
-    "playwright": "^1.59.1"
+    "playwright": "^1.59.1",
+    "puppeteer": "^25.8.0"
   }
 }
