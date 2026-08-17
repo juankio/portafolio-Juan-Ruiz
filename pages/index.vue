@@ -21,11 +21,11 @@ useSeoMeta({
   ogType: 'website',
   ogLocale: computed(() => t('seo.locale')),
   ogSiteName: 'Juan Miguel Ruiz Supelano',
-  ogImage: `${siteUrl}/icons/pwa-512x512.png`,
+  ogImage: `${siteUrl}/og-portfolio.jpg`,
   twitterCard: 'summary_large_image',
   twitterTitle: computed(() => t('seo.index.twitterTitle')),
   twitterDescription: computed(() => t('seo.index.twitterDescription')),
-  twitterImage: `${siteUrl}/icons/pwa-512x512.png`
+  twitterImage: `${siteUrl}/og-portfolio.jpg`
 })
 
 useHead({
@@ -74,6 +74,7 @@ useHead({
           "@id": `${siteUrl}/#service`,
           "name": "Juan Miguel Ruiz | Desarrollo Web",
           "description": "Desarrollo de software, páginas web ultrarrápidas y tiendas virtuales a medida.",
+          "image": `${siteUrl}/og-portfolio.jpg`,
           "provider": { "@id": `${siteUrl}/#person` },
           "areaServed": [
             { "@type": "Country", "name": "Colombia" },
