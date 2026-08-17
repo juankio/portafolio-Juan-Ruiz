@@ -12,13 +12,19 @@ const props = defineProps({
 const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
-const imageError = ref(false)
+const imageState = ref('local') // 'local' -> 'github' -> 'error'
 
 const getPreviewImage = (project) => {
-  // Según [[ThumIO-vs-11ty-GithubOG]] usar headless browsers (11ty) 
-  // para SPAs genera pantallas en blanco o "No Signal" si el render falla.
-  // Es mejor usar SIEMPRE la imagen OpenGraph nativa de GitHub para los repositorios.
+  if (imageState.value === 'local') return `/projects/${project.name}.png`
   return `https://opengraph.githubassets.com/1/${project.full_name}`
+}
+
+const handleImageError = () => {
+  if (imageState.value === 'local') {
+    imageState.value = 'github'
+  } else {
+    imageState.value = 'error'
+  }
 }
 </script>
 
@@ -34,18 +40,18 @@ const getPreviewImage = (project) => {
     <div class="relative overflow-hidden aspect-video bg-[var(--color-surface)]">
       <!-- Imagen normal (se oculta si hay error) -->
       <img
-        v-show="!imageError"
+        v-show="imageState !== 'error'"
         :src="getPreviewImage(project)"
         :alt="`Captura de pantalla del proyecto ${project.name}`"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         width="600"
         height="338"
-        @error="imageError = true"
+        @error="handleImageError"
       />
 
       <!-- Fallback Graffiti cuando la imagen no carga -->
       <div 
-        v-show="imageError" 
+        v-show="imageState === 'error'" 
         class="absolute inset-0 flex flex-col items-center justify-center bg-[#0f1115] border-b border-[var(--color-border)]"
       >
         <!-- Patrón de fondo estilo "pared" -->
