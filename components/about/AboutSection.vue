@@ -30,10 +30,10 @@ useTextSplit('.split-text-about', { stagger: 15, duration: 700 })
       <AboutText :is-light="isLight" />
 
       <!-- Right column -->
-      <div class="space-y-6">
+      <aside class="space-y-6">
         <AboutProfile :is-light="isLight" />
         <AboutSkills :is-light="isLight" />
-      </div>
+      </aside>
     </div>
   </UContainer>
 </template>

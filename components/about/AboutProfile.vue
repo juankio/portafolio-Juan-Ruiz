@@ -12,9 +12,9 @@ const aboutSummary = computed(() => {
 </script>
 
 <template>
-  <div class="about-poster relative overflow-hidden animate-item opacity-0">
+  <article class="about-poster relative overflow-hidden animate-item opacity-0">
     <div class="relative z-10 p-6 sm:p-7">
-      <div class="flex items-start justify-between gap-4">
+      <header class="flex items-start justify-between gap-4">
         <div class="flex items-center gap-4">
           <!-- Clean Avatar -->
           <div class="avatar-street group relative shrink-0">
@@ -28,7 +28,7 @@ const aboutSummary = computed(() => {
             />
           </div>
           <div class="space-y-0.5">
-            <p class="text-lg font-bold" :class="isLight ? 'text-slate-800' : 'text-white'">{{ t('hero.name') }}</p>
+            <h3 class="text-lg font-bold" :class="isLight ? 'text-slate-800' : 'text-white'">{{ t('hero.name') }}</h3>
             <p class="text-sm font-medium" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
               Developer · Designer · Est. Ing. Sistemas
             </p>
@@ -44,22 +44,22 @@ const aboutSummary = computed(() => {
           <span class="w-1.5 h-1.5 mr-1.5 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
           {{ t('about.availability') }}
         </span>
-      </div>
+      </header>
 
       <!-- Summary rows -->
-      <div class="mt-6 space-y-2">
+      <dl class="mt-6 space-y-2">
         <div
           v-for="(row, idx) in aboutSummary"
           :key="row.label"
           class="about-summary-row flex items-center justify-between px-4 py-3"
           :class="isLight ? 'bg-white/60' : 'bg-slate-900/60'"
         >
-          <span class="text-sm font-medium" :class="isLight ? 'text-slate-600' : 'text-slate-300'">{{ row.label }}</span>
-          <span class="text-sm font-bold text-[var(--color-accent)]">{{ row.value }}</span>
+          <dt class="text-sm font-medium" :class="isLight ? 'text-slate-600' : 'text-slate-300'">{{ row.label }}</dt>
+          <dd class="text-sm font-bold text-[var(--color-accent)] m-0">{{ row.value }}</dd>
         </div>
-      </div>
+      </dl>
     </div>
-  </div>
+  </article>
 </template>
 
 <style scoped>

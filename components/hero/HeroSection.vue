@@ -158,9 +158,9 @@ onUnmounted(() => {
           {{ ' ' }}
           <span class="text-[var(--color-accent)]">{{ t('hero.title.highlight2') }}</span>
         </h1>
-        <p class="max-w-2xl text-lg leading-relaxed font-body" style="letter-spacing: 0.02em" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
+        <h2 class="max-w-2xl text-lg leading-relaxed font-body" style="letter-spacing: 0.02em" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
           {{ t('hero.subtitle') }}
-        </p>
+        </h2>
       </div>
 
       <!-- Typing effect with graffiti style -->
@@ -173,10 +173,10 @@ onUnmounted(() => {
       </div>
 
       <div class="flex flex-wrap gap-3 pt-2 anime-element opacity-0">
-        <StreetButton to="/proyectos" variant="primary">
+        <StreetButton to="/proyectos" variant="primary" :aria-label="t('hero.ctas.projects')">
           {{ t('hero.ctas.projects') }}
         </StreetButton>
-        <StreetButton to="/contacto" variant="ghost">
+        <StreetButton to="/contacto" variant="ghost" :aria-label="t('hero.ctas.contact')">
           {{ t('hero.ctas.contact') }}
         </StreetButton>
       </div>

@@ -12,22 +12,24 @@ const aboutChips = computed(() => {
 </script>
 
 <template>
-  <div class="space-y-6">
-    <!-- Section label -->
-    <span
-      class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[var(--color-accent-soft)] text-[var(--color-accent)] animate-item opacity-0 uppercase tracking-widest"
-    >
-      {{ t('about.sectionTitle') }}
-    </span>
+  <article class="space-y-6">
+    <header class="space-y-4">
+      <!-- Section label -->
+      <span
+        class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-[var(--color-accent-soft)] text-[var(--color-accent)] animate-item opacity-0 uppercase tracking-widest"
+      >
+        {{ t('about.sectionTitle') }}
+      </span>
 
-    <!-- Headline -->
-    <div class="relative animate-item opacity-0">
-      <h2 :key="locale" class="text-3xl font-bold sm:text-4xl lg:text-5xl leading-tight split-text-about text-balance text-spray" :class="isLight ? 'text-slate-700' : 'text-white'">
-        {{ t('about.headline.lead') }}
-        <span class="text-[var(--color-accent)]">{{ t('about.headline.accent') }}</span>
-        {{ t('about.headline.tail') }}
-      </h2>
-    </div>
+      <!-- Headline -->
+      <div class="relative animate-item opacity-0">
+        <h2 :key="locale" class="text-3xl font-bold sm:text-4xl lg:text-5xl leading-tight split-text-about text-balance text-spray" :class="isLight ? 'text-slate-700' : 'text-white'">
+          {{ t('about.headline.lead') }}
+          <span class="text-[var(--color-accent)]">{{ t('about.headline.accent') }}</span>
+          {{ t('about.headline.tail') }}
+        </h2>
+      </div>
+    </header>
 
     <!-- Intro text -->
     <p class="text-base leading-relaxed max-w-xl animate-item opacity-0" :class="isLight ? 'text-slate-500' : 'text-slate-400'">
@@ -54,7 +56,7 @@ const aboutChips = computed(() => {
         {{ t('hero.ctas.contact') }}
       </UButton>
     </div>
-  </div>
+  </article>
 </template>
 
 <style scoped>
