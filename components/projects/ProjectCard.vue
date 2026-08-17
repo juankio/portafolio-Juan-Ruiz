@@ -12,7 +12,7 @@ const props = defineProps({
 const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
-const imageError = ref(props.project.name === 'cine-al-parque-')
+const imageError = ref(false)
 
 const getPreviewImage = (project) => {
   // Según [[ThumIO-vs-11ty-GithubOG]] usar headless browsers (11ty) 
