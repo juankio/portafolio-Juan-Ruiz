@@ -15,10 +15,9 @@ const { t } = useI18n()
 const imageError = ref(props.project.name === 'cine-al-parque-')
 
 const getPreviewImage = (project) => {
-  if (project.homepage) {
-    const hp = project.homepage.startsWith('http') ? project.homepage : `https://${project.homepage}`
-    return `https://v1.screenshot.11ty.dev/${encodeURIComponent(hp)}/opengraph/`
-  }
+  // Según [[ThumIO-vs-11ty-GithubOG]] usar headless browsers (11ty) 
+  // para SPAs genera pantallas en blanco o "No Signal" si el render falla.
+  // Es mejor usar SIEMPRE la imagen OpenGraph nativa de GitHub para los repositorios.
   return `https://opengraph.githubassets.com/1/${project.full_name}`
 }
 </script>
