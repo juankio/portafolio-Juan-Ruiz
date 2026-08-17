@@ -4,19 +4,19 @@ export const messages = {
       locale: 'es_CO',
       index: {
         title: 'Juan Miguel Ruiz | Creación de Páginas Web Rápidas y Software | Colombia',
-        description: '¿Necesitas una página web rápida o una tienda online? Soy programador freelance experto en Angular y Vue. Creo páginas web modernas, baratas y buenas que cargan al instante.',
-        keywords: 'crear pagina web, paginas web rapidas, hacer pagina web, necesito una pagina web, quien me hace una pagina web, alguien que haga paginas web, crear mi pagina en internet, programador angular, programador vue, diseño web rapido, paginas web para vender, tiendas virtuales, mejorar mi pagina web, creador de sitios web, arreglar pagina web, cotizar pagina web, paginas web baratas y buenas, experto en paginas web, Juan Miguel Ruiz, juankio',
-        ogTitle: 'Juan Miguel Ruiz | Creador de Páginas Web Rápidas',
-        ogDescription: '¿Necesitas una web que cargue al instante y venda? Ayudo a negocios a crear sitios web y tiendas online modernas y rápidas.',
-        twitterTitle: 'Juan Miguel Ruiz | Creador de Webs Rápidas',
+        description: 'Juan Miguel Ruiz es un desarrollador web Full-Stack en Colombia que trabaja de forma remota para todo el mundo. Creador de páginas web ultrarrápidas, tiendas online y aplicaciones a medida con Vue y Angular.',
+        keywords: 'desarrollador web colombia, freelancer remoto, paginas web rapidas, crear pagina web colombia, programador angular colombia, programador vue remoto, desarrollo frontend internacional, creador de sitios web, tiendas virtuales, inteligencia artificial, Juan Miguel Ruiz, juankio',
+        ogTitle: 'Juan Miguel Ruiz | Desarrollador Web Colombia & Remoto',
+        ogDescription: 'Juan Miguel Ruiz: Desarrollador freelance basado en Colombia creando páginas web ultrarrápidas y aplicaciones modernas para clientes de todo el mundo.',
+        twitterTitle: 'Juan Miguel Ruiz | Desarrollador Web Colombia & Remoto',
         twitterDescription: 'Creación de páginas web, tiendas online y software. Diseños rápidos, modernos y hechos a medida.'
       },
       about: {
-        title: 'Sobre mí — Juan Miguel | El Programador que hace tu Web',
-        description: 'Conoce a Juan Miguel Ruiz. Si buscas alguien que te haga una página web o tienda virtual que cargue rápido, soy tu programador freelance de confianza en Angular y Vue.',
-        keywords: 'quien es juan miguel ruiz, programador colombiano, creador de paginas web, experto en angular, experto en vue, experto web, alguien que sepa crear webs, desarrollador freelance, perfil profesional programador',
-        ogTitle: 'Sobre Juan Miguel | Creador de Sitios Web',
-        ogDescription: 'Conoce mi trayectoria ayudando a negocios a tener páginas web rápidas y aplicaciones modernas.'
+        title: 'Sobre mí — Juan Miguel | Desarrollador Web Remoto (Colombia)',
+        description: 'Conoce a Juan Miguel Ruiz, desarrollador freelance en Colombia. Especializado en crear páginas web rápidas y aplicaciones escalables con Vue, Nuxt y Angular para clientes a nivel global.',
+        keywords: 'quien es juan miguel ruiz, programador colombiano, desarrollador remoto colombia, experto en angular, experto en vue, experto web, servicios de desarrollo web internacional, perfil profesional programador',
+        ogTitle: 'Sobre Juan Miguel | Desarrollador Web Colombia',
+        ogDescription: 'Conoce mi perfil como desarrollador web freelance en Colombia, trabajando remotamente en proyectos de alto rendimiento a nivel internacional.'
       },
       projects: {
         title: 'Proyectos — Ejemplos de Páginas Web y Tiendas Online',
@@ -26,11 +26,11 @@ export const messages = {
         ogDescription: 'Explora las páginas web, tiendas y sistemas rápidos que he construido para distintos clientes.'
       },
       contact: {
-        title: 'Contacto — Cuánto cuesta hacer una página web | Cotizar',
-        description: '¿Quieres saber cuánto cuesta hacer una página web o tienda online? Escríbeme y cotizamos tu idea rápido. Trabajo con negocios de todo el mundo.',
-        keywords: 'cotizar pagina web, cuanto cuesta hacer una pagina web, precio pagina web, contratar creador de paginas web, buscar programador para mi negocio, hacer tienda online costo, necesito un desarrollador, contacto desarrollador freelance',
-        ogTitle: 'Cotiza tu Página Web | Juan Miguel Ruiz',
-        ogDescription: 'Escríbeme para crear tu sitio web o tienda online. Cotizaciones rápidas y directas al grano.'
+        title: 'Contacto — Cotiza tu Proyecto Web | Remoto / Global',
+        description: '¿Buscas un desarrollador web remoto en Colombia? Escríbeme y cotizamos tu idea de aplicación, sitio web o tienda online. Trabajo con clientes en Latinoamérica y todo el mundo.',
+        keywords: 'contratar programador colombia, desarrollador web remoto, cotizar proyecto web, programador vue freelance, contacto desarrollador frontend, outsourcing colombia software',
+        ogTitle: 'Contacto | Juan Miguel Ruiz Desarrollador',
+        ogDescription: 'Contrátame para tu próximo proyecto web. Desarrollador basado en Colombia trabajando con clientes a nivel mundial.'
       },
       schema: {
         jobTitle: 'Programador de Angular, Vue y Creador de Páginas Web',

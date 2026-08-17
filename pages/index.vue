@@ -33,65 +33,78 @@ useHead({
     { rel: 'canonical', href: siteUrl }
   ],
   meta: computed(() => locale.value === 'es' ? [
-    { name: 'geo.region', content: 'CO-MET' },
-    { name: 'geo.placename', content: 'Villavicencio, Meta, Colombia' },
-    { name: 'geo.position', content: '4.142;-73.626' },
-    { name: 'ICBM', content: '4.142, -73.626' }
+    { name: 'geo.region', content: 'CO' },
+    { name: 'geo.placename', content: 'Colombia' }
   ] : []),
   script: [
     {
       type: 'application/ld+json',
-      innerHTML: computed(() => JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Juan Miguel Ruiz Supelano",
-        "alternateName": ["Juan Miguel", "Juan Miguel Ruiz", "juankio", "Juanki"],
-        "url": siteUrl,
-        "image": `${siteUrl}/icons/pwa-512x512.png`,
-        "jobTitle": t('seo.schema.jobTitle'),
-        "description": t('seo.schema.description'),
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Villavicencio",
-          "addressRegion": "Meta",
-          "addressCountry": "CO"
-        },
-        "workLocation": {
-          "@type": "Place",
-          "name": "Villavicencio, Meta, Colombia",
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 4.142,
-            "longitude": -73.626
-          }
-        },
-        "hasOccupation": {
-          "@type": "Occupation",
-          "name": t('seo.schema.occupation'),
-          "occupationLocation": {
-            "@type": "City",
-            "name": "Villavicencio, Colombia"
+      innerHTML: computed(() => JSON.stringify([
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          "name": "Juan Miguel Ruiz Supelano",
+          "alternateName": ["Juan Miguel Ruiz", "juankio", "Juanki"],
+          "url": siteUrl,
+          "image": `${siteUrl}/icons/pwa-512x512.png`,
+          "jobTitle": t('seo.schema.jobTitle'),
+          "description": t('seo.schema.description'),
+          "homeLocation": {
+            "@type": "Place",
+            "name": "Colombia"
           },
-          "skills": "Vue.js, Nuxt 3, React, Svelte, Angular, TypeScript, JavaScript, Tailwind CSS, Node.js, Express, GraphQL, SQL, PostgreSQL, MongoDB, Flask, Python, Docker, AWS, Three.js, WebGL, Anime.js, GSAP, Prompt Engineering, Claude AI, Gemini, OpenAI GPT-4, UI/UX"
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Freelance"
+          },
+          "knowsAbout": [
+            "Vue.js", "Nuxt 3", "React", "Angular", "TypeScript",
+            "Desarrollo Frontend", "Diseño UI/UX", "Aplicaciones Web Rápidas", "PWA",
+            "Desarrollo Web Remoto", "Node.js", "Freelancer Colombia"
+          ],
+          "knowsLanguage": ["es", "en"],
+          "sameAs": [
+            "https://github.com/juankio"
+          ]
         },
-        "knowsAbout": [
-          "Vue.js", "Nuxt.js", "Nuxt 3", "React", "Svelte", "Angular", "JavaScript", "TypeScript",
-          "Tailwind CSS", "Node.js", "Express", "GraphQL", "SQL", "PostgreSQL", "MongoDB", "Flask", "Python",
-          "Docker", "AWS", "Three.js", "WebGL", "Anime.js", "GSAP", "Web Performance", "PWA",
-          "Prompt Engineering", "Claude AI", "Gemini", "OpenAI GPT-4", "AI Agents",
-          "Desarrollo Web", "Diseño UI", "Diseño UX", "Desarrollo Frontend", "Fullstack", "Freelance"
-        ],
-        "knowsLanguage": ["es", "en"],
-        "areaServed": [
-          { "@type": "Country", "name": "Colombia" },
-          { "@type": "Place", "name": "Latinoamérica" },
-          { "@type": "Place", "name": "Remoto" }
-        ],
-        "availableLanguage": ["Spanish", "English"],
-        "sameAs": [
-          "https://github.com/juankio"
-        ]
-      }))
+        {
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          "@id": `${siteUrl}/#service`,
+          "name": "Juan Miguel Ruiz | Desarrollo Web",
+          "description": "Desarrollo de software, páginas web ultrarrápidas y tiendas virtuales a medida.",
+          "provider": { "@id": `${siteUrl}/#person` },
+          "areaServed": [
+            { "@type": "Country", "name": "Colombia" },
+            { "@type": "Place", "name": "Latinoamérica" },
+            { "@type": "Place", "name": "Remoto Global" }
+          ],
+          "availableLanguage": ["Spanish", "English"]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Quién es Juan Miguel Ruiz?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Juan Miguel Ruiz es un desarrollador web Full-Stack y creador de páginas web rápidas basado en Colombia, que ofrece servicios freelance de forma remota a nivel internacional, especializado en Vue, Nuxt, Angular y automatizaciones con IA."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué servicios ofrece Juan Miguel Ruiz?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ofrece desarrollo de páginas web ultrarrápidas, tiendas virtuales, PWAs y aplicaciones web a medida utilizando tecnologías modernas como Vue, Nuxt 3 y Tailwind CSS para clientes en Colombia y todo el mundo."
+              }
+            }
+          ]
+        }
+      ]))
     }
   ]
 })

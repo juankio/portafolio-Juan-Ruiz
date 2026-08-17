@@ -28,6 +28,7 @@ useScrollAnimation('.projects-animate-trigger', {
   <UContainer
     as="section"
     id="proyectos"
+    aria-labelledby="projects-section-title"
     class="relative py-14 sm:py-20"
   >
     <SpraySplatter class="absolute -top-6 -right-4" size="lg" :opacity="0.08" />

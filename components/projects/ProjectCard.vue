@@ -25,6 +25,7 @@ const getPreviewImage = (project) => {
 
 <template>
   <article
+    :aria-labelledby="`project-title-${project.id}`"
     class="group relative flex flex-col overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-card)] transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform hover:-translate-y-1 hover:shadow-xl hover:shadow-black/5 hover:border-[var(--color-accent)]/50 animate-item opacity-0"
     :style="{
       animationDelay: `${idx * 0.06}s`
@@ -36,7 +37,7 @@ const getPreviewImage = (project) => {
       <img
         v-show="!imageError"
         :src="getPreviewImage(project)"
-        :alt="project.name"
+        :alt="`Captura de pantalla del proyecto ${project.name}`"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         width="600"
         height="338"
@@ -86,7 +87,7 @@ const getPreviewImage = (project) => {
         <p class="text-xs uppercase tracking-[0.2em]" :class="isLight ? 'text-slate-400' : 'text-slate-500'">
           {{ t('projects.repo') }}
         </p>
-        <h3 class="text-xl font-bold text-spray" :class="isLight ? 'text-slate-700' : 'text-white'">
+        <h3 :id="`project-title-${project.id}`" class="text-xl font-bold text-spray" :class="isLight ? 'text-slate-700' : 'text-white'">
           {{ project.name }}
         </h3>
       </div>
@@ -115,6 +116,7 @@ const getPreviewImage = (project) => {
           rel="noopener noreferrer"
           variant="primary"
           class="street-btn--sm"
+          :aria-label="`${t('projects.viewCode')} del proyecto ${project.name}`"
         >
           {{ t('projects.viewCode') }}
         </StreetButton>
@@ -125,6 +127,7 @@ const getPreviewImage = (project) => {
           rel="noopener noreferrer"
           variant="ghost"
           class="street-btn--sm"
+          :aria-label="`${t('projects.viewDemo')} del proyecto ${project.name}`"
         >
           {{ t('projects.viewDemo') }}
         </StreetButton>
