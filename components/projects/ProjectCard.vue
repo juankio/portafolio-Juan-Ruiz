@@ -12,17 +12,27 @@ const props = defineProps({
 const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
-const imageError = ref(false)
+const imageState = ref('local') // 'local' -> '11ty' -> 'github' -> 'error'
 
 const getPreviewImage = (project) => {
-  // Primero intentamos la vieja confiable: 11ty para webs que no sean problemáticas
-  if (project.homepage && !['cine-al-parque-', 'discord-party-hub'].includes(project.name)) {
+  if (imageState.value === 'local') return `/projects/${project.name}.png`
+  
+  if (imageState.value === '11ty' && project.homepage) {
     const hp = project.homepage.startsWith('http') ? project.homepage : `https://${project.homepage}`
     return `https://v1.screenshot.11ty.dev/${encodeURIComponent(hp)}/opengraph/`
   }
-  // Si no tiene homepage, o si es un proyecto SPAs conflictivo (Cine/Discord),
-  // usamos directamente la imagen OpenGraph del repo de GitHub.
+
   return `https://opengraph.githubassets.com/1/${project.full_name}`
+}
+
+const handleImageError = () => {
+  if (imageState.value === 'local') {
+    imageState.value = props.project.homepage ? '11ty' : 'github'
+  } else if (imageState.value === '11ty') {
+    imageState.value = 'github'
+  } else {
+    imageState.value = 'error'
+  }
 }
 </script>
 
@@ -38,18 +48,18 @@ const getPreviewImage = (project) => {
     <div class="relative overflow-hidden aspect-video bg-[var(--color-surface)]">
       <!-- Imagen normal (se oculta si hay error) -->
       <img
-        v-show="!imageError"
+        v-show="imageState !== 'error'"
         :src="getPreviewImage(project)"
         :alt="`Captura de pantalla del proyecto ${project.name}`"
         class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         width="600"
         height="338"
-        @error="imageError = true"
+        @error="handleImageError"
       />
 
       <!-- Fallback Graffiti cuando la imagen no carga -->
       <div 
-        v-show="imageError" 
+        v-show="imageState === 'error'" 
         class="absolute inset-0 flex flex-col items-center justify-center bg-[#0f1115] border-b border-[var(--color-border)]"
       >
         <!-- Patrón de fondo estilo "pared" -->
