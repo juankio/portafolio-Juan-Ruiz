@@ -12,15 +12,23 @@ const props = defineProps({
 const isLight = inject('isLight', ref(false))
 const { t } = useI18n()
 
-const imageState = ref('local') // 'local' -> 'github' -> 'error'
+const imageState = ref('local') // 'local' -> '11ty' -> 'github' -> 'error'
 
 const getPreviewImage = (project) => {
   if (imageState.value === 'local') return `/projects/${project.name}.png`
+  
+  if (imageState.value === '11ty' && project.homepage) {
+    const hp = project.homepage.startsWith('http') ? project.homepage : `https://${project.homepage}`
+    return `https://v1.screenshot.11ty.dev/${encodeURIComponent(hp)}/opengraph/`
+  }
+
   return `https://opengraph.githubassets.com/1/${project.full_name}`
 }
 
 const handleImageError = () => {
   if (imageState.value === 'local') {
+    imageState.value = props.project.homepage ? '11ty' : 'github'
+  } else if (imageState.value === '11ty') {
     imageState.value = 'github'
   } else {
     imageState.value = 'error'
