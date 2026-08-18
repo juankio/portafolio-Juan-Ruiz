@@ -25,7 +25,27 @@ useSeoMeta({
 })
 
 useHead({
-  link: [{ rel: 'canonical', href: `${siteUrl}/proyectos` }]
+  link: [{ rel: 'canonical', href: `${siteUrl}/proyectos` }],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: computed(() => JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: t('seo.projects.title'),
+        description: t('seo.projects.description'),
+        url: `${siteUrl}/proyectos`,
+        about: {
+          '@type': 'Thing',
+          name: 'Portafolio de Proyectos de Desarrollo Web'
+        },
+        creator: {
+          '@type': 'Person',
+          name: 'Juan Miguel Ruiz Supelano'
+        }
+      }))
+    }
+  ]
 })
 </script>
 

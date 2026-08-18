@@ -13,6 +13,18 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxtjs/robots'
   ],
+  robots: {
+    groups: [
+      {
+        userAgent: ['*'],
+        allow: '/',
+      },
+      {
+        userAgent: ['GPTBot', 'ClaudeBot', 'PerplexityBot', 'Google-Extended', 'OAI-SearchBot', 'ChatGPT-User'],
+        allow: '/',
+      }
+    ]
+  },
   site: {
     url: 'https://juanmiguelruiz.lat',
     name: 'Juan Miguel Ruiz | Desarrollador Web'

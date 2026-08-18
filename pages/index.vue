@@ -65,7 +65,9 @@ useHead({
           ],
           "knowsLanguage": ["es", "en"],
           "sameAs": [
-            "https://github.com/juankio"
+            "https://github.com/juankio",
+            "https://linkedin.com/in/juanmiguelruiz",
+            "https://twitter.com/juankiodev"
           ]
         },
         {
@@ -92,7 +94,7 @@ useHead({
               "name": "¿Quién es Juan Miguel Ruiz?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Juan Miguel Ruiz es un desarrollador web Full-Stack y creador de páginas web rápidas basado en Colombia, que ofrece servicios freelance de forma remota a nivel internacional, especializado en Vue, Nuxt, Angular y automatizaciones con IA."
+                "text": "Juan Miguel Ruiz es un desarrollador web Full-Stack radicado en Colombia. Se especializa en la creación de aplicaciones de alto rendimiento y sitios web a medida utilizando Vue, Nuxt, React y Node.js, ofreciendo servicios de desarrollo freelance de forma remota a nivel global."
               }
             },
             {
@@ -100,7 +102,7 @@ useHead({
               "name": "¿Qué servicios ofrece Juan Miguel Ruiz?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ofrece desarrollo de páginas web ultrarrápidas, tiendas virtuales, PWAs y aplicaciones web a medida utilizando tecnologías modernas como Vue, Nuxt 3 y Tailwind CSS para clientes en Colombia y todo el mundo."
+                "text": "Ofrece desarrollo Full-Stack, creación de aplicaciones web escalables, sitios web de alta velocidad, PWAs e implementaciones de IA. Especializado en ecosistemas JavaScript/TypeScript modernos para clientes en todo el mundo."
               }
             }
           ]

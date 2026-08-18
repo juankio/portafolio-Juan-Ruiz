@@ -19,7 +19,41 @@ useSeoMeta({
 })
 
 useHead({
-  link: [{ rel: 'canonical', href: `${siteUrl}/sobre-mi` }]
+  link: [{ rel: 'canonical', href: `${siteUrl}/sobre-mi` }],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: computed(() => JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        dateModified: new Date().toISOString(),
+        mainEntity: {
+          '@type': 'Person',
+          name: 'Juan Miguel Ruiz Supelano',
+          alternateName: 'juankio',
+          jobTitle: t('seo.schema.jobTitle'),
+          description: t('seo.schema.description'),
+          url: `${siteUrl}/sobre-mi`,
+          image: `${siteUrl}/icons/pwa-512x512.png`,
+          sameAs: [
+            'https://github.com/juankio',
+            'https://www.linkedin.com/in/juan-miguel-ruiz-supelano/'
+          ],
+          knowsAbout: ['Vue.js', 'Nuxt 3', 'Angular', 'React', 'Node.js', 'TypeScript', 'Tailwind CSS', 'AI Agents'],
+          alumniOf: [
+            {
+              '@type': 'CollegeOrUniversity',
+              name: 'Universidad Cooperativa de Colombia'
+            },
+            {
+              '@type': 'CollegeOrUniversity',
+              name: 'Corporacion Universitaria Minuto de Dios'
+            }
+          ]
+        }
+      }))
+    }
+  ]
 })
 
 const education = computed(() => {

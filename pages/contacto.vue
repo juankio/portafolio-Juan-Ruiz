@@ -18,7 +18,25 @@ useSeoMeta({
 })
 
 useHead({
-  link: [{ rel: 'canonical', href: `${siteUrl}/contacto` }]
+  link: [{ rel: 'canonical', href: `${siteUrl}/contacto` }],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: computed(() => JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ContactPage',
+        name: t('seo.contact.title'),
+        description: t('seo.contact.description'),
+        url: `${siteUrl}/contacto`,
+        mainEntity: {
+          '@type': 'Person',
+          name: 'Juan Miguel Ruiz Supelano',
+          jobTitle: t('seo.schema.jobTitle'),
+          url: `${siteUrl}`
+        }
+      }))
+    }
+  ]
 })
 </script>
 

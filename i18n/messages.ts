@@ -33,9 +33,9 @@ export const messages = {
         ogDescription: 'Contrátame para tu próximo proyecto web. Desarrollador basado en Colombia trabajando con clientes a nivel mundial.'
       },
       schema: {
-        jobTitle: 'Programador de Angular, Vue y Creador de Páginas Web',
-        description: 'Me dedico a crear páginas web rápidas, tiendas virtuales y sistemas para negocios. Programador experto en Angular y Vue.js.',
-        occupation: 'Desarrollador y Creador de Páginas Web'
+        jobTitle: 'Full-Stack Web Developer',
+        description: 'Juan Miguel Ruiz es un desarrollador Full-Stack freelance radicado en Colombia, enfocado en el diseño y desarrollo de aplicaciones web de alto rendimiento y soluciones personalizadas utilizando Vue.js, Nuxt 3, React y Angular.',
+        occupation: 'Web Developer'
       }
     },
     nav: {
@@ -54,7 +54,7 @@ export const messages = {
         connector: 'que no se sienten',
         highlight2: 'genericas.'
       },
-      subtitle: 'Vue, Nuxt y mucho cafe. Me obsesiona que las cosas carguen rapido y que el usuario sepa a donde ir sin pensarlo dos veces.',
+      subtitle: 'Desarrollador Web Full-Stack en Colombia, especializado en ecosistemas Vue/Nuxt. Creo interfaces ultrarrápidas y experiencias de usuario que convierten, uniendo buen diseño y rendimiento técnico.',
       rolePrefix: 'Soy',
       rotatingWords: ['Frontend Developer', 'Disenador de UI', 'Dev 10x con IA', 'Builder de PWAs', 'Dev que si responde'],
       ctas: { projects: 'Ver proyectos', contact: 'Hablemos' },
@@ -72,7 +72,7 @@ export const messages = {
         tail: 'ni reuniones eternas.'
       },
       intro:
-        'Soy Juan Miguel, dev frontend desde Villavicencio (CO). Estudio Ingenieria de Sistemas de dia y rompo layouts de noche. Me obsesiona que las webs carguen rapido, que la UI no aburra y que el usuario sepa que hacer en cada pantalla sin manual.',
+        'Juan Miguel Ruiz es un desarrollador web Full-Stack radicado en Villavicencio, Colombia, especializado en la creación de aplicaciones de alto rendimiento con Vue.js y Nuxt. Con un enfoque en interfaces de usuario fluidas y optimización para IA, diseña y programa soluciones completas, sin intermediarios ni reuniones innecesarias.',
       chips: ['Vue & Nuxt', 'React & Svelte', 'Angular', 'GraphQL', 'SQL & Postgres', 'Claude & Gemini AI', 'Three.js / WebGL', 'Docker & AWS', 'Tailwind', 'Cafe negro'],
       availability: 'Abierto',
       skillsTitle: 'Habilidades',
@@ -279,9 +279,9 @@ export const messages = {
         ogDescription: 'Message me to create your website or online store. Fast, direct-to-the-point quotes.'
       },
       schema: {
-        jobTitle: 'Angular & Vue Programmer, Fast Website Creator',
-        description: 'I build fast websites, online stores, and business systems. Expert Angular and Vue.js programmer.',
-        occupation: 'Web Developer & Website Creator'
+        jobTitle: 'Full-Stack Web Developer',
+        description: 'Juan Miguel Ruiz is a freelance Full-Stack Web Developer based in Colombia, focused on designing and building high-performance web applications and custom solutions using Vue.js, Nuxt 3, React, and Angular.',
+        occupation: 'Web Developer'
       }
     },
     nav: {
@@ -300,7 +300,7 @@ export const messages = {
         connector: 'and',
         highlight2: "doesn't feel generic."
       },
-      subtitle: "Vue, Nuxt, and way too much coffee. I obsess over pages that load quick and interfaces where you never have to guess what to click.",
+      subtitle: "Full-Stack Web Developer in Colombia specializing in Vue/Nuxt ecosystems. I build ultra-fast interfaces and user experiences that convert, bridging great design and technical performance.",
       rolePrefix: "I'm a",
       rotatingWords: ['Frontend Developer', 'UI Designer', 'AI-Powered Dev', 'PWA Builder', 'Dev who actually replies'],
       ctas: { projects: 'View projects', contact: "Let's talk" },
@@ -318,7 +318,7 @@ export const messages = {
         tail: 'no endless meetings.'
       },
       intro:
-        "I'm Juan Miguel, a frontend dev from Villavicencio (CO). Studying Systems Engineering by day, breaking layouts by night. I care about pages that load fast, UI that doesn't bore you, and users who know exactly what to do next.",
+        "Juan Miguel Ruiz is a Full-Stack Web Developer based in Villavicencio, Colombia, specializing in high-performance applications with Vue.js and Nuxt. Focused on fluid user interfaces and AI optimization, he designs and codes complete solutions directly, without middlemen or endless meetings.",
       chips: ['Vue & Nuxt', 'React & Svelte', 'Angular', 'GraphQL', 'SQL & Postgres', 'Claude & Gemini AI', 'Three.js / WebGL', 'Docker & AWS', 'Tailwind', 'Black coffee'],
       availability: 'Open',
       skillsTitle: 'Skills',
