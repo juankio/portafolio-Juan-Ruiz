@@ -29,6 +29,14 @@ export default defineNuxtConfig({
     url: 'https://juanmiguelruiz.lat',
     name: 'Juan Miguel Ruiz | Desarrollador Web'
   },
+  sitemap: {
+    sources: [
+      '/api/__sitemap__/urls'
+    ],
+    exclude: [
+      '/api/**'
+    ]
+  },
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
